@@ -34,17 +34,17 @@ Begin VB.Form frmProductoPromocion
       _ExtentY        =   16536
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado de Articulos"
       TabPicture(0)   =   "frmProductoPromocion.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lvArticulos"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Asignar Promoción"
       TabPicture(1)   =   "frmProductoPromocion.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame1"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
@@ -56,7 +56,7 @@ Begin VB.Form frmProductoPromocion
       Tab(1).ControlCount=   4
       Begin VB.Frame Frame4 
          Height          =   855
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   28
          Top             =   8400
          Width           =   12495
@@ -79,7 +79,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame3 
          Height          =   3255
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   16
          Top             =   5160
          Width           =   12495
@@ -209,7 +209,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame2 
          Height          =   3255
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   5
          Top             =   1800
          Width           =   12495
@@ -312,7 +312,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame1 
          Height          =   1335
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   2
          Top             =   480
          Width           =   12495
@@ -349,7 +349,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin MSComctlLib.ListView lvArticulos 
          Height          =   8775
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   1
          Top             =   480
          Width           =   12615
