@@ -2020,6 +2020,7 @@ Select Case Index
 '        Load frmARTI
 '        frmARTI.Show
         frmProductoPromocion.Show
+        frmPedidoHorario.Show
         'frmFormGenPedidos_Consulta.Show
         Screen.MousePointer = 0
     Case 1
