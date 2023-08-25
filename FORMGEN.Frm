@@ -2977,7 +2977,6 @@ Begin VB.Form FORMGEN
       _ExtentY        =   661
       _Version        =   393217
       BackColor       =   14737632
-      Enabled         =   -1  'True
       MultiLine       =   0   'False
       TextRTF         =   $"FORMGEN.frx":5D2C
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -5218,6 +5217,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'BITACORA DE CAMBIOS
+'CODIGO     USAURIO     FECHA       DESCRIPCION
+'(@#A-1)    JMENDOZA    24/08/2023  ACTUALIZA FLAG HOSTING EN TABLA ARTI
+'==============
 Dim TipoCambioDia1 As Currency
 Dim loc_ped_llave As rdoResultset
 Dim PSLOC_PED_LLAVE As rdoQuery
@@ -11628,7 +11631,18 @@ End If
              arm_llave!ARM_FECHA_ULT = LK_FECHA_DIA
            End If
          End If
+         
          arm_llave.Update
+         '(@#A-1) inicio
+         If LK_CODTRA = 2403 Then
+            pu_codcia = LK_CODCIA
+            PUB_KEY = arm_llave!ARM_CODART
+            LEER_ART_LLAVE
+            art_LLAVE.Edit
+            art_LLAVE!art_hosting = 0
+            art_LLAVE.Update
+         End If
+         '(@#A-1) inicio
 SALTA_T:
          pu_codcia = LK_CODCIA
          PUB_KEY = arm_llave!ARM_CODART

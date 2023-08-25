@@ -12,8 +12,8 @@ Begin VB.Form frmDocu
    ControlBox      =   0   'False
    LinkTopic       =   "Form2"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11115
-   ScaleWidth      =   20340
+   ScaleHeight     =   5250
+   ScaleWidth      =   9930
    WindowState     =   2  'Maximized
    Begin VB.CommandButton Command1 
       Caption         =   "Genera TXT para SUNAT"
@@ -1765,16 +1765,16 @@ Set far_r = PSFAR.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
 LIMPIA_DOCU
 grid_fac2.Rows = 2
-txtNumfac.Text = ""
-txtSerie.Text = ""
+txtNumFac.Text = ""
+txtserie.Text = ""
 'SQ_OPER = 1
 'PUB_CODCIA = LK_CODCIA
 'LEER_PAR_LLAVE
 'If par_llave.EOF Then
 '  Exit Sub
 'End If
-txtSerie.Locked = False
-lblsaldo.Caption = "Saldo Actual "
+txtserie.Locked = False
+lblSaldo.Caption = "Saldo Actual "
 lbldomicilio.Caption = "Domicilio :"
 lbldocu(1).Visible = True
 lbldocu(3).Visible = True
@@ -1788,10 +1788,10 @@ If Left(cmbFBG.Text, 1) = "P" Then
  d_cheque.Visible = True
  d_efectivo.Visible = True
  lblEfectivo.Visible = True
- lblsaldo.Caption = "Total Planilla="
+ lblSaldo.Caption = "Total Planilla="
  'txtSerie.Locked = True
  lbldomicilio.Caption = "Vendedor :"
- txtSerie.Text = 0
+ txtserie.Text = 0
  lbldocu(1).Visible = False
  lbldocu(3).Visible = False
  lbldocu(5).Visible = False
@@ -1803,42 +1803,42 @@ End If
 If LK_FLAG_FACTURACION = "V" Then
    Select Case Left(cmbFBG.Text, 1)
    Case "G"
-       txtSerie.Text = ven_llave!VEM_SERIE_G
+       txtserie.Text = ven_llave!VEM_SERIE_G
    Case "B"
-       txtSerie.Text = ven_llave!VEM_SERIE_B
+       txtserie.Text = ven_llave!VEM_SERIE_B
    Case "F"
-       txtSerie.Text = ven_llave!VEM_SERIE_F
+       txtserie.Text = ven_llave!VEM_SERIE_F
    Case "P"
-       txtSerie.Text = ven_llave!VEM_SERIE_P
+       txtserie.Text = ven_llave!VEM_SERIE_P
    End Select
 ElseIf LK_FLAG_FACTURACION = "A" Then
    If Left(cmbFBG.Text, 1) = "F" Then
-     txtSerie.Text = par_llave!PAR_F_SERIE
+     txtserie.Text = par_llave!PAR_F_SERIE
    ElseIf Left(cmbFBG.Text, 1) = "B" Then
-     txtSerie.Text = par_llave!PAR_B_SERIE
+     txtserie.Text = par_llave!PAR_B_SERIE
    ElseIf Left(cmbFBG.Text, 1) = "G" Then
-     txtSerie.Text = par_llave!PAR_G_SERIE
+     txtserie.Text = par_llave!PAR_G_SERIE
    ElseIf Left(cmbFBG.Text, 1) = "P" Then
-     txtSerie.Text = par_llave!PAR_P_SERIE
+     txtserie.Text = par_llave!PAR_P_SERIE
    End If
 ElseIf LK_FLAG_FACTURACION = "U" Then
    If Left(cmbFBG.Text, 1) = "F" Then
-     txtSerie.Text = usu_llave!USU_SERIE_F
+     txtserie.Text = usu_llave!USU_SERIE_F
    ElseIf Left(cmbFBG.Text, 1) = "B" Then
-     txtSerie.Text = usu_llave!USU_SERIE_B
+     txtserie.Text = usu_llave!USU_SERIE_B
    End If
 End If
 If Left(cmbFBG.Text, 1) = "N" Or Left(cmbFBG.Text, 1) = "D" Then
      If Left(cmbFBG.Text, 1) = "D" Then
-        txtSerie.Text = par_llave!PAR_SERIE_NDEB
+        txtserie.Text = par_llave!PAR_SERIE_NDEB
      Else
-        txtSerie.Text = par_llave!PAR_SERIE_NCRE
+        txtserie.Text = par_llave!PAR_SERIE_NCRE
      End If
     If LK_FLAG_FACTURACION = "U" Then
       If Left(cmbFBG.Text, 1) = "D" Then
-        txtSerie.Text = usu_llave!USU_SERIE_ND
+        txtserie.Text = usu_llave!USU_SERIE_ND
       Else
-        txtSerie.Text = usu_llave!USU_SERIE_NC
+        txtserie.Text = usu_llave!USU_SERIE_NC
       End If
     End If
     lbldocu(1).Visible = False
@@ -1850,18 +1850,18 @@ If Left(cmbFBG.Text, 1) = "N" Or Left(cmbFBG.Text, 1) = "D" Then
 End If
 If LOC_TIPMOV = 10 Then
  PU_TIPMOV = 10
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
  PU_TIPMOV = LOC_TIPMOV
  If LOC_TIPMOV = 20 Then
-  txtSerie.Text = Val(par_llave!PAR_SER_KARDEX)
+  txtserie.Text = Val(par_llave!PAR_SER_KARDEX)
  End If
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  If LOC_TIPMOV = 99 Then
    PU_FBG = "K"
  Else
@@ -1879,30 +1879,30 @@ If LOC_TIPMOV = 5 Or LOC_TIPMOV = 6 Then
    PSCNT_LLAVE.rdoParameters(0) = LK_CODCIA
    PSCNT_LLAVE.rdoParameters(1) = 2403
    cnt_llave.Requery
-   If Not cnt_llave.EOF Then txtSerie.Text = Nulo_Valor0(cnt_llave!cnt_serie)
+   If Not cnt_llave.EOF Then txtserie.Text = Nulo_Valor0(cnt_llave!cnt_serie)
 Else
- txtSerie.Text = "0"
+ txtserie.Text = "0"
 End If
 If LOC_TIPMOV = 3 Then pu_cp = "P"
 If LOC_TIPMOV = 102 Then pu_cp = "C"
 If LOC_TIPMOV = 100 Or LOC_TIPMOV = 101 Or LOC_TIPMOV = 93 Then
 If LOC_TIPMOV = 100 Then pu_cp = "C"
- txtSerie.Text = "1"
+ txtserie.Text = "1"
 End If
 
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  PU_FBG = " "
 
 End If
 pu_codcia = LK_CODCIA
 LEER_FAR_CONSUL
 If Not far_consul.EOF Then
- txtNumfac.Text = far_consul!far_numfac
+ txtNumFac.Text = far_consul!far_numfac
 Else
- txtNumfac.Text = "0"
+ txtNumFac.Text = "0"
 End If
-Azul txtNumfac, txtNumfac
+Azul txtNumFac, txtNumFac
 
 If Trim(d_fecha.Caption) = "" Then txtnumfac_KeyPress 13
 
@@ -1926,8 +1926,8 @@ End If
 'End If
 If LOC_TIPMOV <> 3 Then pu_cp = " "
 If Left(cmbFBG.Text, 1) = "P" And PUB_TIPMOV <> 10 Then
- txtNumfac.Text = Nulo_Valor0(par_llave!par_planilla)
- txtNumfac.SetFocus
+ txtNumFac.Text = Nulo_Valor0(par_llave!par_planilla)
+ txtNumFac.SetFocus
  txtnumfac_KeyPress 13
  Exit Sub
 End If
@@ -1951,9 +1951,9 @@ If LOC_TIPMOV = 30 Then
     wnumfac = Nulo_Valor0(temp_mayor!PED_NUMFAC)
  End If
  pu_cp = "P"
- txtSerie.Text = wser
- txtNumfac.Text = wnumfac
- txtNumfac.SetFocus
+ txtserie.Text = wser
+ txtNumFac.Text = wnumfac
+ txtNumFac.SetFocus
  txtnumfac_KeyPress 13
  Exit Sub
 End If
@@ -1962,46 +1962,46 @@ If LK_FLAG_FACTURACION = "V" Then
    If ven_llave.EOF Then GoTo dale
    Select Case Left(cmbFBG.Text, 1)
    Case "G"
-       txtSerie.Text = ven_llave!VEM_SERIE_G
+       txtserie.Text = ven_llave!VEM_SERIE_G
    Case "B"
-       txtSerie.Text = ven_llave!VEM_SERIE_B
+       txtserie.Text = ven_llave!VEM_SERIE_B
    Case "F"
-       txtSerie.Text = ven_llave!VEM_SERIE_F
+       txtserie.Text = ven_llave!VEM_SERIE_F
    Case "P"
-       txtSerie.Text = ven_llave!VEM_SERIE_P
+       txtserie.Text = ven_llave!VEM_SERIE_P
    End Select
 dale:
 ElseIf LK_FLAG_FACTURACION = "A" And LOC_TIPMOV <> 93 Then
  If Left(cmbFBG.Text, 1) = "F" Then
-  txtSerie.Text = par_llave!PAR_F_SERIE
+  txtserie.Text = par_llave!PAR_F_SERIE
  ElseIf Left(cmbFBG.Text, 1) = "B" Then
-  txtSerie.Text = par_llave!PAR_B_SERIE
+  txtserie.Text = par_llave!PAR_B_SERIE
  ElseIf Left(cmbFBG.Text, 1) = "G" Then
-  txtSerie.Text = par_llave!PAR_G_SERIE
+  txtserie.Text = par_llave!PAR_G_SERIE
  ElseIf Left(cmbFBG.Text, 1) = "N" Then
-  txtSerie.Text = par_llave!PAR_SERIE_NCRE
+  txtserie.Text = par_llave!PAR_SERIE_NCRE
  ElseIf Left(cmbFBG.Text, 1) = "D" Then
-  txtSerie.Text = par_llave!PAR_SERIE_NDEB
+  txtserie.Text = par_llave!PAR_SERIE_NDEB
  End If
 ElseIf LK_FLAG_FACTURACION = "U" Then
    If Left(cmbFBG.Text, 1) = "F" Then
-     txtSerie.Text = usu_llave!USU_SERIE_F
+     txtserie.Text = usu_llave!USU_SERIE_F
    ElseIf Left(cmbFBG.Text, 1) = "B" Then
-     txtSerie.Text = usu_llave!USU_SERIE_B
+     txtserie.Text = usu_llave!USU_SERIE_B
    End If
 End If
 If LOC_TIPMOV = 10 Then
  pu_cp = "C"
  PU_TIPMOV = 10
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtSerie.Text)
+ PU_NUMSER = Val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
  pu_cp = "C"
  If Right(Trim(cmbFBG.Text), 1) = "P" Then
-   txtSerie.Text = "0"
+   txtserie.Text = "0"
    PU_NUMSER = 0
    PU_FBG = "C"
    pu_cp = "P"
@@ -2040,38 +2040,38 @@ Else
  PU_NUMSER = 0
  PU_FBG = " "
 End If
-PU_NUMSER = Val(txtSerie.Text)
+PU_NUMSER = Val(txtserie.Text)
 pu_codcia = LK_CODCIA
 LEER_FAR_CONSUL
 If Not far_consul.EOF Then
- txtNumfac.Text = far_consul!far_numfac
+ txtNumFac.Text = far_consul!far_numfac
 Else
- txtNumfac.Text = "0"
+ txtNumFac.Text = "0"
 End If
-txtNumfac.SetFocus
+txtNumFac.SetFocus
 txtnumfac_KeyPress 13
-If LK_EMP = "HER" And Val(txtSerie.Text) = 0 And LOC_TIPMOV = 10 Then
-   txtSerie.Locked = False
-   txtSerie.Text = ""
-   txtSerie.SetFocus
+If LK_EMP = "HER" And Val(txtserie.Text) = 0 And LOC_TIPMOV = 10 Then
+   txtserie.Locked = False
+   txtserie.Text = ""
+   txtserie.SetFocus
 End If
 End Sub
 
 Private Sub CmdAnterior_Click()
 Dim tempo
 If LOC_TIPMOV = 0 Then Exit Sub
-tempo = Val(txtNumfac.Text)
+tempo = Val(txtNumFac.Text)
 If LOC_TIPMOV = 10 Then
- If Trim(txtSerie.Text) = "" Then
+ If Trim(txtserie.Text) = "" Then
   Exit Sub
  End If
 End If
-If Val(txtNumfac.Text) <= 0 Then
+If Val(txtNumFac.Text) <= 0 Then
  LIMPIA_DOCU
  grid_fac2.Clear
  Exit Sub
 End If
-txtNumfac.Text = Val(txtNumfac.Text) - 1
+txtNumFac.Text = Val(txtNumFac.Text) - 1
 If LOC_TIPMOV = 96 Or LOC_TIPMOV = 30 Then ' PLANILLA
  txtnumfac_KeyPress 13
  Exit Sub
@@ -2090,13 +2090,13 @@ Else
   d_mensaje.Visible = False
   CmdAnterior.Enabled = True
 End If
-Azul txtNumfac, txtNumfac
-LOC_NUMFAC_FIN = Val(txtNumfac.Text)
+Azul txtNumFac, txtNumFac
+LOC_NUMFAC_FIN = Val(txtNumFac.Text)
 
 End Sub
 
 Private Sub cmdCerrar_Click()
-Unload frmDocu
+Unload frmdocu
 End Sub
 
 Private Sub cmdimp_Click()
@@ -2107,7 +2107,7 @@ End If
 If LOC_TIPMOV = 0 Or Trim(d_fecha.Caption) = "" Then
 Exit Sub
 End If
-If frmDocu.LBLEXTORNO.Visible Then
+If frmdocu.LBLEXTORNO.Visible Then
   MsgBox "Impresión No Procede...", 48, Pub_Titulo
   Exit Sub
 End If
@@ -2137,7 +2137,7 @@ If LOC_TIPMOV = 10 Then
      Exit Sub
  End If
 End If
-Dim i, j
+Dim I, j
 Dim wranF
 Dim LETRAS(24) As String * 1
 
@@ -2146,38 +2146,38 @@ Dim xl As Object
 On Error GoTo FINTODO
 Screen.MousePointer = 11
 PB.Visible = True
-PB.Max = 6
+PB.max = 6
 PB.Min = 0
 PB.Value = 0
 PB.Value = PB.Value + 1
 GoSub WEXCEL
 PB.Value = PB.Value + 1
 pub_cadena = ""
-xl.Cells(4, 1) = "PLANILLA : " & Trim(txtSerie.Text) & " - " & Trim(txtNumfac.Text)
+xl.Cells(4, 1) = "PLANILLA : " & Trim(txtserie.Text) & " - " & Trim(txtNumFac.Text)
 xl.Cells(3, 1) = "'" & Format(LK_FECHA_DIA, "dd/mm/yyyy")
 xl.Cells(1, 1) = Trim(Mid(MDIForm1.stb_EB.Panels("cia"), 4, Len(MDIForm1.stb_EB.Panels("cia"))))
 xl.Cells(2, 1) = "PLANILLA DE COBRANZA"
 PB.Value = PB.Value + 1
-For i = 0 To grid_fac2.Rows - 1
+For I = 0 To grid_fac2.Rows - 1
   For j = 0 To 14
-     If grid_fac2.TextMatrix(i, j) = "" Then
-       xl.Cells(i + 7, j + 1) = " "
+     If grid_fac2.TextMatrix(I, j) = "" Then
+       xl.Cells(I + 7, j + 1) = " "
      Else
-       xl.Cells(i + 7, j + 1) = grid_fac2.TextMatrix(i, j)
+       xl.Cells(I + 7, j + 1) = grid_fac2.TextMatrix(I, j)
      End If
   Next j
-Next i
+Next I
 PB.Value = PB.Value + 1
 GoSub LETRAS
 PB.Value = PB.Value + 1
-wranF = "A" & i + 8 & ":D" & i + 8
+wranF = "A" & I + 8 & ":D" & I + 8
 xl.Range(wranF).Borders.Item(xlEdgeTop).LineStyle = 3
-xl.Cells(i + 1 + 7, 1) = "Total Cheque.  ="
-xl.Cells(i + 1 + 7, 2) = "'" & d_cheque.Caption
-xl.Cells(i + 2 + 7, 1) = "Total Efectivo.="
-xl.Cells(i + 2 + 7, 2) = "'" & d_efectivo.Caption
-xl.Cells(i + 3 + 7, 1) = "Total Planilla.="
-xl.Cells(i + 3 + 7, 2) = "'" & d_saldo.Caption
+xl.Cells(I + 1 + 7, 1) = "Total Cheque.  ="
+xl.Cells(I + 1 + 7, 2) = "'" & d_cheque.Caption
+xl.Cells(I + 2 + 7, 1) = "Total Efectivo.="
+xl.Cells(I + 2 + 7, 2) = "'" & d_efectivo.Caption
+xl.Cells(I + 3 + 7, 1) = "Total Planilla.="
+xl.Cells(I + 3 + 7, 2) = "'" & d_saldo.Caption
 
 wranF = "A8:" & "O8"
 xl.Range(wranF).Borders.Item(xlEdgeTop).LineStyle = 3
@@ -2235,16 +2235,16 @@ Dim WSRUTA As String
 Dim wRuta As String
 Dim rmoneda As String * 1
 wRuta = Left(PUB_RUTA_OTRO, 2) + "\ADMIN\STANDAR\"
-frmDocu.Reportes.Connect = PUB_ODBC
-frmDocu.Reportes.Destination = crptToWindow  '= crptToPrinter
-frmDocu.Reportes.WindowLeft = 2
-frmDocu.Reportes.WindowTop = 70
-frmDocu.Reportes.WindowWidth = 635
-frmDocu.Reportes.WindowHeight = 390
-frmDocu.Reportes.Formulas(1) = ""
-PUB_NETO = Val(frmDocu.d_neto.Caption)
-PUB_FECHA = frmDocu.d_fecha.Caption
-PU_NUMSER = Val((frmDocu.txtSerie.Text))
+frmdocu.Reportes.Connect = PUB_ODBC
+frmdocu.Reportes.Destination = crptToWindow  '= crptToPrinter
+frmdocu.Reportes.WindowLeft = 2
+frmdocu.Reportes.WindowTop = 70
+frmdocu.Reportes.WindowWidth = 635
+frmdocu.Reportes.WindowHeight = 390
+frmdocu.Reportes.Formulas(1) = ""
+PUB_NETO = Val(frmdocu.d_neto.Caption)
+PUB_FECHA = frmdocu.d_fecha.Caption
+PU_NUMSER = Val((frmdocu.txtserie.Text))
 
 If Left(d_moneda.Caption, 3) = "US$" Then
    rmoneda = "D"
@@ -2252,16 +2252,16 @@ Else
    rmoneda = "S"
 End If
 
-PU_NUMFAC = Val((frmDocu.txtNumfac.Text))
-frmDocu.Reportes.Formulas(1) = "SON_EFECTIVO=  'SON: " & CONVER_LETRAS(PUB_NETO, rmoneda) & "'"
-frmDocu.Reportes.WindowTitle = "ORDEN DE COMPRA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
-frmDocu.Reportes.ReportFileName = wRuta + "ORDEN.RPT"
+PU_NUMFAC = Val((frmdocu.txtNumFac.Text))
+frmdocu.Reportes.Formulas(1) = "SON_EFECTIVO=  'SON: " & CONVER_LETRAS(PUB_NETO, rmoneda) & "'"
+frmdocu.Reportes.WindowTitle = "ORDEN DE COMPRA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+frmdocu.Reportes.ReportFileName = wRuta + "ORDEN.RPT"
 wser = PU_NUMSER
 pub_cadena = "{PEDIDOS.PED_ESTADO} = 'N' AND {PEDIDOS.PED_CODCIA} = '" & LK_CODCIA & "' AND {PEDIDOS.PED_NUMSER}= '" & wser & "' AND {PEDIDOS.PED_NUMFAC} = " & PU_NUMFAC
-frmDocu.Reportes.SelectionFormula = pub_cadena
-frmDocu.Reportes.WindowTitle = frmDocu.Reportes.WindowTitle & " Archivo: " & Trim(frmDocu.Reportes.ReportFileName)
+frmdocu.Reportes.SelectionFormula = pub_cadena
+frmdocu.Reportes.WindowTitle = frmdocu.Reportes.WindowTitle & " Archivo: " & Trim(frmdocu.Reportes.ReportFileName)
 On Error GoTo accion
-frmDocu.Reportes.Action = 1
+frmdocu.Reportes.Action = 1
 On Error GoTo 0
 Return
 FINTODO:
@@ -2272,9 +2272,9 @@ End Sub
 
 Private Sub cmdserie_Click()
 Dim valor
-valor = InputBox("Ingrese hasta que numero de " & Trim(cmbFBG.Text) & " Desea Mostrar para la Impresión. Segun serie : " & txtSerie.Text & " - ", "Inpresión en Serie . . . ", Trim(txtNumfac.Text))
+valor = InputBox("Ingrese hasta que numero de " & Trim(cmbFBG.Text) & " Desea Mostrar para la Impresión. Segun serie : " & txtserie.Text & " - ", "Inpresión en Serie . . . ", Trim(txtNumFac.Text))
 If valor = "" Then Exit Sub
-If Val(valor) < Val(txtNumfac.Text) Then
+If Val(valor) < Val(txtNumFac.Text) Then
   MsgBox "No Procede... No puede ser menor que el Nº inicial ", 48, Pub_Titulo
   Exit Sub
 End If
@@ -2287,16 +2287,16 @@ End Sub
 Private Sub cmdSiguiente_Click()
 Dim tempo
 If LOC_TIPMOV = 0 Then Exit Sub
-tempo = Val(txtNumfac.Text)
+tempo = Val(txtNumFac.Text)
 If LOC_TIPMOV = 10 Then
- If Trim(txtSerie.Text) = "" Then
+ If Trim(txtserie.Text) = "" Then
   Exit Sub
  End If
 End If
-If Val(txtNumfac.Text) < 0 Then
+If Val(txtNumFac.Text) < 0 Then
   Exit Sub
 End If
-txtNumfac.Text = Val(txtNumfac.Text) + 1
+txtNumFac.Text = Val(txtNumFac.Text) + 1
 If LOC_TIPMOV = 96 Or LOC_TIPMOV = 30 Then ' PLANILLA
  txtnumfac_KeyPress 13
  Exit Sub
@@ -2312,14 +2312,14 @@ Else
   d_mensaje.Visible = False
   cmdSiguiente.Enabled = True
 End If
-Azul txtNumfac, txtNumfac
-LOC_NUMFAC_FIN = Val(txtNumfac.Text)
+Azul txtNumFac, txtNumFac
+LOC_NUMFAC_FIN = Val(txtNumFac.Text)
 End Sub
 
 Private Sub Command1_Click()
 On Error GoTo Exporta
         If LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
-            CrearArchivoPlano2 Left(cmbFBG.Text, 1), Me.txtSerie.Text, Me.txtNumfac.Text
+            CrearArchivoPlano2 Left(cmbFBG.Text, 1), Me.txtserie.Text, Me.txtNumFac.Text
         End If
         MsgBox "Archivos generados correctamente.", vbInformation, Pub_Titulo
        Exit Sub
@@ -2376,8 +2376,8 @@ Set far_codusu = FARUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 FARUSU(0) = LK_CODCIA
 FARUSU(1) = LOC_TIPMOV
 FARUSU(2) = d_fecha.Caption
-FARUSU(3) = txtSerie.Text
-FARUSU(4) = txtNumfac.Text
+FARUSU(3) = txtserie.Text
+FARUSU(4) = txtNumFac.Text
 far_codusu.Requery
 fila = 1
 Do Until far_codusu.EOF
@@ -2474,8 +2474,8 @@ Set far_codusu = FARUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 FARUSU(0) = LK_CODCIA
 FARUSU(1) = LOC_TIPMOV
 FARUSU(2) = d_fecha.Caption
-FARUSU(3) = txtSerie.Text
-FARUSU(4) = txtNumfac.Text
+FARUSU(3) = txtserie.Text
+FARUSU(4) = txtNumFac.Text
 far_codusu.Requery
 fila = 1
 Do Until far_codusu.EOF
@@ -2524,8 +2524,8 @@ Set all_codusu = ALLUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 ALLUSU(0) = LK_CODCIA
 ALLUSU(1) = LOC_TIPMOV
 ALLUSU(2) = d_fecha.Caption
-ALLUSU(3) = txtSerie.Text
-ALLUSU(4) = txtNumfac.Text
+ALLUSU(3) = txtserie.Text
+ALLUSU(4) = txtNumFac.Text
 
 all_codusu.Requery
 Do Until all_codusu.EOF
@@ -2547,8 +2547,8 @@ Set far_codusu = FARUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 FARUSU(0) = LK_CODCIA
 FARUSU(1) = LOC_TIPMOV
 FARUSU(2) = d_fecha.Caption
-FARUSU(3) = txtSerie.Text
-FARUSU(4) = txtNumfac.Text
+FARUSU(3) = txtserie.Text
+FARUSU(4) = txtNumFac.Text
 
 far_codusu.Requery
 Do Until far_codusu.EOF
@@ -2581,8 +2581,8 @@ Set all_codusu = ALLUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 ALLUSU(0) = LK_CODCIA
 ALLUSU(1) = LOC_TIPMOV
 ALLUSU(2) = d_fecha.Caption
-ALLUSU(3) = txtSerie.Text
-ALLUSU(4) = txtNumfac.Text
+ALLUSU(3) = txtserie.Text
+ALLUSU(4) = txtNumFac.Text
 all_codusu.Requery
 Do Until all_codusu.EOF
  all_codusu.Edit
@@ -2602,8 +2602,8 @@ Set far_codusu = FARUSU.OpenResultset(rdOpenKeyset, rdConcurValues)
 FARUSU(0) = LK_CODCIA
 FARUSU(1) = LOC_TIPMOV
 FARUSU(2) = d_fecha.Caption
-FARUSU(3) = txtSerie.Text
-FARUSU(4) = txtNumfac.Text
+FARUSU(3) = txtserie.Text
+FARUSU(4) = txtNumFac.Text
 far_codusu.Requery
 Do Until far_codusu.EOF
  far_codusu.Edit
@@ -2741,11 +2741,11 @@ If LOC_TIPMOV = 3 Then NUMERO.Text = 7
 DESC_GRIFO = 0
 WS_FLETE = 0
 ws_serie = 0
-ws_serie = Val(txtSerie.Text)
+ws_serie = Val(txtserie.Text)
 CmdAnterior.Enabled = False
 'DoEvents
 cmdSiguiente.Enabled = False
-cmdImp.Enabled = False
+cmdimp.Enabled = False
 'DoEvents
 cherela.Visible = False
 tguia.Visible = False
@@ -2796,12 +2796,12 @@ ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
    If Left(cmbFBG.Text, 1) = "F" Then
      PSFAR.rdoParameters(0) = LOC_TIPMOV
      PSFAR.rdoParameters(1) = LK_CODCIA
-     PSFAR.rdoParameters(2) = txtSerie.Text
-     PSFAR.rdoParameters(3) = Val(txtNumfac.Text)
+     PSFAR.rdoParameters(2) = txtserie.Text
+     PSFAR.rdoParameters(3) = Val(txtNumFac.Text)
    Else
      PSFAR.rdoParameters(0) = LOC_TIPMOV
      PSFAR.rdoParameters(1) = LK_CODCIA
-     PSFAR.rdoParameters(2) = txtNumfac.Text
+     PSFAR.rdoParameters(2) = txtNumFac.Text
    End If
  Else
    PSFAR.rdoParameters(0) = LOC_TIPMOV
@@ -2820,28 +2820,28 @@ End If
 If LOC_TIPMOV = 20 And Left(cmbFBG.Text, 1) <> "K" Then
 Else
  PSFAR.rdoParameters(1) = LK_CODCIA
- PSFAR.rdoParameters(4) = Val(txtNumfac.Text)
+ PSFAR.rdoParameters(4) = Val(txtNumFac.Text)
 End If
 far_r.Requery
 If far_r.EOF Then
    wflag_docu = "A"
    CmdAnterior.Enabled = True
    cmdSiguiente.Enabled = True
-   cmdImp.Enabled = True
+   cmdimp.Enabled = True
    Exit Sub
 Else
   If LK_FLAG_SOS = "A" And far_r!FAR_FLAG_SO <> "A" Then
     wflag_docu = "A"
     CmdAnterior.Enabled = True
     cmdSiguiente.Enabled = True
-    cmdImp.Enabled = True
+    cmdimp.Enabled = True
     Exit Sub
   End If
 End If
-tempo_serie = Trim(txtSerie.Text)
+tempo_serie = Trim(txtserie.Text)
 PB.Value = 0
 PB.Min = 0
-PB.Max = far_r.RowCount + 3
+PB.max = far_r.RowCount + 3
 PB.Visible = True
 'DoEvents
 LIMPIA_DOCU
@@ -2892,7 +2892,7 @@ SQ_OPER = 1
 pu_codcia = LK_CODCIA
 If LOC_TIPMOV = 93 Or LOC_TIPMOV = 5 Or LOC_TIPMOV = 6 Or LOC_TIPMOV = 100 Or LOC_TIPMOV = 101 Then
  lbldomicilio.Caption = ""
- lbldireccion.Caption = "Concepto :"
+ lblDireccion.Caption = "Concepto :"
  'QUITADO 30/11/2001
  'd_dire.Caption = Trim(far_r!far_concepto)
  'd_dire.ToolTipText = Trim(d_dire.Caption)
@@ -2904,7 +2904,7 @@ If LOC_TIPMOV = 93 Or LOC_TIPMOV = 5 Or LOC_TIPMOV = 6 Or LOC_TIPMOV = 100 Or LO
    TRANS.Visible = True
  End If
 Else
- lbldireccion.Caption = "Dirección Entrega:"
+ lblDireccion.Caption = "Dirección Entrega:"
  lbldomicilio.Caption = "Domicilio:"
  
 End If
@@ -2929,13 +2929,13 @@ If LOC_TIPMOV = 102 Or OC_TIPMOV = 100 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or 
      txtdocu.Caption = Trim(far_r!far_concepto)  ' serguia & " - " & far_r!far_numguia
      pu_cp = Right(cmbFBG.Text, 1)
  End If
- lblsaldo.Visible = True
+ lblSaldo.Visible = True
  d_saldo.Visible = True
  d_moneda.Visible = True
 ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Or LOC_TIPMOV = 3 Then
  l_fecha_compra.Visible = True
  d_fecha_compra.Visible = True
- lblsaldo.Visible = True
+ lblSaldo.Visible = True
  d_saldo.Visible = True
  
  d_moneda.Visible = True
@@ -3043,9 +3043,9 @@ d_domicilio.Caption = Trim(WLUGAR1) + " " + Trim(cli_llave!CLI_CASA_DIREC) + " #
 
 If Left(cmbFBG.Text, 1) = "F" Then
  d_ruc.Caption = Trim(Nulo_Valors(cli_llave!cli_ruc_esposo))
- LBLRUC.Visible = True
+ lblRuc.Visible = True
 Else
- LBLRUC.Visible = False
+ lblRuc.Visible = False
  d_ruc.Caption = ""
 End If
 
@@ -3145,7 +3145,7 @@ FECHA_PART.Text = Format(far_r!FAR_fecha_compra, "dd/mm/yyyy")
  Else
  If LOC_TIPMOV = 10 Then
      d_condicion.Caption = far_r!far_subtra
-     frmDocu.d_fechaV.Caption = frmDocu.d_fecha.Caption
+     frmdocu.d_fechaV.Caption = frmdocu.d_fecha.Caption
      
  ElseIf LOC_TIPMOV = 20 Then
    d_condicion.Caption = far_r!far_subtra ' "COMPRA AL CONTADO"
@@ -3387,10 +3387,10 @@ If Trim(LBLEXTORNO.Caption) = "" Then
 End If
    CmdAnterior.Enabled = True
    cmdSiguiente.Enabled = True
-   cmdImp.Enabled = True
+   cmdimp.Enabled = True
    PB.Visible = False
    If cherela.Visible And LK_EMP <> "HER" Then cherela_Click
-   LOC_NUMFAC_FIN = Val(txtNumfac.Text)
+   LOC_NUMFAC_FIN = Val(txtNumFac.Text)
    If LK_CODUSU = "ADMIN" And (LOC_TIPMOV = 6 Or LOC_TIPMOV = 5) Then
      MsgBox "CAntidad :  " & conteo_cantidad, 48, Pub_Titulo
    End If
@@ -3504,27 +3504,27 @@ If Trim(TIPMOV.Text) = "" Then
  LOC_TIPMOV = 0
 Else
  LOC_TIPMOV = Val(Trim(Right(TIPMOV.Text, 4)))
- cmdImp.Enabled = False
+ cmdimp.Enabled = False
  lblpersona.Visible = True
  d_Codclie.Visible = True
- LBLRUC.Visible = True
+ lblRuc.Visible = True
  'lblven.Visible = True
  d_codven.Visible = True
  d_condicion.Visible = True
  lblcondicion.Visible = True
- lbldireccion.Visible = True
+ lblDireccion.Visible = True
  If LOC_TIPMOV = 101 Or LOC_TIPMOV = 93 Or LOC_TIPMOV = 20 Or LOC_TIPMOV = 5 Or LOC_TIPMOV = 6 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
-   cmdImp.Enabled = True
+   cmdimp.Enabled = True
  ElseIf LOC_TIPMOV = 96 Then
-   cmdImp.Enabled = True
+   cmdimp.Enabled = True
    lblpersona.Visible = False
    d_Codclie.Visible = False
-   LBLRUC.Visible = False
+   lblRuc.Visible = False
 '   lblven.Visible = False
    d_codven.Visible = False
    d_condicion.Visible = False
    lblcondicion.Visible = False
-   lbldireccion.Visible = False
+   lblDireccion.Visible = False
  End If
  If temporal = "X" Then
   Exit Sub
@@ -3569,7 +3569,7 @@ Else
   lblflete.Caption = "Flete"
   stbEtiqueta.Panels(5).Text = "Flete"
   cmbFBG.AddItem "K = Kardex"
-  If LOC_TIPMOV = 30 Then cmdImp.Enabled = True
+  If LOC_TIPMOV = 30 Then cmdimp.Enabled = True
  ElseIf LOC_TIPMOV = 96 Then
   lblNumfac.Caption = "Panilla"
   lblflete.Caption = ""
@@ -3579,7 +3579,7 @@ Else
  If LOC_TIPMOV = 102 Then
  Else
   d_codven.Visible = False
-  LBLRUC.Visible = False
+  lblRuc.Visible = False
   d_Codclie.Visible = False
   lblpersona.Caption = ""
  End If
@@ -3681,7 +3681,7 @@ End If
 End Sub
 
 Private Sub txtNumfac_GotFocus()
-temporal = txtNumfac.Text
+temporal = txtNumFac.Text
 End Sub
 
 Private Sub txtnumfac_KeyPress(KeyAscii As Integer)
@@ -3689,10 +3689,10 @@ Private Sub txtnumfac_KeyPress(KeyAscii As Integer)
 Dim wven As Integer
 SOLO_ENTERO KeyAscii
 If KeyAscii = 13 Then
-  If Val(txtSerie.Text) <= 0 Then
+  If Val(txtserie.Text) <= 0 Then
    'Exit Sub
   End If
-  If Val(txtNumfac.Text) <= 0 Then
+  If Val(txtNumFac.Text) <= 0 Then
    LIMPIA_DOCU
    grid_fac2.Clear
    Exit Sub
@@ -3706,7 +3706,7 @@ If KeyAscii = 13 Then
   End If
   If Left(cmbFBG.Text, 1) = "P" And LOC_TIPMOV <> 10 Then
     'txtSerie.Locked = True
-    txtSerie.Text = 0
+    txtserie.Text = 0
     GoSub PLANILLA
     Exit Sub
   Else
@@ -3715,11 +3715,11 @@ If KeyAscii = 13 Then
     loc_flag_espera = ""
   End If
   If Trim(wflag_docu) = "" Then
-    temporal = txtNumfac.Text
+    temporal = txtNumFac.Text
   Else
-    txtSerie.Text = tempo_serie
-    txtNumfac.Text = temporal
-    Azul txtNumfac, txtNumfac
+    txtserie.Text = tempo_serie
+    txtNumFac.Text = temporal
+    Azul txtNumFac, txtNumFac
   End If
 End If
 Exit Sub
@@ -3742,7 +3742,7 @@ PS_REP01(1) = 0
 Set llave_rep01 = PS_REP01.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
 PS_REP01(0) = LK_CODCIA
-PS_REP01(1) = Val(txtNumfac.Text)
+PS_REP01(1) = Val(txtNumFac.Text)
 llave_rep01.Requery
 d_mensaje.Visible = False
 If llave_rep01.EOF = True Then
@@ -3754,16 +3754,16 @@ End If
 cabe_grid
 d_fecha.Caption = Format(llave_rep01!CAA_FECHA, "dd/mm/yyyy")
 wven = 0
-F1 = 0
+f1 = 0
 WS_BRUTO = 0
 grid_fac2.Rows = 1
 PB.Visible = True
-PB.Max = llave_rep01.RowCount
+PB.max = llave_rep01.RowCount
 PB.Min = 0
 PB.Value = 0
 Do Until llave_rep01.EOF
    PB.Value = PB.Value + 1
-   F1 = F1 + 1
+   f1 = f1 + 1
    grid_fac2.Rows = grid_fac2.Rows + 1
    SQ_OPER = 1
    pu_codcia = LK_CODCIA
@@ -3774,28 +3774,28 @@ Do Until llave_rep01.EOF
       MsgBox "Error en Codigo de cliente, NO EXISTE ...", 48, Pub_Titulo
       GoTo CANCELA
    End If
-    grid_fac2.TextMatrix(F1, 0) = Trim(cli_llave!CLI_NOMBRE)
-    grid_fac2.TextMatrix(F1, 1) = Trim(cli_llave!cli_codclie)
-    grid_fac2.TextMatrix(F1, 2) = Trim(llave_rep01!CAA_CODVEN)
+    grid_fac2.TextMatrix(f1, 0) = Trim(cli_llave!CLI_NOMBRE)
+    grid_fac2.TextMatrix(f1, 1) = Trim(cli_llave!cli_codclie)
+    grid_fac2.TextMatrix(f1, 2) = Trim(llave_rep01!CAA_CODVEN)
    If Trim(llave_rep01!CAA_TIPDOC) = "FA" Or Trim(llave_rep01!CAA_TIPDOC) = "CC" Then
-    grid_fac2.TextMatrix(F1, 3) = Trim(llave_rep01!CAA_TIPDOC)
+    grid_fac2.TextMatrix(f1, 3) = Trim(llave_rep01!CAA_TIPDOC)
     If llave_rep01!CAA_FBG = "F" Then
-      grid_fac2.TextMatrix(F1, 4) = "FAC."
+      grid_fac2.TextMatrix(f1, 4) = "FAC."
     ElseIf llave_rep01!CAA_FBG = "B" Then
-      grid_fac2.TextMatrix(F1, 4) = "BOL."
+      grid_fac2.TextMatrix(f1, 4) = "BOL."
     ElseIf llave_rep01!CAA_FBG = "G" Then
-      grid_fac2.TextMatrix(F1, 4) = "GUIA"
+      grid_fac2.TextMatrix(f1, 4) = "GUIA"
     End If
-    grid_fac2.TextMatrix(F1, 5) = llave_rep01!CAa_numser
-    grid_fac2.TextMatrix(F1, 6) = llave_rep01!CAa_numfac
-    grid_fac2.TextMatrix(F1, 7) = "" 'llave_rep01!CAA_NUMFAC
-    grid_fac2.TextMatrix(F1, 8) = Format(llave_rep01!caa_SALDO_car + Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
-    grid_fac2.TextMatrix(F1, 9) = Format(Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
+    grid_fac2.TextMatrix(f1, 5) = llave_rep01!CAa_numser
+    grid_fac2.TextMatrix(f1, 6) = llave_rep01!CAa_numfac
+    grid_fac2.TextMatrix(f1, 7) = "" 'llave_rep01!CAA_NUMFAC
+    grid_fac2.TextMatrix(f1, 8) = Format(llave_rep01!caa_SALDO_car + Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
+    grid_fac2.TextMatrix(f1, 9) = Format(Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
     WS_BRUTO = WS_BRUTO + Val(llave_rep01!CAA_IMPORTE * -1)
-    grid_fac2.TextMatrix(F1, 10) = llave_rep01!CAA_FECHA_VCTO
+    grid_fac2.TextMatrix(f1, 10) = llave_rep01!CAA_FECHA_VCTO
   Else
-    grid_fac2.TextMatrix(F1, 3) = Trim(llave_rep01!CAA_TIPDOC)
-    grid_fac2.TextMatrix(F1, 4) = Trim(llave_rep01!CAA_TIPDOC)
+    grid_fac2.TextMatrix(f1, 3) = Trim(llave_rep01!CAA_TIPDOC)
+    grid_fac2.TextMatrix(f1, 4) = Trim(llave_rep01!CAA_TIPDOC)
     SQ_OPER = 1
     pu_cp = llave_rep01!CAA_CP
     pu_codclie = cli_llave!cli_codclie
@@ -3804,18 +3804,18 @@ Do Until llave_rep01.EOF
     PUB_NUMDOC = llave_rep01!CAA_NUMDOC
     PUB_TIPDOC = Trim(llave_rep01!CAA_TIPDOC)
     LEER_CAR_LLAVE
-    If Not car_llave.EOF Then grid_fac2.TextMatrix(F1, 11) = car_llave!car_NUM_CHEQUE
-    grid_fac2.TextMatrix(F1, 12) = llave_rep01!CAA_IMPORTE * -1
-    grid_fac2.TextMatrix(F1, 13) = llave_rep01!caa_concepto
-    grid_fac2.TextMatrix(F1, 14) = llave_rep01!CAA_FECHA_VCTO
+    If Not car_llave.EOF Then grid_fac2.TextMatrix(f1, 11) = car_llave!car_NUM_CHEQUE
+    grid_fac2.TextMatrix(f1, 12) = llave_rep01!CAA_IMPORTE * -1
+    grid_fac2.TextMatrix(f1, 13) = llave_rep01!caa_concepto
+    grid_fac2.TextMatrix(f1, 14) = llave_rep01!CAA_FECHA_VCTO
     WS_CHEQUE = WS_CHEQUE + Val(llave_rep01!CAA_IMPORTE * -1)
   End If
   If llave_rep01!CAA_CODVEN <> 0 Then wven = llave_rep01!CAA_CODVEN
   llave_rep01.MoveNext
 Loop
-frmDocu.d_efectivo.Caption = Format(WS_BRUTO, "0.00;(0.000)")
-frmDocu.d_cheque.Caption = Format(WS_CHEQUE, "0.00;(0.000)")
-frmDocu.d_saldo.Caption = Format(WS_CHEQUE + WS_BRUTO, "0.00;(0.000)")
+frmdocu.d_efectivo.Caption = Format(WS_BRUTO, "0.00;(0.000)")
+frmdocu.d_cheque.Caption = Format(WS_CHEQUE, "0.00;(0.000)")
+frmdocu.d_saldo.Caption = Format(WS_CHEQUE + WS_BRUTO, "0.00;(0.000)")
 SQ_OPER = 1
 pu_codcia = LK_CODCIA
 PUB_CODVEN = wven
@@ -3853,8 +3853,8 @@ PS_REP01(2) = 0
 Set llave_rep01 = PS_REP01.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
 PS_REP01(0) = LK_CODCIA
-PS_REP01(1) = txtSerie.Text
-PS_REP01(2) = Val(txtNumfac.Text)
+PS_REP01(1) = txtserie.Text
+PS_REP01(2) = Val(txtNumFac.Text)
 
 llave_rep01.Requery
 d_mensaje.Visible = False
@@ -3867,11 +3867,11 @@ End If
 cabe_grid
 d_fecha.Caption = Format(llave_rep01!PED_FECHA, "dd/mm/yyyy")
 wven = 0
-F1 = 0
+f1 = 0
 WS_BRUTO = 0
 grid_fac2.Rows = 1
 PB.Visible = True
-PB.Max = llave_rep01.RowCount
+PB.max = llave_rep01.RowCount
 PB.Min = 0
 PB.Value = 0
 pu_codcia = LK_CODCIA
@@ -4046,14 +4046,14 @@ End If
 End Sub
 
 Private Sub txtserie_GotFocus()
-txtSerie.Text = Trim(txtSerie.Text)
+txtserie.Text = Trim(txtserie.Text)
 End Sub
 
 Private Sub txtSerie_KeyPress(KeyAscii As Integer)
 SOLO_ENTERO KeyAscii
 If KeyAscii = 13 Then
- If txtNumfac.Enabled Then
-  txtNumfac.SetFocus
+ If txtNumFac.Enabled Then
+  txtNumFac.SetFocus
  End If
 End If
 End Sub
@@ -4080,7 +4080,7 @@ Dim indice As Integer
 Dim wm As Integer
 Dim llave_rep01 As rdoResultset
 Dim PS_REP01 As rdoQuery
-Dim i As Integer
+Dim I As Integer
 Dim valor
 Dim loc_xl As Object
 Dim loc_codtra As Integer
@@ -4119,28 +4119,28 @@ End If
 'End If
   
 
-    frmDocu.Reportes.Connect = PUB_ODBC
-    If frmDocu.imp.Value = 1 Then
-      frmDocu.Reportes.Destination = crptToPrinter
+    frmdocu.Reportes.Connect = PUB_ODBC
+    If frmdocu.imp.Value = 1 Then
+      frmdocu.Reportes.Destination = crptToPrinter
     Else
-      frmDocu.Reportes.Destination = crptToWindow  '= crptToPrinter
+      frmdocu.Reportes.Destination = crptToWindow  '= crptToPrinter
     End If
-    frmDocu.Reportes.WindowLeft = 2
-    frmDocu.Reportes.WindowTop = 70
-    frmDocu.Reportes.WindowWidth = 635
-    frmDocu.Reportes.WindowHeight = 390
-    frmDocu.Reportes.Formulas(1) = ""
-    frmDocu.d_neto.Refresh
-    PUB_NETO = Val(frmDocu.d_neto.Caption)
-    PUB_FECHA = frmDocu.d_fecha.Caption
-    PU_NUMSER = Val((frmDocu.txtSerie.Text))
-    PU_NUMFAC = Val((frmDocu.txtNumfac.Text))
+    frmdocu.Reportes.WindowLeft = 2
+    frmdocu.Reportes.WindowTop = 70
+    frmdocu.Reportes.WindowWidth = 635
+    frmdocu.Reportes.WindowHeight = 390
+    frmdocu.Reportes.Formulas(1) = ""
+    frmdocu.d_neto.Refresh
+    PUB_NETO = Val(frmdocu.d_neto.Caption)
+    PUB_FECHA = frmdocu.d_fecha.Caption
+    PU_NUMSER = Val((frmdocu.txtserie.Text))
+    PU_NUMFAC = Val((frmdocu.txtNumFac.Text))
     If LK_EMP = "PIU" Then
-       frmDocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
+       frmdocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
     Else
-       frmDocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
+       frmdocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
     End If
-    If PUB_NETO <> Val(frmDocu.d_neto.Caption) Then
+    If PUB_NETO <> Val(frmdocu.d_neto.Caption) Then
       MsgBox "Espere....!!!", 48, Pub_Titulo
       Exit Function
     End If
@@ -4176,15 +4176,15 @@ End If
     
     
     If LOC_TIPMOV = 3 Or LOC_TIPMOV = 25 Or LOC_TIPMOV = 6 Or LOC_TIPMOV = 100 Or LOC_TIPMOV = 101 Then
-        frmDocu.Reportes.WindowTitle = "GUIA DE REMISION  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+        frmdocu.Reportes.WindowTitle = "GUIA DE REMISION  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         If LOC_TIPMOV = 25 Or LOC_TIPMOV = 100 Or LOC_TIPMOV = 101 Then
-          frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_GUIA)  ' "FACGUIA.RPT"
+          frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_GUIA)  ' "FACGUIA.RPT"
         Else
-          frmDocu.Reportes.ReportFileName = wRuta + "GUIAR3.RPT"
+          frmdocu.Reportes.ReportFileName = wRuta + "GUIAR3.RPT"
         End If
-        pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = " & LOC_TIPMOV & " AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND  ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ") AND {FACART.FAR_NUMSER} = '" & Trim(txtSerie.Text) & "'  "
+        pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = " & LOC_TIPMOV & " AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND  ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ") AND {FACART.FAR_NUMSER} = '" & Trim(txtserie.Text) & "'  "
         'Debug.Print pub_cadena
-        frmDocu.Reportes.Formulas(1) = ""
+        frmdocu.Reportes.Formulas(1) = ""
         If chetrans.Value = 1 Then
              PS_TRA(0) = Val(Right(TRANS.Text, 3))
              llave_trans.Requery
@@ -4199,90 +4199,90 @@ End If
         GoTo pasa_todo
     End If
     If LOC_TIPMOV = 20 Then
-        frmDocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+        frmdocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         pub_mensaje = "Inventario Valorado (Si), Inventario en Unidades (No) "
         Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
         If Pub_Respuesta = vbYes Then
-            frmDocu.Reportes.ReportFileName = wRuta + "NOTAING.RPT"
+            frmdocu.Reportes.ReportFileName = wRuta + "NOTAING.RPT"
         Else
-            frmDocu.Reportes.ReportFileName = wRuta + "NOTAINV.RPT"
+            frmdocu.Reportes.ReportFileName = wRuta + "NOTAINV.RPT"
         End If
         wser = PU_NUMSER
         pub_cadena = "{FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_NUMSER}= '" & wser & "'  AND {FACART.FAR_NUMFAC} = " & PU_NUMFAC
-        frmDocu.Reportes.Formulas(1) = ""
+        frmdocu.Reportes.Formulas(1) = ""
         Reportes.Formulas(1) = "CIA=  '" & Mid(MDIForm1.stb_EB.Panels("cia"), 4, Len(MDIForm1.stb_EB.Panels("cia"))) & "'"
         GoTo pasa_todo
     End If
     If LOC_TIPMOV = 75 Or LOC_TIPMOV = 93 Or LOC_TIPMOV = 102 Then
         wser = PU_NUMSER
-        frmDocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+        frmdocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         If LOC_TIPMOV = 93 Then
-        frmDocu.Reportes.ReportFileName = wRuta + "CAMBP.RPT"
+        frmdocu.Reportes.ReportFileName = wRuta + "CAMBP.RPT"
         End If
         If LOC_TIPMOV = 75 Then
-          frmDocu.Reportes.ReportFileName = wRuta + "DEF01.RPT"
+          frmdocu.Reportes.ReportFileName = wRuta + "DEF01.RPT"
         End If
         If LOC_TIPMOV = 102 Then
-          frmDocu.Reportes.ReportFileName = wRuta + "CAMBPRO.RPT"
+          frmdocu.Reportes.ReportFileName = wRuta + "CAMBPRO.RPT"
           Reportes.Formulas(12) = "DOCUMENTO=  '" & DOC102 & "'"
         End If
         pub_cadena = "{FACART.FAR_TIPMOV} = " & LOC_TIPMOV & " AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_NUMSER}= '" & wser & "'  AND {FACART.FAR_NUMFAC} = " & PU_NUMFAC
-        frmDocu.Reportes.Formulas(1) = ""
+        frmdocu.Reportes.Formulas(1) = ""
         GoTo pasa_todo
     End If
     If LOC_TIPMOV = 99 Then
         wser = PU_NUMSER
-        frmDocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
-        frmDocu.Reportes.ReportFileName = wRuta + "VOCCM.RPT"
+        frmdocu.Reportes.WindowTitle = "KARDEX Nº :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+        frmdocu.Reportes.ReportFileName = wRuta + "VOCCM.RPT"
         pub_cadena = "{ALLOG.ALL_CODCIA} = '" & LK_CODCIA & "' AND {ALLOG.ALL_NUMSER}= '" & wser & "'  AND {ALLOG.ALL_NUMFAC} = " & PU_NUMFAC
-        frmDocu.Reportes.Formulas(1) = ""
+        frmdocu.Reportes.Formulas(1) = ""
         GoTo pasa_todo
     End If
     If LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Or LOC_TIPMOV = 25 Then
-      If Left(frmDocu.cmbFBG.Text, 1) = "B" Then
-        frmDocu.Reportes.WindowTitle = "BOLETA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
+      If Left(frmdocu.cmbFBG.Text, 1) = "B" Then
+        frmdocu.Reportes.WindowTitle = "BOLETA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
         If LK_EMP = "PIU" Or LK_EMP = "PAR" Then
-          frmDocu.Reportes.WindowTitle = "BOLETA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+          frmdocu.Reportes.WindowTitle = "BOLETA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         End If
-        frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_B)  '"CLIBOL.RPT"
+        frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_B)  '"CLIBOL.RPT"
        ' If SIN_CODART = 1 Then frmdocu.Reportes.ReportFileName = wRuta + "BOL002.RPT"  'GTS quitado
-        If LOC_ARROZ = "A" Then frmDocu.Reportes.ReportFileName = wRuta + "CLIBOLIE.RPT"
-      ElseIf Left(frmDocu.cmbFBG.Text, 1) = "F" Then
-        frmDocu.Reportes.WindowTitle = "FACTURA : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
+        If LOC_ARROZ = "A" Then frmdocu.Reportes.ReportFileName = wRuta + "CLIBOLIE.RPT"
+      ElseIf Left(frmdocu.cmbFBG.Text, 1) = "F" Then
+        frmdocu.Reportes.WindowTitle = "FACTURA : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
         If LK_EMP = "PIU" Or LK_EMP = "PAR" Then
-          frmDocu.Reportes.WindowTitle = "FACTURA : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+          frmdocu.Reportes.WindowTitle = "FACTURA : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         End If
-        frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_F)
-        If LOC_ARROZ = "A" Then frmDocu.Reportes.ReportFileName = wRuta + "CLIFACIE.RPT"
-      ElseIf Left(frmDocu.cmbFBG.Text, 1) = "G" Then
-        frmDocu.Reportes.WindowTitle = " GUIA   : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
-        frmDocu.Reportes.ReportFileName = wRuta + "GRE006.RPT"
-      ElseIf Left(frmDocu.cmbFBG.Text, 1) = "P" Then
-        frmDocu.Reportes.WindowTitle = " PEDIDO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
-        frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_G)
-      ElseIf Left(frmDocu.cmbFBG.Text, 1) = "N" Then
-        frmDocu.Reportes.WindowTitle = " N. CREDITO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
+        frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_F)
+        If LOC_ARROZ = "A" Then frmdocu.Reportes.ReportFileName = wRuta + "CLIFACIE.RPT"
+      ElseIf Left(frmdocu.cmbFBG.Text, 1) = "G" Then
+        frmdocu.Reportes.WindowTitle = " GUIA   : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
+        frmdocu.Reportes.ReportFileName = wRuta + "GRE006.RPT"
+      ElseIf Left(frmdocu.cmbFBG.Text, 1) = "P" Then
+        frmdocu.Reportes.WindowTitle = " PEDIDO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
+        frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_G)
+      ElseIf Left(frmdocu.cmbFBG.Text, 1) = "N" Then
+        frmdocu.Reportes.WindowTitle = " N. CREDITO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & " al " & Format(LOC_NUMFAC_FIN, "0000000")
         If Trim(grid_fac2.TextMatrix(1, 1)) = "" Then
-         frmDocu.Reportes.ReportFileName = wRuta + "NCREDV.RPT"
+         frmdocu.Reportes.ReportFileName = wRuta + "NCREDV.RPT"
          Else
-         frmDocu.Reportes.ReportFileName = wRuta + "NCRED.RPT"
+         frmdocu.Reportes.ReportFileName = wRuta + "NCRED.RPT"
         End If
-      ElseIf Left(frmDocu.cmbFBG.Text, 1) = "D" Then
-        frmDocu.Reportes.WindowTitle = " N. DEBITO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
+      ElseIf Left(frmdocu.cmbFBG.Text, 1) = "D" Then
+        frmdocu.Reportes.WindowTitle = " N. DEBITO  : " & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
         If Trim(grid_fac2.TextMatrix(1, 1)) = "" Then
-         frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_NDV)
+         frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_NDV)
         Else
-         frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_ND)
+         frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_ND)
         End If
       End If
     End If
     wser = PU_NUMSER
-    If Left(frmDocu.cmbFBG.Text, 1) = "N" Then
-       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = 97 AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmDocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
-    ElseIf Left(frmDocu.cmbFBG.Text, 1) = "D" Then
-       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = 98 AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmDocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
+    If Left(frmdocu.cmbFBG.Text, 1) = "N" Then
+       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = 97 AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmdocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
+    ElseIf Left(frmdocu.cmbFBG.Text, 1) = "D" Then
+       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND {FACART.FAR_TIPMOV} = 98 AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmdocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
     Else
-       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND ({FACART.FAR_TIPMOV} = 10 OR {FACART.FAR_TIPMOV} = 25)  AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmDocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
+       pub_cadena = "{FACART.FAR_ESTADO} <> 'E' AND ({FACART.FAR_TIPMOV} = 10 OR {FACART.FAR_TIPMOV} = 25)  AND {FACART.FAR_CODCIA} = '" & LK_CODCIA & "' AND {FACART.FAR_FBG} = '" & Left(frmdocu.cmbFBG.Text, 1) & "' AND {FACART.FAR_NUMSER}= '" & wser & "' AND ( {FACART.FAR_NUMFAC} >= " & PU_NUMFAC & " and {FACART.FAR_NUMFAC} <= " & LOC_NUMFAC_FIN & ")"
      End If
     Reportes.Formulas(12) = ""
     Reportes.Formulas(13) = ""
@@ -4293,16 +4293,16 @@ End If
     If cherela.Value = 1 And LK_EMP = "HER" Then
        Reportes.Formulas(10) = "GUIA=  '" & Trim(tguia.Text) & "'"
     End If
-    If Left(frmDocu.cmbFBG.Text, 1) = "G" Then GoTo PASA_OP
+    If Left(frmdocu.cmbFBG.Text, 1) = "G" Then GoTo PASA_OP
     If LK_EMP = "PIU" Or LK_EMP = "PAR" Or LK_EMP = "3AA" Then
        Reportes.Formulas(17) = ""
        Reportes.Formulas(18) = ""
        Reportes.Formulas(19) = ""
        Reportes.Formulas(20) = ""
-       pub_mensaje = "Desea Imprimir la " & Trim(frmDocu.Reportes.WindowTitle) & "   ¿Desea Continuar... ?"
+       pub_mensaje = "Desea Imprimir la " & Trim(frmdocu.Reportes.WindowTitle) & "   ¿Desea Continuar... ?"
        Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
        If Pub_Respuesta = vbYes Then
-         frmDocu.Reportes.SelectionFormula = pub_cadena
+         frmdocu.Reportes.SelectionFormula = pub_cadena
          Reportes.Formulas(10) = ""
          Reportes.Formulas(11) = ""
          Reportes.Formulas(12) = ""
@@ -4323,41 +4323,41 @@ End If
          On Error GoTo accion
          'Debug.Print pub_cadena
          
-         frmDocu.Reportes.WindowTitle = frmDocu.Reportes.WindowTitle & " Archivo: " & Trim(frmDocu.Reportes.ReportFileName)
-         frmDocu.Reportes.Action = 1
+         frmdocu.Reportes.WindowTitle = frmdocu.Reportes.WindowTitle & " Archivo: " & Trim(frmdocu.Reportes.ReportFileName)
+         frmdocu.Reportes.Action = 1
          On Error GoTo 0
        End If
 PASA_OP:
        If LOC_TIPMOV = 10 Or LOC_TIPMOV = 100 Or LOC_TIPMOV = 3 Or LOC_TIPMOV = 25 Then
-         WSNUMDOC = Left(frmDocu.Reportes.WindowTitle, 23)
+         WSNUMDOC = Left(frmdocu.Reportes.WindowTitle, 23)
          If LK_EMP = "PAR" Then
-           WSNUMDOC = Right(Trim(frmDocu.Reportes.WindowTitle), 15)
+           WSNUMDOC = Right(Trim(frmdocu.Reportes.WindowTitle), 15)
          End If
          If LK_EMP = "3AA" Then
               WSNUMDOC = Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000") & ""
          End If
-         frmDocu.Reportes.WindowTitle = "GUIA DE VENTA  " & Trim(frmDocu.Reportes.WindowTitle)
+         frmdocu.Reportes.WindowTitle = "GUIA DE VENTA  " & Trim(frmdocu.Reportes.WindowTitle)
          If sin_valor.Value = 1 Then
-            frmDocu.Reportes.ReportFileName = wRuta + "FACGUIA2.RPT"
+            frmdocu.Reportes.ReportFileName = wRuta + "FACGUIA2.RPT"
          Else
              If LOC_TIPMOV = 25 Then   'GTS
-             frmDocu.Reportes.ReportFileName = wRuta + "GRE006NEW.RPT"
+             frmdocu.Reportes.ReportFileName = wRuta + "GRE006NEW.RPT"
              Else
-             frmDocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_GUIA) ' "FACGUIA.RPT"
+             frmdocu.Reportes.ReportFileName = wRuta + Trim(pac_llave!PAC_ARCHI_GUIA) ' "FACGUIA.RPT"
              End If
          End If
          If LOC_TIPMOV = 100 Then
             If sin_valor.Value = 1 Then
-            frmDocu.Reportes.ReportFileName = wRuta + "GUIAR2.RPT"
+            frmdocu.Reportes.ReportFileName = wRuta + "GUIAR2.RPT"
             Else
-            frmDocu.Reportes.ReportFileName = wRuta + "GUIAR.RPT"
+            frmdocu.Reportes.ReportFileName = wRuta + "GUIAR.RPT"
          End If
          End If
          
-         pub_mensaje = "Desea Imprimir la " & Trim(frmDocu.Reportes.WindowTitle) & "   ¿ Continuar... ?"
+         pub_mensaje = "Desea Imprimir la " & Trim(frmdocu.Reportes.WindowTitle) & "   ¿ Continuar... ?"
          Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
          If Pub_Respuesta = vbYes Then
-           frmDocu.Reportes.SelectionFormula = pub_cadena
+           frmdocu.Reportes.SelectionFormula = pub_cadena
            Reportes.Formulas(21) = "FECHA_EMI=  '" & d_fecha_compra.Caption & "'"
            Reportes.Formulas(10) = ""
            Reportes.Formulas(11) = "FECHA_PARTIDA=  '" & FECHA_PART.Text & "'"
@@ -4424,19 +4424,19 @@ PASA_OP:
               Reportes.Formulas(21) = "TRN_CERT =  '" & llave_trans!TRN_CERT & "'"
 '             End If
            End If
-           frmDocu.Reportes.WindowTitle = frmDocu.Reportes.WindowTitle & " Archivo: " & Trim(frmDocu.Reportes.ReportFileName)
+           frmdocu.Reportes.WindowTitle = frmdocu.Reportes.WindowTitle & " Archivo: " & Trim(frmdocu.Reportes.ReportFileName)
            'Debug.Print frmdocu.Reportes.WindowTitle
            On Error GoTo accion
-           frmDocu.Reportes.Action = 1
+           frmdocu.Reportes.Action = 1
            On Error GoTo 0
          End If
        End If
     Else
 pasa_todo:
-       frmDocu.Reportes.SelectionFormula = pub_cadena
-       frmDocu.Reportes.WindowTitle = frmDocu.Reportes.WindowTitle & " Archivo: " & Trim(frmDocu.Reportes.ReportFileName)
+       frmdocu.Reportes.SelectionFormula = pub_cadena
+       frmdocu.Reportes.WindowTitle = frmdocu.Reportes.WindowTitle & " Archivo: " & Trim(frmdocu.Reportes.ReportFileName)
        On Error GoTo accion
-       frmDocu.Reportes.Action = 1
+       frmdocu.Reportes.Action = 1
        On Error GoTo 0
        If cherela.Value = 1 Then
           GoTo PASA_OP

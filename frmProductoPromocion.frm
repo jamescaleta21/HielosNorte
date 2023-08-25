@@ -34,17 +34,17 @@ Begin VB.Form frmProductoPromocion
       _ExtentY        =   16536
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado de Articulos"
       TabPicture(0)   =   "frmProductoPromocion.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "lvArticulos"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Asignar Promoción"
       TabPicture(1)   =   "frmProductoPromocion.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Frame1"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
@@ -56,7 +56,7 @@ Begin VB.Form frmProductoPromocion
       Tab(1).ControlCount=   4
       Begin VB.Frame Frame4 
          Height          =   855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   28
          Top             =   8400
          Width           =   12495
@@ -79,7 +79,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame3 
          Height          =   3255
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   16
          Top             =   5160
          Width           =   12495
@@ -209,7 +209,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame2 
          Height          =   3255
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   5
          Top             =   1800
          Width           =   12495
@@ -312,7 +312,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame1 
          Height          =   1335
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   2
          Top             =   480
          Width           =   12495
@@ -349,7 +349,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin MSComctlLib.ListView lvArticulos 
          Height          =   8775
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   1
          Top             =   480
          Width           =   12615
@@ -484,6 +484,7 @@ Private Sub cmdGrabar_Click()
 
     On Error GoTo cGraba
 
+    MousePointer = vbHourglass
     LimpiaParametros oCmdEjec
     oCmdEjec.CommandText = "[dbo].[USP_PROMOCION_BONIFICACION_PROCCESS]"
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
@@ -536,23 +537,35 @@ Private Sub cmdGrabar_Click()
 
     End If
     
-'    oCmdEjec.Execute
-    Dim orsResult  As ADODB.Recordset
+    '    oCmdEjec.Execute
+    Dim orsResult As ADODB.Recordset
+
     Set orsResult = oCmdEjec.Execute
+
     Dim sMensaje() As String
+
     If Not orsResult.EOF Then
         sMensaje = Split(orsResult.Fields(0), "=")
+
         If sMensaje(0) = 0 Then
-        MsgBox sMensaje(1), vbInformation, Pub_Titulo
-    cmdCancelar_Click
+            LimpiaParametros oCmdEjec
+            oCmdEjec.CommandText = "[dbo].[USP_SYNC_PROMOCION_BONIFICACION]"
+            oCmdEjec.CommandType = adCmdStoredProc
+            oCmdEjec.Execute
+            MousePointer = vbDefault
+            MsgBox sMensaje(1), vbInformation, Pub_Titulo
+            cmdCancelar_Click
         Else
-        MsgBox sMensaje(1), vbCritical, Pub_Titulo
+            MousePointer = vbDefault
+            MsgBox sMensaje(1), vbCritical, Pub_Titulo
+
         End If
+
     End If
-    
     
     Exit Sub
 cGraba:
+    MousePointer = vbDefault
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
@@ -832,6 +845,8 @@ If SoloNumeros(KeyAscii) Then KeyAscii = 0
 End Sub
 
 Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
+    Me.lvPromocion.ListItems.Clear
+    Me.lvBonificacion.ListItems.Clear
 
     On Error GoTo cDatos
 
@@ -858,6 +873,7 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
     Loop
     
     Dim orsBoni As ADODB.Recordset
+
     Set orsBoni = orsData.NextRecordset
     
     Do While Not orsBoni.EOF
@@ -868,8 +884,6 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
         itemx.SubItems(4) = orsBoni!PRE
         orsBoni.MoveNext
     Loop
-    
-       
   
     Exit Sub
 cDatos:
