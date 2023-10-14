@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
-Object = "{F6E4F630-E903-11D5-8BB9-0080AD40A177}#1.18#0"; "OSControlsUser.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{F6E4F630-E903-11D5-8BB9-0080AD40A177}#1.18#0"; "oscontrolsuser.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form FORMGEN 
    BackColor       =   &H00C0C0C0&
@@ -2977,6 +2977,7 @@ Begin VB.Form FORMGEN
       _ExtentY        =   661
       _Version        =   393217
       BackColor       =   14737632
+      Enabled         =   -1  'True
       MultiLine       =   0   'False
       TextRTF         =   $"FORMGEN.frx":5D2C
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -7274,7 +7275,7 @@ frafondo.Visible = False
     End If
 
         
-    If TypeOf FORMGEN.Controls(indice) Is label Then
+    If TypeOf FORMGEN.Controls(indice) Is Label Then
         enlace = 1
     Else
         enlace = 0
@@ -9625,7 +9626,7 @@ Do Until loc_pedidos.EOF
     
     loListItem.ListSubItems.Add Key:="CodClie", Text:=loc_pedidos!idcliente
     loListItem.ListSubItems.Add Key:="NomClie", Text:=Trim(loc_pedidos!cliente)
-    loListItem.ListSubItems.Add Key:="Total", Text:=Format(loc_pedidos!Total, "#,##0.00")
+    loListItem.ListSubItems.Add Key:="Total", Text:=Format(loc_pedidos!total, "#,##0.00")
     loListItem.ListSubItems.Add Key:="Dir", Text:=loc_pedidos!dir
     loListItem.ListSubItems.Add Key:="Observ", Text:=loc_pedidos!obs
     
@@ -9861,7 +9862,7 @@ End If
 
 Barra.Min = 0
 Barra.Value = 0
-Barra.max = all_llave.RowCount
+Barra.Max = all_llave.RowCount
 Barra.Visible = True
 
 FORMGEN.Grid_all.Visible = False
@@ -10167,10 +10168,10 @@ If LK_FLAG_ALTERNO = "A" And LK_FLAG_ORIGINAL <> "A" Then
            ElseIf UCase(Forms(iFormCount).Name) = "FRMPREUNIDAD" Then
                 FrmPreUnidad.PRO_GOTFOCUS
                 FrmPreUnidad.ListView1.Visible = False
-                FrmPreUnidad.Txt_key.Text = ""
+                FrmPreUnidad.txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FRMREPO" Then
                 FrmRepo.ListView1.Visible = False
-                FrmRepo.Txt_key.Text = ""
+                FrmRepo.txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
                 fraprecios.Visible = False
@@ -10824,7 +10825,7 @@ End If
 
 Barra.Visible = True
 'Barra
-Barra.max = 90
+Barra.Max = 90
 Barra.Min = 62
 
 Barra.Value = 62
@@ -10915,9 +10916,9 @@ CN.Execute "Commit Transaction", rdExecDirect
 'End If
 
 If LK_PASA_BOLETAS = "A" And (LK_CODTRA = 2401 Or LK_CODTRA = 2402 Or LK_CODTRA = 2412) Then ' And i_fbg.Text = "F" Then
-        CrearArchivoPlano i_fbg.Text, Me.i_numser.Text, Me.i_numfac.Text
+       ' CrearArchivoPlano i_fbg.Text, Me.i_numser.Text, Me.i_numfac.Text
     ElseIf (LK_CODTRA = 2401 Or LK_CODTRA = 2402 Or LK_CODTRA = 2412) And i_fbg.Text = "F" Then
-        CrearArchivoPlano i_fbg.Text, Me.i_numser.Text, Me.i_numfac.Text
+       ' CrearArchivoPlano i_fbg.Text, Me.i_numser.Text, Me.i_numfac.Text
     ElseIf LK_CODTRA = 1111 And (ww_codtra_ext = 2401 Or ww_codtra_ext = 2402 Or ww_codtra_ext = 2412) And (PUB_FBG = "F" Or PUB_FBG = "N" Or PUB_FBG = "D") Then
         CrearArchivoPlano i_fbg.Text, "", 1
 End If
@@ -11639,7 +11640,7 @@ End If
             PUB_KEY = arm_llave!ARM_CODART
             LEER_ART_LLAVE
             art_LLAVE.Edit
-            art_LLAVE!art_hosting = 0
+            art_LLAVE!ART_HOSTING = 0
             art_LLAVE.Update
          End If
          '(@#A-1) inicio
