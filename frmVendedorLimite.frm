@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmVendedorLimite 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Límite para vendedores"
@@ -63,10 +63,10 @@ Begin VB.Form frmVendedorLimite
       TabCaption(1)   =   "Listado de vendedores"
       TabPicture(1)   =   "frmVendedorLimite.frx":0CE6
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "cmdSearch"
-      Tab(1).Control(1)=   "txtSearch"
-      Tab(1).Control(2)=   "lvSearch"
-      Tab(1).Control(3)=   "Label5"
+      Tab(1).Control(0)=   "Label5"
+      Tab(1).Control(1)=   "lvSearch"
+      Tab(1).Control(2)=   "txtSearch"
+      Tab(1).Control(3)=   "cmdSearch"
       Tab(1).ControlCount=   4
       Begin VB.CommandButton cmdServer 
          Caption         =   "Server"
@@ -483,7 +483,7 @@ Private Sub cmdGrabar_Click()
             Me.lvData.ListItems.Clear
             'MsgBox oRSdatos!Mensaje, vbInformation, Pub_Titulo
         Else
-            MsgBox oRSdatos!Mensaje, vbCritical, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbCritical, Pub_Titulo
 
         End If
 
@@ -530,6 +530,14 @@ Private Sub cmdServer_Click()
 '    End If
 
     MousePointer = vbHourglass
+'DATOS CLOUD
+Dim c_Server As String, c_DataBase As String, c_User As String, c_Pass As String
+
+c_Server = Leer_Ini(App.Path & "\config.ini", "C_SERVER", "c:\")
+c_DataBase = Leer_Ini(App.Path & "\config.ini", "C_DATABASE", "c:\")
+c_User = Leer_Ini(App.Path & "\config.ini", "C_USER", "c:\")
+c_Pass = Leer_Ini(App.Path & "\config.ini", "C_PASS", "c:\")
+'FIN CLOUD
 
     On Error GoTo server
 
@@ -537,7 +545,7 @@ Private Sub cmdServer_Click()
 
     oCnnRemoto.CursorLocation = adUseClient
     oCnnRemoto.Provider = "SQLOLEDB.1"
-    oCnnRemoto.Open "Server=162.222.225.88;Database=hielou5q_hielosnorte;Uid=usr_hielosnorte;Pwd=82*nTw6i;"
+    oCnnRemoto.Open "Server=" + c_Server + ";Database=" + c_DataBase + ";Uid=" + c_User + ";Pwd=" + c_Pass + ";"
 
     Dim oCmdRemoto As New ADODB.Command
 
@@ -579,9 +587,9 @@ Private Sub cmdServer_Click()
             Me.lvData.ListItems.Clear
             cmdCancelar_Click
             Me.cmdServer.Enabled = False
-            MsgBox oRSdatos!Mensaje, vbInformation, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbInformation, Pub_Titulo
         Else
-            MsgBox oRSdatos!Mensaje, vbCritical, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbCritical, Pub_Titulo
 
         End If
 
