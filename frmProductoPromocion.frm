@@ -5,10 +5,10 @@ Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form frmProductoPromocion 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Asignación de Promociones"
-   ClientHeight    =   9585
+   ClientHeight    =   9870
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   13065
+   ClientWidth     =   13080
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   8.25
@@ -22,29 +22,29 @@ Begin VB.Form frmProductoPromocion
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   9585
-   ScaleWidth      =   13065
+   ScaleHeight     =   9870
+   ScaleWidth      =   13080
    Begin TabDlg.SSTab SSTTab0 
-      Height          =   9375
+      Height          =   9615
       Left            =   120
       TabIndex        =   0
       Top             =   120
       Width           =   12855
       _ExtentX        =   22675
-      _ExtentY        =   16536
+      _ExtentY        =   16960
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado de Articulos"
       TabPicture(0)   =   "frmProductoPromocion.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "lvArticulos"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Asignar Promoción"
       TabPicture(1)   =   "frmProductoPromocion.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Frame1"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
@@ -55,53 +55,79 @@ Begin VB.Form frmProductoPromocion
       Tab(1).Control(3).Enabled=   0   'False
       Tab(1).ControlCount=   4
       Begin VB.Frame Frame4 
-         Height          =   855
-         Left            =   -74760
-         TabIndex        =   28
+         Height          =   1095
+         Left            =   240
+         TabIndex        =   31
          Top             =   8400
          Width           =   12495
          Begin VB.CommandButton cmdCancelar 
             Caption         =   "&Cancelar"
-            Height          =   480
-            Left            =   11280
-            TabIndex        =   30
+            Height          =   720
+            Left            =   11040
+            Picture         =   "frmProductoPromocion.frx":0038
+            Style           =   1  'Graphical
+            TabIndex        =   16
             Top             =   240
-            Width           =   1095
+            Width           =   1335
          End
          Begin VB.CommandButton cmdGrabar 
             Caption         =   "&Grabar"
-            Height          =   480
-            Left            =   10080
-            TabIndex        =   29
+            Height          =   720
+            Left            =   8160
+            Picture         =   "frmProductoPromocion.frx":07A2
+            Style           =   1  'Graphical
+            TabIndex        =   15
             Top             =   240
-            Width           =   1095
+            Width           =   1335
+         End
+         Begin VB.CommandButton cmdEliminar 
+            Caption         =   "Eliminar"
+            Enabled         =   0   'False
+            Height          =   720
+            Left            =   9600
+            Picture         =   "frmProductoPromocion.frx":0F0C
+            Style           =   1  'Graphical
+            TabIndex        =   33
+            Top             =   240
+            Width           =   1335
          End
       End
       Begin VB.Frame Frame3 
          Height          =   3255
-         Left            =   -74760
-         TabIndex        =   16
+         Left            =   240
+         TabIndex        =   25
          Top             =   5160
          Width           =   12495
+         Begin VB.TextBox txtTope 
+            Height          =   375
+            Left            =   10320
+            TabIndex        =   11
+            Top             =   1200
+            Width           =   1095
+         End
          Begin VB.CommandButton cmdBoniDel 
             Enabled         =   0   'False
             Height          =   360
             Left            =   11160
-            TabIndex        =   27
+            Picture         =   "frmProductoPromocion.frx":1676
+            Style           =   1  'Graphical
+            TabIndex        =   14
             Top             =   2160
             Width           =   990
          End
          Begin VB.CommandButton cmdBoniAdd 
             Height          =   360
             Left            =   11160
-            TabIndex        =   26
+            Picture         =   "frmProductoPromocion.frx":1A00
+            Style           =   1  'Graphical
+            TabIndex        =   13
             Top             =   1680
             Width           =   990
          End
          Begin MSComctlLib.ListView lvBonificacion 
             Height          =   1455
             Left            =   120
-            TabIndex        =   24
+            TabIndex        =   12
             Top             =   1680
             Width           =   10935
             _ExtentX        =   19288
@@ -121,21 +147,21 @@ Begin VB.Form frmProductoPromocion
          Begin VB.TextBox txtrecibe 
             Height          =   375
             Left            =   9120
-            TabIndex        =   23
+            TabIndex        =   10
             Top             =   1200
             Width           =   1095
          End
          Begin VB.TextBox txtCantidad 
             Height          =   375
             Left            =   9120
-            TabIndex        =   21
+            TabIndex        =   9
             Top             =   480
             Width           =   1095
          End
          Begin MSDataListLib.DataCombo DatBonificacion 
             Height          =   315
             Left            =   120
-            TabIndex        =   19
+            TabIndex        =   8
             Top             =   1200
             Width           =   8895
             _ExtentX        =   15690
@@ -143,6 +169,16 @@ Begin VB.Form frmProductoPromocion
             _Version        =   393216
             Style           =   2
             Text            =   ""
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Tope:"
+            Height          =   195
+            Left            =   10320
+            TabIndex        =   32
+            Top             =   960
+            Width           =   495
          End
          Begin VB.Label lblProducto2 
             Alignment       =   2  'Center
@@ -161,7 +197,7 @@ Begin VB.Form frmProductoPromocion
             ForeColor       =   &H80000008&
             Height          =   375
             Left            =   120
-            TabIndex        =   25
+            TabIndex        =   30
             Tag             =   "X"
             Top             =   480
             Width           =   8775
@@ -172,7 +208,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Recibe:"
             Height          =   195
             Left            =   9120
-            TabIndex        =   22
+            TabIndex        =   29
             Top             =   960
             Width           =   645
          End
@@ -182,7 +218,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Por cada:"
             Height          =   195
             Left            =   9240
-            TabIndex        =   20
+            TabIndex        =   28
             Top             =   240
             Width           =   825
          End
@@ -192,7 +228,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Producto:"
             Height          =   195
             Left            =   120
-            TabIndex        =   18
+            TabIndex        =   27
             Top             =   960
             Width           =   825
          End
@@ -202,29 +238,31 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "ASIGNAR BONIFICACIÓN"
             Height          =   195
             Left            =   120
-            TabIndex        =   17
+            TabIndex        =   26
             Top             =   240
             Width           =   2205
          End
       End
       Begin VB.Frame Frame2 
          Height          =   3255
-         Left            =   -74760
-         TabIndex        =   5
+         Left            =   240
+         TabIndex        =   20
          Top             =   1800
          Width           =   12495
          Begin VB.CommandButton cmdPromDel 
             Enabled         =   0   'False
             Height          =   360
             Left            =   11400
-            TabIndex        =   15
+            Picture         =   "frmProductoPromocion.frx":1D8A
+            Style           =   1  'Graphical
+            TabIndex        =   7
             Top             =   1680
             Width           =   990
          End
          Begin MSComctlLib.ListView lvPromocion 
             Height          =   2175
             Left            =   120
-            TabIndex        =   13
+            TabIndex        =   5
             Top             =   960
             Width           =   11175
             _ExtentX        =   19711
@@ -244,28 +282,30 @@ Begin VB.Form frmProductoPromocion
          Begin VB.TextBox txtPrecio 
             Height          =   285
             Left            =   10080
-            TabIndex        =   12
+            TabIndex        =   4
             Top             =   555
             Width           =   975
          End
          Begin VB.TextBox txtHasta 
             Height          =   285
             Left            =   5400
-            TabIndex        =   11
+            TabIndex        =   3
             Top             =   555
             Width           =   975
          End
          Begin VB.TextBox txtDesde 
             Height          =   285
             Left            =   1680
-            TabIndex        =   10
+            TabIndex        =   2
             Top             =   600
             Width           =   975
          End
          Begin VB.CommandButton cmdPromAdd 
             Height          =   360
             Left            =   11400
-            TabIndex        =   14
+            Picture         =   "frmProductoPromocion.frx":2114
+            Style           =   1  'Graphical
+            TabIndex        =   6
             Top             =   1200
             Width           =   990
          End
@@ -275,7 +315,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Precio:"
             Height          =   195
             Left            =   9360
-            TabIndex        =   9
+            TabIndex        =   24
             Top             =   600
             Width           =   600
          End
@@ -285,7 +325,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Rango Final:"
             Height          =   195
             Left            =   4200
-            TabIndex        =   8
+            TabIndex        =   23
             Top             =   600
             Width           =   1065
          End
@@ -295,7 +335,7 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "Rango Inicial:"
             Height          =   195
             Left            =   360
-            TabIndex        =   7
+            TabIndex        =   22
             Top             =   600
             Width           =   1185
          End
@@ -305,24 +345,25 @@ Begin VB.Form frmProductoPromocion
             Caption         =   "ASIGNAR PROMOCIÓN"
             Height          =   195
             Left            =   120
-            TabIndex        =   6
+            TabIndex        =   21
             Top             =   240
             Width           =   1965
          End
       End
       Begin VB.Frame Frame1 
          Height          =   1335
-         Left            =   -74760
-         TabIndex        =   2
+         Left            =   240
+         TabIndex        =   17
          Top             =   480
          Width           =   12495
          Begin VB.Label lblIdProducto 
             BackStyle       =   0  'Transparent
             Height          =   195
             Left            =   11280
-            TabIndex        =   4
+            TabIndex        =   19
             Tag             =   "X"
             Top             =   120
+            Visible         =   0   'False
             Width           =   555
          End
          Begin VB.Label lblProducto 
@@ -341,20 +382,20 @@ Begin VB.Form frmProductoPromocion
             ForeColor       =   &H80000008&
             Height          =   675
             Left            =   360
-            TabIndex        =   3
+            TabIndex        =   18
             Tag             =   "X"
             Top             =   360
             Width           =   11715
          End
       End
       Begin MSComctlLib.ListView lvArticulos 
-         Height          =   8775
-         Left            =   120
+         Height          =   9015
+         Left            =   -74880
          TabIndex        =   1
          Top             =   480
          Width           =   12615
          _ExtentX        =   22251
-         _ExtentY        =   15478
+         _ExtentY        =   15901
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -426,6 +467,7 @@ Private Sub cmdBoniAdd_Click()
         Item.SubItems(2) = Me.DatBonificacion.Text
         Item.SubItems(3) = Me.txtrecibe.Text
         Item.SubItems(4) = "0.00"
+        Item.SubItems(5) = Me.txtTope.Text
     Else
 
         Dim itemx As Object
@@ -450,6 +492,7 @@ Private Sub cmdBoniAdd_Click()
             Item.SubItems(2) = Me.DatBonificacion.Text
             Item.SubItems(3) = Me.txtrecibe.Text
             Item.SubItems(4) = "0.00"
+            Item.SubItems(5) = Me.txtTope.Text
         Else
             MsgBox "Producto ya se encuentra Agregado.", vbCritical, Pub_Titulo
             Me.DatBonificacion.SetFocus
@@ -462,6 +505,7 @@ Private Sub cmdBoniAdd_Click()
     Me.txtCantidad.Text = ""
     Me.DatBonificacion.BoundText = -1
     Me.txtrecibe.Text = ""
+    Me.txtTope.Text = ""
     
     Me.txtCantidad.SetFocus
 
@@ -474,6 +518,85 @@ Me.cmdBoniDel.Enabled = False
 Me.txtCantidad.SetFocus
 End Sub
 
+Private Sub cmdEliminar_Click()
+
+    If MsgBox("¿Desea eliminar toda la configuración" + vbCrLf + "del producto " + Me.lblProducto.Caption + "?", vbQuestion + vbYesNo, "Eliminar Configuración") = vbNo Then Exit Sub
+
+    On Error GoTo cElimina
+
+    MousePointer = vbHourglass
+    LimpiaParametros oCmdEjec
+    oCmdEjec.CommandText = "[dbo].[USP_PROMOCION_BONIFICACION_DELETE]"
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lblIdProducto.Caption)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adBSTR, adParamInput, 20, LK_CODUSU)
+    
+    Dim orsResult As ADODB.Recordset
+
+    Set orsResult = oCmdEjec.Execute
+
+    Dim sMensaje() As String
+
+    'DATOS CLOUD
+    Dim c_Server   As String, c_DataBase As String, c_User As String, c_Pass As String
+
+    c_Server = Leer_Ini(App.Path & "\config.ini", "C_SERVER", "c:\")
+    c_DataBase = Leer_Ini(App.Path & "\config.ini", "C_DATABASE", "c:\")
+    c_User = Leer_Ini(App.Path & "\config.ini", "C_USER", "c:\")
+    c_Pass = Leer_Ini(App.Path & "\config.ini", "C_PASS", "c:\")
+    'FIN CLOUD
+
+    If Not orsResult.EOF Then
+        sMensaje = Split(orsResult.Fields(0), "=")
+
+        If sMensaje(0) = 0 Then
+
+            Dim oCnnRemoto As New ADODB.Connection
+
+            oCnnRemoto.CursorLocation = adUseClient
+            oCnnRemoto.Provider = "SQLOLEDB.1"
+            oCnnRemoto.Open "Server=" + c_Server + ";Database=" + c_DataBase + ";Uid=" + c_User + ";Pwd=" + c_Pass + ";"
+
+            Dim oCmdRemoto As New ADODB.Command
+
+            oCmdRemoto.ActiveConnection = oCnnRemoto
+            oCmdRemoto.CommandText = "[dbo].[USP_PROMOCION_BONIFICACION_DELETE]"
+            oCmdRemoto.CommandType = adCmdStoredProc
+    
+            oCmdRemoto.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lblIdProducto.Caption)
+        
+            Dim oRSresultRemoto As ADODB.Recordset
+        
+            Set oRSresultRemoto = oCmdRemoto.Execute
+        
+            If Not oRSresultRemoto.EOF Then
+        
+                If oRSresultRemoto.Fields(0).Value = 0 Then
+                    MousePointer = vbDefault
+                    MsgBox oRSresultRemoto.Fields(1).Value, vbInformation, Pub_Titulo
+                    cmdCancelar_Click
+                Else
+                    MousePointer = vbDefault
+                    MsgBox oRSresultRemoto.Fields(1).Value, vbCritical, Pub_Titulo
+
+                End If
+            
+            End If
+        
+        Else
+            MousePointer = vbDefault
+            MsgBox sMensaje(1), vbCritical, Pub_Titulo
+
+        End If
+
+    End If
+    
+    Exit Sub
+cElimina:
+    MsgBox Err.Description, vbCritical, Pub_Titulo
+
+End Sub
+
 Private Sub cmdGrabar_Click()
 
     If Me.lvPromocion.ListItems.count = 0 Then
@@ -484,6 +607,7 @@ Private Sub cmdGrabar_Click()
 
     On Error GoTo cGraba
 
+    MousePointer = vbHourglass
     LimpiaParametros oCmdEjec
     oCmdEjec.CommandText = "[dbo].[USP_PROMOCION_BONIFICACION_PROCCESS]"
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
@@ -528,6 +652,7 @@ Private Sub cmdGrabar_Click()
             strBonificacion = strBonificacion & "cant=""" & itemx.Text & """ "
             strBonificacion = strBonificacion & "boni=""" & itemx.SubItems(3) & """ "
             strBonificacion = strBonificacion & "pre=""" & itemx.SubItems(4) & """ "
+            strBonificacion = strBonificacion & "tope=""" & IIf(Len(Trim(itemx.SubItems(5))) = 0, Null, itemx.SubItems(5)) & """ "
             strBonificacion = strBonificacion & "/>"
         Next
         strBonificacion = strBonificacion & "</r>"
@@ -536,23 +661,36 @@ Private Sub cmdGrabar_Click()
 
     End If
     
-'    oCmdEjec.Execute
-    Dim orsResult  As ADODB.Recordset
+    '    oCmdEjec.Execute
+    Dim orsResult As ADODB.Recordset
+
     Set orsResult = oCmdEjec.Execute
+
     Dim sMensaje() As String
+
     If Not orsResult.EOF Then
         sMensaje = Split(orsResult.Fields(0), "=")
+
         If sMensaje(0) = 0 Then
-        MsgBox sMensaje(1), vbInformation, Pub_Titulo
-    cmdCancelar_Click
+            LimpiaParametros oCmdEjec
+            oCmdEjec.CommandText = "[dbo].[USP_SAVE_PROMOCION_BONIFICACION]"
+            oCmdEjec.CommandType = adCmdStoredProc
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lblIdProducto.Caption)
+            oCmdEjec.Execute
+            MousePointer = vbDefault
+            MsgBox sMensaje(1), vbInformation, Pub_Titulo
+            cmdCancelar_Click
         Else
-        MsgBox sMensaje(1), vbCritical, Pub_Titulo
+            MousePointer = vbDefault
+            MsgBox sMensaje(1), vbCritical, Pub_Titulo
+
         End If
+
     End If
-    
     
     Exit Sub
 cGraba:
+    MousePointer = vbDefault
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
@@ -754,6 +892,7 @@ With Me.lvBonificacion
     .ColumnHeaders.Add , , "Bonificación", 5500
     .ColumnHeaders.Add , , "Recibe"
     .ColumnHeaders.Add , , "Precio"
+    .ColumnHeaders.Add , , "Tope", 0
     .FullRowSelect = True
     .Gridlines = True
     .HideColumnHeaders = False
@@ -779,6 +918,12 @@ Private Sub EnviarDatos()
     obtenerInformacionPromocion Me.lvArticulos.SelectedItem.Text
 End Sub
 
+Private Sub lvArticulos_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+If Button = 2 Then
+PopupMenu mnuElimina
+End If
+End Sub
+
 Private Sub lvBonificacion_ItemClick(ByVal Item As MSComctlLib.ListItem)
 Me.cmdBoniDel.Enabled = True
 End Sub
@@ -786,6 +931,7 @@ End Sub
 Private Sub lvPromocion_ItemClick(ByVal Item As MSComctlLib.ListItem)
 Me.cmdPromDel.Enabled = True
 End Sub
+
 
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
  If SoloNumeros(KeyAscii) Then KeyAscii = 0
@@ -828,10 +974,17 @@ Private Sub txtPrecio_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtrecibe_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ If KeyAscii = vbKeyReturn Then
+ Me.txtTope.SelStart = 0
+ Me.txtTope.SelLength = Len(Me.txtTope.Text)
+ Me.txtTope.SetFocus
+ End If
 End Sub
 
 Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
+    Me.lvPromocion.ListItems.Clear
+    Me.lvBonificacion.ListItems.Clear
 
     On Error GoTo cDatos
 
@@ -858,6 +1011,7 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
     Loop
     
     Dim orsBoni As ADODB.Recordset
+
     Set orsBoni = orsData.NextRecordset
     
     Do While Not orsBoni.EOF
@@ -866,10 +1020,16 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
         itemx.SubItems(2) = orsBoni!producto
         itemx.SubItems(3) = orsBoni!boni
         itemx.SubItems(4) = orsBoni!PRE
+        itemx.SubItems(5) = orsBoni!tope
         orsBoni.MoveNext
     Loop
-    
-       
+  
+    If Me.lvPromocion.ListItems.count <> 0 Or Me.lvPromocion.ListItems.count <> 0 Then
+        Me.cmdEliminar.Enabled = True
+    Else
+        Me.cmdEliminar.Enabled = False
+
+    End If
   
     Exit Sub
 cDatos:
@@ -877,3 +1037,7 @@ cDatos:
 
 End Sub
 
+Private Sub txtTope_KeyPress(KeyAscii As Integer)
+If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ If KeyAscii = vbKeyReturn Then cmdBoniAdd_Click
+End Sub

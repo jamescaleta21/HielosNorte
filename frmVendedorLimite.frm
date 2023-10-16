@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmVendedorLimite 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Límite para vendedores"
@@ -36,49 +36,54 @@ Begin VB.Form frmVendedorLimite
       _ExtentY        =   13361
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Asignar limite a vendedor"
       TabPicture(0)   =   "frmVendedorLimite.frx":0CCA
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "cmdServer"
-      Tab(0).Control(1)=   "cmdCancelar"
-      Tab(0).Control(2)=   "ListView1"
-      Tab(0).Control(3)=   "ListView2"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "lblIdVendedor"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "cmdGrabar"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "txtVendedor"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Frame1"
-      Tab(0).Control(5)=   "txtVendedor"
-      Tab(0).Control(6)=   "cmdGrabar"
-      Tab(0).Control(7)=   "lblIdVendedor"
-      Tab(0).Control(8)=   "Label1"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "ListView2"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "ListView1"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).Control(7)=   "cmdCancelar"
+      Tab(0).Control(7).Enabled=   0   'False
+      Tab(0).Control(8)=   "cmdServer"
+      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).ControlCount=   9
       TabCaption(1)   =   "Listado de vendedores"
       TabPicture(1)   =   "frmVendedorLimite.frx":0CE6
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label5"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "lvSearch"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "txtSearch"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "cmdSearch"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).ControlCount=   4
       Begin VB.CommandButton cmdServer 
          Caption         =   "Server"
          Enabled         =   0   'False
          Height          =   600
-         Left            =   -66840
+         Left            =   8160
          Picture         =   "frmVendedorLimite.frx":0D02
          Style           =   1  'Graphical
          TabIndex        =   23
          Top             =   6840
+         Visible         =   0   'False
          Width           =   1215
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "Cancelar"
          Height          =   600
-         Left            =   -64200
+         Left            =   10800
          Picture         =   "frmVendedorLimite.frx":146C
          Style           =   1  'Graphical
          TabIndex        =   12
@@ -87,7 +92,7 @@ Begin VB.Form frmVendedorLimite
       End
       Begin VB.CommandButton cmdSearch 
          Height          =   360
-         Left            =   11160
+         Left            =   -63840
          Picture         =   "frmVendedorLimite.frx":1BD6
          Style           =   1  'Graphical
          TabIndex        =   1
@@ -96,14 +101,14 @@ Begin VB.Form frmVendedorLimite
       End
       Begin VB.TextBox txtSearch 
          Height          =   285
-         Left            =   1320
+         Left            =   -73680
          TabIndex        =   0
          Top             =   480
          Width           =   9855
       End
       Begin MSComctlLib.ListView lvSearch 
          Height          =   6615
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   11
          Top             =   840
          Width           =   11895
@@ -122,7 +127,7 @@ Begin VB.Form frmVendedorLimite
       End
       Begin MSComctlLib.ListView ListView1 
          Height          =   2295
-         Left            =   -73680
+         Left            =   1320
          TabIndex        =   4
          TabStop         =   0   'False
          Top             =   760
@@ -144,7 +149,7 @@ Begin VB.Form frmVendedorLimite
       End
       Begin MSComctlLib.ListView ListView2 
          Height          =   2655
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   8
          TabStop         =   0   'False
          Top             =   1750
@@ -166,7 +171,7 @@ Begin VB.Form frmVendedorLimite
       End
       Begin VB.Frame Frame1 
          Height          =   5895
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   15
          Top             =   840
          Width           =   11895
@@ -277,7 +282,7 @@ Begin VB.Form frmVendedorLimite
       End
       Begin VB.TextBox txtVendedor 
          Height          =   285
-         Left            =   -73680
+         Left            =   1320
          TabIndex        =   3
          Top             =   480
          Width           =   2775
@@ -285,7 +290,7 @@ Begin VB.Form frmVendedorLimite
       Begin VB.CommandButton cmdGrabar 
          Caption         =   "Grabar"
          Height          =   600
-         Left            =   -65520
+         Left            =   9480
          Picture         =   "frmVendedorLimite.frx":2674
          Style           =   1  'Graphical
          TabIndex        =   10
@@ -297,7 +302,7 @@ Begin VB.Form frmVendedorLimite
          BackStyle       =   0  'Transparent
          Caption         =   "Vendedor:"
          Height          =   195
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   21
          Top             =   525
          Width           =   900
@@ -307,7 +312,7 @@ Begin VB.Form frmVendedorLimite
          BackStyle       =   0  'Transparent
          Caption         =   "Label2"
          Height          =   195
-         Left            =   -70560
+         Left            =   4440
          TabIndex        =   14
          Tag             =   "X"
          Top             =   480
@@ -318,7 +323,7 @@ Begin VB.Form frmVendedorLimite
          BackStyle       =   0  'Transparent
          Caption         =   "Vendedor:"
          Height          =   195
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   13
          Top             =   480
          Width           =   900
@@ -344,23 +349,23 @@ Private Sub cmdAdd_Click()
 
     End If
 
-    If Len(Trim(Me.txtlimite.Text)) = 0 Then
+    If Len(Trim(Me.txtLimite.Text)) = 0 Then
         MsgBox "Debe ingresar el límite", vbCritical, Pub_Titulo
-        Me.txtlimite.SetFocus
+        Me.txtLimite.SetFocus
         Exit Sub
 
     End If
 
-    If Not IsNumeric(Me.txtlimite.Text) Then
+    If Not IsNumeric(Me.txtLimite.Text) Then
         MsgBox "Límite ingresado incorrecto, debe ser número", vbCritical, Pub_Titulo
-        Me.txtlimite.SetFocus
+        Me.txtLimite.SetFocus
         Exit Sub
 
     End If
     
-    If Val(Me.txtlimite.Text) <= 0 Then
+    If Val(Me.txtLimite.Text) <= 0 Then
         MsgBox "Limite ingresado no puede ser menor o igual a cero", vbCritical, Pub_Titulo
-        Me.txtlimite.SetFocus
+        Me.txtLimite.SetFocus
         Exit Sub
     End If
 
@@ -370,7 +375,7 @@ Private Sub cmdAdd_Click()
  
         Set itemx = Me.lvData.ListItems.Add(, , Me.lblIdArticulo.Caption)
         itemx.SubItems(1) = Trim(Me.txtArticulo.Text)
-        itemx.SubItems(2) = Me.txtlimite.Text
+        itemx.SubItems(2) = Me.txtLimite.Text
     Else
 
         Dim vEncontrado As Boolean
@@ -390,7 +395,7 @@ Private Sub cmdAdd_Click()
         If vEncontrado = False Then
             Set itemx = Me.lvData.ListItems.Add(, , Me.lblIdArticulo.Caption)
             itemx.SubItems(1) = Trim(Me.txtArticulo.Text)
-            itemx.SubItems(2) = Me.txtlimite.Text
+            itemx.SubItems(2) = Me.txtLimite.Text
         Else
             MsgBox "Producto ya agregado", vbCritical, Pub_Titulo
 
@@ -400,8 +405,8 @@ Private Sub cmdAdd_Click()
 
     Me.lblIdArticulo.Caption = ""
     Me.txtArticulo.Text = ""
-    Me.txtlimite.Text = ""
-    Me.lblprecio.Caption = ""
+    Me.txtLimite.Text = ""
+    Me.lblPrecio.Caption = ""
     Me.txtArticulo.SetFocus
 
 End Sub
@@ -424,17 +429,17 @@ End Sub
 
 Private Sub cmdGrabar_Click()
 
-    If Len(Trim(Me.lblIDvendedor.Caption)) = 0 Then
+    If Len(Trim(Me.lblIdVendedor.Caption)) = 0 Then
         MsgBox "Debe ingresar el vendedor", vbCritical, Pub_Titulo
         Exit Sub
 
     End If
     
-    If Me.lvData.ListItems.count = 0 Then
-        MsgBox "Debe agregar articulos.", vbCritical, Pub_Titulo
-        Me.txtArticulo.SetFocus
-        Exit Sub
-    End If
+    'If Me.lvData.ListItems.count = 0 Then
+      '  MsgBox "Debe agregar articulos.", vbCritical, Pub_Titulo
+       ' Me.txtArticulo.SetFocus
+       ' Exit Sub
+    'End If
 
     On Error GoTo almacena
 
@@ -442,7 +447,7 @@ Private Sub cmdGrabar_Click()
     oCmdEjec.CommandText = "[dbo].[USP_VENDEDOR_LIMITE_REGISTER]"
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
 
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@idvendedor", adInteger, adParamInput, , Me.lblIDvendedor.Caption)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@idvendedor", adInteger, adParamInput, , Me.lblIdVendedor.Caption)
     
     Dim strItems As String
 
@@ -469,14 +474,16 @@ Private Sub cmdGrabar_Click()
   
     If Not oRSdatos.EOF Then
         If oRSdatos!Codigo = 0 Then
-            LimpiarControles Me
+           
+            cmdServer_Click
+            cmdCancelar_Click
+             LimpiarControles Me
             Me.ListView1.ListItems.Clear
             Me.ListView2.ListItems.Clear
             Me.lvData.ListItems.Clear
-            cmdCancelar_Click
-            MsgBox oRSdatos!Mensaje, vbInformation, Pub_Titulo
+            'MsgBox oRSdatos!Mensaje, vbInformation, Pub_Titulo
         Else
-            MsgBox oRSdatos!Mensaje, vbCritical, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbCritical, Pub_Titulo
 
         End If
 
@@ -509,20 +516,28 @@ End Sub
 
 Private Sub cmdServer_Click()
 
-    If Len(Trim(Me.lblIDvendedor.Caption)) = 0 Then
+    If Len(Trim(Me.lblIdVendedor.Caption)) = 0 Then
         MsgBox "Debe ingresar el vendedor", vbCritical, Pub_Titulo
         Exit Sub
 
     End If
     
-    If Me.lvData.ListItems.count = 0 Then
-        MsgBox "Debe agregar articulos.", vbCritical, Pub_Titulo
-        Me.txtArticulo.SetFocus
-        Exit Sub
-
-    End If
+'    If Me.lvData.ListItems.count = 0 Then
+'        MsgBox "Debe agregar articulos.", vbCritical, Pub_Titulo
+'        Me.txtArticulo.SetFocus
+'        Exit Sub
+'
+'    End If
 
     MousePointer = vbHourglass
+'DATOS CLOUD
+Dim c_Server As String, c_DataBase As String, c_User As String, c_Pass As String
+
+c_Server = Leer_Ini(App.Path & "\config.ini", "C_SERVER", "c:\")
+c_DataBase = Leer_Ini(App.Path & "\config.ini", "C_DATABASE", "c:\")
+c_User = Leer_Ini(App.Path & "\config.ini", "C_USER", "c:\")
+c_Pass = Leer_Ini(App.Path & "\config.ini", "C_PASS", "c:\")
+'FIN CLOUD
 
     On Error GoTo server
 
@@ -530,7 +545,7 @@ Private Sub cmdServer_Click()
 
     oCnnRemoto.CursorLocation = adUseClient
     oCnnRemoto.Provider = "SQLOLEDB.1"
-    oCnnRemoto.Open "Server=162.222.225.88;Database=hielou5q_hielosnorte;Uid=usr_hielosnorte;Pwd=82*nTw6i;"
+    oCnnRemoto.Open "Server=" + c_Server + ";Database=" + c_DataBase + ";Uid=" + c_User + ";Pwd=" + c_Pass + ";"
 
     Dim oCmdRemoto As New ADODB.Command
 
@@ -539,7 +554,7 @@ Private Sub cmdServer_Click()
     oCmdRemoto.CommandType = adCmdStoredProc
 
     
-    oCmdRemoto.Parameters.Append oCmdEjec.CreateParameter("@idvendedor", adInteger, adParamInput, , Me.lblIDvendedor.Caption)
+    oCmdRemoto.Parameters.Append oCmdEjec.CreateParameter("@idvendedor", adInteger, adParamInput, , Me.lblIdVendedor.Caption)
     
     Dim strItems As String
 
@@ -572,9 +587,9 @@ Private Sub cmdServer_Click()
             Me.lvData.ListItems.Clear
             cmdCancelar_Click
             Me.cmdServer.Enabled = False
-            MsgBox oRSdatos!Mensaje, vbInformation, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbInformation, Pub_Titulo
         Else
-            MsgBox oRSdatos!Mensaje, vbCritical, Pub_Titulo
+            MsgBox oRSdatos!mensaje, vbCritical, Pub_Titulo
 
         End If
 
@@ -627,7 +642,7 @@ Private Sub lvSearch_DblClick()
 
     Do While Not orsResult.EOF
         Me.txtVendedor.Text = orsResult!nomvend
-        Me.lblIDvendedor.Caption = orsResult!idevend
+        Me.lblIdVendedor.Caption = orsResult!idevend
         
         Set itemx = Me.lvData.ListItems.Add(, , orsResult!ideprod)
         itemx.SubItems(1) = orsResult!nomprod
@@ -738,9 +753,9 @@ Private Sub txtArticulo_KeyPress(KeyAscii As Integer)
             
             Me.txtArticulo.Text = Me.ListView2.ListItems(loc_keya).SubItems(1)
             Me.lblIdArticulo.Caption = Me.ListView2.ListItems(loc_keya).Text
-            Me.lblprecio.Caption = Me.ListView2.ListItems(loc_keya).SubItems(2)
+            Me.lblPrecio.Caption = Me.ListView2.ListItems(loc_keya).SubItems(2)
             Me.ListView2.Visible = False
-            Me.txtlimite.SetFocus
+            Me.txtLimite.SetFocus
 '            Me.lvDetalle.SetFocus
         End If
     End If
@@ -756,7 +771,7 @@ End Sub
 
 Private Sub txtVendedor_Change()
 vBuscarC = True
-Me.lblIDvendedor.Caption = ""
+Me.lblIdVendedor.Caption = ""
 End Sub
 
 Private Sub txtVendedor_GotFocus()
@@ -803,7 +818,7 @@ Private Sub txtVendedor_KeyDown(KeyCode As Integer, Shift As Integer)
     If KeyCode = 27 Then
         Me.ListView1.Visible = False
         Me.txtVendedor.Text = ""
-        Me.lblIDvendedor.Caption = ""
+        Me.lblIdVendedor.Caption = ""
     End If
 
     GoTo fin
@@ -851,7 +866,7 @@ Private Sub txtVendedor_KeyPress(KeyAscii As Integer)
         Else
             
             Me.txtVendedor.Text = Me.ListView1.ListItems(loc_key).SubItems(1)
-            Me.lblIDvendedor.Caption = Me.ListView1.ListItems(loc_key).Text
+            Me.lblIdVendedor.Caption = Me.ListView1.ListItems(loc_key).Text
             Me.ListView1.Visible = False
             Me.txtArticulo.SetFocus
 '            Me.lvDetalle.SetFocus

@@ -799,11 +799,9 @@ Begin VB.MDIForm MDIForm1
    Begin VB.Menu menutit7 
       Caption         =   "&Opciones"
       Begin VB.Menu submenutit7 
-         Caption         =   "&Actualizar Precios en Tiempo Real"
-         Enabled         =   0   'False
+         Caption         =   "&Mantenimiento de Precios y Bonificaciones"
          Index           =   0
          Shortcut        =   ^T
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -811,11 +809,9 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Cotizaciones de Ventas"
-         Enabled         =   0   'False
+         Caption         =   "&Registro de Horarios"
          Index           =   2
          Shortcut        =   ^Z
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -2017,9 +2013,8 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-'        Load frmARTI
-'        frmARTI.Show
-        frmProductoPromocion.Show
+        Load frmARTI
+        frmARTI.Show
         'frmFormGenPedidos_Consulta.Show
         Screen.MousePointer = 0
     Case 1
@@ -2360,13 +2355,15 @@ Private Sub submenutit7_Click(Index As Integer)
   Select Case Index
     Case 0
        Screen.MousePointer = 11
-       Load frmPrecios
-       frmPrecios.Show
-       Screen.MousePointer = 0
-    Case 2
+'       Load frmPrecios
+'       frmPrecios.Show
+'       Screen.MousePointer = 0
+         frmProductoPromocion.Show
+        'frmPedidoHorario.Show
+        Screen.MousePointer = 0
+     Case 2
        Screen.MousePointer = 11
-       Load frmCotizacion  'FORM_COTfrmOCProv
-       frmCotizacion.Show
+       frmPedidoHorario.Show
        Screen.MousePointer = 0
     Case 4
         Screen.MousePointer = 11
@@ -2562,7 +2559,7 @@ Select Case Button.Key
                 FrmRepo.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
-                FORMGEN.TEXTOVAR.Text = ""
+                FORMGEN.textovar.Text = ""
            End If
         End If
        Next iFormCount
