@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.Form frmDocu 
    Caption         =   "Consulta de Operaciones"
    ClientHeight    =   5250
@@ -2789,7 +2789,7 @@ ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PSFAR.rdoParameters(2) = ws_serie
  PSFAR.rdoParameters(3) = Left(cmbFBG.Text, 1)
  If LOC_TIPMOV = 97 Then  'ALAN DIJO QUE SALIA ERROR ???
- ' PSFAR.rdoParameters(5) = Right(cmbFBG.Text, 1)
+  PSFAR.rdoParameters(5) = Right(cmbFBG.Text, 1)
  End If
 ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
  If LOC_TIPMOV = 20 And Left(cmbFBG.Text, 1) <> "K" Then
