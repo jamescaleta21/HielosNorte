@@ -2789,7 +2789,7 @@ ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PSFAR.rdoParameters(2) = ws_serie
  PSFAR.rdoParameters(3) = Left(cmbFBG.Text, 1)
  If LOC_TIPMOV = 97 Then  'ALAN DIJO QUE SALIA ERROR ???
- ' PSFAR.rdoParameters(5) = Right(cmbFBG.Text, 1)
+  PSFAR.rdoParameters(5) = Right(cmbFBG.Text, 1)
  End If
 ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
  If LOC_TIPMOV = 20 And Left(cmbFBG.Text, 1) <> "K" Then
