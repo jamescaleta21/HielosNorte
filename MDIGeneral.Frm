@@ -1066,7 +1066,7 @@ Dim Wfile As String
 Dim WFORM As String
 Public Sub LLENA_ACCESO_OTROS(WSOTROS As String)
 Dim W1 As String * 2
-Dim I, wPosF, WPosV, cuenta As Integer
+Dim i, wPosF, WPosV, cuenta As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
@@ -1081,11 +1081,11 @@ cade = Trim(WSOTROS)
 cuenta = 0
 wPosF = 1
 a = 0
-For I = 1 To Len(cade)
- If Mid(cade, I, 1) = "." Then
+For i = 1 To Len(cade)
+ If Mid(cade, i, 1) = "." Then
    a = a + 1
  End If
-Next I
+Next i
 lk_OTROS_Count = a
 ReDim lk_OTROS(a)
 Do Until cuenta = a
@@ -1394,7 +1394,7 @@ fila = 0
 SQ_OPER = 0
 Do Until tab_mayor.EOF
  MDIForm1.SubmenuTit4(fila).Caption = "&" + Trim(tab_mayor!tab_NOMLARGO)
- If Val(tab_mayor!tab_nomcorto) = 1 Then
+ If val(tab_mayor!tab_nomcorto) = 1 Then
   MDIForm1.SubmenuTit4(fila).Visible = True
   MDIForm1.SubmenuTit4(fila + 1).Visible = True
   SQ_OPER = 9
@@ -1446,14 +1446,14 @@ Screen.MousePointer = 0
 If LK_EMP = "HER" Then
   wfecha = #7/3/2099#
   If LK_FECHA_DIA >= wfecha Then
-  If Val(GEN!GEN_CBS) <> 9 Then
+  If val(GEN!GEN_CBS) <> 9 Then
 sigue:
     WS = InputBox("Nº Serial es : " & Format(GEN!GEN_CFP, "0000000000000000") & " , Llame al proveedor y pida su nueva serie." & Chr(13) & "{Sí intenta colocar una serie que no es, por quinta vez... el Proveedor no responde por la información almacenada.}", "Acceso Limitado ....")
     If WS = "" Then
       GoTo sigue
     End If
-    wserie = Val(WS)
-    If Val(PRO_DES(GEN!GEN_CFP)) = Val(wserie) Then
+    wserie = val(WS)
+    If val(PRO_DES(GEN!GEN_CFP)) = val(wserie) Then
        GEN.Edit
        GEN!GEN_CBS = 9
        GEN.Update
@@ -1517,7 +1517,7 @@ If Trim(menuAlm(Index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(menuAlm(Index).Caption, 4))
+pu_codtra = val(Left(menuAlm(Index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1606,7 +1606,7 @@ If Trim(Menucomp(Index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(Menucomp(Index).Caption, 4))
+pu_codtra = val(Left(Menucomp(Index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1646,7 +1646,7 @@ If Trim(MenuContab(Index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(MenuContab(Index).Caption, 4))
+pu_codtra = val(Left(MenuContab(Index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1705,7 +1705,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis1(Index).Caption, 4))
+pu_codtra = val(Left(menudis1(Index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1746,7 +1746,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis2(Index).Caption, 4))
+pu_codtra = val(Left(menudis2(Index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1787,7 +1787,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menudis3(Index).Caption, 4))
+pu_codtra = val(Left(menudis3(Index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -1833,7 +1833,7 @@ If Trim(menuMoli(Index).Caption) = "" Then
 End If
 Screen.MousePointer = 0
 
-pu_codtra = Val(Left(menuMoli(Index).Caption, 4))
+pu_codtra = val(Left(menuMoli(Index).Caption, 4))
 SQ_OPER = 3
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
@@ -1865,7 +1865,7 @@ Dim var As String
 MsgBox "" & Chr(13) & "Visitenos en www.viarapidaperu.com", vbInformation, "Asesoria y Soporte"
 Exit Sub
 Dim ww As Form
-Dim I
+Dim i
 On Error GoTo OJO
 var = Trim(MDIForm1.ActiveForm.Name)
 If UCase(var) = "FORMGEN" Then
@@ -1917,7 +1917,7 @@ End If
 Screen.MousePointer = 0
 
 SQ_OPER = 3
-pu_codtra = Val(Left(menuVent(Index).Caption, 4))
+pu_codtra = val(Left(menuVent(Index).Caption, 4))
 LEER_TRA_LLAVE
 If Trim(retra_llave(7)) = "FRMIMP2" Then
  Load FrmImp2
@@ -2013,9 +2013,8 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-        Load frmARTI
-        frmARTI.Show
-        'frmFormGenPedidos_Consulta.Show
+'        frmARTI.Show
+        frmEmpresa.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2559,7 +2558,7 @@ Select Case Button.Key
                 FrmRepo.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
-                FORMGEN.textovar.Text = ""
+                FORMGEN.TEXTOVAR.Text = ""
            End If
         End If
        Next iFormCount
