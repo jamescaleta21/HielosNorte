@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
 Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form FrmVen 
    Caption         =   "Maestro de Vendedores"
    ClientHeight    =   6540
@@ -148,6 +149,18 @@ Begin VB.Form FrmVen
          TabIndex        =   83
          Top             =   120
          Width           =   3135
+         Begin MSDataListLib.DataCombo DatEmpresa 
+            Height          =   315
+            Left            =   1080
+            TabIndex        =   96
+            Top             =   2400
+            Width           =   1695
+            _ExtentX        =   2990
+            _ExtentY        =   556
+            _Version        =   393216
+            Style           =   2
+            Text            =   ""
+         End
          Begin VB.ComboBox ComPerfil 
             Height          =   315
             ItemData        =   "FrmVend.frx":3BAC
@@ -155,7 +168,7 @@ Begin VB.Form FrmVen
             List            =   "FrmVend.frx":3BBC
             Style           =   2  'Dropdown List
             TabIndex        =   95
-            Top             =   2280
+            Top             =   2040
             Width           =   1695
          End
          Begin VB.ComboBox comPrecio 
@@ -165,7 +178,7 @@ Begin VB.Form FrmVen
             List            =   "FrmVend.frx":3C01
             Style           =   2  'Dropdown List
             TabIndex        =   93
-            Top             =   1920
+            Top             =   1680
             Width           =   1695
          End
          Begin VB.TextBox txtPass 
@@ -173,7 +186,7 @@ Begin VB.Form FrmVen
             Left            =   1080
             MaxLength       =   10
             TabIndex        =   91
-            Top             =   1560
+            Top             =   1320
             Width           =   1695
          End
          Begin VB.TextBox txtUser 
@@ -181,7 +194,7 @@ Begin VB.Form FrmVen
             Left            =   1080
             MaxLength       =   20
             TabIndex        =   90
-            Top             =   1200
+            Top             =   960
             Width           =   1695
          End
          Begin VB.ComboBox comLogeo 
@@ -191,7 +204,7 @@ Begin VB.Form FrmVen
             List            =   "FrmVend.frx":3C17
             Style           =   2  'Dropdown List
             TabIndex        =   87
-            Top             =   720
+            Top             =   600
             Width           =   1695
          End
          Begin VB.ComboBox ComActivo 
@@ -201,17 +214,27 @@ Begin VB.Form FrmVen
             List            =   "FrmVend.frx":3C2D
             Style           =   2  'Dropdown List
             TabIndex        =   86
-            Top             =   360
+            Top             =   240
             Width           =   1695
+         End
+         Begin VB.Label Label13 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Pertenece a:"
+            Height          =   195
+            Left            =   135
+            TabIndex        =   97
+            Top             =   2460
+            Width           =   915
          End
          Begin VB.Label Label12 
             AutoSize        =   -1  'True
             BackStyle       =   0  'Transparent
             Caption         =   "Perfil:"
             Height          =   195
-            Left            =   600
+            Left            =   660
             TabIndex        =   94
-            Top             =   2340
+            Top             =   2100
             Width           =   390
          End
          Begin VB.Label Label11 
@@ -221,7 +244,7 @@ Begin VB.Form FrmVen
             Height          =   195
             Left            =   120
             TabIndex        =   92
-            Top             =   1980
+            Top             =   1740
             Width           =   930
          End
          Begin VB.Label Label10 
@@ -231,7 +254,7 @@ Begin VB.Form FrmVen
             Height          =   195
             Left            =   465
             TabIndex        =   89
-            Top             =   1245
+            Top             =   1005
             Width           =   585
          End
          Begin VB.Label Label9 
@@ -241,7 +264,7 @@ Begin VB.Form FrmVen
             Height          =   195
             Left            =   315
             TabIndex        =   88
-            Top             =   1605
+            Top             =   1365
             Width           =   735
          End
          Begin VB.Label Label7 
@@ -251,7 +274,7 @@ Begin VB.Form FrmVen
             Height          =   195
             Left            =   555
             TabIndex        =   85
-            Top             =   420
+            Top             =   300
             Width           =   495
          End
          Begin VB.Label Label8 
@@ -261,7 +284,7 @@ Begin VB.Form FrmVen
             Height          =   195
             Left            =   135
             TabIndex        =   84
-            Top             =   780
+            Top             =   660
             Width           =   915
          End
       End
@@ -1618,112 +1641,137 @@ GENERA_VEN = valor + 1
 End Function
 
 Public Sub GRABAR_VEN()
-Dim NAMETRA As String
-If Left(cmdModificar.Caption, 2) = "&G" Then
-   ven_llave.Edit
-Else
-   ven_llave.AddNew
-       
-End If
 
-ven_llave!VEM_CODVEN = Val(FrmVen.Txt_key.Text)
-ven_llave!VEM_NOMBRE = FrmVen.txtnombre.Text
-ven_llave!vem_codcia = LK_CODCIA
-ven_llave!VEM_SERIE_G = Val(FrmVen.serie_g.Text)
-ven_llave!VEM_NUMFAC_G_INI = Val(FrmVen.numfac_g.Text)
-ven_llave!VEM_SERIE_B = Val(FrmVen.Serie_b.Text)
-ven_llave!VEM_NUMFAC_B_INI = Val(FrmVen.numfac_b.Text)
-ven_llave!VEM_SERIE_F = Val(FrmVen.serie_f.Text)
+    Dim NAMETRA As String
 
-ven_llave!VEM_NUMFAC_F_INI = Val(FrmVen.numfac_f.Text)
-ven_llave!VEM_NUMFAC_G_FIN = Val(FrmVen.numfac_g_f.Text)
-ven_llave!VEM_NUMFAC_B_FIN = Val(FrmVen.numfac_b_f.Text)
-ven_llave!VEM_NUMFAC_F_FIN = Val(FrmVen.numfac_f_f.Text)
-
-
-ven_llave!VEM_SERIE_P = Val(FrmVen.serie_p.Text)
-ven_llave!VEM_NUMFAC_P_INI = Val(FrmVen.numfac_p.Text)
-ven_llave!VEM_NUMFAC_P_FIN = Val(FrmVen.numfac_p_f.Text)
-ven_llave!VEM_FLAG_P = " "
-If Check1.Value = 1 Then
-  ven_llave!VEM_FLAG_P = "A"
-End If
-
-ven_llave!VEM_SERIE_N = Val(FrmVen.serie_nc.Text)
-ven_llave!VEM_SERIE_D = Val(FrmVen.serie_nd.Text)
-ven_llave!VEM_NUMFAC_N_INI = Val(FrmVen.numfac_nc.Text)
-ven_llave!VEM_NUMFAC_D_INI = Val(FrmVen.numfac_nd.Text)
-ven_llave!VEM_NUMFAC_N_FIN = Val(FrmVen.numfac_nc_f.Text)
-ven_llave!VEM_NUMFAC_D_FIN = Val(FrmVen.numfac_nd_f.Text)
-ven_llave!VEM_FLAG_N = " "
-If chenc.Value = 1 Then
-  ven_llave!VEM_FLAG_N = "A"
-End If
-ven_llave!VEM_FLAG_D = " "
-If chend.Value = 1 Then
-  ven_llave!VEM_FLAG_D = "A"
-End If
-
-ven_llave!VEM_FECHA_ING = txtfechaing.Text
-ven_llave!VEM_DIRECCION = FrmVen.txtdireccion.Text
-ven_llave!VEM_TELE_CASA = FrmVen.txttelecasa.Text
-ven_llave!VEM_TELE_CELU = FrmVen.txttelecelu.Text
-ven_llave!VEM_SERIE_R = Val(FrmVen.remi.Text)
-ven_llave!VEM_FLAG_G = " "
-ven_llave!VEM_FLAG_B = " "
-ven_llave!VEM_FLAG_F = " "
-'datos para app movil
-ven_llave!vem_hosting = 0
-ven_llave!vem_activo = Me.ComActivo.ListIndex
-ven_llave!vem_movil = Me.comLogeo.ListIndex
-ven_llave!vem_price = Me.comPrecio.ListIndex
-ven_llave!vem_idperfil = Me.ComPerfil.ListIndex
-If Me.comLogeo.ListIndex = 1 Then
-ven_llave!vem_login = Me.txtUser.Text
-    If Len(Trim(Me.txtPass.Text)) <> 0 Then
-    
-    Dim cEncr As New CSHA256
-    
-    ven_llave!vem_pass = cEncr.SHADD256(Trim(Me.txtPass.Text))
-    End If
+    If Left(cmdModificar.Caption, 2) = "&G" Then
+        ven_llave.Edit
     Else
-    ven_llave!vem_login = ""
-    ven_llave!vem_pass = ""
-End If
-If cheguia.Value = 1 Then
-  ven_llave!VEM_FLAG_G = "A"
-End If
-If cheboleta.Value = 1 Then
-  ven_llave!VEM_FLAG_B = "A"
-End If
-If chefactura.Value = 1 Then
-  ven_llave!VEM_FLAG_F = "A"
-End If
-ven_llave("VEM_TRNKEY") = Val(Right(cmbtransporte.Text, 10))
-NAMETRA = IIf(cmbtransporte.Text = "", " ", cmbtransporte.Text)
-ven_llave("VEM_TRANSPORTISTA") = Mid(NAMETRA, 1, 50)
-ven_llave.Update
-SQ_OPER = 2
-PUB_CODCIA = LK_CODCIA
-PUB_CODVEN = Val(FrmVen.Txt_key.Text)
-LEER_PAR_LLAVE
-If pac_llave.EOF Then
-pac_llave.AddNew
-Else
-pac_llave.Edit
-End If
-pac_llave!pac_codcia = LK_CODCIA
-pac_llave!pac_codven = PUB_CODVEN
-pac_llave!PAC_ARCHI_F = txtfac.Text
-pac_llave!PAC_ARCHI_B = txtbol.Text
-pac_llave!PAC_ARCHI_G = txtguia.Text
-pac_llave!PAC_ARCHI_GUIA = txtgr.Text
-pac_llave!PAC_ARCHI_NC = txtnc.Text
-pac_llave!PAC_ARCHI_ND = txtnd.Text
-pac_llave!PAC_FLAG_CIA = " "
-pac_llave.Update
+        ven_llave.AddNew
+       
+    End If
+
+    ven_llave!VEM_CODVEN = val(FrmVen.Txt_key.Text)
+    ven_llave!VEM_NOMBRE = FrmVen.txtnombre.Text
+    ven_llave!vem_codcia = LK_CODCIA
+    ven_llave!VEM_SERIE_G = val(FrmVen.serie_g.Text)
+    ven_llave!VEM_NUMFAC_G_INI = val(FrmVen.numfac_g.Text)
+    ven_llave!VEM_SERIE_B = val(FrmVen.Serie_b.Text)
+    ven_llave!VEM_NUMFAC_B_INI = val(FrmVen.numfac_b.Text)
+    ven_llave!VEM_SERIE_F = val(FrmVen.serie_f.Text)
+
+    ven_llave!VEM_NUMFAC_F_INI = val(FrmVen.numfac_f.Text)
+    ven_llave!VEM_NUMFAC_G_FIN = val(FrmVen.numfac_g_f.Text)
+    ven_llave!VEM_NUMFAC_B_FIN = val(FrmVen.numfac_b_f.Text)
+    ven_llave!VEM_NUMFAC_F_FIN = val(FrmVen.numfac_f_f.Text)
+
+    ven_llave!VEM_SERIE_P = val(FrmVen.serie_p.Text)
+    ven_llave!VEM_NUMFAC_P_INI = val(FrmVen.numfac_p.Text)
+    ven_llave!VEM_NUMFAC_P_FIN = val(FrmVen.numfac_p_f.Text)
+    ven_llave!VEM_FLAG_P = " "
+
+    If Check1.Value = 1 Then
+        ven_llave!VEM_FLAG_P = "A"
+
+    End If
+
+    ven_llave!VEM_SERIE_N = val(FrmVen.serie_nc.Text)
+    ven_llave!VEM_SERIE_D = val(FrmVen.serie_nd.Text)
+    ven_llave!VEM_NUMFAC_N_INI = val(FrmVen.numfac_nc.Text)
+    ven_llave!VEM_NUMFAC_D_INI = val(FrmVen.numfac_nd.Text)
+    ven_llave!VEM_NUMFAC_N_FIN = val(FrmVen.numfac_nc_f.Text)
+    ven_llave!VEM_NUMFAC_D_FIN = val(FrmVen.numfac_nd_f.Text)
+    ven_llave!VEM_FLAG_N = " "
+
+    If chenc.Value = 1 Then
+        ven_llave!VEM_FLAG_N = "A"
+
+    End If
+
+    ven_llave!VEM_FLAG_D = " "
+
+    If chend.Value = 1 Then
+        ven_llave!VEM_FLAG_D = "A"
+
+    End If
+
+    ven_llave!VEM_FECHA_ING = txtfechaing.Text
+    ven_llave!VEM_DIRECCION = FrmVen.txtdireccion.Text
+    ven_llave!VEM_TELE_CASA = FrmVen.txttelecasa.Text
+    ven_llave!VEM_TELE_CELU = FrmVen.txttelecelu.Text
+    ven_llave!VEM_SERIE_R = val(FrmVen.remi.Text)
+    ven_llave!VEM_FLAG_G = " "
+    ven_llave!VEM_FLAG_B = " "
+    ven_llave!VEM_FLAG_F = " "
+    'datos para app movil
+    ven_llave!vem_hosting = 0
+    ven_llave!vem_activo = Me.ComActivo.ListIndex
+    ven_llave!vem_movil = Me.comLogeo.ListIndex
+    ven_llave!vem_price = Me.comPrecio.ListIndex
+    ven_llave!vem_idperfil = Me.ComPerfil.ListIndex
+    ven_llave!VEM_IDEMPRESA = Me.DatEmpresa.BoundText
+
+    If Me.comLogeo.ListIndex = 1 Then
+        ven_llave!vem_login = Me.txtUser.Text
+
+        If Len(Trim(Me.txtPass.Text)) <> 0 Then
+    
+            Dim cEncr As New CSHA256
+    
+            ven_llave!vem_pass = cEncr.SHADD256(Trim(Me.txtPass.Text))
+
+        End If
+
+    Else
+        ven_llave!vem_login = ""
+        ven_llave!vem_pass = ""
+
+    End If
+
+    If cheguia.Value = 1 Then
+        ven_llave!VEM_FLAG_G = "A"
+
+    End If
+
+    If cheboleta.Value = 1 Then
+        ven_llave!VEM_FLAG_B = "A"
+
+    End If
+
+    If chefactura.Value = 1 Then
+        ven_llave!VEM_FLAG_F = "A"
+
+    End If
+
+    ven_llave("VEM_TRNKEY") = val(Right(cmbtransporte.Text, 10))
+    NAMETRA = IIf(cmbtransporte.Text = "", " ", cmbtransporte.Text)
+    ven_llave("VEM_TRANSPORTISTA") = Mid(NAMETRA, 1, 50)
+    ven_llave.Update
+    SQ_OPER = 2
+    PUB_CODCIA = LK_CODCIA
+    PUB_CODVEN = val(FrmVen.Txt_key.Text)
+    LEER_PAR_LLAVE
+
+    If pac_llave.EOF Then
+        pac_llave.AddNew
+    Else
+        pac_llave.Edit
+
+    End If
+
+    pac_llave!pac_codcia = LK_CODCIA
+    pac_llave!pac_codven = PUB_CODVEN
+    pac_llave!PAC_ARCHI_F = txtfac.Text
+    pac_llave!PAC_ARCHI_B = txtbol.Text
+    pac_llave!PAC_ARCHI_G = txtguia.Text
+    pac_llave!PAC_ARCHI_GUIA = txtgr.Text
+    pac_llave!PAC_ARCHI_NC = txtnc.Text
+    pac_llave!PAC_ARCHI_ND = txtnd.Text
+    pac_llave!PAC_FLAG_CIA = " "
+    pac_llave.Update
 
 End Sub
+
 Public Sub MENSAJE_VEN(TEXTO As String)
   LblMensaje.Caption = TEXTO
   PARPADEA.Enabled = True
@@ -1736,7 +1784,7 @@ If ban = 0 Then
          Else
           Txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).SubItems(1))
        End If
-       PUB_CODVEN = Val(Txt_key.Text)
+       PUB_CODVEN = val(Txt_key.Text)
        pu_codcia = LK_CODCIA
        PUB_CODCIA = LK_CODCIA
        SQ_OPER = 1
@@ -1780,6 +1828,7 @@ FrmVen.comLogeo.ListIndex = IIf(ven_llave!vem_movil, 1, 0)
 FrmVen.txtUser.Text = ven_llave!vem_login
 FrmVen.comPrecio.ListIndex = IIf(ven_llave!vem_price, 1, 0)
 FrmVen.ComPerfil.ListIndex = IIf(Trim(Nulo_Valors(ven_llave!vem_idperfil)) = "", 0, ven_llave!vem_idperfil)
+FrmVen.DatEmpresa.BoundText = ven_llave!VEM_IDEMPRESA
 'PARTE MOVIL FIN
 FindInCmb Nulo_Valor0(ven_llave!VEM_TRNKEY)
 cheguia.Value = 0
@@ -1809,7 +1858,7 @@ If UCase(Nulo_Valors(ven_llave!VEM_FLAG_D)) = "A" Then
 End If
 SQ_OPER = 2
 PUB_CODCIA = LK_CODCIA
-PUB_CODVEN = Val(ven_llave!VEM_CODVEN)
+PUB_CODVEN = val(ven_llave!VEM_CODVEN)
 LEER_PAR_LLAVE
 If Not pac_llave.EOF Then
  txtfac.Text = Trim(pac_llave!PAC_ARCHI_F)
@@ -1941,7 +1990,7 @@ Else
    txtfechaing.Text = Format(WSFECHA, "dd/mm/yyyy")
    '"SI GRABA.."
     SQ_OPER = 1
-    PUB_CODVEN = Val(FrmVen.Txt_key.Text)
+    PUB_CODVEN = val(FrmVen.Txt_key.Text)
     pu_codcia = LK_CODCIA
     LEER_VEN_LLAVE
     If Not ven_llave.EOF Then
@@ -2147,12 +2196,22 @@ If LK_FLAG_FACTURACION = "V" Then
 End If
 
 LlenaTransporte
-
+LlenaEmpresa
 pub_cadena = "SELECT * FROM TRANSPORTE WHERE TRN_KEY = ? ORDER BY TRN_NOMBRE"
 Set PS_TRAONE = CN.CreateQuery("", pub_cadena)
 PS_TRAONE(0) = 0
 Set TRANSPORTEONE = PS_TRAONE.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
+End Sub
+
+Private Sub LlenaEmpresa()
+LimpiaParametros oCmdEjec
+oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_LIST]"
+Dim ORSdatos  As ADODB.Recordset
+Set ORSdatos = oCmdEjec.Execute
+Set Me.DatEmpresa.RowSource = ORSdatos
+Me.DatEmpresa.ListField = ORSdatos(1).Name
+Me.DatEmpresa.BoundColumn = ORSdatos(0).Name
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -2469,14 +2528,14 @@ End If
 If KeyAscii <> 13 Then
    GoTo fin
 End If
-pu_codclie = Val(Txt_key.Text)
+pu_codclie = val(Txt_key.Text)
 If Len(Txt_key.Text) = 0 Or Txt_key.Locked Then
    Exit Sub
 End If
 If pu_codclie <> 0 And IsNumeric(Txt_key.Text) = True Then
    loc_key = 0
    On Error GoTo mucho
-   PUB_CODVEN = Val(Txt_key.Text)
+   PUB_CODVEN = val(Txt_key.Text)
    pu_codcia = LK_CODCIA
    SQ_OPER = 1
    LEER_VEN_LLAVE

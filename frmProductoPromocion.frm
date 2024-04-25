@@ -470,15 +470,15 @@ Private Sub cmdBoniAdd_Click()
         Item.SubItems(5) = Me.txtTope.Text
     Else
 
-        Dim itemx As Object
+        Dim itemX As Object
 
         Dim cruce As Boolean
 
         cruce = False
 
-        For Each itemx In Me.lvBonificacion.ListItems
+        For Each itemX In Me.lvBonificacion.ListItems
 
-            If Me.DatBonificacion.BoundText = itemx.SubItems(1) Then
+            If Me.DatBonificacion.BoundText = itemX.SubItems(1) Then
                 cruce = True
                 Exit For
 
@@ -616,20 +616,20 @@ Private Sub cmdGrabar_Click()
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adBSTR, adParamInput, 20, LK_CODUSU)
     
     'OBTENIENDO XML DE PROMOCIONES
-    Dim itemx        As Object
+    Dim itemX        As Object
 
     Dim strPromocion As String
 
     If Me.lvPromocion.ListItems.count <> 0 Then
         strPromocion = "<r>"
 
-        For Each itemx In Me.lvPromocion.ListItems
+        For Each itemX In Me.lvPromocion.ListItems
 
             strPromocion = strPromocion & "<d "
-            strPromocion = strPromocion & "idprecio=""" & itemx.Tag & """ "
-            strPromocion = strPromocion & "ini=""" & itemx.SubItems(1) & """ "
-            strPromocion = strPromocion & "fin=""" & itemx.SubItems(2) & """ "
-            strPromocion = strPromocion & "pre=""" & itemx.SubItems(3) & """ "
+            strPromocion = strPromocion & "idprecio=""" & itemX.Tag & """ "
+            strPromocion = strPromocion & "ini=""" & itemX.SubItems(1) & """ "
+            strPromocion = strPromocion & "fin=""" & itemX.SubItems(2) & """ "
+            strPromocion = strPromocion & "pre=""" & itemX.SubItems(3) & """ "
             strPromocion = strPromocion & "/>"
             
         Next
@@ -645,14 +645,14 @@ Private Sub cmdGrabar_Click()
     If Me.lvBonificacion.ListItems.count <> 0 Then
         strBonificacion = "<r>"
 
-        For Each itemx In Me.lvBonificacion.ListItems
+        For Each itemX In Me.lvBonificacion.ListItems
 
             strBonificacion = strBonificacion & "<d "
-            strBonificacion = strBonificacion & "idboni=""" & itemx.SubItems(1) & """ "
-            strBonificacion = strBonificacion & "cant=""" & itemx.Text & """ "
-            strBonificacion = strBonificacion & "boni=""" & itemx.SubItems(3) & """ "
-            strBonificacion = strBonificacion & "pre=""" & itemx.SubItems(4) & """ "
-            strBonificacion = strBonificacion & "tope=""" & IIf(Len(Trim(itemx.SubItems(5))) = 0, Null, itemx.SubItems(5)) & """ "
+            strBonificacion = strBonificacion & "idboni=""" & itemX.SubItems(1) & """ "
+            strBonificacion = strBonificacion & "cant=""" & itemX.Text & """ "
+            strBonificacion = strBonificacion & "boni=""" & itemX.SubItems(3) & """ "
+            strBonificacion = strBonificacion & "pre=""" & itemX.SubItems(4) & """ "
+            strBonificacion = strBonificacion & "tope=""" & IIf(Len(Trim(itemX.SubItems(5))) = 0, Null, itemX.SubItems(5)) & """ "
             strBonificacion = strBonificacion & "/>"
         Next
         strBonificacion = strBonificacion & "</r>"
@@ -733,7 +733,7 @@ Private Sub cmdPromAdd_Click()
 
     End If
     
-    If Val(Me.txtPrecio.Text) <= 0 Then
+    If val(Me.txtPrecio.Text) <= 0 Then
         MsgBox "El precio ingresado es incorrecto.", vbInformation, Pub_Titulo
         Me.txtPrecio.SetFocus
         Me.txtPrecio.SelStart = 0
@@ -743,7 +743,7 @@ Private Sub cmdPromAdd_Click()
     End If
 
     If IsNumeric(Me.txtHasta.Text) Then
-        If Val(Me.txtDesde.Text) > Val(Me.txtHasta.Text) Then
+        If val(Me.txtDesde.Text) > val(Me.txtHasta.Text) Then
             MsgBox "La cantidad inicial debe ser anterior al rango final", vbInformation, Pub_Titulo
             Exit Sub
 
@@ -762,15 +762,15 @@ Private Sub cmdPromAdd_Click()
         Item.SubItems(3) = Me.txtPrecio.Text
     Else
 
-        Dim itemx As Object
+        Dim itemX As Object
 
         Dim cruce As Boolean
 
         cruce = False
 
-        For Each itemx In Me.lvPromocion.ListItems
+        For Each itemX In Me.lvPromocion.ListItems
 
-            If Me.txtDesde.Text >= Val(itemx.SubItems(1)) And Me.txtDesde.Text <= Val(itemx.SubItems(2)) Then
+            If Me.txtDesde.Text >= val(itemX.SubItems(1)) And Me.txtDesde.Text <= val(itemX.SubItems(2)) Then
                 cruce = True
                 Exit For
 
@@ -835,11 +835,11 @@ oCmdEjec.CommandText = "[dbo].[USP_PRODUCTO_LIST]"
   Dim orsData As ADODB.Recordset
   Set orsData = oCmdEjec.Execute
   
-  Dim itemx As Object
+  Dim itemX As Object
   
   Do While Not orsData.EOF
-  Set itemx = Me.lvArticulos.ListItems.Add(, , orsData!cod)
-  itemx.SubItems(1) = orsData!nom
+  Set itemX = Me.lvArticulos.ListItems.Add(, , orsData!cod)
+  itemX.SubItems(1) = orsData!nom
     orsData.MoveNext
   
   Loop
@@ -998,14 +998,14 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
 
     Set orsData = oCmdEjec.Execute
   
-    Dim itemx As Object
+    Dim itemX As Object
   
     Do While Not orsData.EOF
-        Set itemx = Me.lvPromocion.ListItems.Add(, , orsData!descripcion)
-        itemx.Tag = orsData!idepre
-        itemx.SubItems(1) = orsData!ini
-        itemx.SubItems(2) = IIf(orsData!fin = 0, "", orsData!fin)
-        itemx.SubItems(3) = orsData!PRE
+        Set itemX = Me.lvPromocion.ListItems.Add(, , orsData!descripcion)
+        itemX.Tag = orsData!idepre
+        itemX.SubItems(1) = orsData!ini
+        itemX.SubItems(2) = IIf(orsData!fin = 0, "", orsData!fin)
+        itemX.SubItems(3) = orsData!PRE
         orsData.MoveNext
     
     Loop
@@ -1015,12 +1015,12 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
     Set orsBoni = orsData.NextRecordset
     
     Do While Not orsBoni.EOF
-        Set itemx = Me.lvBonificacion.ListItems.Add(, , orsBoni!cant)
-        itemx.SubItems(1) = orsBoni!idboni
-        itemx.SubItems(2) = orsBoni!producto
-        itemx.SubItems(3) = orsBoni!boni
-        itemx.SubItems(4) = orsBoni!PRE
-        itemx.SubItems(5) = orsBoni!tope
+        Set itemX = Me.lvBonificacion.ListItems.Add(, , orsBoni!cant)
+        itemX.SubItems(1) = orsBoni!idboni
+        itemX.SubItems(2) = orsBoni!producto
+        itemX.SubItems(3) = orsBoni!boni
+        itemX.SubItems(4) = orsBoni!PRE
+        itemX.SubItems(5) = orsBoni!tope
         orsBoni.MoveNext
     Loop
   

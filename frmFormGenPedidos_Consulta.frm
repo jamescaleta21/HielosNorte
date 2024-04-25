@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{C4847593-972C-11D0-9567-00A0C9273C2A}#8.0#0"; "crviewer.dll"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form frmFormGenPedidos_Consulta 
    Caption         =   "Pedidos por Vendedor"
    ClientHeight    =   8925
@@ -110,7 +110,7 @@ Begin VB.Form frmFormGenPedidos_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   81395713
+         Format          =   201326593
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 
