@@ -79,21 +79,38 @@ Frm.Controls(i).ListIndex = -1
 End Sub
 
 Public Sub ActivarControles(Frm As Form)
-'Dim J
-'For J = 0 To Frm.Controls.count - 1
-'    If TypeOf Frm.Controls(J) Is TextBox Then
+Dim J As Integer
+
+For J = 0 To Frm.Controls.count - 1
+
+    If TypeOf Frm.Controls(J) Is TextBox Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+    If TypeOf Frm.Controls(J) Is DataCombo Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+    If TypeOf Frm.Controls(J) Is ComboBox Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+    If TypeOf Frm.Controls(J) Is DTPicker Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+    If TypeOf Frm.Controls(J) Is MaskEdBox Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+    If TypeOf Frm.Controls(J) Is UpDown Then
+        Frm.Controls(J).Enabled = True
+    End If
+
+'    If TypeOf Frm.Controls(J) Is jhTextBoxM.TextBoxM And Frm.Controls(J).Tag = "X" Then
 '        Frm.Controls(J).Enabled = True
 '    End If
-'    If TypeOf Frm.Controls(J) Is DataCombo Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'    If TypeOf Frm.Controls(J) Is ComboBox Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'     If TypeOf Frm.Controls(J) Is DTPicker Then
-'        Frm.Controls(J).Enabled = True
-'    End If
-'Next
+Next
 End Sub
 
 Public Function Mayusculas(Caracter As Integer) As Integer
