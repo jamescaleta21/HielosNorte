@@ -88,8 +88,8 @@ Begin VB.Form frmEmpresa
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmEmpresa.frx":0000
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
-      Tab(0).Control(1)=   "lvListado"
+      Tab(0).Control(0)=   "lvListado"
+      Tab(0).Control(1)=   "txtSearch"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Empresa"
       TabPicture(1)   =   "frmEmpresa.frx":001C
@@ -207,9 +207,7 @@ MostrarEmpresas
 End Sub
 
 Private Sub lvListado_DblClick()
-  
 EnviarDatosEdicion
-
 End Sub
 Private Sub EnviarDatosEdicion()
     Me.lblId.Caption = Me.lvListado.SelectedItem.Text

@@ -3,10 +3,10 @@ Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form frmPedidoHorario 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Horario Permitido para pasar Pedidos"
-   ClientHeight    =   1845
+   ClientHeight    =   2670
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   5160
+   ClientWidth     =   4770
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   8.25
@@ -21,8 +21,35 @@ Begin VB.Form frmPedidoHorario
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   1845
-   ScaleWidth      =   5160
+   ScaleHeight     =   2670
+   ScaleWidth      =   4770
+   Begin VB.CheckBox chkHLA 
+      Caption         =   "Hora Limite para Anular"
+      Height          =   255
+      Left            =   360
+      TabIndex        =   9
+      Top             =   1680
+      Width           =   2415
+   End
+   Begin VB.Frame FraHoraLimite 
+      Height          =   855
+      Left            =   240
+      TabIndex        =   7
+      Top             =   1680
+      Width           =   3255
+      Begin MSComCtl2.DTPicker dtpHLA 
+         Height          =   375
+         Left            =   600
+         TabIndex        =   8
+         Top             =   360
+         Width           =   1815
+         _ExtentX        =   3201
+         _ExtentY        =   661
+         _Version        =   393216
+         Format          =   202113026
+         CurrentDate     =   45148
+      End
+   End
    Begin VB.CommandButton cmdGrabar 
       Caption         =   "Grabar"
       Height          =   600
@@ -49,7 +76,7 @@ Begin VB.Form frmPedidoHorario
       _ExtentX        =   3201
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   202375170
+      Format          =   202113026
       CurrentDate     =   45148
    End
    Begin MSComCtl2.DTPicker dtpHasta 
@@ -61,7 +88,7 @@ Begin VB.Form frmPedidoHorario
       _ExtentX        =   3201
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   202375170
+      Format          =   202113026
       CurrentDate     =   45148
    End
    Begin VB.CommandButton cmdBorrar 
@@ -109,46 +136,70 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub chkHLA_Click()
+Me.FraHoraLimite.Enabled = Me.chkHLA.Value
+End Sub
+
 Private Sub cmdBorrar_Click()
-On Error GoTo cElimina
-LimpiaParametros oCmdEjec
-oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_HORARIO_DELETE]"
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adVarChar, adParamInput, 20, LK_CODUSU)
 
-Dim orsData As ADODB.Recordset
-Set orsData = oCmdEjec.Execute
+    If MsgBox("Desea eliminar el Horario?", vbQuestion + vbYesNo, Pub_Titulo) = vbNo Then Exit Sub
 
-Dim mensaje() As String
-If Not orsData.EOF Then
-    mensaje = Split(orsData.Fields(0).Value, "=")
-    If mensaje(0) = 0 Then
-        MsgBox mensaje(1), vbInformation, Pub_Titulo
-        Me.LblMensaje.Caption = "No se ha configurado Horario"
-        Me.dtpDesde.Value = "00:00:00"
-        Me.dtpHasta.Value = "00:00:00"
-    Else
-        MsgBox mensaje(1), vbCritical, Pub_Titulo
+    On Error GoTo cElimina
+
+    MousePointer = vbHourglass
+    LimpiaParametros oCmdEjec
+    oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_HORARIO_DELETE]"
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adVarChar, adParamInput, 20, LK_CODUSU)
+
+    Dim orsData As ADODB.Recordset
+
+    Set orsData = oCmdEjec.Execute
+
+    Dim mensaje() As String
+
+    MousePointer = vbDefault
+
+    If Not orsData.EOF Then
+        mensaje = Split(orsData.Fields(0).Value, "=")
+
+        If mensaje(0) = 0 Then
+            MsgBox mensaje(1), vbInformation, Pub_Titulo
+            Me.LblMensaje.Caption = "No se ha configurado Horario"
+            Me.dtpDesde.Value = "00:00:00"
+            Me.dtpHasta.Value = "00:00:00"
+            Me.FraHoraLimite.Enabled = False
+            Me.chkHLA.Value = 0
+            Me.dtpHasta.Value = "00:00:00"
+        Else
+            MsgBox mensaje(1), vbCritical, Pub_Titulo
+
+        End If
+
     End If
-End If
 
-
-Exit Sub
+    Exit Sub
 cElimina:
-MsgBox Err.Description, vbCritical, Pub_Titulo
+    MousePointer = vbDefault
+    MsgBox Err.Description, vbCritical, Pub_Titulo
+
 End Sub
 
 Private Sub cmdGrabar_Click()
 
-If Me.dtpDesde.Value > Me.dtpHasta.Value Then
-    MsgBox "Horas incorrectas.", vbCritical, Pub_Titulo
-    Exit Sub
-End If
+    If Me.dtpDesde.Value > Me.dtpHasta.Value Then
+        MsgBox "Horas incorrectas.", vbCritical, Pub_Titulo
+        Exit Sub
+
+    End If
 
     On Error GoTo cSave
 
-Dim dd()  As String
-dd = Split(CStr(Me.dtpDesde.Value), " ")
+    MousePointer = vbHourglass
+
+    Dim dd() As String
+
+    dd = Split(CStr(Me.dtpDesde.Value), " ")
 
     LimpiaParametros oCmdEjec
     oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_HORARIO_REGISTER]"
@@ -157,18 +208,22 @@ dd = Split(CStr(Me.dtpDesde.Value), " ")
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@fin", adVarChar, adParamInput, 10, Format(Me.dtpHasta.Value, "HH:mm:ss"))
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adVarChar, adParamInput, 20, LK_CODUSU)
 
+    If Me.chkHLA.Value Then
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@HLA", adVarChar, adParamInput, 10, Format(Me.dtpHLA.Value, "HH:mm:ss"))
+
+    End If
 
     Dim orsData As ADODB.Recordset
 
     Set orsData = oCmdEjec.Execute
 
     Dim mensaje() As String
-
+MousePointer = vbDefault
     If Not orsData.EOF Then
         mensaje = Split(orsData.Fields(0), "=")
 
         If mensaje(0) = 0 Then
-        Me.LblMensaje.Caption = "Horario actual configurado:"
+            Me.LblMensaje.Caption = "Horario actual configurado:"
             MsgBox mensaje(1), vbInformation, Pub_Titulo
         Else
             MsgBox mensaje(1), vbCritical, Pub_Titulo
@@ -179,6 +234,7 @@ dd = Split(CStr(Me.dtpDesde.Value), " ")
 
     Exit Sub
 cSave:
+    MousePointer = vbDefault
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
@@ -207,6 +263,14 @@ Private Sub MostrarDatos()
         Me.LblMensaje.Caption = "Horario actual configurado:"
         Me.dtpDesde.Value = orsData!ini
         Me.dtpHasta.Value = orsData!fin
+        If IsNull(orsData!HLA) Then
+            Me.FraHoraLimite.Enabled = False
+        Else
+            Me.chkHLA.Value = 1
+            Me.FraHoraLimite.Enabled = True
+             Me.dtpHLA.Value = orsData!HLA
+        End If
+       
     Else
         Me.LblMensaje.Caption = "No se ha configurado Horario"
 

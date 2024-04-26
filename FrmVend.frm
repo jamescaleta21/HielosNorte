@@ -1773,7 +1773,7 @@ Public Sub GRABAR_VEN()
 End Sub
 
 Public Sub MENSAJE_VEN(TEXTO As String)
-  LblMensaje.Caption = TEXTO
+  lblMensaje.Caption = TEXTO
   PARPADEA.Enabled = True
 End Sub
 
@@ -1940,81 +1940,123 @@ End If
 End Sub
 
 Private Sub cmdagregar_Click()
-'On Error GoTo ESCAPA
-If Left(cmdAgregar.Caption, 2) = "&A" Then
-    cmdAgregar.Caption = "&Grabar"
-    cmdCancelar.Enabled = True
-    cmdModificar.Enabled = False
-    cmdEliminar.Enabled = False
-    LIMPIA_VEN
-    DESBLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
-    DESBLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
-    DESBLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
-    remi.Enabled = True
-    txtfechaing.Enabled = True
-    FrmVen.Txt_key = GENERA_VEN
-    txtfechaing.Text = Format(LK_FECHA_DIA, "dd/mm/yyyy")
-    Me.comLogeo.ListIndex = 1
-    Me.ComActivo.ListIndex = 1
-    Me.txtUser.Text = ""
-    Me.txtPass.Text = ""
-    FrmVen.txtnombre.SetFocus
-    'AGREGAMOS EN BLANCO
-Else
-   If FrmVen.txtnombre.Text = "" Or Len(FrmVen.txtnombre.Text) = 0 Then
-       MsgBox "Ingrese Nombre de Vendedor ..!!!", 48, Pub_Titulo
-       Azul txtnombre, txtnombre
-       Exit Sub
-   End If
-   If Me.comLogeo.ListIndex = 1 And Len(Trim(Me.txtUser.Text)) = 0 Then
-    MsgBox "Debe ingresar el Usuario del Vendedor.", vbCritical, Pub_Titulo
-    Me.txtUser.SetFocus
-    Exit Sub
-   End If
-   If Me.comLogeo.ListIndex = 1 And Len(Trim(Me.txtPass.Text)) = 0 Then
-    MsgBox "Debe ingresar el Pass del Vendedor.", vbCritical, Pub_Titulo
-    Me.txtPass.SetFocus
-    Exit Sub
-   End If
-   If Me.ComPerfil.ListIndex = 0 Then
-    MsgBox "Debe elegir el perfil del Usuario.", vbCritical, Pub_Titulo
-    Me.ComPerfil.SetFocus
-    Exit Sub
-   End If
-   WSFECHA = ES_FECHAS(txtfechaing)
-   If WSFECHA = "1" Then
-     MsgBox " Fecha Invalidad ...", 48, Pub_Titulo
-     Azul2 txtfechaing, txtfechaing
-     Exit Sub
-   End If
-   txtfechaing.Text = Format(WSFECHA, "dd/mm/yyyy")
-   '"SI GRABA.."
-    SQ_OPER = 1
-    PUB_CODVEN = val(FrmVen.Txt_key.Text)
-    pu_codcia = LK_CODCIA
-    LEER_VEN_LLAVE
-    If Not ven_llave.EOF Then
-       MsgBox "Registro ,  EXISTE ... ", 48, Pub_Titulo
-       Azul FrmVen.Txt_key, Txt_key
-       Exit Sub
+
+    'On Error GoTo ESCAPA
+    If Left(cmdAgregar.Caption, 2) = "&A" Then
+        cmdAgregar.Caption = "&Grabar"
+        cmdCancelar.Enabled = True
+        cmdModificar.Enabled = False
+        cmdEliminar.Enabled = False
+        LIMPIA_VEN
+        DESBLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+        DESBLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
+        DESBLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
+        remi.Enabled = True
+        txtfechaing.Enabled = True
+        FrmVen.Txt_key = GENERA_VEN
+        txtfechaing.Text = Format(LK_FECHA_DIA, "dd/mm/yyyy")
+        Me.comLogeo.ListIndex = 1
+        Me.ComActivo.ListIndex = 1
+        Me.txtUser.Enabled = True
+        Me.txtUser.Text = ""
+        Me.txtPass.Text = ""
+        FrmVen.txtnombre.SetFocus
+        'AGREGAMOS EN BLANCO
+    Else
+
+        'VALIDA SI EL USUARIO EXISTE EN CLOUD\
+        MousePointer = vbHourglass
+        If Len(Trim(Me.txtUser.Text)) <> 0 Then
+            LimpiaParametros oCmdEjec
+            oCmdEjec.CommandText = "[dbo].[USP_USUARIO_VALIDA_REGISTER]"
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@USER", adVarChar, adParamInput, 20, Me.txtUser.Text)
+
+            Dim orsValida As ADODB.Recordset
+
+            Set orsValida = oCmdEjec.Execute
+        
+            If Not orsValida.EOF Then
+            MousePointer = vbDefault
+                If orsValida!Dato = 1 Then
+                    MsgBox "Usuario ya se encuentra registrado."
+                    Exit Sub
+
+                End If
+
+            End If
+
+        Else
+
+            If FrmVen.txtnombre.Text = "" Or Len(FrmVen.txtnombre.Text) = 0 Then
+                MsgBox "Ingrese Nombre de Vendedor ..!!!", 48, Pub_Titulo
+                Azul txtnombre, txtnombre
+                Exit Sub
+
+            End If
+
+            If Me.comLogeo.ListIndex = 1 And Len(Trim(Me.txtUser.Text)) = 0 Then
+                MsgBox "Debe ingresar el Usuario del Vendedor.", vbCritical, Pub_Titulo
+                Me.txtUser.SetFocus
+                Exit Sub
+
+            End If
+
+            If Me.comLogeo.ListIndex = 1 And Len(Trim(Me.txtPass.Text)) = 0 Then
+                MsgBox "Debe ingresar el Pass del Vendedor.", vbCritical, Pub_Titulo
+                Me.txtPass.SetFocus
+                Exit Sub
+
+            End If
+
+            If Me.ComPerfil.ListIndex = 0 Then
+                MsgBox "Debe elegir el perfil del Usuario.", vbCritical, Pub_Titulo
+                Me.ComPerfil.SetFocus
+                Exit Sub
+
+            End If
+
+            WSFECHA = ES_FECHAS(txtfechaing)
+
+            If WSFECHA = "1" Then
+                MsgBox " Fecha Invalidad ...", 48, Pub_Titulo
+                Azul2 txtfechaing, txtfechaing
+                Exit Sub
+
+            End If
+
+            txtfechaing.Text = Format(WSFECHA, "dd/mm/yyyy")
+            '"SI GRABA.."
+            SQ_OPER = 1
+            PUB_CODVEN = val(FrmVen.Txt_key.Text)
+            pu_codcia = LK_CODCIA
+            LEER_VEN_LLAVE
+
+            If Not ven_llave.EOF Then
+                MsgBox "Registro ,  EXISTE ... ", 48, Pub_Titulo
+                Azul FrmVen.Txt_key, Txt_key
+                Exit Sub
+
+            End If
+
+            Screen.MousePointer = 11
+            GRABAR_VEN
+            MENSAJE_VEN "Bancos , AGREGADO... "
+            cmdAgregar.Caption = "&Agregar"
+            cmdEliminar.Enabled = True
+            cmdModificar.Enabled = True
+            LIMPIA_VEN
+            BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+            BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
+            BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
+            remi.Enabled = False
+            txtfechaing.Enabled = False
+            Txt_key.Locked = False
+            Txt_key.SetFocus
+            Screen.MousePointer = 0
+
+        End If
+
     End If
-   Screen.MousePointer = 11
-   GRABAR_VEN
-   MENSAJE_VEN "Bancos , AGREGADO... "
-   cmdAgregar.Caption = "&Agregar"
-   cmdEliminar.Enabled = True
-   cmdModificar.Enabled = True
-   LIMPIA_VEN
-   BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
-   BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
-   BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
-   remi.Enabled = False
-   txtfechaing.Enabled = False
-   Txt_key.Locked = False
-   Txt_key.SetFocus
-   Screen.MousePointer = 0
-      
-End If
    
 End Sub
 
@@ -2134,6 +2176,7 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
     DESBLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
     remi.Enabled = True
     txtfechaing.Enabled = True
+    Me.txtUser.Enabled = False
     txtnombre.SetFocus
 Else
     '*Grabar las modificaciones
@@ -2626,11 +2669,11 @@ End Sub
 
 Private Sub PARPADEA_Timer()
  CU = CU + 1
- LblMensaje.Visible = True 'Not LblMensaje.Visible
+ lblMensaje.Visible = True 'Not LblMensaje.Visible
  If CU > 8 Then
    CU = 0
    PARPADEA.Enabled = False
-   LblMensaje.Visible = False
+   lblMensaje.Visible = False
  End If
 End Sub
 
