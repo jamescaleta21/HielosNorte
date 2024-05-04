@@ -352,7 +352,7 @@ Public Sub CONEXION_GEN()
   
   PUB_DSN = UCase(wdsn)
   wAcceso = "anteromariano"
-  wAcceso = "accesodenegado$1"
+  'wAcceso = "accesodenegado$1"
   
   
   ws_color = 3
@@ -1683,8 +1683,8 @@ PUB_CODCIA = Nulo_Valors(par_llave!PAR_CIACON)
 If WTIPO = 1 Then
  WTEXTO.Text = Mid(WTEXTO.Text, 2, Len(WTEXTO.Text))
  wgrupo = Trim(WTEXTO.Text)
- If Val(wgrupo) = 0 Then Exit Sub
- archi = "SELECT * FROM COMAEST WHERE COM_CODCIA = ? AND COM_CUENTA >= '" & wgrupo & "' AND COM_CUENTA < '" & Trim(Str(Val(wgrupo) + 1)) & "'  ORDER BY COM_CUENTA"
+ If val(wgrupo) = 0 Then Exit Sub
+ archi = "SELECT * FROM COMAEST WHERE COM_CODCIA = ? AND COM_CUENTA >= '" & wgrupo & "' AND COM_CUENTA < '" & Trim(Str(val(wgrupo) + 1)) & "'  ORDER BY COM_CUENTA"
 End If
 Load frmBuscacta
 frmBuscacta.lbltabla.Caption = LK_TABLA
@@ -1719,5 +1719,5 @@ If wcuenta = 63 Then
 Else
   cad = "%..."
 End If
-Splash.lblporcentaje.Caption = Format((Val(wcuenta) * 100) / 63, "0") & cad
+Splash.lblporcentaje.Caption = Format((val(wcuenta) * 100) / 63, "0") & cad
 End Sub
