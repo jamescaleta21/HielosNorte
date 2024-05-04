@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -819,11 +819,9 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Ordenes de Compra a Proveedores"
-         Enabled         =   0   'False
+         Caption         =   "&Registro de Empresas"
          Index           =   4
          Shortcut        =   ^O
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -1066,7 +1064,7 @@ Dim Wfile As String
 Dim WFORM As String
 Public Sub LLENA_ACCESO_OTROS(WSOTROS As String)
 Dim W1 As String * 2
-Dim i, wPosF, WPosV, cuenta As Integer
+Dim I, wPosF, WPosV, cuenta As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
@@ -1081,11 +1079,11 @@ cade = Trim(WSOTROS)
 cuenta = 0
 wPosF = 1
 a = 0
-For i = 1 To Len(cade)
- If Mid(cade, i, 1) = "." Then
+For I = 1 To Len(cade)
+ If Mid(cade, I, 1) = "." Then
    a = a + 1
  End If
-Next i
+Next I
 lk_OTROS_Count = a
 ReDim lk_OTROS(a)
 Do Until cuenta = a
@@ -1865,7 +1863,7 @@ Dim var As String
 MsgBox "" & Chr(13) & "Visitenos en www.viarapidaperu.com", vbInformation, "Asesoria y Soporte"
 Exit Sub
 Dim ww As Form
-Dim i
+Dim I
 On Error GoTo OJO
 var = Trim(MDIForm1.ActiveForm.Name)
 If UCase(var) = "FORMGEN" Then
@@ -2013,8 +2011,7 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-'        frmARTI.Show
-        frmEmpresa.Show
+        frmARTI.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2365,9 +2362,8 @@ Private Sub submenutit7_Click(Index As Integer)
        frmPedidoHorario.Show
        Screen.MousePointer = 0
     Case 4
-        Screen.MousePointer = 11
-       Load FORM_PED ' frmOCProv
-       FORM_PED.Show
+       Screen.MousePointer = 11
+       frmEmpresa.Show
        Screen.MousePointer = 0
    Case 6
        Screen.MousePointer = 11
