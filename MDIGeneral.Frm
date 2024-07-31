@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -1302,7 +1302,9 @@ ProBar.Value = ProBar.Value + 1
 If Len(CONST_SERVER) = 0 Or Len(CONST_UID) = 0 Then
   MsgBox "ADVERTENCIA ..!! DEBES DEFINIR EL NOMBRE DEL SERVIDOR , UID , PWD", 48, Pub_Titulo
 End If
-PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & CONST_PWD & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english;DATABASE=BDATOS"
+'PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & CONST_PWD & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english;DATABASE=BDATOS"
+PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & cClave & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english" ';DATABASE=BDATOS"
+
 'CONn$ = "dsn=" & wdsn & ";uid=sa;pwd=" & wAcceso & ";database=bdatos2;"
 ' * Permisos para los Menus *
 'Debug.Print PUB_ODBC
@@ -2011,7 +2013,8 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-        frmARTI.Show
+        'frmARTI.Show
+        frmCampania.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2395,25 +2398,7 @@ End Select
 End Sub
 
 
-Private Sub Timer1_Timer()
-'On Error GoTo SALE
-'Timer1.Enabled = False
-'If Trim(MDIForm1.gfecha.Caption) <> "" Then
-'  MDIForm1.gfecha.Caption = ""
-'Else
-'  MDIForm1.gfecha.Caption = Format(LK_FECHA_DIA, "dd/mm/yyyy")
-'End If
-'PSMSG_LLAVE(0) = LK_CODUSU
-'msg_llave.Requery
-'If Trim(msg_llave!USU_MSGBOX) <> "" Then
-'   MsgBox "Usted. Tiene un Mensaje de :" & Chr(13) & Chr(13) & Trim(msg_llave!USU_MSGBOX), vbExclamation, "Mensajeria Solution"
-'   msg_llave.Edit
-'   msg_llave!USU_MSGBOX = ""
-'   msg_llave.Update
-'End If
-'SALE:
-'
-End Sub
+
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim RetVal
@@ -2554,7 +2539,7 @@ Select Case Button.Key
                 FrmRepo.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
-                FORMGEN.TEXTOVAR.Text = ""
+                FORMGEN.textovar.Text = ""
            End If
         End If
        Next iFormCount
