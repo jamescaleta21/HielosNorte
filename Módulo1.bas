@@ -262,7 +262,6 @@ Public pre_unidad As rdoResultset
 Public PSped_MAYOR As rdoQuery
 Public ped_MAYOR As rdoResultset
 
-
 Public Sub MUESTRA_USUario()
 FORMGEN.i_CODUSU.Clear
 usu.Requery
@@ -344,15 +343,13 @@ Public Sub CONEXION_GEN()
   Dim iStatusBarWidth As Integer
   Dim Srutas As String
   Dim ws_color As Integer
-  Dim wAcceso As String
 
   Splash.lblmensa.Caption = "Intentando conexion con el servidor..."
   DoEvents
   wdsn = "dsn_datos"
   
   PUB_DSN = UCase(wdsn)
-  wAcceso = "anteromariano"
-  'wAcceso = "accesodenegado$1"
+  
   
   
   ws_color = 3
@@ -362,7 +359,7 @@ Public Sub CONEXION_GEN()
   DoEvents
   NL = Chr(13) & Chr(10)
   Set EN = rdoEnvironments(0)
-  CONn$ = "dsn=" & wdsn & ";uid=sa;pwd=" & wAcceso & ";database=bdatos;"
+  CONn$ = "dsn=" & wdsn & ";uid=sa;pwd=" & cClave
   
   
   Pub_ConnAdo.Open CONn$
