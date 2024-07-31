@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -841,10 +841,8 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Orden de Compra de Clientes"
-         Enabled         =   0   'False
+         Caption         =   "&Mantenimiento de Campañas"
          Index           =   8
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -2013,8 +2011,7 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-        'frmARTI.Show
-        frmCampania.Show
+        frmARTI.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2375,9 +2372,9 @@ Private Sub submenutit7_Click(Index As Integer)
        frmOpcion.Show 1
     Case 8
        Screen.MousePointer = 11
-       Load frmOCCliente
-       Screen.MousePointer = 0
-       frmOCCliente.Show
+       'Load frmCampania
+       'Screen.MousePointer = 0
+       frmCampania.Show
     Case 10
        Screen.MousePointer = 11
        PUB_TIPOPRINT = 1
@@ -2539,7 +2536,7 @@ Select Case Button.Key
                 FrmRepo.Txt_key.Text = ""
            ElseIf UCase(Forms(iFormCount).Name) = "FORMGEN" Then
                 FORMGEN.LV_ART.Visible = False
-                FORMGEN.textovar.Text = ""
+                FORMGEN.TEXTOVAR.Text = ""
            End If
         End If
        Next iFormCount
