@@ -1,5 +1,5 @@
 Attribute VB_Name = "modMain"
-Public Const cClave As String = "accesodenegado$1"
+Public Const cClave As String = "anteromariano"
 
 Function ConvertirFechaFormat_yyyyMMdd(ByVal inputDate As String) As String
 
