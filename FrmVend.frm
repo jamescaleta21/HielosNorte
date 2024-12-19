@@ -5,16 +5,16 @@ Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form FrmVen 
    Caption         =   "Maestro de Vendedores"
-   ClientHeight    =   6540
+   ClientHeight    =   6525
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   12330
+   ClientWidth     =   11895
    ControlBox      =   0   'False
    Icon            =   "FrmVend.frx":0000
    LinkTopic       =   "Form3"
    MDIChild        =   -1  'True
-   ScaleHeight     =   6540
-   ScaleWidth      =   12330
+   ScaleHeight     =   6525
+   ScaleWidth      =   11895
    WindowState     =   2  'Maximized
    Begin VB.CommandButton cmdAgregar 
       BackColor       =   &H00FFFFFF&
@@ -554,7 +554,6 @@ Begin VB.Form FrmVen
       _ExtentY        =   6191
       _Version        =   393216
       Style           =   1
-      Tabs            =   2
       Tab             =   1
       TabHeight       =   520
       ForeColor       =   8388608
@@ -602,6 +601,37 @@ Begin VB.Form FrmVen
       Tab(1).Control(12)=   "txtnd"
       Tab(1).Control(12).Enabled=   0   'False
       Tab(1).ControlCount=   13
+      TabCaption(2)   =   "Datos de Repartidor"
+      TabPicture(2)   =   "FrmVend.frx":3C71
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).Control(0)=   "Label14"
+      Tab(2).Control(1)=   "Label15"
+      Tab(2).Control(2)=   "Label16"
+      Tab(2).Control(3)=   "txtBrevete"
+      Tab(2).Control(4)=   "txtPlaca"
+      Tab(2).Control(5)=   "txtCapacidad"
+      Tab(2).ControlCount=   6
+      Begin VB.TextBox txtCapacidad 
+         Height          =   330
+         Left            =   -72120
+         TabIndex        =   103
+         Top             =   1920
+         Width           =   1695
+      End
+      Begin VB.TextBox txtPlaca 
+         Height          =   330
+         Left            =   -72120
+         TabIndex        =   102
+         Top             =   1320
+         Width           =   1695
+      End
+      Begin VB.TextBox txtBrevete 
+         Height          =   330
+         Left            =   -72120
+         TabIndex        =   101
+         Top             =   720
+         Width           =   1695
+      End
       Begin VB.TextBox txtnd 
          Height          =   285
          Left            =   1320
@@ -1418,6 +1448,36 @@ Begin VB.Form FrmVen
             Width           =   780
          End
       End
+      Begin VB.Label Label16 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "CAPACIDAD EN KG:"
+         Height          =   195
+         Left            =   -73785
+         TabIndex        =   100
+         Top             =   1988
+         Width           =   1500
+      End
+      Begin VB.Label Label15 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "PLACA:"
+         Height          =   195
+         Left            =   -72840
+         TabIndex        =   99
+         Top             =   1388
+         Width           =   555
+      End
+      Begin VB.Label Label14 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "BREVETE:"
+         Height          =   195
+         Left            =   -73080
+         TabIndex        =   98
+         Top             =   788
+         Width           =   795
+      End
       Begin VB.Label Label5 
          AutoSize        =   -1  'True
          Caption         =   "Nta Deb. :"
@@ -1727,6 +1787,11 @@ Public Sub GRABAR_VEN()
         ven_llave!vem_pass = ""
 
     End If
+    'DATOS DEL REPARTIDOR - INICIO
+    ven_llave!vem_brevete = Trim(Me.txtBrevete.Text)
+    ven_llave!vem_placa = Trim(Me.txtPlaca.Text)
+    ven_llave!vem_capacidad_kg = Me.txtCapacidad.Text
+    'DATOS DEL REPARTIDOR - FIN
 
     If cheguia.Value = 1 Then
         ven_llave!VEM_FLAG_G = "A"
@@ -1773,7 +1838,7 @@ Public Sub GRABAR_VEN()
 End Sub
 
 Public Sub MENSAJE_VEN(TEXTO As String)
-  lblMensaje.Caption = TEXTO
+  LblMensaje.Caption = TEXTO
   PARPADEA.Enabled = True
 End Sub
 
@@ -1830,6 +1895,11 @@ FrmVen.comPrecio.ListIndex = IIf(ven_llave!vem_price, 1, 0)
 FrmVen.ComPerfil.ListIndex = IIf(Trim(Nulo_Valors(ven_llave!vem_idperfil)) = "", 0, ven_llave!vem_idperfil)
 FrmVen.DatEmpresa.BoundText = ven_llave!VEM_IDEMPRESA
 'PARTE MOVIL FIN
+'DATOS DE REPARTIDOR - INICIO
+Me.txtBrevete.Text = Nulo_Valors(ven_llave!vem_brevete)
+Me.txtPlaca.Text = Nulo_Valors(ven_llave!vem_placa)
+Me.txtCapacidad.Text = Nulo_Valor0(ven_llave!vem_capacidad_kg)
+'DATOS DE REPARTIDOR - FIN
 FindInCmb Nulo_Valor0(ven_llave!VEM_TRNKEY)
 cheguia.Value = 0
 cheboleta.Value = 0
@@ -1916,6 +1986,12 @@ txtguia.Text = ""
 txtgr.Text = ""
 txtnc.Text = ""
 txtnd.Text = ""
+
+Me.txtUser.Text = ""
+Me.txtPass = ""
+Me.txtBrevete.Text = ""
+Me.txtPlaca.Text = ""
+Me.txtCapacidad.Text = 0
 
 cmbtransporte.ListIndex = -1
 Me.ComPerfil.ListIndex = 0
@@ -2025,6 +2101,36 @@ Private Sub cmdagregar_Click()
             Exit Sub
 
         End If
+        
+        'VALIDACION PARA TRANSPORTISTA - INICIO
+        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtBrevete.Text)) = 0 Then
+            Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar el Brevete del Repartidor", vbCritical, Pub_Titulo
+            Me.txtBrevete.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar la Placa del vehiculo.", vbCritical, Pub_Titulo
+            Me.txtPlaca.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar la capacidad del vehiculo.", vbCritical, Pub_Titulo
+            Me.txtCapacidad.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And val(Me.txtCapacidad.Text) <= 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Capacidad ingresada incorrecta.", vbInformation, Pub_Titulo
+            Me.txtCapacidad.SetFocus
+            Exit Sub
+        End If
+        'VALIDACION PARA TRANSPORTISTA - FIN
 
         txtfechaing.Text = Format(WSFECHA, "dd/mm/yyyy")
         '"SI GRABA.."
@@ -2195,6 +2301,35 @@ Else
         Me.ComPerfil.SetFocus
         Exit Sub
     End If
+    'VALIDACIONES DEL REPARTIDOR - INICIO
+    If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtBrevete.Text)) = 0 Then
+            Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar el Brevete del Repartidor", vbCritical, Pub_Titulo
+            Me.txtBrevete.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar la Placa del vehiculo.", vbCritical, Pub_Titulo
+            Me.txtPlaca.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Debe ingresar la capacidad del vehiculo.", vbCritical, Pub_Titulo
+            Me.txtCapacidad.SetFocus
+            Exit Sub
+        End If
+        
+        If Me.ComPerfil.ListIndex = 3 And val(Me.txtCapacidad.Text) <= 0 Then
+        Me.SSTab1.tab = 2
+            MsgBox "Capacidad ingresada incorrecta.", vbInformation, Pub_Titulo
+            Me.txtCapacidad.SetFocus
+            Exit Sub
+        End If
+    'VALIDACIONES DEL REPARTIDOR - FIN
     txtfechaing.Text = Format(WSFECHA, "dd/mm/yyyy")
      Screen.MousePointer = 11
      GRABAR_VEN
@@ -2214,6 +2349,13 @@ End If
 
 End Sub
 
+Private Sub ComPerfil_Click()
+If Me.ComPerfil.ListIndex = 3 Then
+    Me.SSTab1.TabVisible(2) = True
+Else
+    Me.SSTab1.TabVisible(2) = False
+End If
+End Sub
 
 Private Sub Form_Load()
 Unload FORMGEN
@@ -2245,6 +2387,7 @@ Set PS_TRAONE = CN.CreateQuery("", pub_cadena)
 PS_TRAONE(0) = 0
 Set TRANSPORTEONE = PS_TRAONE.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
+Me.SSTab1.TabVisible(2) = False
 End Sub
 
 Private Sub LlenaEmpresa()
@@ -2511,6 +2654,8 @@ If KeyAscii = 13 Then
 End If
 End Sub
 
+
+
 Private Sub txt_key_GotFocus()
  Azul Txt_key, Txt_key
 End Sub
@@ -2669,11 +2814,11 @@ End Sub
 
 Private Sub PARPADEA_Timer()
  CU = CU + 1
- lblMensaje.Visible = True 'Not LblMensaje.Visible
+ LblMensaje.Visible = True 'Not LblMensaje.Visible
  If CU > 8 Then
    CU = 0
    PARPADEA.Enabled = False
-   lblMensaje.Visible = False
+   LblMensaje.Visible = False
  End If
 End Sub
 

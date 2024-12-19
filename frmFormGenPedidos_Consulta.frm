@@ -110,7 +110,7 @@ Begin VB.Form frmFormGenPedidos_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   201326593
+         Format          =   205258753
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 
@@ -182,7 +182,7 @@ Private Sub cmdMostrar_Click()
     oCmdEjec.CommandText = "[dbo].[USP_PEDIDOS_VENDEDOR]"
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adChar, adParamInput, 8, FormatoFecha(Me.dtpFecha.Value))
-     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
 
     Dim orsc As ADODB.Recordset
 
@@ -191,86 +191,88 @@ Private Sub cmdMostrar_Click()
     Dim vCAnt As Integer
 
     vCAnt = orsc!cant
+
     If chkres.Value = 0 Then
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_RESUMEN]"
+        LimpiaParametros oCmdEjec
+        oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_RESUMEN]"
 
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adChar, adParamInput, 8, FormatoFecha(Me.dtpFecha.Value))
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adChar, adParamInput, 8, FormatoFecha(Me.dtpFecha.Value))
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
 
-    Dim orsData As ADODB.Recordset
+        Dim orsData As ADODB.Recordset
 
-    Set orsData = oCmdEjec.Execute
+        Set orsData = oCmdEjec.Execute
 
-    Dim vReporte   As CRAXDRT.Report
+        Dim vReporte   As CRAXDRT.Report
 
-    Dim colParam   As CRAXDRT.ParameterFieldDefinitions
+        Dim colParam   As CRAXDRT.ParameterFieldDefinitions
 
-    Dim objParam   As CRAXDRT.ParameterFieldDefinition
+        Dim objParam   As CRAXDRT.ParameterFieldDefinition
 
-    Dim objCrystal As New CRAXDRT.APPLICATION
+        Dim objCrystal As New CRAXDRT.APPLICATION
 
-    Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedor.rpt")
+        Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedor.rpt")
     
-    Set colParam = vReporte.ParameterFields
+        Set colParam = vReporte.ParameterFields
     
-    For Each objParam In colParam
+        For Each objParam In colParam
 
-        Select Case objParam.ParameterFieldName
+            Select Case objParam.ParameterFieldName
 
-            Case "pCant"
-                objParam.AddCurrentValue CStr(vCAnt)
+                Case "pCant"
+                    objParam.AddCurrentValue CStr(vCAnt)
 
-        End Select
+            End Select
 
-    Next
+        Next
     
-    vReporte.Database.SetDataSource orsData, 3, 1
+        vReporte.Database.SetDataSource orsData, 3, 1
 
-    Me.crvReporte.ReportSource = vReporte
-    Me.crvReporte.ViewReport
+        Me.crvReporte.ReportSource = vReporte
+        Me.crvReporte.ViewReport
     Else
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_RESUMEN_TOTAL]"
+        LimpiaParametros oCmdEjec
+        oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_RESUMEN_TOTAL]"
 
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adChar, adParamInput, 8, FormatoFecha(Me.dtpFecha.Value))
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adChar, adParamInput, 8, FormatoFecha(Me.dtpFecha.Value))
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
 
-    Dim orsData2 As ADODB.Recordset
+        Dim orsData2 As ADODB.Recordset
 
-    Set orsData2 = oCmdEjec.Execute
+        Set orsData2 = oCmdEjec.Execute
 
-    Dim vReporte2   As CRAXDRT.Report
+        Dim vReporte2   As CRAXDRT.Report
 
-    Dim colParam2   As CRAXDRT.ParameterFieldDefinitions
+        Dim colParam2   As CRAXDRT.ParameterFieldDefinitions
 
-    Dim objParam2   As CRAXDRT.ParameterFieldDefinition
+        Dim objParam2   As CRAXDRT.ParameterFieldDefinition
 
-    Dim objCrystal2 As New CRAXDRT.APPLICATION
+        Dim objCrystal2 As New CRAXDRT.APPLICATION
 
-    Set vReporte2 = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedorRES.rpt")
+        Set vReporte2 = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedorRES.rpt")
     
-    Set colParam2 = vReporte2.ParameterFields
+        Set colParam2 = vReporte2.ParameterFields
     
-    For Each objParam2 In colParam2
+        For Each objParam2 In colParam2
 
-        Select Case objParam2.ParameterFieldName
+            Select Case objParam2.ParameterFieldName
 
-            Case "pCant"
-                objParam2.AddCurrentValue CStr(vCAnt)
+                Case "pCant"
+                    objParam2.AddCurrentValue CStr(vCAnt)
 
-        End Select
+            End Select
 
-    Next
+        Next
     
-    vReporte2.Database.SetDataSource orsData2, 3, 1
+        vReporte2.Database.SetDataSource orsData2, 3, 1
 
-    Me.crvReporte.ReportSource = vReporte2
-    Me.crvReporte.ViewReport
+        Me.crvReporte.ReportSource = vReporte2
+        Me.crvReporte.ViewReport
+
     End If
 
 End Sub
