@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmDocu 
    Caption         =   "Consulta de Operaciones"
    ClientHeight    =   5250
@@ -12,8 +12,8 @@ Begin VB.Form frmDocu
    ControlBox      =   0   'False
    LinkTopic       =   "Form2"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11115
-   ScaleWidth      =   20340
+   ScaleHeight     =   5250
+   ScaleWidth      =   9930
    WindowState     =   2  'Maximized
    Begin VB.CommandButton Command1 
       Caption         =   "Genera TXT para SUNAT"
@@ -4513,7 +4513,7 @@ End Sub
 
 Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero As Double)
 
-    Dim oRS As ADODB.Recordset
+    Dim ors As ADODB.Recordset
 
     LimpiaParametros oCmdEjec
 
@@ -4536,7 +4536,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
     End If
     
-    Set oRS = oCmdEjec.Execute
+    Set ors = oCmdEjec.Execute
     
     Dim sCadena As String
 
@@ -4627,15 +4627,15 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Else
     End If
      
-    sARCHIVOcab = sRUC & "-" & oRS!Nombre + IIf((LOC_TIPMOV = 97 Or LOC_TIPMOV = 98), ".not", IIf(LK_CODTRA = 1111, ".cba", ".cab"))
-    sARCHIVOtri = sRUC & "-" & oRS!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".tri", ".tri"))
-    sARCHIVOley = sRUC & "-" & oRS!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".ley", ".ley"))
-    sARCHIVOdet = sRUC & "-" & oRS!Nombre + ".det"
-    sARCHIVOaca = sRUC & "-" & oRS!Nombre + ".aca"
+    sARCHIVOcab = sRUC & "-" & ors!Nombre + IIf((LOC_TIPMOV = 97 Or LOC_TIPMOV = 98), ".not", IIf(LK_CODTRA = 1111, ".cba", ".cab"))
+    sARCHIVOtri = sRUC & "-" & ors!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".tri", ".tri"))
+    sARCHIVOley = sRUC & "-" & ors!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".ley", ".ley"))
+    sARCHIVOdet = sRUC & "-" & ors!Nombre + ".det"
+    sARCHIVOaca = sRUC & "-" & ors!Nombre + ".aca"
     If cTipoDocto = "F" And LOC_TIPMOV = 10 Then
-    sARCHIVOpag = sRUC & "-" & oRS!Nombre + ".pag"
-    sARCHIVOdpa = sRUC & "-" & oRS!Nombre + ".dpa"
-    sARCHIVOrtn = sRUC & "-" & oRS!Nombre + ".rtn"
+    sARCHIVOpag = sRUC & "-" & ors!Nombre + ".pag"
+    sARCHIVOdpa = sRUC & "-" & ors!Nombre + ".dpa"
+    sARCHIVOrtn = sRUC & "-" & ors!Nombre + ".rtn"
     End If
     
     'If LK_CODTRA <> 1111 Then
@@ -4957,22 +4957,22 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     
     If LK_CODTRA = 2412 Then
 
-        Do While Not oRS.EOF
-            sCadena = sCadena & oRS!fecemision & "|" & oRS!CODMOTIVO & "|" & oRS!DESCMOTIVO & "|" & oRS!TIPODOCAFECTADO & "|" & oRS!NUMDOCAFECTADO & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & oRS!CLI1 & "|" & oRS!TIPMONEDA & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOOPERINAFECTAS & "|" & oRS!MTOOPEREXONERADAS & "|" & oRS!MTOIGV & "|" & oRS!MTOISC & "|" & oRS!MTOOTROSTRIBUTOS & "|" & oRS!MTOIMPVENTA & "|"
-            oRS.MoveNext
+        Do While Not ors.EOF
+            sCadena = sCadena & ors!fecemision & "|" & ors!CODMOTIVO & "|" & ors!DESCMOTIVO & "|" & ors!TIPODOCAFECTADO & "|" & ors!NUMDOCAFECTADO & "|" & ors!TIPDOCUSUARIO & "|" & ors!NUMDOCUSUARIO & "|" & ors!CLI1 & "|" & ors!TIPMONEDA & "|" & ors!SUMOTROSCARGOS & "|" & ors!MTOOPERGRAVADAS & "|" & ors!MTOOPERINAFECTAS & "|" & ors!MTOOPEREXONERADAS & "|" & ors!MTOIGV & "|" & ors!MTOISC & "|" & ors!MTOOTROSTRIBUTOS & "|" & ors!MTOIMPVENTA & "|"
+            ors.MoveNext
         Loop
     
     ElseIf LK_CODTRA = 1111 Then
-         Do While Not oRS.EOF
-            sCadena = sCadena & oRS!FEC_GENERACcION & "|" & oRS!FEC_COMUNICACION & "|" & oRS!TIPDOCBAJA & "|" & oRS!NUMDOCBAJA & "|" & oRS!DESMOTIVOBAJA & "|"
-            oRS.MoveNext
+         Do While Not ors.EOF
+            sCadena = sCadena & ors!FEC_GENERACcION & "|" & ors!FEC_COMUNICACION & "|" & ors!TIPDOCBAJA & "|" & ors!NUMDOCBAJA & "|" & ors!DESMOTIVOBAJA & "|"
+            ors.MoveNext
         Loop
     Else
 
-        Do While Not oRS.EOF
+        Do While Not ors.EOF
             'sCadena = sCadena & oRS!TIPOPERACION & "|" & oRS!fecemision & "|" & oRS!hORA & "|" & oRS!FECHAVENC & "|" & oRS!codlocalemisor & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & oRS!rznsocialusuario & "|" & oRS!TIPMONEDA & "|" & oRS!MTOIGV & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOIMPVENTA & "|" & oRS!SUMDSCTOGLOBAL & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!TOTANTICIPOS & "|" & oRS!IMPTOTALVENTA & "|" & oRS!UBL & "|" & oRS!CUSTOMDOC & "|"
-            sCadena = sCadena & oRS!TIPOPERACION & "|" & oRS!fecemision & "|" & oRS!hORA & "|" & oRS!FECHAVENC & "|" & oRS!codlocalemisor & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & Trim(oRS!rznsocialusuario) & "|" & oRS!TIPMONEDA & "|" & oRS!MTOIGV & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOIMPVENTA & "|" & oRS!SUMDSCTOGLOBAL & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!TOTANTICIPOS & "|" & oRS!IMPTOTALVENTA & "|" & oRS!UBL & "|" & oRS!CUSTOMDOC & "|"
-            oRS.MoveNext
+            sCadena = sCadena & ors!TIPOPERACION & "|" & ors!fecemision & "|" & ors!hORA & "|" & ors!FECHAVENC & "|" & ors!codlocalemisor & "|" & ors!TIPDOCUSUARIO & "|" & ors!NUMDOCUSUARIO & "|" & Trim(ors!rznsocialusuario) & "|" & ors!TIPMONEDA & "|" & ors!MTOIGV & "|" & ors!MTOOPERGRAVADAS & "|" & ors!MTOIMPVENTA & "|" & ors!SUMDSCTOGLOBAL & "|" & ors!SUMOTROSCARGOS & "|" & ors!TOTANTICIPOS & "|" & ors!IMPTOTALVENTA & "|" & ors!UBL & "|" & ors!CUSTOMDOC & "|"
+            ors.MoveNext
         Loop
 
     End If
@@ -4985,12 +4985,12 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoCab = Nothing
     
     'DIRECCION
-    oRS.MoveFirst
+    ors.MoveFirst
     sCadena = ""
-    Do While Not oRS.EOF
+    Do While Not ors.EOF
         'sCadena = sCadena & oRS!ACA1 & "|" & oRS!ACA2 & "|" & oRS!ACA3 & "|" & oRS!ACA4 & "|" & oRS!PAIS & "|" & oRS!UBIGEO & "|" & oRS!dir & "|" & oRS!PAIS1 & "|" & oRS!UBIGEO1 & "|" & oRS!dir1 & "|"
-        sCadena = sCadena & oRS!ACA1 & "|" & oRS!ACA2 & "|" & oRS!ACA3 & "|" & oRS!ACA4 & "|" & oRS!ACA5 & "|" & oRS!PAIS & "|" & oRS!UBIGEO & "|" & oRS!dir & "|" & oRS!PAIS1 & "|" & oRS!UBIGEO1 & "|" & oRS!dir1 & "|"
-        oRS.MoveNext
+        sCadena = sCadena & ors!ACA1 & "|" & ors!ACA2 & "|" & ors!ACA3 & "|" & ors!ACA4 & "|" & ors!ACA5 & "|" & ors!PAIS & "|" & ors!UBIGEO & "|" & ors!dir & "|" & ors!PAIS1 & "|" & ors!UBIGEO1 & "|" & ors!dir1 & "|"
+        ors.MoveNext
     Loop
     
     'Escribimos LINEAS
@@ -5002,7 +5002,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     
     Dim oRSdet As ADODB.Recordset
 
-    Set oRSdet = oRS.NextRecordset
+    Set oRSdet = ors.NextRecordset
    
     sCadena = ""
     Dim c As Integer
@@ -5054,7 +5054,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoDet = Nothing
     
     Dim orsTri As ADODB.Recordset
-    Set orsTri = oRS.NextRecordset
+    Set orsTri = ors.NextRecordset
     
     sCadena = ""
     c = 1
@@ -5077,7 +5077,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoTri = Nothing
     
     Dim orsLey As ADODB.Recordset
-    Set orsLey = oRS.NextRecordset
+    Set orsLey = ors.NextRecordset
     
     c = 1
     sCadena = ""
@@ -5098,7 +5098,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     If cTipoDocto = "F" And LOC_TIPMOV = 10 Then
             'PAG
             Dim orsPAG As ADODB.Recordset
-            Set orsPAG = oRS.NextRecordset
+            Set orsPAG = ors.NextRecordset
             
             c = 1
             sCadena = ""
@@ -5118,7 +5118,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
             
             'DPA
             Dim orsDPA As ADODB.Recordset
-            Set orsDPA = oRS.NextRecordset
+            Set orsDPA = ors.NextRecordset
             If UCase(xFormaPago) = "CREDITO" Or UCase(xFormaPago) = "CRÉDITO" Then
             If LK_CODCIA = "01" Then
                Set ArchivoDPA = obj_FSO.CreateTextFile(Leer_Ini(App.Path & "\config.ini", "CARPETA", "C:\") + sARCHIVOdpa, True)
