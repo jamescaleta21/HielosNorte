@@ -117,6 +117,7 @@ Public pCantidad As Integer
 Public pIDREPARTO As Integer
 Public pREPARTIDOR As String
 Public pOBS As String
+Public pVendedores As String
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 If KeyCode = vbKeyEscape Then Unload Me
@@ -152,6 +153,9 @@ Private Sub Form_Load()
             Case "pOBS"
                 objParam.AddCurrentValue pOBS
 
+            Case "pVENDEDORES"
+                objParam.AddCurrentValue pVendedores
+
         End Select
 
     Next
@@ -178,6 +182,9 @@ Private Sub Form_Load()
 
             Case "pOBS"
                 objParam.AddCurrentValue pOBS
+
+            Case "pVENDEDORES"
+                objParam.AddCurrentValue pVendedores
 
         End Select
 

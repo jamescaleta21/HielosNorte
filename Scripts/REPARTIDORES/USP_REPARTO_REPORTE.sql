@@ -11,8 +11,8 @@ BEGIN
 END;
 GO
 /*
-exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',9
-select * from pedido
+exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',19
+exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',20
 */
 CREATE PROCEDURE [dbo].[USP_REPARTO_REPORTE]
     @CODCIA CHAR(2),
@@ -22,8 +22,48 @@ WITH ENCRYPTION
 AS
 SET NOCOUNT ON;
 
+DECLARE @TBLVENDEDOR TABLE
+(
+    VENDEDOR VARCHAR(100)
+);
+
+INSERT INTO @TBLVENDEDOR
+(
+    VENDEDOR
+)
+SELECT DISTINCT
+       v.VEM_NOMBRE
+FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
+    INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK)
+        ON rc.idReparto = rd.idReparto
+           AND rc.codCia = rd.codCia
+    INNER JOIN dbo.VEMAEST v WITH (NOLOCK)
+        ON rd.codCia = v.VEM_CODCIA
+           AND rd.idVendedor = v.VEM_CODVEN
+WHERE rc.idReparto = @IDREPARTO
+      AND rc.codCia = @CODCIA;
+
+
+DECLARE @resultado VARCHAR(100);
+
+-- Inicializar la variable
+SET @resultado = '';
+
+-- Concatenar los valores
+SELECT @resultado = @resultado + CASE
+                                     WHEN RTRIM(LTRIM(@resultado)) = '' THEN
+                                         ''
+                                     ELSE
+                                         ', '
+                                 END + RTRIM(LTRIM(VENDEDOR))
+FROM @TBLVENDEDOR;
+
+
+
+
 SELECT COUNT(p.idpedido) AS cant,
-       SUM(p.total) AS total
+       SUM(p.total) AS total,
+       @resultado AS ListaVendedores
 FROM PEDIDO p
     INNER JOIN dbo.REPARTO_DET rd
         ON rd.codCia = @CODCIA
@@ -34,6 +74,7 @@ FROM PEDIDO p
 WHERE rd.idReparto = @IDREPARTO
       AND COALESCE(p.ANULADO, 0) = 0
       AND rc.fecha = @FECHA;
+
 
 SELECT COALESCE(CAST(c.CLI_PRECIOS AS VARCHAR(10)), '') AS orden,
        p.idpedido AS ide,
@@ -93,85 +134,148 @@ GROUP BY p.idpedido,
 ORDER BY p.idpedido;
 
 --RESUMEN
-declare @TBLZONAS TABLE(DESCRIPCION VARCHAR(1000),IDSUBRUTA TINYINT)
-DECLARE @INI TINYINT, @FIN TINYINT, @STRFINAL VARCHAR(1000), @IDSUBRUTA INT
-DECLARE @TBLDISTINCT TABLE(IDSUBRUTA TINYINT, DESCRIPCION VARCHAR(100), INDICE TINYINT IDENTITY)
+DECLARE @TBLZONAS TABLE
+(
+    DESCRIPCION VARCHAR(1000),
+    IDSUBRUTA TINYINT
+);
+DECLARE @INI TINYINT,
+        @FIN TINYINT,
+        @STRFINAL VARCHAR(1000),
+        @IDSUBRUTA INT;
+DECLARE @TBLDISTINCT TABLE
+(
+    IDSUBRUTA TINYINT,
+    DESCRIPCION VARCHAR(100),
+    INDICE TINYINT IDENTITY
+);
 
 
-SET @STRFINAL = ''
+SET @STRFINAL = '';
 
 
-	INSERT INTO @TBLZONAS(DESCRIPCION,IDSUBRUTA)
-	select distinct RTRIM(LTRIM(t.TAB_NOMLARGO)),p.IDSUBRUTA
-	FROM PEDIDO p with (nolock)
-	INNER JOIN dbo.CLIENTES c WITH (NOLOCK)
-		ON p.idcliente = c.CLI_CODCLIE
-		   AND c.CLI_CODCIA = @CODCIA
-		 INNER JOIN TABLAS t WITH (NOLOCK) ON c.CLI_ZONA_NEW = t.TAB_NUMTAB AND t.TAB_TIPREG = 35 AND t.TAB_CODCIA = '00'      
-		 INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK) ON RD.codCia = @CODCIA AND RD.idPedido = P.idpedido
-	  WHERE RD.idReparto = @IDREPARTO
-	  AND COALESCE(p.ANULADO, 0) = 0
-	  AND p.fecha = @FECHA
+INSERT INTO @TBLZONAS
+(
+    DESCRIPCION,
+    IDSUBRUTA
+)
+SELECT DISTINCT
+       RTRIM(LTRIM(t.TAB_NOMLARGO)),
+       p.IDSUBRUTA
+FROM PEDIDO p WITH (NOLOCK)
+    INNER JOIN dbo.CLIENTES c WITH (NOLOCK)
+        ON p.idcliente = c.CLI_CODCLIE
+           AND c.CLI_CODCIA = @CODCIA
+    INNER JOIN TABLAS t WITH (NOLOCK)
+        ON c.CLI_ZONA_NEW = t.TAB_NUMTAB
+           AND t.TAB_TIPREG = 35
+           AND t.TAB_CODCIA = '00'
+    INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK)
+        ON rd.codCia = @CODCIA
+           AND rd.idPedido = p.idpedido
+WHERE rd.idReparto = @IDREPARTO
+      AND COALESCE(p.ANULADO, 0) = 0
+      AND p.fecha = @FECHA;
 
-	  /*
+/*
 	  exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',7
 	  */
-	 
-              
-     INSERT INTO @TBLDISTINCT(IDSUBRUTA)
-     SELECT DISTINCT IDSUBRUTA FROM @TBLZONAS
 
-	SELECT @INI = MIN(INDICE) FROM @TBLDISTINCT
-	SELECT @FIN = mAX(INDICE) FROM @TBLDISTINCT
 
-	WHILE @INI <= @FIN
-	BEGIN
-		SELECT TOP 1 @IDSUBRUTA = IDSUBRUTA FROM @TBLDISTINCT WHERE INDICE = @INI
+INSERT INTO @TBLDISTINCT
+(
+    IDSUBRUTA
+)
+SELECT DISTINCT
+       IDSUBRUTA
+FROM @TBLZONAS;
 
-		SELECT @STRFINAL = STUFF((SELECT ', ' + descripcion FROM @TBLZONAS WHERE IDSUBRUTA = @IDSUBRUTA
-		FOR XML PATH('')),1,1, '')
+SELECT @INI = MIN(INDICE)
+FROM @TBLDISTINCT;
+SELECT @FIN = MAX(INDICE)
+FROM @TBLDISTINCT;
 
-		UPDATE @TBLDISTINCT SET DESCRIPCION = @STRFINAL WHERE INDICE = @INI
+WHILE @INI <= @FIN
+BEGIN
+    SELECT TOP 1
+           @IDSUBRUTA = IDSUBRUTA
+    FROM @TBLDISTINCT
+    WHERE INDICE = @INI;
 
-		SET @INI = @INI + 1
-	END
-              
-    SELECT 
-           RTRIM(LTRIM(a.ART_NOMBRE)) AS prod,
-           SUM(pd.cantidad) AS cant,
-           SUM(pd.importe) AS imp,
-           p.fecha AS fecha,
-           RTRIM(LTRIM(v.VEM_NOMBRE)) AS ven,
-           RTRIM(ltrim(c.CLI_PRENDA)) as dia,
-           RTRIM(LTRIM(p.IDSUBRUTA)) AS subruta,
-           td.DESCRIPCION as zona
-    FROM
-	dbo.REPARTO_CAB rc WITH (NOLOCK) 
-	INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK) ON rc.idReparto = rd.idReparto AND rc.codCia = rd.codCia
-	INNER JOIN dbo.PEDIDO p WITH (NOLOCK) ON rd.idPedido = p.idpedido AND rd.codCia = @CODCIA
-        INNER JOIN dbo.CLIENTES c WITH (NOLOCK)
-            ON p.idcliente = c.CLI_CODCLIE
-               AND c.CLI_CODCIA = @CODCIA
-        INNER JOIN dbo.PEDIDO_DETALLE pd WITH (NOLOCK)
-            ON pd.idpedido = p.idpedido
-        INNER JOIN dbo.ARTI a WITH (NOLOCK)
-            ON pd.idproducto = a.ART_KEY
-               AND a.ART_CODCIA = @CODCIA
-        INNER JOIN dbo.VEMAEST v WITH (NOLOCK)
-            ON rc.idRepartidor = v.VEM_CODVEN
-               AND v.VEM_CODCIA = @CODCIA   
-        INNER JOIN TABLAS t WITH (NOLOCK) ON c.CLI_ZONA_NEW = t.TAB_NUMTAB AND t.TAB_TIPREG = 35 AND t.TAB_CODCIA = '00'           
-        INNER JOIN @TBLDISTINCT td ON p.IDSUBRUTA = td.IDSUBRUTA
-		
-    WHERE RD.idReparto = @IDREPARTO
-          AND COALESCE(p.ANULADO, 0) = 0
-          AND p.fecha = @FECHA
-		  AND rc.codCia = @CODCIA
-    GROUP BY a.ART_NOMBRE,
-             p.fecha
-            ,v.VEM_NOMBRE
-            ,c.CLI_PRENDA
-            ,p.IDSUBRUTA
-            ,t.TAB_NOMLARGO
-            ,td.DESCRIPCION
+    SELECT @STRFINAL = STUFF(
+                       (
+                           SELECT ', ' + DESCRIPCION
+                           FROM @TBLZONAS
+                           WHERE IDSUBRUTA = @IDSUBRUTA
+                           FOR XML PATH('')
+                       ),
+                       1,
+                       1,
+                       ''
+                            );
+
+    UPDATE @TBLDISTINCT
+    SET DESCRIPCION = @STRFINAL
+    WHERE INDICE = @INI;
+
+    SET @INI = @INI + 1;
+END;
+
+SELECT RTRIM(LTRIM(a.ART_NOMBRE)) AS prod,
+       SUM(pd.cantidad) AS cant,
+       SUM(pd.importe) AS imp,
+       p.fecha AS fecha,
+       RTRIM(LTRIM(v.VEM_NOMBRE)) AS ven,
+       RTRIM(LTRIM(c.CLI_PRENDA)) AS dia,
+       RTRIM(LTRIM(p.IDSUBRUTA)) AS subruta,
+       td.DESCRIPCION AS zona
+FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
+    INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK)
+        ON rc.idReparto = rd.idReparto
+           AND rc.codCia = rd.codCia
+    INNER JOIN dbo.PEDIDO p WITH (NOLOCK)
+        ON rd.idPedido = p.idpedido
+           AND rd.codCia = @CODCIA
+    INNER JOIN dbo.CLIENTES c WITH (NOLOCK)
+        ON p.idcliente = c.CLI_CODCLIE
+           AND c.CLI_CODCIA = @CODCIA
+    INNER JOIN dbo.PEDIDO_DETALLE pd WITH (NOLOCK)
+        ON pd.idpedido = p.idpedido
+    INNER JOIN dbo.ARTI a WITH (NOLOCK)
+        ON pd.idproducto = a.ART_KEY
+           AND a.ART_CODCIA = @CODCIA
+    INNER JOIN dbo.VEMAEST v WITH (NOLOCK)
+        ON rc.idRepartidor = v.VEM_CODVEN
+           AND v.VEM_CODCIA = @CODCIA
+    INNER JOIN TABLAS t WITH (NOLOCK)
+        ON c.CLI_ZONA_NEW = t.TAB_NUMTAB
+           AND t.TAB_TIPREG = 35
+           AND t.TAB_CODCIA = '00'
+    INNER JOIN @TBLDISTINCT td
+        ON p.IDSUBRUTA = td.IDSUBRUTA
+WHERE rd.idReparto = @IDREPARTO
+      AND COALESCE(p.ANULADO, 0) = 0
+      AND p.fecha = @FECHA
+      AND rc.codCia = @CODCIA
+GROUP BY a.ART_NOMBRE,
+         p.fecha,
+         v.VEM_NOMBRE,
+         c.CLI_PRENDA,
+         p.IDSUBRUTA,
+         t.TAB_NOMLARGO,
+         td.DESCRIPCION;
+
+
+
+
+
+
+
+
 GO
+
+
+/*
+exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',19
+exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',20
+*/

@@ -138,7 +138,7 @@ Begin VB.Form frmRepartos
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   444989441
+         Format          =   205848577
          CurrentDate     =   45614
       End
       Begin VB.TextBox txtObs 
@@ -253,26 +253,6 @@ Begin VB.Form frmRepartos
             Top             =   2280
             Width           =   750
          End
-         Begin MSComctlLib.ListView lvPedidos 
-            Height          =   4695
-            Left            =   120
-            TabIndex        =   3
-            Top             =   1800
-            Width           =   5895
-            _ExtentX        =   10398
-            _ExtentY        =   8281
-            View            =   3
-            LabelEdit       =   1
-            LabelWrap       =   -1  'True
-            HideSelection   =   0   'False
-            HideColumnHeaders=   -1  'True
-            _Version        =   393217
-            ForeColor       =   -2147483640
-            BackColor       =   -2147483643
-            BorderStyle     =   1
-            Appearance      =   1
-            NumItems        =   0
-         End
          Begin MSDataListLib.DataCombo DatRepartidor 
             Height          =   315
             Left            =   1800
@@ -296,6 +276,26 @@ Begin VB.Form frmRepartos
             _Version        =   393216
             Style           =   2
             Text            =   ""
+         End
+         Begin MSComctlLib.ListView lvPedidos 
+            Height          =   4695
+            Left            =   120
+            TabIndex        =   3
+            Top             =   1800
+            Width           =   5895
+            _ExtentX        =   10398
+            _ExtentY        =   8281
+            View            =   3
+            LabelEdit       =   1
+            LabelWrap       =   -1  'True
+            HideSelection   =   0   'False
+            HideColumnHeaders=   -1  'True
+            _Version        =   393217
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BorderStyle     =   1
+            Appearance      =   1
+            NumItems        =   0
          End
          Begin VB.Label Label1 
             AutoSize        =   -1  'True
@@ -507,17 +507,17 @@ Private Sub cmdDel_Click()
 
     End If
     
-   Dim i As Integer
+   Dim I As Integer
 
     ' Recorre los elementos desde el final hacia el principio
     ' para evitar problemas al eliminar elementos mientras se recorre la colección.
-    For i = Me.lvData.ListItems.count To 1 Step -1
+    For I = Me.lvData.ListItems.count To 1 Step -1
         ' Verifica si el elemento está seleccionado (Check = True)
-        If Me.lvData.ListItems(i).Checked = True Then
+        If Me.lvData.ListItems(I).Checked = True Then
             ' Elimina el elemento del ListView
-            Me.lvData.ListItems.Remove i
+            Me.lvData.ListItems.Remove I
         End If
-    Next i
+    Next I
    SumarPedidosAsignados
 End Sub
 
@@ -538,7 +538,7 @@ Private Sub cmdDelPedido_Click()
     
     Dim strMotivo As String
 
-    strMotivo = InputBox("Ingrese el Motivo dee Eliminació:", Pub_Titulo)
+    strMotivo = InputBox("Ingrese el Motivo dee Eliminación:", Pub_Titulo)
     
     If Len(Trim(strMotivo)) = 0 Then Exit Sub
 
@@ -587,14 +587,14 @@ If Me.DatVendedor.BoundText <> -1 Then
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-    Dim orsD As ADODB.Recordset
-    Set orsD = oCmdEjec.Execute
+    Dim ORSd As ADODB.Recordset
+    Set ORSd = oCmdEjec.Execute
     
-    Do While Not orsD.EOF
-        Set itemX = Me.lvPedidos.ListItems.Add(, , orsD!idpedido)
-        itemX.SubItems(1) = orsD!Nombre
-        itemX.SubItems(2) = orsD!peso
-        orsD.MoveNext
+    Do While Not ORSd.EOF
+        Set itemX = Me.lvPedidos.ListItems.Add(, , ORSd!idpedido)
+        itemX.SubItems(1) = ORSd!Nombre
+        itemX.SubItems(2) = ORSd!peso
+        ORSd.MoveNext
     Loop
 End If
 End Sub
@@ -605,7 +605,7 @@ End Sub
 
 Private Sub Form_Load()
 Me.dtpFechaFiltro.Value = LK_FECHA_DIA
-configurarLV
+ConfigurarLV
 cargarRepartidoresVendedores
 cargarRepartos
 Desactivar
@@ -615,7 +615,7 @@ Me.Toolbar1.Buttons(4).Enabled = False
 CenterMe Me
 End Sub
 
-Private Sub configurarLV()
+Private Sub ConfigurarLV()
 
     With Me.lvPedidos
         .HideColumnHeaders = False
@@ -661,7 +661,7 @@ oCmdEjec.CommandType = adCmdStoredProc
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
 
 'Dim ors As ADODB.Recordset
-Dim orsT As ADODB.Recordset
+Dim ORSt As ADODB.Recordset
 
 Set orsRepartidor = oCmdEjec.Execute
 
@@ -670,11 +670,11 @@ Me.DatRepartidor.ListField = orsRepartidor(1).Name
 Me.DatRepartidor.BoundColumn = orsRepartidor(0).Name
 Me.DatRepartidor.BoundText = -1
 
-Set orsT = orsRepartidor.NextRecordset
+Set ORSt = orsRepartidor.NextRecordset
 
-Set Me.DatVendedor.RowSource = orsT
-Me.DatVendedor.ListField = orsT(1).Name
-Me.DatVendedor.BoundColumn = orsT(0).Name
+Set Me.DatVendedor.RowSource = ORSt
+Me.DatVendedor.ListField = ORSt(1).Name
+Me.DatVendedor.BoundColumn = ORSt(0).Name
 Me.DatVendedor.BoundText = -1
 
 
@@ -684,12 +684,18 @@ Private Sub lvListado_ItemClick(ByVal Item As MSComctlLib.ListItem)
 Me.Toolbar1.Buttons(3).Enabled = True
 End Sub
 
+Private Sub lvPedidos_DblClick()
+frmRepartos_Pedido.gIDpedido = Me.lvPedidos.SelectedItem.Text
+frmRepartos_Pedido.Show vbModal
+End Sub
+
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
 
         Case 1 'Nuevo
             Me.SSTReparto.tab = 0
+            Me.SSTReparto.TabEnabled(1) = False
             Me.Toolbar1.Buttons(1).Enabled = False
             Me.Toolbar1.Buttons(2).Enabled = True
             Me.Toolbar1.Buttons(3).Enabled = False
@@ -781,6 +787,11 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                 End If
 
                 limpiarPantalla
+                Me.SSTReparto.TabEnabled(1) = True
+                Me.Toolbar1.Buttons(1).Enabled = True
+                Me.Toolbar1.Buttons(2).Enabled = False
+                Me.Toolbar1.Buttons(3).Enabled = False
+                Me.Toolbar1.Buttons(4).Enabled = False
 
             End If
 
@@ -797,7 +808,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             Set orsDataResumen = oCmdEjec.Execute
             
             Dim orsDataMain As ADODB.Recordset
-            Dim orsDataRes As ADODB.Recordset
+
+            Dim orsDataRes  As ADODB.Recordset
             
             Set orsDataMain = orsDataResumen.NextRecordset
             Set orsDataRes = orsDataMain.NextRecordset
@@ -809,10 +821,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             frmRepartos_View.pIDREPARTO = Me.lvListado.SelectedItem.Tag
             frmRepartos_View.pREPARTIDOR = Me.lvListado.SelectedItem.SubItems(1)
             frmRepartos_View.pCantidad = orsDataResumen!cant
+            frmRepartos_View.pVendedores = orsDataResumen!ListaVendedores
             frmRepartos_View.Caption = "Reparto Nro: " & Me.lvListado.SelectedItem.Tag
             frmRepartos_View.Show vbModal
 
         Case 4
+            Me.SSTReparto.TabEnabled(1) = True
             Me.Toolbar1.Buttons(1).Enabled = True
             Me.Toolbar1.Buttons(2).Enabled = False
             Me.Toolbar1.Buttons(3).Enabled = False
@@ -839,17 +853,17 @@ Me.lvListado.ListItems.Clear
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , Me.dtpFechaFiltro.Value)
     
-    Dim orsD As ADODB.Recordset
-    Set orsD = oCmdEjec.Execute
+    Dim ORSd As ADODB.Recordset
+    Set ORSd = oCmdEjec.Execute
     
-    Do While Not orsD.EOF
-        Set itemX = Me.lvListado.ListItems.Add(, , orsD!reparto)
-        itemX.Tag = orsD!idreparto
-        itemX.SubItems(1) = orsD!repartidor
-        itemX.SubItems(2) = orsD!fecha
-        itemX.SubItems(3) = orsD!cloud
-        itemX.SubItems(4) = orsD!obs
-        orsD.MoveNext
+    Do While Not ORSd.EOF
+        Set itemX = Me.lvListado.ListItems.Add(, , ORSd!reparto)
+        itemX.Tag = ORSd!idreparto
+        itemX.SubItems(1) = ORSd!repartidor
+        itemX.SubItems(2) = ORSd!fecha
+        itemX.SubItems(3) = ORSd!cloud
+        itemX.SubItems(4) = ORSd!obs
+        ORSd.MoveNext
     Loop
 
 End Sub
