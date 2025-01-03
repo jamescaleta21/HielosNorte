@@ -81,6 +81,7 @@ Form=frmCampania.frm
 Module=modMain; modMain.bas
 Form=frmRepartos.frm
 Form=frmRepartos_View.frm
+Form=frmRepartos_Pedido.frm
 IconForm="RCRYSTAL"
 Startup="Splash"
 HelpFile=""

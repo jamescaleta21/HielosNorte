@@ -47,13 +47,13 @@ IF
     FROM dbo.REPARTO_CAB rc
     WHERE rc.codCia = @CODCIA
           AND rc.idReparto = @IDREPARTO
-) IS null
+) IS NOT NULL
 BEGIN
     SET @EXITO = '-2=El reparto ya fue eliminado.';
     GOTO Terminar;
 END;
 
---BEGIN TRAN;
+BEGIN TRAN;
 BEGIN TRY
 
     UPDATE dbo.REPARTO_CAB
@@ -64,16 +64,26 @@ BEGIN TRY
     WHERE codCia = @CODCIA
           AND idReparto = @IDREPARTO;
 
+    UPDATE dbo.PEDIDO
+    SET idRepartidor = NULL
+    WHERE idpedido IN
+          (
+              SELECT DISTINCT
+                     rd.idPedido
+              FROM dbo.REPARTO_DET rd
+              WHERE rd.idReparto = @IDREPARTO
+          );
+
 END TRY
 BEGIN CATCH
     SET @EXITO = RTRIM(LTRIM(STR(ERROR_NUMBER()))) + '=' + ERROR_MESSAGE();
-    --ROLLBACK TRAN;
+    ROLLBACK TRAN;
     GOTO Terminar;
 END CATCH;
 
 
---IF @@TRANCOUNT > 0
---    COMMIT;
+IF @@TRANCOUNT > 0
+    COMMIT;
 
 Terminar:
 SELECT @EXITO;
