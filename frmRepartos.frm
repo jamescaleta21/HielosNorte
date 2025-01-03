@@ -138,7 +138,7 @@ Begin VB.Form frmRepartos
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   205848577
+         Format          =   188612609
          CurrentDate     =   45614
       End
       Begin VB.TextBox txtObs 
@@ -469,7 +469,9 @@ If MsgBox("¿Está seguro que desea cerrar los Repartos?.", vbQuestion + vbYesNo, 
     LimpiaParametros oCmdEjec
     MousePointer = vbHourglass
     oCmdEjec.CommandText = "[dbo].[USP_REPARTO_SYNC]"
-    oCmdEjec.CommandTimeout = 100
+    oCmdEjec.CommandTimeout = 1000
+     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDREPARTO", adInteger, adParamInput, , Me.lvListado.SelectedItem.Tag)
 
     Dim orsExe As ADODB.Recordset
 
