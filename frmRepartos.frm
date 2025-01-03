@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
 Begin VB.Form frmRepartos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Asignar Vendedores a Repartidores"
@@ -28,15 +28,15 @@ Begin VB.Form frmRepartos
    ScaleWidth      =   17310
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   660
+      Height          =   630
       Left            =   0
       TabIndex        =   1
       Top             =   0
       Width           =   17310
       _ExtentX        =   30533
-      _ExtentY        =   1164
-      ButtonWidth     =   1667
-      ButtonHeight    =   1005
+      _ExtentY        =   1111
+      ButtonWidth     =   1482
+      ButtonHeight    =   953
       AllowCustomize  =   0   'False
       Appearance      =   1
       _Version        =   393216
@@ -66,20 +66,23 @@ Begin VB.Form frmRepartos
       _ExtentY        =   15478
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Reparto"
       TabPicture(0)   =   "frmRepartos.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label4"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Frame1"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Frame2"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "txtObs"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).ControlCount=   4
       TabCaption(1)   =   "Listado"
       TabPicture(1)   =   "frmRepartos.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label5"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "cmdCloud"
@@ -96,7 +99,7 @@ Begin VB.Form frmRepartos
       Begin VB.CommandButton cmdDelPedido 
          Caption         =   "Del"
          Height          =   360
-         Left            =   16080
+         Left            =   -58920
          TabIndex        =   25
          Top             =   1440
          Width           =   750
@@ -104,14 +107,14 @@ Begin VB.Form frmRepartos
       Begin VB.CommandButton cmdBuscar 
          Caption         =   "Buscar"
          Height          =   360
-         Left            =   3720
+         Left            =   -71280
          TabIndex        =   22
          Top             =   480
          Width           =   990
       End
       Begin MSComctlLib.ListView lvListado 
          Height          =   7455
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   19
          Top             =   1080
          Width           =   15735
@@ -131,26 +134,26 @@ Begin VB.Form frmRepartos
       End
       Begin MSComCtl2.DTPicker dtpFechaFiltro 
          Height          =   315
-         Left            =   1080
+         Left            =   -73920
          TabIndex        =   18
          Top             =   600
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   188612609
+         Format          =   41746433
          CurrentDate     =   45614
       End
       Begin VB.TextBox txtObs 
          Height          =   975
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   14
          Top             =   7680
          Width           =   14535
       End
       Begin VB.Frame Frame2 
          Height          =   6975
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   9
          Top             =   480
          Width           =   9615
@@ -233,7 +236,7 @@ Begin VB.Form frmRepartos
       End
       Begin VB.Frame Frame1 
          Height          =   6975
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   2
          Top             =   480
          Width           =   6855
@@ -331,7 +334,7 @@ Begin VB.Form frmRepartos
       Begin VB.CommandButton cmdCloud 
          Caption         =   "Cerrar Repartos"
          Height          =   480
-         Left            =   9360
+         Left            =   -65640
          TabIndex        =   26
          Top             =   480
          Width           =   1695
@@ -341,7 +344,7 @@ Begin VB.Form frmRepartos
          BackStyle       =   0  'Transparent
          Caption         =   "Fecha:"
          Height          =   195
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   17
          Top             =   660
          Width           =   570
@@ -351,7 +354,7 @@ Begin VB.Form frmRepartos
          BackStyle       =   0  'Transparent
          Caption         =   "Observaciones:"
          Height          =   195
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   10
          Top             =   7680
          Width           =   1335
@@ -569,7 +572,7 @@ End Sub
 
 Private Sub DatRepartidor_Change()
 Me.lvPedidos.ListItems.Clear
-Me.lblPeso.Caption = "0.00"
+Me.lblpeso.Caption = "0.00"
 Me.lblCapacidadVehiculo.Caption = "0.00"
 Me.lvData.ListItems.Clear
 If Me.DatRepartidor.BoundText <> -1 Then
@@ -663,7 +666,7 @@ oCmdEjec.CommandType = adCmdStoredProc
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
 
 'Dim ors As ADODB.Recordset
-Dim ORSt As ADODB.Recordset
+Dim orsT As ADODB.Recordset
 
 Set orsRepartidor = oCmdEjec.Execute
 
@@ -672,11 +675,11 @@ Me.DatRepartidor.ListField = orsRepartidor(1).Name
 Me.DatRepartidor.BoundColumn = orsRepartidor(0).Name
 Me.DatRepartidor.BoundText = -1
 
-Set ORSt = orsRepartidor.NextRecordset
+Set orsT = orsRepartidor.NextRecordset
 
-Set Me.DatVendedor.RowSource = ORSt
-Me.DatVendedor.ListField = ORSt(1).Name
-Me.DatVendedor.BoundColumn = ORSt(0).Name
+Set Me.DatVendedor.RowSource = orsT
+Me.DatVendedor.ListField = orsT(1).Name
+Me.DatVendedor.BoundColumn = orsT(0).Name
 Me.DatVendedor.BoundText = -1
 
 
@@ -730,6 +733,11 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                 Exit Sub
 
             End If
+            
+            If val(Me.lblpeso.Caption) > val(Me.lblCapacidadVehiculo.Caption) Then
+                MsgBox "Carga superada del vehiculo.", vbInformation, Pub_Titulo
+                Exit Sub
+            End If
 
             Dim xDetalle As String
 
@@ -747,7 +755,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDREPARTIDOR", adInteger, adParamInput, , Me.DatRepartidor.BoundText)
             
-            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@PESO", adDouble, adParamInput, , Me.lblPeso.Caption)
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@PESO", adDouble, adParamInput, , Me.lblpeso.Caption)
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adVarChar, adParamInput, 20, LK_CODUSU)
             'AGREGANDO EL DETALLE
             
@@ -879,7 +887,7 @@ cPeso = 0
        cPeso = cPeso + lvItem.SubItems(3)
 
     Next
-    Me.lblPeso.Caption = cPeso
+    Me.lblpeso.Caption = cPeso
 End Sub
 
 Private Sub Desactivar()
