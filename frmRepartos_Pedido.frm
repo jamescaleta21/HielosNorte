@@ -3,7 +3,7 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmRepartos_Pedido 
    BorderStyle     =   4  'Fixed ToolWindow
    Caption         =   "Detalles de Pedido:"
-   ClientHeight    =   4950
+   ClientHeight    =   5670
    ClientLeft      =   45
    ClientTop       =   315
    ClientWidth     =   10350
@@ -20,18 +20,88 @@ Begin VB.Form frmRepartos_Pedido
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   4950
+   ScaleHeight     =   5670
    ScaleWidth      =   10350
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.Frame Frame1 
+      Height          =   1815
+      Left            =   120
+      TabIndex        =   1
+      Top             =   120
+      Width           =   10095
+      Begin VB.Label lblObs 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BorderStyle     =   1  'Fixed Single
+         ForeColor       =   &H80000008&
+         Height          =   345
+         Left            =   2760
+         TabIndex        =   7
+         Top             =   1200
+         Width           =   3945
+      End
+      Begin VB.Label lblDireccion 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BorderStyle     =   1  'Fixed Single
+         ForeColor       =   &H80000008&
+         Height          =   345
+         Left            =   2760
+         TabIndex        =   6
+         Top             =   720
+         Width           =   3945
+      End
+      Begin VB.Label lblCliente 
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000005&
+         BorderStyle     =   1  'Fixed Single
+         ForeColor       =   &H80000008&
+         Height          =   345
+         Left            =   2760
+         TabIndex        =   5
+         Top             =   240
+         Width           =   3945
+      End
+      Begin VB.Label Label3 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Observación:"
+         Height          =   195
+         Left            =   1320
+         TabIndex        =   4
+         Top             =   1080
+         Width           =   1140
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Dirección:"
+         Height          =   195
+         Left            =   1320
+         TabIndex        =   3
+         Top             =   600
+         Width           =   870
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cliente:"
+         Height          =   195
+         Left            =   1560
+         TabIndex        =   2
+         Top             =   240
+         Width           =   675
+      End
+   End
    Begin MSComctlLib.ListView lvDetalle 
-      Height          =   4575
+      Height          =   3375
       Left            =   120
       TabIndex        =   0
-      Top             =   240
+      Top             =   2040
       Width           =   10095
       _ExtentX        =   17806
-      _ExtentY        =   8070
+      _ExtentY        =   5953
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
@@ -85,6 +155,10 @@ Private Sub cargarPedido()
 
     Set orsDatos = oCmdEjec.Execute
     
+    Me.lblCliente.Caption = orsDatos!cliente
+    Me.lblDireccion.Caption = orsDatos!dir
+    Me.lblObs.Caption = orsDatos!obs
+    
     Dim ORSt As ADODB.Recordset
     Set ORSt = orsDatos.NextRecordset
     
@@ -98,3 +172,4 @@ Private Sub cargarPedido()
     Loop
 
 End Sub
+
