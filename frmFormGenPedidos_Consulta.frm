@@ -110,7 +110,7 @@ Begin VB.Form frmFormGenPedidos_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   205258753
+         Format          =   203358209
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 

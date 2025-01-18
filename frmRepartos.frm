@@ -135,7 +135,7 @@ Begin VB.Form frmRepartos
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   188153857
+         Format          =   418316289
          CurrentDate     =   45614
       End
       Begin VB.TextBox txtObs 
@@ -650,6 +650,7 @@ Private Sub ConfigurarLV()
         .ColumnHeaders.Add , , "Fecha"
         .ColumnHeaders.Add , , "Cerrado"
         .ColumnHeaders.Add , , "obs", 0
+        .ColumnHeaders.Add , , "placa", 0
 
     End With
 
@@ -733,6 +734,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             If val(Me.lblPeso.Caption) > val(Me.lblCapacidadVehiculo.Caption) Then
                 MsgBox "Carga superada del vehiculo.", vbInformation, Pub_Titulo
                 Exit Sub
+
             End If
 
             Dim xDetalle As String
@@ -802,13 +804,14 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             End If
 
         Case 3
+            MousePointer = vbHourglass
             LimpiaParametros oCmdEjec
             oCmdEjec.CommandText = "[dbo].[USP_REPARTO_REPORTE]"
 
             Dim orsDataResumen As ADODB.Recordset
         
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
+            oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , Me.lvListado.SelectedItem.SubItems(2))
             oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDREPARTO", adInteger, adParamInput, , Me.lvListado.SelectedItem.Tag)
             
             Set orsDataResumen = oCmdEjec.Execute
@@ -824,11 +827,13 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             Set frmRepartos_View.pRSdataRes = orsDataRes
             
             frmRepartos_View.pOBS = Me.lvListado.SelectedItem.SubItems(4)
+            frmRepartos_View.pPLACA = Me.lvListado.SelectedItem.SubItems(5)
             frmRepartos_View.pIDREPARTO = Me.lvListado.SelectedItem.Tag
             frmRepartos_View.pREPARTIDOR = Me.lvListado.SelectedItem.SubItems(1)
             frmRepartos_View.pCantidad = orsDataResumen!cant
             frmRepartos_View.pVendedores = orsDataResumen!ListaVendedores
             frmRepartos_View.Caption = "Reparto Nro: " & Me.lvListado.SelectedItem.Tag
+            MousePointer = vbDefault
             frmRepartos_View.Show vbModal
 
         Case 4
@@ -869,6 +874,7 @@ Me.lvListado.ListItems.Clear
         itemX.SubItems(2) = ORSd!fecha
         itemX.SubItems(3) = ORSd!cloud
         itemX.SubItems(4) = ORSd!obs
+        itemX.SubItems(5) = ORSd!placa
         ORSd.MoveNext
     Loop
 

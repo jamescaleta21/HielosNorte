@@ -11,10 +11,10 @@ BEGIN
 END;
 GO
 /*
-exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',19
+exec [dbo].[USP_REPARTO_REPORTE] '01','20250114',57
 exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',20
 */
-CREATE PROCEDURE [dbo].[USP_REPARTO_REPORTE]
+create PROCEDURE [dbo].[USP_REPARTO_REPORTE]
     @CODCIA CHAR(2),
     @FECHA DATE,
     @IDREPARTO INT
@@ -221,14 +221,52 @@ BEGIN
     SET @INI = @INI + 1;
 END;
 
+---	PARTE CLOUD INI
+DECLARE @TABLECLOUD TABLE(idPedido BIGINT, idProducto INT, cantidad INT, entregada INT)
+    DECLARE @IDEMPRESA INT;
+    SELECT TOP 1
+           @IDEMPRESA = e.IdEmpresa
+    FROM dbo.EMPRESA e
+    WHERE e.Activo = 1
+          AND e.Defecto = 1;
+
+   DECLARE @tsql VARCHAR(4000),
+            @openquery VARCHAR(4000),
+            @linkedserver VARCHAR(20)
+    SET @linkedserver = 'SMARTSOFT';
+    SET @openquery = 'SELECT * FROM OPENQUERY(' + @linkedserver + ', ''';
+
+	SET @tsql = 'SELECT rdi.idPedido,rdi.idProducto,rdi.cantidad,rdi.cantidadEntregada' + ' FROM dbo.REPARTO_DET rd' +
+	' INNER JOIN dbo.REPARTO_DET_ITEM rdi ON RD.idReparto = RDI.idReparto AND rd.idEmpresa = rdi.idEmpresa AND rd.idPedido = rdi.idPedido ' + 
+	' WHERE rd.idReparto = ' + CAST(@IDREPARTO AS VARCHAR(10)) + ' and rd.idEmpresa = ' + CAST(@IDEMPRESA AS VARCHAR(10)) + 'order by rdi.idpedido'' );';
+
+	INSERT INTO @TABLECLOUD
+	(
+	    idPedido,
+	    idProducto,
+	    cantidad,
+	    entregada
+	)
+		  	EXEC (@openquery + @tsql);
+			--SELECT * FROM @TABLECLOUD t
+
+----PARTE CLOUD FIN
+
+/*
+exec [dbo].[USP_REPARTO_REPORTE] '01','20250114',57
+*/
+
 SELECT RTRIM(LTRIM(a.ART_NOMBRE)) AS prod,
        SUM(pd.cantidad) AS cant,
        SUM(pd.importe) AS imp,
        p.fecha AS fecha,
-       RTRIM(LTRIM(v.VEM_NOMBRE)) AS ven,
+       COALESCE(V.VEM_PLACA,'') + ' - ' + RTRIM(LTRIM(v.VEM_NOMBRE)) AS ven,
        RTRIM(LTRIM(c.CLI_PRENDA)) AS dia,
        RTRIM(LTRIM(p.IDSUBRUTA)) AS subruta,
        td.DESCRIPCION AS zona
+	   ,RTRIM(LTRIM(c.CLI_NOMBRE)) AS 'cli'
+	   ,c.CLI_CASA_DIREC AS 'dir'
+	   ,SUM(t2.entregada) AS 'entregada'
 FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
     INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK)
         ON rc.idReparto = rd.idReparto
@@ -253,6 +291,7 @@ FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
            AND t.TAB_CODCIA = '00'
     INNER JOIN @TBLDISTINCT td
         ON p.IDSUBRUTA = td.IDSUBRUTA
+		INNER JOIN @TABLECLOUD t2 ON t2.idPedido= p.idpedido_cloud AND t2.idProducto = pd.idproducto
 WHERE rd.idReparto = @IDREPARTO
       AND COALESCE(p.ANULADO, 0) = 0
       AND p.fecha = @FECHA
@@ -260,22 +299,60 @@ WHERE rd.idReparto = @IDREPARTO
 GROUP BY a.ART_NOMBRE,
          p.fecha,
          v.VEM_NOMBRE,
+		 V.VEM_PLACA,
          c.CLI_PRENDA,
          p.IDSUBRUTA,
          t.TAB_NOMLARGO,
-         td.DESCRIPCION;
+         td.DESCRIPCION,RTRIM(LTRIM(c.CLI_NOMBRE)),c.CLI_CASA_DIREC
 
+		 ;
 
+		 SELECT RTRIM(LTRIM(a.ART_NOMBRE)) AS prod,
+       SUM(pd.cantidad) AS cant,
+       SUM(pd.importe) AS imp,
+       p.fecha AS fecha,
+       COALESCE(V.VEM_PLACA,'') + ' - ' + RTRIM(LTRIM(v.VEM_NOMBRE)) AS ven,
+       RTRIM(LTRIM(c.CLI_PRENDA)) AS dia,
+       RTRIM(LTRIM(p.IDSUBRUTA)) AS subruta,
+       td.DESCRIPCION AS zona
+	   ,SUM(t2.entregada) AS 'entregada'
+FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
+    INNER JOIN dbo.REPARTO_DET rd WITH (NOLOCK)
+        ON rc.idReparto = rd.idReparto
+           AND rc.codCia = rd.codCia
+    INNER JOIN dbo.PEDIDO p WITH (NOLOCK)
+        ON rd.idPedido = p.idpedido
+           AND rd.codCia = @CODCIA
+    INNER JOIN dbo.CLIENTES c WITH (NOLOCK)
+        ON p.idcliente = c.CLI_CODCLIE
+           AND c.CLI_CODCIA = @CODCIA
+    INNER JOIN dbo.PEDIDO_DETALLE pd WITH (NOLOCK)
+        ON pd.idpedido = p.idpedido
+    INNER JOIN dbo.ARTI a WITH (NOLOCK)
+        ON pd.idproducto = a.ART_KEY
+           AND a.ART_CODCIA = @CODCIA
+    INNER JOIN dbo.VEMAEST v WITH (NOLOCK)
+        ON rc.idRepartidor = v.VEM_CODVEN
+           AND v.VEM_CODCIA = @CODCIA
+    INNER JOIN TABLAS t WITH (NOLOCK)
+        ON c.CLI_ZONA_NEW = t.TAB_NUMTAB
+           AND t.TAB_TIPREG = 35
+           AND t.TAB_CODCIA = '00'
+    INNER JOIN @TBLDISTINCT td
+        ON p.IDSUBRUTA = td.IDSUBRUTA
+		INNER JOIN @TABLECLOUD t2 ON t2.idPedido= p.idpedido_cloud AND t2.idProducto = pd.idproducto
+WHERE rd.idReparto = @IDREPARTO
+      AND COALESCE(p.ANULADO, 0) = 0
+      AND p.fecha = @FECHA
+      AND rc.codCia = @CODCIA
+GROUP BY a.ART_NOMBRE,
+         p.fecha,
+         v.VEM_NOMBRE,
+		 V.VEM_PLACA,
+         c.CLI_PRENDA,
+         p.IDSUBRUTA,
+         t.TAB_NOMLARGO,
+         td.DESCRIPCION
 
-
-
-
-
-
+		 ;
 GO
-
-
-/*
-exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',19
-exec [dbo].[USP_REPARTO_REPORTE] '01','20241030',20
-*/

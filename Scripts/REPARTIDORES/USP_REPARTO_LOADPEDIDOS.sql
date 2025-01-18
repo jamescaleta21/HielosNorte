@@ -33,7 +33,7 @@ INNER JOIN dbo.PEDIDO_DETALLE pd WITH (NOLOCK) ON p.idpedido = pd.idpedido
         ON p.idcliente = c.CLI_CODCLIE
            AND c.CLI_CODCIA = @CODCIA
 WHERE p.fecha = @FECHA
-      AND p.idvendedor = @IDVENDEDOR AND p.idRepartidor IS null
+      AND p.idvendedor = @IDVENDEDOR AND p.idRepartidor IS NULL AND COALESCE(p.ANULADO,0) = 0
 	  GROUP BY c.CLI_NOMBRE,p.idpedido,p.observacion
 	  ;
 

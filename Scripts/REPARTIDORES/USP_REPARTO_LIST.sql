@@ -25,7 +25,8 @@ SELECT rc.idReparto,
        RTRIM(LTRIM(v.VEM_NOMBRE)) AS 'repartidor',
        CONVERT(VARCHAR(10), rc.fecha, 103) AS 'fecha',
 	   CASE WHEN ISNULL(rc.onCloud,0) = 0 THEN 'NO'ELSE 'SI' END AS 'cloud',
-	   COALESCE(rc.observaciones,'') AS 'obs'
+	   COALESCE(rc.observaciones,'') AS 'obs',
+	   COALESCE(v.VEM_PLACA,'') AS 'placa'
 FROM dbo.REPARTO_CAB rc WITH (NOLOCK)
     INNER JOIN dbo.VEMAEST v WITH (NOLOCK)
         ON rc.codCia = v.VEM_CODCIA

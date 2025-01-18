@@ -30,8 +30,8 @@ Begin VB.Form frmRepartos_View
       _ExtentX        =   36433
       _ExtentY        =   17383
       _Version        =   393216
-      Tabs            =   2
-      TabsPerRow      =   2
+      Tabs            =   4
+      TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Reporte Detallado"
       TabPicture(0)   =   "frmRepartos_View.frx":0000
@@ -44,6 +44,16 @@ Begin VB.Form frmRepartos_View
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "crVisorRes"
       Tab(1).ControlCount=   1
+      TabCaption(2)   =   "Liquidación Detallada por Cliente"
+      TabPicture(2)   =   "frmRepartos_View.frx":0038
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).Control(0)=   "crLiqDetxCliente"
+      Tab(2).ControlCount=   1
+      TabCaption(3)   =   "Liquidación Resumida"
+      TabPicture(3)   =   "frmRepartos_View.frx":0054
+      Tab(3).ControlEnabled=   0   'False
+      Tab(3).Control(0)=   "crLiqResxCliente"
+      Tab(3).ControlCount=   1
       Begin CRVIEWERLibCtl.CRViewer crVisorDet 
          Height          =   9255
          Left            =   120
@@ -104,6 +114,66 @@ Begin VB.Form frmRepartos_View
          EnableSearchExpertButton=   0   'False
          EnableHelpButton=   0   'False
       End
+      Begin CRVIEWERLibCtl.CRViewer crLiqDetxCliente 
+         Height          =   9255
+         Left            =   -74880
+         TabIndex        =   3
+         Top             =   480
+         Width           =   20415
+         DisplayGroupTree=   -1  'True
+         DisplayToolbar  =   -1  'True
+         EnableGroupTree =   0   'False
+         EnableNavigationControls=   -1  'True
+         EnableStopButton=   -1  'True
+         EnablePrintButton=   -1  'True
+         EnableZoomControl=   -1  'True
+         EnableCloseButton=   -1  'True
+         EnableProgressControl=   -1  'True
+         EnableSearchControl=   -1  'True
+         EnableRefreshButton=   0   'False
+         EnableDrillDown =   -1  'True
+         EnableAnimationControl=   -1  'True
+         EnableSelectExpertButton=   0   'False
+         EnableToolbar   =   -1  'True
+         DisplayBorder   =   -1  'True
+         DisplayTabs     =   -1  'True
+         DisplayBackgroundEdge=   -1  'True
+         SelectionFormula=   ""
+         EnablePopupMenu =   -1  'True
+         EnableExportButton=   0   'False
+         EnableSearchExpertButton=   0   'False
+         EnableHelpButton=   0   'False
+      End
+      Begin CRVIEWERLibCtl.CRViewer crLiqResxCliente 
+         Height          =   9255
+         Left            =   -74880
+         TabIndex        =   4
+         Top             =   480
+         Width           =   20415
+         DisplayGroupTree=   -1  'True
+         DisplayToolbar  =   -1  'True
+         EnableGroupTree =   0   'False
+         EnableNavigationControls=   -1  'True
+         EnableStopButton=   -1  'True
+         EnablePrintButton=   -1  'True
+         EnableZoomControl=   -1  'True
+         EnableCloseButton=   -1  'True
+         EnableProgressControl=   -1  'True
+         EnableSearchControl=   -1  'True
+         EnableRefreshButton=   0   'False
+         EnableDrillDown =   -1  'True
+         EnableAnimationControl=   -1  'True
+         EnableSelectExpertButton=   0   'False
+         EnableToolbar   =   -1  'True
+         DisplayBorder   =   -1  'True
+         DisplayTabs     =   -1  'True
+         DisplayBackgroundEdge=   -1  'True
+         SelectionFormula=   ""
+         EnablePopupMenu =   -1  'True
+         EnableExportButton=   0   'False
+         EnableSearchExpertButton=   0   'False
+         EnableHelpButton=   0   'False
+      End
    End
 End
 Attribute VB_Name = "frmRepartos_View"
@@ -117,6 +187,7 @@ Public pCantidad As Integer
 Public pIDREPARTO As Integer
 Public pREPARTIDOR As String
 Public pOBS As String
+Public pPLACA As String
 Public pVendedores As String
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -148,7 +219,7 @@ Private Sub Form_Load()
                 objParam.AddCurrentValue "REPARTO NRO " & CStr(pIDREPARTO)
 
             Case "pREPARTIDOR"
-                objParam.AddCurrentValue pREPARTIDOR
+                objParam.AddCurrentValue pPLACA & " - " & pREPARTIDOR
 
             Case "pOBS"
                 objParam.AddCurrentValue pOBS
@@ -166,6 +237,7 @@ Private Sub Form_Load()
     Me.crVisorDet.ViewReport
     
     '--------------
+    'RESUMEN
     Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoRepartidorRES.rpt")
     
     Set colParam = vReporte.ParameterFields
@@ -194,6 +266,68 @@ Private Sub Form_Load()
 
     Me.crVisorRes.ReportSource = vReporte
     Me.crVisorRes.ViewReport
+    
+    '---------------
+    'LIQUIDACION DETALLADA POR CLIENTE
+      Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "LiquidacionDetCliente.rpt")
+    
+    Set colParam = vReporte.ParameterFields
+    
+    For Each objParam In colParam
+
+        Select Case objParam.ParameterFieldName
+
+            Case "pCant"
+                objParam.AddCurrentValue CStr(pCantidad)
+
+            Case "pREPARTO"
+                objParam.AddCurrentValue "REPARTO NRO " & CStr(pIDREPARTO)
+
+            Case "pOBS"
+                objParam.AddCurrentValue pOBS
+
+            Case "pVENDEDORES"
+                objParam.AddCurrentValue pVendedores
+
+        End Select
+
+    Next
+    
+    vReporte.Database.SetDataSource pRSdataRes, 3, 1
+
+    Me.crLiqDetxCliente.ReportSource = vReporte
+    Me.crLiqDetxCliente.ViewReport
+    
+    '---------------
+    'LIQUIDACION RESUMIDA POR CLIENTE
+      Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "LiquidacionResCliente.rpt")
+    
+    Set colParam = vReporte.ParameterFields
+    
+    For Each objParam In colParam
+
+        Select Case objParam.ParameterFieldName
+
+            Case "pCant"
+                objParam.AddCurrentValue CStr(pCantidad)
+
+            Case "pREPARTO"
+                objParam.AddCurrentValue "REPARTO NRO " & CStr(pIDREPARTO)
+
+            Case "pOBS"
+                objParam.AddCurrentValue pOBS
+
+            Case "pVENDEDORES"
+                objParam.AddCurrentValue pVendedores
+
+        End Select
+
+    Next
+    
+    vReporte.Database.SetDataSource pRSdataRes.NextRecordset, 3, 1
+
+    Me.crLiqResxCliente.ReportSource = vReporte
+    Me.crLiqResxCliente.ViewReport
 
 End Sub
 
@@ -209,6 +343,12 @@ Private Sub Form_Resize()
     
     Me.crVisorRes.Height = Me.ScaleHeight - 800
     Me.crVisorRes.Width = Me.ScaleWidth - 500
+    
+    Me.crLiqDetxCliente.Height = Me.ScaleHeight - 800
+    Me.crLiqDetxCliente.Width = Me.ScaleWidth - 500
+    
+      Me.crLiqResxCliente.Height = Me.ScaleHeight - 800
+    Me.crLiqResxCliente.Width = Me.ScaleWidth - 500
 
 End Sub
 
