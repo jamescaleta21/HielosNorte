@@ -83,12 +83,12 @@ Begin VB.Form frmRepartos
       TabCaption(1)   =   "Listado"
       TabPicture(1)   =   "frmRepartos.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "cmdDelPedido"
-      Tab(1).Control(1)=   "cmdBuscar"
-      Tab(1).Control(2)=   "lvListado"
-      Tab(1).Control(3)=   "dtpFechaFiltro"
-      Tab(1).Control(4)=   "cmdCloud"
-      Tab(1).Control(5)=   "Label5"
+      Tab(1).Control(0)=   "Label5"
+      Tab(1).Control(1)=   "cmdCloud"
+      Tab(1).Control(2)=   "dtpFechaFiltro"
+      Tab(1).Control(3)=   "lvListado"
+      Tab(1).Control(4)=   "cmdBuscar"
+      Tab(1).Control(5)=   "cmdDelPedido"
       Tab(1).ControlCount=   6
       Begin VB.CommandButton cmdDelPedido 
          Caption         =   "Del"
@@ -135,7 +135,7 @@ Begin VB.Form frmRepartos
          _ExtentX        =   2566
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   418316289
+         Format          =   203358209
          CurrentDate     =   45614
       End
       Begin VB.TextBox txtObs 
@@ -234,6 +234,24 @@ Begin VB.Form frmRepartos
          TabIndex        =   2
          Top             =   480
          Width           =   6855
+         Begin VB.CommandButton cmdSearch 
+            Caption         =   "Search"
+            Height          =   480
+            Left            =   120
+            TabIndex        =   29
+            Top             =   1440
+            Width           =   5895
+         End
+         Begin VB.ComboBox ComRuta 
+            Height          =   315
+            ItemData        =   "frmRepartos.frx":0038
+            Left            =   1800
+            List            =   "frmRepartos.frx":0060
+            Style           =   2  'Dropdown List
+            TabIndex        =   28
+            Top             =   1080
+            Width           =   4095
+         End
          Begin VB.CheckBox chkTodos 
             Caption         =   "Marcar todos"
             Height          =   255
@@ -245,9 +263,9 @@ Begin VB.Form frmRepartos
          Begin VB.CommandButton cmdAdd 
             Caption         =   "Add"
             Height          =   480
-            Left            =   6010
+            Left            =   6020
             TabIndex        =   12
-            Top             =   2280
+            Top             =   2520
             Width           =   750
          End
          Begin MSDataListLib.DataCombo DatRepartidor 
@@ -266,7 +284,7 @@ Begin VB.Form frmRepartos
             Height          =   315
             Left            =   1800
             TabIndex        =   5
-            Top             =   960
+            Top             =   720
             Width           =   4095
             _ExtentX        =   7223
             _ExtentY        =   556
@@ -275,13 +293,13 @@ Begin VB.Form frmRepartos
             Text            =   ""
          End
          Begin MSComctlLib.ListView lvPedidos 
-            Height          =   4695
+            Height          =   4215
             Left            =   120
             TabIndex        =   3
-            Top             =   1800
+            Top             =   2280
             Width           =   5895
             _ExtentX        =   10398
-            _ExtentY        =   8281
+            _ExtentY        =   7435
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -293,6 +311,16 @@ Begin VB.Form frmRepartos
             BorderStyle     =   1
             Appearance      =   1
             NumItems        =   0
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Ruta:"
+            Height          =   195
+            Left            =   1110
+            TabIndex        =   27
+            Top             =   1140
+            Width           =   465
          End
          Begin VB.Label Label1 
             AutoSize        =   -1  'True
@@ -309,9 +337,9 @@ Begin VB.Form frmRepartos
             BackStyle       =   0  'Transparent
             Caption         =   "Vendedor:"
             Height          =   195
-            Left            =   720
+            Left            =   675
             TabIndex        =   7
-            Top             =   1080
+            Top             =   780
             Width           =   900
          End
          Begin VB.Label Label3 
@@ -319,9 +347,9 @@ Begin VB.Form frmRepartos
             BackStyle       =   0  'Transparent
             Caption         =   "Pedidos:"
             Height          =   195
-            Left            =   600
+            Left            =   120
             TabIndex        =   6
-            Top             =   1560
+            Top             =   2040
             Width           =   735
          End
       End
@@ -564,6 +592,35 @@ Private Sub cmdDelPedido_Click()
 
 End Sub
 
+Private Sub cmdSearch_Click()
+    Me.lvPedidos.ListItems.Clear
+
+    If Me.DatVendedor.BoundText <> -1 Then
+        LimpiaParametros oCmdEjec
+        oCmdEjec.CommandText = "[dbo].[USP_REPARTO_LOADPEDIDOS]"
+        oCmdEjec.CommandType = adCmdStoredProc
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SUBRUTA", adInteger, adParamInput, , Me.ComRuta.ListIndex - 1)
+
+        Dim ORSd As ADODB.Recordset
+
+        Set ORSd = oCmdEjec.Execute
+    
+        Do While Not ORSd.EOF
+            Set itemX = Me.lvPedidos.ListItems.Add(, , ORSd!idpedido)
+            itemX.SubItems(1) = ORSd!Nombre
+            itemX.SubItems(2) = ORSd!peso
+            itemX.SubItems(3) = ORSd!subruta
+            itemX.SubItems(4) = ORSd!obs
+            ORSd.MoveNext
+        Loop
+
+    End If
+
+End Sub
+
 Private Sub DatRepartidor_Change()
 Me.lvPedidos.ListItems.Clear
 Me.lblPeso.Caption = "0.00"
@@ -577,28 +634,6 @@ If Me.DatRepartidor.BoundText <> -1 Then
 End If
 End Sub
 
-Private Sub DatVendedor_Change()
-Me.lvPedidos.ListItems.Clear
-If Me.DatVendedor.BoundText <> -1 Then
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_REPARTO_LOADPEDIDOS]"
-    oCmdEjec.CommandType = adCmdStoredProc
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
-    Dim ORSd As ADODB.Recordset
-    Set ORSd = oCmdEjec.Execute
-    
-    Do While Not ORSd.EOF
-        Set itemX = Me.lvPedidos.ListItems.Add(, , ORSd!idpedido)
-        itemX.SubItems(1) = ORSd!Nombre
-        itemX.SubItems(2) = ORSd!peso
-        itemX.SubItems(3) = ORSd!obs
-        ORSd.MoveNext
-    Loop
-End If
-End Sub
-
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 If KeyCode = vbKeyEscape Then Unload Me
 End Sub
@@ -609,6 +644,7 @@ ConfigurarLV
 cargarRepartidoresVendedores
 cargarRepartos
 Desactivar
+Me.ComRuta.ListIndex = 0
 Me.Toolbar1.Buttons(2).Enabled = False
 Me.Toolbar1.Buttons(3).Enabled = False
 Me.Toolbar1.Buttons(4).Enabled = False
@@ -622,6 +658,7 @@ Private Sub ConfigurarLV()
         .ColumnHeaders.Add , , "Nro Pedido", 1500
         .ColumnHeaders.Add , , "Cliente", 3000
         .ColumnHeaders.Add , , "Peso", 800
+        .ColumnHeaders.Add , , "SubRuta", 1500
         .ColumnHeaders.Add , , "obs", 2500
         .FullRowSelect = True
         .View = lvwReport
@@ -855,6 +892,7 @@ Me.DatVendedor.BoundText = -1
 Me.txtObs.Text = ""
 Me.lvData.ListItems.Clear
 Me.lvPedidos.ListItems.Clear
+Me.ComRuta.ListIndex = 0
 End Sub
 
 Private Sub cargarRepartos()
