@@ -30,8 +30,8 @@ Public Sub LimpiaParametros(oCmd As ADODB.Command)
     oCmd.CommandType = adCmdStoredProc
     Pub_ConnAdo.CursorLocation = adUseClient
 
-    For i = oCmd.Parameters.count - 1 To 0 Step -1
-        oCmd.Parameters.Delete i
+    For I = oCmd.Parameters.count - 1 To 0 Step -1
+        oCmd.Parameters.Delete I
     Next
 
 End Sub
@@ -66,45 +66,45 @@ End Sub
 
 
 Public Sub LimpiarControles(Frm As Form)
-   Dim i
-   For i = 0 To Frm.Controls.count - 1
-      If TypeOf Frm.Controls(i) Is TextBox Then
-         Frm.Controls(i).Text = ""
-      ElseIf TypeOf Frm.Controls(i) Is label And Frm.Controls(i).Tag = "X" Then
-          Frm.Controls(i).Caption = ""
-      ElseIf TypeOf Frm.Controls(i) Is ComboBox Then
-Frm.Controls(i).ListIndex = -1
+   Dim I
+   For I = 0 To Frm.Controls.count - 1
+      If TypeOf Frm.Controls(I) Is TextBox Then
+         Frm.Controls(I).Text = ""
+      ElseIf TypeOf Frm.Controls(I) Is label And Frm.Controls(I).Tag = "X" Then
+          Frm.Controls(I).Caption = ""
+      ElseIf TypeOf Frm.Controls(I) Is ComboBox Then
+Frm.Controls(I).ListIndex = -1
       End If
-   Next i
+   Next I
 End Sub
 
 Public Sub ActivarControles(Frm As Form)
-Dim J As Integer
+Dim j As Integer
 
-For J = 0 To Frm.Controls.count - 1
+For j = 0 To Frm.Controls.count - 1
 
-    If TypeOf Frm.Controls(J) Is TextBox Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is TextBox Then
+        Frm.Controls(j).Enabled = True
     End If
 
-    If TypeOf Frm.Controls(J) Is DataCombo Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is DataCombo Then
+        Frm.Controls(j).Enabled = True
     End If
 
-    If TypeOf Frm.Controls(J) Is ComboBox Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is ComboBox Then
+        Frm.Controls(j).Enabled = True
     End If
 
-    If TypeOf Frm.Controls(J) Is DTPicker Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is DTPicker Then
+        Frm.Controls(j).Enabled = True
     End If
 
-    If TypeOf Frm.Controls(J) Is MaskEdBox Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is MaskEdBox Then
+        Frm.Controls(j).Enabled = True
     End If
 
-    If TypeOf Frm.Controls(J) Is UpDown Then
-        Frm.Controls(J).Enabled = True
+    If TypeOf Frm.Controls(j) Is UpDown Then
+        Frm.Controls(j).Enabled = True
     End If
 
 '    If TypeOf Frm.Controls(J) Is jhTextBoxM.TextBoxM And Frm.Controls(J).Tag = "X" Then
@@ -120,22 +120,20 @@ Public Function Mayusculas(Caracter As Integer) As Integer
 End Function
 
 Public Sub DesactivarControles(Frm As Form)
-Dim J
-For J = 0 To Frm.Controls.count - 1
-    If TypeOf Frm.Controls(J) Is TextBox And Frm.Controls(J).Tag = "X" Then
-        Frm.Controls(J).Enabled = False
+Dim j
+For j = 0 To Frm.Controls.count - 1
+    If TypeOf Frm.Controls(j) Is TextBox And Frm.Controls(j).Tag = "X" Then
+        Frm.Controls(j).Enabled = False
     End If
-'    If TypeOf Frm.Controls(J) Is DataCombo Then
-'        Frm.Controls(J).Enabled = False
-'    End If
-    If TypeOf Frm.Controls(J) Is ComboBox Then
-        Frm.Controls(J).Enabled = False
+    If TypeOf Frm.Controls(j) Is DataCombo Then
+        Frm.Controls(j).Enabled = False
     End If
-    If TypeOf Frm.Controls(J) Is DTPicker Then
-        Frm.Controls(J).Enabled = False
+    If TypeOf Frm.Controls(j) Is ComboBox Then
+        Frm.Controls(j).Enabled = False
+    End If
+    If TypeOf Frm.Controls(j) Is DTPicker Then
+        Frm.Controls(j).Enabled = False
     End If
 Next
 End Sub
-
-
 

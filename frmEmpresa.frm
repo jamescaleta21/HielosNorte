@@ -29,7 +29,7 @@ Begin VB.Form frmEmpresa
       Align           =   1  'Align Top
       Height          =   660
       Left            =   0
-      TabIndex        =   7
+      TabIndex        =   8
       Top             =   0
       Width           =   8805
       _ExtentX        =   15531
@@ -42,31 +42,25 @@ Begin VB.Form frmEmpresa
          NumButtons      =   6
          BeginProperty Button1 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Nuevo"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button2 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Guardar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button3 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Editar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button4 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Cancelar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button5 {0713F354-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button6 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Eliminar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -98,29 +92,36 @@ Begin VB.Form frmEmpresa
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label2"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "lblId"
+      Tab(1).Control(2)=   "Label3"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "Label3"
+      Tab(1).Control(3)=   "txtDenominacion"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtDenominacion"
+      Tab(1).Control(4)=   "cboPrincipal"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "cboPrincipal"
+      Tab(1).Control(5)=   "txtIdEmpresa"
       Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
+      Begin VB.TextBox txtIdEmpresa 
+         Height          =   375
+         Left            =   2760
+         TabIndex        =   3
+         Top             =   2160
+         Width           =   855
+      End
       Begin VB.ComboBox cboPrincipal 
          Height          =   315
          ItemData        =   "frmEmpresa.frx":0038
          Left            =   2760
          List            =   "frmEmpresa.frx":0042
          Style           =   2  'Dropdown List
-         TabIndex        =   9
+         TabIndex        =   5
          Top             =   3360
          Width           =   2295
       End
       Begin VB.TextBox txtDenominacion 
          Height          =   375
          Left            =   2760
-         TabIndex        =   3
+         TabIndex        =   4
          Top             =   2760
          Width           =   4215
       End
@@ -156,20 +157,9 @@ Begin VB.Form frmEmpresa
          Caption         =   "Es Principal:"
          Height          =   195
          Left            =   1545
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   3420
          Width           =   1050
-      End
-      Begin VB.Label lblId 
-         Appearance      =   0  'Flat
-         BackColor       =   &H80000005&
-         ForeColor       =   &H80000008&
-         Height          =   375
-         Left            =   2760
-         TabIndex        =   6
-         Tag             =   "X"
-         Top             =   2160
-         Width           =   1575
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
@@ -177,7 +167,7 @@ Begin VB.Form frmEmpresa
          Caption         =   "Denominación:"
          Height          =   195
          Left            =   1305
-         TabIndex        =   5
+         TabIndex        =   7
          Top             =   2850
          Width           =   1290
       End
@@ -187,7 +177,7 @@ Begin VB.Form frmEmpresa
          Caption         =   "Identificador:"
          Height          =   195
          Left            =   1440
-         TabIndex        =   4
+         TabIndex        =   6
          Top             =   2250
          Width           =   1155
       End
@@ -207,12 +197,10 @@ MostrarEmpresas
 End Sub
 
 Private Sub lvListado_DblClick()
-  
 EnviarDatosEdicion
-
 End Sub
 Private Sub EnviarDatosEdicion()
-    Me.lblId.Caption = Me.lvListado.SelectedItem.Text
+    Me.txtIdEmpresa.Text = Me.lvListado.SelectedItem.Text
     Me.txtDenominacion.Text = Me.lvListado.SelectedItem.SubItems(1)
     If Me.lvListado.SelectedItem.SubItems(2) = "SI" Then
         Me.cboPrincipal.ListIndex = 1
@@ -253,6 +241,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As ComctlLib.Button)
             ActivarControles Me
             Estado_Botones Editar
             EnviarDatosEdicion
+            Me.txtIdEmpresa.Enabled = False
             Me.txtDenominacion.SetFocus
 
         Case 4 'CANCELAR
@@ -342,7 +331,7 @@ Private Sub Estado_Botones(val As Valores)
             Me.Toolbar1.Buttons(5).Enabled = False
 Me.Toolbar1.Buttons(6).Enabled = False
             Me.SSTab1.tab = 1
-            Me.txtDenominacion.SetFocus
+            Me.txtIdEmpresa.SetFocus
 
         Case buscar
             Me.Toolbar1.Buttons(1).Enabled = True
@@ -367,6 +356,23 @@ End Sub
 
 Sub grabarEmpresa()
 
+    If Len(Trim(Me.txtIdEmpresa.Text)) = 0 Then
+        MsgBox "Debe ingregar el Identificador de Empresa.", vbCritical, Pub_Titulo
+        Me.txtIdEmpresa.SetFocus
+    
+        
+        Exit Sub
+
+    End If
+    
+    If Not IsNumeric(Me.txtIdEmpresa.Text) Then
+        MsgBox "Identificador ingresado es incorrecto.", vbCritical, Pub_Titulo
+            Me.txtIdEmpresa.SelStart = 0
+        Me.txtIdEmpresa.SelLength = Len(Me.txtIdEmpresa.Text)
+        Me.txtIdEmpresa.SetFocus
+        Exit Sub
+    End If
+
     If Len(Trim(Me.txtDenominacion.Text)) = 0 Then
         MsgBox "Debe ingresar la denominación de la Empresa", vbCritical, Pub_Titulo
         Me.txtDenominacion.SetFocus
@@ -384,10 +390,10 @@ Sub grabarEmpresa()
         oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_REGISTRAR]"
     Else
         oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_ACTUALIZAR]"
-        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamInput, , Me.lblId.Caption)
+        
 
     End If
-   
+   oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamInput, , Me.txtIdEmpresa.Text)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DENOMINACION", adVarChar, adParamInput, 200, Trim(Me.txtDenominacion.Text))
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adVarChar, adParamInput, 20, LK_CODUSU)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DEFECTO", adBoolean, adParamInput, , Me.cboPrincipal.ListIndex)
@@ -473,6 +479,11 @@ End Sub
 
 Private Sub txtDenominacion_KeyPress(KeyAscii As Integer)
 KeyAscii = Mayusculas(KeyAscii)
+End Sub
+
+Private Sub txtIdEmpresa_KeyPress(KeyAscii As Integer)
+
+If SoloNumeros(KeyAscii) Then KeyAscii = 0
 End Sub
 
 Private Sub txtSearch_KeyPress(KeyAscii As Integer)

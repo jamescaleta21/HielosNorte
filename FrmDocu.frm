@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmDocu 
    Caption         =   "Consulta de Operaciones"
    ClientHeight    =   5250
@@ -1699,7 +1699,7 @@ Dim PS As rdoQuery
 Private Sub cherela_Click()
  If tguia.Visible Then tguia.SetFocus
  If cherela.Value = 1 Then
-   If Val(WGUIA_RELA) <> 0 Then
+   If val(WGUIA_RELA) <> 0 Then
       tguia.Text = "G/." + Trim(SERIE_GUIA) + " - " + WGUIA_RELA
    End If
  End If
@@ -1735,7 +1735,7 @@ If temporal = "X" Then
  Exit Sub
 End If
 If LK_FLAG_FACTURACION = "V" Then
- If Val(txtvend.Text) <> 0 Then
+ If val(txtvend.Text) <> 0 Then
  If ven_llave.EOF Then
    MsgBox "Digite un Vendedor", 48, Pub_Titulo
    Exit Sub
@@ -1850,18 +1850,18 @@ If Left(cmbFBG.Text, 1) = "N" Or Left(cmbFBG.Text, 1) = "D" Then
 End If
 If LOC_TIPMOV = 10 Then
  PU_TIPMOV = 10
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
  PU_TIPMOV = LOC_TIPMOV
  If LOC_TIPMOV = 20 Then
-  txtserie.Text = Val(par_llave!PAR_SER_KARDEX)
+  txtserie.Text = val(par_llave!PAR_SER_KARDEX)
  End If
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  If LOC_TIPMOV = 99 Then
    PU_FBG = "K"
  Else
@@ -1891,7 +1891,7 @@ If LOC_TIPMOV = 100 Then pu_cp = "C"
 End If
 
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  PU_FBG = " "
 
 End If
@@ -1993,11 +1993,11 @@ End If
 If LOC_TIPMOV = 10 Then
  pu_cp = "C"
  PU_TIPMOV = 10
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
 ElseIf LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
  PU_TIPMOV = LOC_TIPMOV
- PU_NUMSER = Val(txtserie.Text)
+ PU_NUMSER = val(txtserie.Text)
  PU_FBG = Left(cmbFBG.Text, 1)
  pu_cp = "C"
  If Right(Trim(cmbFBG.Text), 1) = "P" Then
@@ -2040,7 +2040,7 @@ Else
  PU_NUMSER = 0
  PU_FBG = " "
 End If
-PU_NUMSER = Val(txtserie.Text)
+PU_NUMSER = val(txtserie.Text)
 pu_codcia = LK_CODCIA
 LEER_FAR_CONSUL
 If Not far_consul.EOF Then
@@ -2050,7 +2050,7 @@ Else
 End If
 txtNumFac.SetFocus
 txtnumfac_KeyPress 13
-If LK_EMP = "HER" And Val(txtserie.Text) = 0 And LOC_TIPMOV = 10 Then
+If LK_EMP = "HER" And val(txtserie.Text) = 0 And LOC_TIPMOV = 10 Then
    txtserie.Locked = False
    txtserie.Text = ""
    txtserie.SetFocus
@@ -2060,18 +2060,18 @@ End Sub
 Private Sub CmdAnterior_Click()
 Dim tempo
 If LOC_TIPMOV = 0 Then Exit Sub
-tempo = Val(txtNumFac.Text)
+tempo = val(txtNumFac.Text)
 If LOC_TIPMOV = 10 Then
  If Trim(txtserie.Text) = "" Then
   Exit Sub
  End If
 End If
-If Val(txtNumFac.Text) <= 0 Then
+If val(txtNumFac.Text) <= 0 Then
  LIMPIA_DOCU
  grid_fac2.Clear
  Exit Sub
 End If
-txtNumFac.Text = Val(txtNumFac.Text) - 1
+txtNumFac.Text = val(txtNumFac.Text) - 1
 If LOC_TIPMOV = 96 Or LOC_TIPMOV = 30 Then ' PLANILLA
  txtnumfac_KeyPress 13
  Exit Sub
@@ -2091,7 +2091,7 @@ Else
   CmdAnterior.Enabled = True
 End If
 Azul txtNumFac, txtNumFac
-LOC_NUMFAC_FIN = Val(txtNumFac.Text)
+LOC_NUMFAC_FIN = val(txtNumFac.Text)
 
 End Sub
 
@@ -2132,7 +2132,7 @@ If LOC_TIPMOV <> 96 Then
  Exit Sub
 End If
 If LOC_TIPMOV = 10 Then
- If chetrans.Value = 1 And Val(Right(TRANS.Text, 3)) = 0 Then
+ If chetrans.Value = 1 And val(Right(TRANS.Text, 3)) = 0 Then
       MsgBox "Está Activada a opción de Transportista. Seleccione un Transportista ?", 48, Pub_Titulo
      Exit Sub
  End If
@@ -2242,9 +2242,9 @@ frmdocu.Reportes.WindowTop = 70
 frmdocu.Reportes.WindowWidth = 635
 frmdocu.Reportes.WindowHeight = 390
 frmdocu.Reportes.Formulas(1) = ""
-PUB_NETO = Val(frmdocu.d_neto.Caption)
+PUB_NETO = val(frmdocu.d_neto.Caption)
 PUB_FECHA = frmdocu.d_fecha.Caption
-PU_NUMSER = Val((frmdocu.txtserie.Text))
+PU_NUMSER = val((frmdocu.txtserie.Text))
 
 If Left(d_moneda.Caption, 3) = "US$" Then
    rmoneda = "D"
@@ -2252,7 +2252,7 @@ Else
    rmoneda = "S"
 End If
 
-PU_NUMFAC = Val((frmdocu.txtNumFac.Text))
+PU_NUMFAC = val((frmdocu.txtNumFac.Text))
 frmdocu.Reportes.Formulas(1) = "SON_EFECTIVO=  'SON: " & CONVER_LETRAS(PUB_NETO, rmoneda) & "'"
 frmdocu.Reportes.WindowTitle = "ORDEN DE COMPRA  :" & Format(PU_NUMSER, "000") & " - " & Format(PU_NUMFAC, "0000000")
 frmdocu.Reportes.ReportFileName = wRuta + "ORDEN.RPT"
@@ -2274,7 +2274,7 @@ Private Sub cmdserie_Click()
 Dim valor
 valor = InputBox("Ingrese hasta que numero de " & Trim(cmbFBG.Text) & " Desea Mostrar para la Impresión. Segun serie : " & txtserie.Text & " - ", "Inpresión en Serie . . . ", Trim(txtNumFac.Text))
 If valor = "" Then Exit Sub
-If Val(valor) < Val(txtNumFac.Text) Then
+If val(valor) < val(txtNumFac.Text) Then
   MsgBox "No Procede... No puede ser menor que el Nº inicial ", 48, Pub_Titulo
   Exit Sub
 End If
@@ -2287,16 +2287,16 @@ End Sub
 Private Sub cmdSiguiente_Click()
 Dim tempo
 If LOC_TIPMOV = 0 Then Exit Sub
-tempo = Val(txtNumFac.Text)
+tempo = val(txtNumFac.Text)
 If LOC_TIPMOV = 10 Then
  If Trim(txtserie.Text) = "" Then
   Exit Sub
  End If
 End If
-If Val(txtNumFac.Text) < 0 Then
+If val(txtNumFac.Text) < 0 Then
   Exit Sub
 End If
-txtNumFac.Text = Val(txtNumFac.Text) + 1
+txtNumFac.Text = val(txtNumFac.Text) + 1
 If LOC_TIPMOV = 96 Or LOC_TIPMOV = 30 Then ' PLANILLA
  txtnumfac_KeyPress 13
  Exit Sub
@@ -2313,7 +2313,7 @@ Else
   cmdSiguiente.Enabled = True
 End If
 Azul txtNumFac, txtNumFac
-LOC_NUMFAC_FIN = Val(txtNumFac.Text)
+LOC_NUMFAC_FIN = val(txtNumFac.Text)
 End Sub
 
 Private Sub Command1_Click()
@@ -2336,7 +2336,7 @@ If LOC_TIPMOV <> 20 Then Exit Sub
 
  cap_valor = InputBox("Modificación de Descto de Mercaderia  en valor Porcentual(%).= " & Chr(13) & "el valor de descto. afecta a costo promedio mas no al documento.", " Descto(%)", d_descto.Caption)
  If cap_valor = "" Then Exit Sub
- If Val(cap_valor) = 0 Then
+ If val(cap_valor) = 0 Then
   pub_mensaje = "Valor 0.00(%) para el Descto... desea continuar... "
   Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
   If Pub_Respuesta <> vbYes Then
@@ -2349,11 +2349,11 @@ If LOC_TIPMOV <> 20 Then Exit Sub
  fila = 1
  Do Until fila = grid_fac2.Rows
      If Trim(grid_fac2.TextMatrix(fila, 9)) <> "NOT" Then
-       grid_fac2.TextMatrix(fila, 6) = Format(Val(grid_fac2.TextMatrix(fila, 5)) * (Val(cap_valor) / 100), "0.00")
+       grid_fac2.TextMatrix(fila, 6) = Format(val(grid_fac2.TextMatrix(fila, 5)) * (val(cap_valor) / 100), "0.00")
      Else
        grid_fac2.TextMatrix(fila, 6) = "0"
      End If
-     ww_desc = ww_desc + Val(grid_fac2.TextMatrix(fila, 6))
+     ww_desc = ww_desc + val(grid_fac2.TextMatrix(fila, 6))
      fila = fila + 1
  Loop
 pub_mensaje = "Chequear los datos del calculo. Total de Descto en " & d_moneda.Caption & " = " & Format(ww_desc, "0.00") & " - Confirmar la modificación ? "
@@ -2382,8 +2382,8 @@ far_codusu.Requery
 fila = 1
 Do Until far_codusu.EOF
  far_codusu.Edit
- far_codusu!FAR_DESCTO = Val(grid_fac2.TextMatrix(fila, 6))
- far_codusu!FAR_PORDESCTOS = Val(grid_fac2.TextMatrix(fila, 6))
+ far_codusu!FAR_DESCTO = val(grid_fac2.TextMatrix(fila, 6))
+ far_codusu!FAR_PORDESCTOS = val(grid_fac2.TextMatrix(fila, 6))
  far_codusu!FAR_TOT_DESCTO = cap_valor
  far_codusu.Update
  far_codusu.MoveNext
@@ -2416,7 +2416,7 @@ If LOC_TIPMOV <> 20 Then Exit Sub
 
  cap_valor = InputBox("Modificación de Flete en Mercaderia  S/. = ", "Fletes en S/.", d_flete.Caption)
  If cap_valor = "" Then Exit Sub
- If Val(cap_valor) = 0 Then
+ If val(cap_valor) = 0 Then
   pub_mensaje = "Valor 0.00 para el Flete... desea continuar... "
   Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
   If Pub_Respuesta <> vbYes Then
@@ -2428,8 +2428,8 @@ If LOC_TIPMOV <> 20 Then Exit Sub
  wpeso = 0
  fila = 1
  Do Until fila = grid_fac2.Rows
-   wcanti = wcanti + Val(grid_fac2.TextMatrix(fila, 2))
-   wpeso = wpeso + Val(grid_fac2.TextMatrix(fila, 8))
+   wcanti = wcanti + val(grid_fac2.TextMatrix(fila, 2))
+   wpeso = wpeso + val(grid_fac2.TextMatrix(fila, 8))
    fila = fila + 1
  Loop
    
@@ -2441,14 +2441,14 @@ Pub_Respuesta = MsgBox(pub_mensaje, Pub_Estilo, Pub_Titulo)
    Do Until fila = grid_fac2.Rows
      If Pub_Respuesta = vbYes Then
        If wcanti <> 0 Then
-           grid_fac2.TextMatrix(fila, 7) = Format((Val(cap_valor) / wcanti) * Val(grid_fac2.TextMatrix(fila, 2)), "0.00")
+           grid_fac2.TextMatrix(fila, 7) = Format((val(cap_valor) / wcanti) * val(grid_fac2.TextMatrix(fila, 2)), "0.00")
        End If
      Else
        If wpeso <> 0 Then
-           grid_fac2.TextMatrix(fila, 7) = Format((Val(cap_valor) / wpeso) * grid_fac2.TextMatrix(fila, 8), "0.00")
+           grid_fac2.TextMatrix(fila, 7) = Format((val(cap_valor) / wpeso) * grid_fac2.TextMatrix(fila, 8), "0.00")
        End If
      End If
-     ww_desc = ww_desc + Val(grid_fac2.TextMatrix(fila, 7))
+     ww_desc = ww_desc + val(grid_fac2.TextMatrix(fila, 7))
      fila = fila + 1
    Loop
 
@@ -2480,7 +2480,7 @@ far_codusu.Requery
 fila = 1
 Do Until far_codusu.EOF
  far_codusu.Edit
- far_codusu!FAR_FLETE = Val(grid_fac2.TextMatrix(fila, 7))
+ far_codusu!FAR_FLETE = val(grid_fac2.TextMatrix(fila, 7))
  far_codusu!FAR_TOT_FLETE = ww_desc
  far_codusu.Update
  far_codusu.MoveNext
@@ -2741,7 +2741,7 @@ If LOC_TIPMOV = 3 Then NUMERO.Text = 7
 DESC_GRIFO = 0
 WS_FLETE = 0
 ws_serie = 0
-ws_serie = Val(txtserie.Text)
+ws_serie = val(txtserie.Text)
 CmdAnterior.Enabled = False
 'DoEvents
 cmdSiguiente.Enabled = False
@@ -2797,7 +2797,7 @@ ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Then
      PSFAR.rdoParameters(0) = LOC_TIPMOV
      PSFAR.rdoParameters(1) = LK_CODCIA
      PSFAR.rdoParameters(2) = txtserie.Text
-     PSFAR.rdoParameters(3) = Val(txtNumFac.Text)
+     PSFAR.rdoParameters(3) = val(txtNumFac.Text)
    Else
      PSFAR.rdoParameters(0) = LOC_TIPMOV
      PSFAR.rdoParameters(1) = LK_CODCIA
@@ -2820,7 +2820,7 @@ End If
 If LOC_TIPMOV = 20 And Left(cmbFBG.Text, 1) <> "K" Then
 Else
  PSFAR.rdoParameters(1) = LK_CODCIA
- PSFAR.rdoParameters(4) = Val(txtNumFac.Text)
+ PSFAR.rdoParameters(4) = val(txtNumFac.Text)
 End If
 far_r.Requery
 If far_r.EOF Then
@@ -2922,7 +2922,7 @@ If LOC_TIPMOV = 102 Or OC_TIPMOV = 100 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or 
  Else
    txtdocu.Caption = "G/ " & far_r!far_serguia & " - " & far_r!far_numguia
  End If
- If Val(WGUIA_RELA) <> 0 Then
+ If val(WGUIA_RELA) <> 0 Then
    cherela.Value = 1
  End If
  If LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Then
@@ -2943,7 +2943,7 @@ ElseIf LOC_TIPMOV = 20 Or LOC_TIPMOV = 99 Or LOC_TIPMOV = 3 Then
  'd_saldo.Visible = False
  txtdocu.Visible = True
  lblfac.Visible = True
- If Val(far_r!FAR_NUMFAC_C) = 0 Then
+ If val(far_r!FAR_NUMFAC_C) = 0 Then
    'txtdocu.Caption = " "
    txtdocu.Caption = "G/ " & far_r!far_serguia & " - " & far_r!far_numguia
  Else
@@ -2991,14 +2991,14 @@ End If
 
 SQ_OPER = 1
 PUB_CODCIA = "00"
-PUB_NUMTAB = cli_llave!CLI_LUGAR_TRAB
+'PUB_NUMTAB = cli_llave!CLI_LUGAR_TRAB
 PUB_TIPREG = 25
 LEER_TAB_LLAVE
 WLUGAR = ""
 If Not tab_llave.EOF Then
 WLUGAR = Trim(tab_llave!tab_NOMLARGO)
 End If
-PUB_NUMTAB = cli_llave!CLI_LUGAR_CASA
+'PUB_NUMTAB = cli_llave!CLI_LUGAR_CASA
 LEER_TAB_LLAVE
 WLUGAR1 = ""
 If Not tab_llave.EOF Then
@@ -3019,7 +3019,7 @@ If Not tab_llave.EOF Then
 WZONA1 = Trim(tab_llave!tab_NOMLARGO)
 End If
 
-PUB_NUMTAB = cli_llave!cli_TRAB_SUBZONA
+'PUB_NUMTAB = cli_llave!cli_TRAB_SUBZONA
 PUB_TIPREG = 35
 LEER_TAB_LLAVE
 WSUBZONA = ""
@@ -3034,7 +3034,7 @@ WSUBZONA1 = Trim(tab_llave!tab_NOMLARGO)
 End If
 'QUITADO 30/11/2001
 'd_dire.Caption = Trim(WLUGAR) + " " + Trim(cli_llave!CLI_TRAB_DIREC) + " # " + Trim(cli_llave!CLI_TRAB_NUM) & "  " & WZONA & "  " & WSUBZONA
-txtdire.Text = Trim(cli_llave!CLI_TRAB_DIREC)
+'txtdire.Text = Trim(cli_llave!CLI_TRAB_DIREC)
 'txtnum.Text = Trim(cli_llave!CLI_TRAB_NUM)
 'ASIGNA_INT TxtZonaTrabajo, cli_llave!cli_TRAB_ZONA
 'ASIGNA_INT TxtSubZonaTrabajo, cli_llave!cli_TRAB_SUBZONA
@@ -3084,7 +3084,7 @@ If LOC_TIPMOV = 102 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 97 Or LOC_TIPMOV = 98 Or 
      SQ_OPER = 1
      PUB_TIPREG = 2103
      PUB_CODCIA = LK_CODCIA
-     PUB_NUMTAB = Val(far_r!FAR_CODVEN)
+     PUB_NUMTAB = val(far_r!FAR_CODVEN)
      LEER_TAB_LLAVE
      WRES = " "
      If Not tab_llave.EOF Then
@@ -3140,8 +3140,8 @@ FECHA_PART.Text = Format(far_r!FAR_fecha_compra, "dd/mm/yyyy")
   Else
      d_condicion.Caption = Left(TIPMOV.Text, 40)
   End If
-  d_dias.Caption = Val(far_r!FAR_DIAS)
-  d_fechaV.Caption = Format(DateAdd("d", Val(far_r!FAR_DIAS), far_r!FAR_fecha_compra), "dd/mm/yyyy")
+  d_dias.Caption = val(far_r!FAR_DIAS)
+  d_fechaV.Caption = Format(DateAdd("d", val(far_r!FAR_DIAS), far_r!FAR_fecha_compra), "dd/mm/yyyy")
  Else
  If LOC_TIPMOV = 10 Then
      d_condicion.Caption = far_r!far_subtra
@@ -3158,7 +3158,7 @@ FECHA_PART.Text = Format(far_r!FAR_fecha_compra, "dd/mm/yyyy")
 End If
 
 If LK_FLAG_GRIFO = "A" And LOC_TIPMOV = 10 Then
-  If Val(Nulo_Valor0(far_r!far_signo_car)) <> 1 Then
+  If val(Nulo_Valor0(far_r!far_signo_car)) <> 1 Then
      d_condicion.Caption = "VENTA AL CONTADO"
   Else
      d_condicion.Caption = "VENTA AL CREDITO"
@@ -3171,7 +3171,7 @@ If Nulo_Valors(far_r!FAR_MONEDA) = "D" Then
 '  lblven.Visible = True
   If LOC_TIPMOV = 20 Then
 '   lblven.Caption = "T. Cambio:"
-   d_codven.Caption = Val(Nulo_Valor0(far_r!FAR_tipo_cambio))
+   d_codven.Caption = val(Nulo_Valor0(far_r!FAR_tipo_cambio))
   End If
 Else
   d_moneda.Caption = "S/."
@@ -3228,8 +3228,8 @@ LOC_ARROZ = ""
 conteo_cantidad = 0
 conteo_peso = 0
 Do Until far_r.EOF
-   If LOC_TIPMOV = 20 And Val(far_r!far_signo_arm) = -1 And far_r!far_estado = "E" Then GoTo NADA
-   If (LOC_TIPMOV = 97 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 98) And Val(far_r!far_codart) = 0 Then
+   If LOC_TIPMOV = 20 And val(far_r!far_signo_arm) = -1 And far_r!far_estado = "E" Then GoTo NADA
+   If (LOC_TIPMOV = 97 Or LOC_TIPMOV = 10 Or LOC_TIPMOV = 98) And val(far_r!far_codart) = 0 Then
      grid_fac2.Rows = grid_fac2.Rows + 3
      fila = fila + 2
      SQ_OPER = 1
@@ -3248,14 +3248,14 @@ Do Until far_r.EOF
      grid_fac2.ColWidth(0) = 6500
      GoTo pasa
    End If
-   If LOC_TIPMOV = 98 And Val(far_r!far_codart) = 0 Then
+   If LOC_TIPMOV = 98 And val(far_r!far_codart) = 0 Then
      grid_fac2.Rows = grid_fac2.Rows + 2
      fila = fila + 2
      grid_fac2.TextMatrix(fila, 0) = far_r!far_concepto
      grid_fac2.ColWidth(0) = 6500
      GoTo pasa
    End If
-   If LOC_TIPMOV = 99 And Val(far_r!far_codart) = 0 Then
+   If LOC_TIPMOV = 99 And val(far_r!far_codart) = 0 Then
      grid_fac2.Rows = grid_fac2.Rows + 1
      grid_fac2.TextMatrix(grid_fac2.Rows - 1, 0) = "Concepto: " & Trim(far_r!far_concepto)
      grid_fac2.ColWidth(0) = 6500
@@ -3357,7 +3357,7 @@ NADA:
 Loop
  d_fecha_compra.Caption = Format(WFECHA_COMPRA, "dd/mm/yyyy")
  FCONT.Caption = "Fec. Contable : " & Format(WFECHA_COMPRA, "dd/mm/yy")  'CAMBIO GTS P DIROME WFECHA_CONT POR WFECHA_COMPRA
- If Val(wnumfac_c) <> 0 And LOC_TIPMOV = 10 Then
+ If val(wnumfac_c) <> 0 And LOC_TIPMOV = 10 Then
   txtdocu.Caption = txtdocu.Caption + " / Cambio Doc. = " & wnumser_c & " - " & wnumfac_c
  End If
 If Trim(LBLEXTORNO.Caption) = "" Then
@@ -3390,7 +3390,7 @@ End If
    cmdimp.Enabled = True
    PB.Visible = False
    If cherela.Visible And LK_EMP <> "HER" Then cherela_Click
-   LOC_NUMFAC_FIN = Val(txtNumFac.Text)
+   LOC_NUMFAC_FIN = val(txtNumFac.Text)
    If LK_CODUSU = "ADMIN" And (LOC_TIPMOV = 6 Or LOC_TIPMOV = 5) Then
      MsgBox "CAntidad :  " & conteo_cantidad, 48, Pub_Titulo
    End If
@@ -3503,7 +3503,7 @@ cmbFBG.Clear
 If Trim(TIPMOV.Text) = "" Then
  LOC_TIPMOV = 0
 Else
- LOC_TIPMOV = Val(Trim(Right(TIPMOV.Text, 4)))
+ LOC_TIPMOV = val(Trim(Right(TIPMOV.Text, 4)))
  cmdimp.Enabled = False
  lblpersona.Visible = True
  d_Codclie.Visible = True
@@ -3689,10 +3689,10 @@ Private Sub txtnumfac_KeyPress(KeyAscii As Integer)
 Dim wven As Integer
 SOLO_ENTERO KeyAscii
 If KeyAscii = 13 Then
-  If Val(txtserie.Text) <= 0 Then
+  If val(txtserie.Text) <= 0 Then
    'Exit Sub
   End If
-  If Val(txtNumFac.Text) <= 0 Then
+  If val(txtNumFac.Text) <= 0 Then
    LIMPIA_DOCU
    grid_fac2.Clear
    Exit Sub
@@ -3742,7 +3742,7 @@ PS_REP01(1) = 0
 Set llave_rep01 = PS_REP01.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
 PS_REP01(0) = LK_CODCIA
-PS_REP01(1) = Val(txtNumFac.Text)
+PS_REP01(1) = val(txtNumFac.Text)
 llave_rep01.Requery
 d_mensaje.Visible = False
 If llave_rep01.EOF = True Then
@@ -3789,9 +3789,9 @@ Do Until llave_rep01.EOF
     grid_fac2.TextMatrix(f1, 5) = llave_rep01!CAa_numser
     grid_fac2.TextMatrix(f1, 6) = llave_rep01!CAa_numfac
     grid_fac2.TextMatrix(f1, 7) = "" 'llave_rep01!CAA_NUMFAC
-    grid_fac2.TextMatrix(f1, 8) = Format(llave_rep01!caa_SALDO_car + Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
-    grid_fac2.TextMatrix(f1, 9) = Format(Val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
-    WS_BRUTO = WS_BRUTO + Val(llave_rep01!CAA_IMPORTE * -1)
+    grid_fac2.TextMatrix(f1, 8) = Format(llave_rep01!caa_SALDO_car + val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
+    grid_fac2.TextMatrix(f1, 9) = Format(val(llave_rep01!CAA_IMPORTE * -1), "0.00;(0.00)")
+    WS_BRUTO = WS_BRUTO + val(llave_rep01!CAA_IMPORTE * -1)
     grid_fac2.TextMatrix(f1, 10) = llave_rep01!CAA_FECHA_VCTO
   Else
     grid_fac2.TextMatrix(f1, 3) = Trim(llave_rep01!CAA_TIPDOC)
@@ -3808,7 +3808,7 @@ Do Until llave_rep01.EOF
     grid_fac2.TextMatrix(f1, 12) = llave_rep01!CAA_IMPORTE * -1
     grid_fac2.TextMatrix(f1, 13) = llave_rep01!caa_concepto
     grid_fac2.TextMatrix(f1, 14) = llave_rep01!CAA_FECHA_VCTO
-    WS_CHEQUE = WS_CHEQUE + Val(llave_rep01!CAA_IMPORTE * -1)
+    WS_CHEQUE = WS_CHEQUE + val(llave_rep01!CAA_IMPORTE * -1)
   End If
   If llave_rep01!CAA_CODVEN <> 0 Then wven = llave_rep01!CAA_CODVEN
   llave_rep01.MoveNext
@@ -3854,7 +3854,7 @@ Set llave_rep01 = PS_REP01.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
 
 PS_REP01(0) = LK_CODCIA
 PS_REP01(1) = txtserie.Text
-PS_REP01(2) = Val(txtNumFac.Text)
+PS_REP01(2) = val(txtNumFac.Text)
 
 llave_rep01.Requery
 d_mensaje.Visible = False
@@ -4093,7 +4093,7 @@ If LOC_TIPMOV = 3 Or LOC_TIPMOV = 100 Or LOC_TIPMOV = 101 Or LOC_TIPMOV = 10 Or 
     If LK_FLAG_FACTURACION = "A" Then
         PUB_CODVEN = 1
     ElseIf LK_FLAG_FACTURACION = "V" Then
-        PUB_CODVEN = Val(d_codven.Caption)
+        PUB_CODVEN = val(d_codven.Caption)
     End If
     LEER_PAR_LLAVE
     If pac_llave.EOF Then
@@ -4131,16 +4131,16 @@ End If
     frmdocu.Reportes.WindowHeight = 390
     frmdocu.Reportes.Formulas(1) = ""
     frmdocu.d_neto.Refresh
-    PUB_NETO = Val(frmdocu.d_neto.Caption)
+    PUB_NETO = val(frmdocu.d_neto.Caption)
     PUB_FECHA = frmdocu.d_fecha.Caption
-    PU_NUMSER = Val((frmdocu.txtserie.Text))
-    PU_NUMFAC = Val((frmdocu.txtNumFac.Text))
+    PU_NUMSER = val((frmdocu.txtserie.Text))
+    PU_NUMFAC = val((frmdocu.txtNumFac.Text))
     If LK_EMP = "PIU" Then
        frmdocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
     Else
        frmdocu.Reportes.Formulas(1) = "SON=  ' " & CONVER_LETRAS(PUB_NETO, WMONEDA) & "'"
     End If
-    If PUB_NETO <> Val(frmdocu.d_neto.Caption) Then
+    If PUB_NETO <> val(frmdocu.d_neto.Caption) Then
       MsgBox "Espere....!!!", 48, Pub_Titulo
       Exit Function
     End If
@@ -4186,7 +4186,7 @@ End If
         'Debug.Print pub_cadena
         frmdocu.Reportes.Formulas(1) = ""
         If chetrans.Value = 1 Then
-             PS_TRA(0) = Val(Right(TRANS.Text, 3))
+             PS_TRA(0) = val(Right(TRANS.Text, 3))
              llave_trans.Requery
              Reportes.Formulas(12) = "TRN_NOMBRE    =  '" & llave_trans!TRN_NOMBRE & "'"
              Reportes.Formulas(13) = "TRN_DIRECCION =  '" & llave_trans!TRN_DIRECCION & "'"
@@ -4384,7 +4384,7 @@ PASA_OP:
            Reportes.Formulas(26) = ""
            Reportes.Formulas(27) = ""
            Reportes.Formulas(28) = ""
-            Select Case Val(Right(cmbMotivo.Text, 6))
+            Select Case val(Right(cmbMotivo.Text, 6))
                  Case 1
                        Reportes.Formulas(22) = "VENT1= 'X'"
                  Case 2
@@ -4409,7 +4409,7 @@ PASA_OP:
 
            
            If chetrans.Value = 1 Then
-             PS_TRA(0) = Val(Right(TRANS.Text, 3))
+             PS_TRA(0) = val(Right(TRANS.Text, 3))
              llave_trans.Requery
              Reportes.Formulas(12) = "TRN_NOMBRE    =  '" & llave_trans!TRN_NOMBRE & "'"
              Reportes.Formulas(13) = "TRN_DIRECCION =  '" & llave_trans!TRN_DIRECCION & "'"
@@ -4461,7 +4461,7 @@ If KeyAscii = 13 Then
  SQ_OPER = 1
  pu_cp = "C"
  pu_codcia = LK_CODCIA
- pu_codclie = Val(d_Codclie.Caption)
+ pu_codclie = val(d_Codclie.Caption)
  LEER_CLI_LLAVE
  If cli_llave.EOF Then
    MsgBox "Cleinte no Existe NO Procede... ", 48, Pub_Titulo
@@ -4469,9 +4469,9 @@ If KeyAscii = 13 Then
  End If
  cli_llave.Edit
  cli_llave!CLI_TRAB_DIREC = Trim(txtdire.Text)
- cli_llave!CLI_TRAB_NUM = Val(txtnum.Text)
- cli_llave!cli_TRAB_ZONA = Val(Right(TxtZonaTrabajo.Text, 4))
- cli_llave!cli_TRAB_SUBZONA = Val(Right(TxtSubZonaTrabajo.Text, 4))
+ cli_llave!CLI_TRAB_NUM = val(txtnum.Text)
+ cli_llave!cli_TRAB_ZONA = val(Right(TxtZonaTrabajo.Text, 4))
+ cli_llave!cli_TRAB_SUBZONA = val(Right(TxtSubZonaTrabajo.Text, 4))
  cli_llave.Update
  FRADIRE.Visible = False
  txtnumfac_KeyPress 13
@@ -4484,7 +4484,7 @@ End Sub
 Private Sub txtvend_KeyPress(KeyAscii As Integer)
 SOLO_ENTERO KeyAscii
 If KeyAscii = 13 Then
-  If Val(txtvend.Text) <> 0 Then
+  If val(txtvend.Text) <> 0 Then
     SQ_OPER = 1
     pu_codcia = LK_CODCIA
     PUB_CODVEN = Nulo_Valor0(txtvend.Text)
@@ -4503,7 +4503,7 @@ End If
 End Sub
 Public Sub ASIGNA_INT(WCONTROL As ComboBox, txt As Integer)
 For fila = 0 To WCONTROL.ListCount - 1
-    If Val(Trim(Right(WCONTROL.List(fila), 3))) = txt Then
+    If val(Trim(Right(WCONTROL.List(fila), 3))) = txt Then
         WCONTROL.ListIndex = fila
         Exit Sub
     End If
@@ -4513,7 +4513,7 @@ End Sub
 
 Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero As Double)
 
-    Dim oRS As ADODB.Recordset
+    Dim ors As ADODB.Recordset
 
     LimpiaParametros oCmdEjec
 
@@ -4536,7 +4536,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECHA", adDBTimeStamp, adParamInput, , LK_FECHA_DIA)
     End If
     
-    Set oRS = oCmdEjec.Execute
+    Set ors = oCmdEjec.Execute
     
     Dim sCadena As String
 
@@ -4627,15 +4627,15 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Else
     End If
      
-    sARCHIVOcab = sRUC & "-" & oRS!Nombre + IIf((LOC_TIPMOV = 97 Or LOC_TIPMOV = 98), ".not", IIf(LK_CODTRA = 1111, ".cba", ".cab"))
-    sARCHIVOtri = sRUC & "-" & oRS!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".tri", ".tri"))
-    sARCHIVOley = sRUC & "-" & oRS!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".ley", ".ley"))
-    sARCHIVOdet = sRUC & "-" & oRS!Nombre + ".det"
-    sARCHIVOaca = sRUC & "-" & oRS!Nombre + ".aca"
+    sARCHIVOcab = sRUC & "-" & ors!Nombre + IIf((LOC_TIPMOV = 97 Or LOC_TIPMOV = 98), ".not", IIf(LK_CODTRA = 1111, ".cba", ".cab"))
+    sARCHIVOtri = sRUC & "-" & ors!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".tri", ".tri"))
+    sARCHIVOley = sRUC & "-" & ors!Nombre + IIf(LK_CODTRA = 2412, ".not", IIf(LK_CODTRA = 1111, ".ley", ".ley"))
+    sARCHIVOdet = sRUC & "-" & ors!Nombre + ".det"
+    sARCHIVOaca = sRUC & "-" & ors!Nombre + ".aca"
     If cTipoDocto = "F" And LOC_TIPMOV = 10 Then
-    sARCHIVOpag = sRUC & "-" & oRS!Nombre + ".pag"
-    sARCHIVOdpa = sRUC & "-" & oRS!Nombre + ".dpa"
-    sARCHIVOrtn = sRUC & "-" & oRS!Nombre + ".rtn"
+    sARCHIVOpag = sRUC & "-" & ors!Nombre + ".pag"
+    sARCHIVOdpa = sRUC & "-" & ors!Nombre + ".dpa"
+    sARCHIVOrtn = sRUC & "-" & ors!Nombre + ".rtn"
     End If
     
     'If LK_CODTRA <> 1111 Then
@@ -4957,22 +4957,22 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     
     If LK_CODTRA = 2412 Then
 
-        Do While Not oRS.EOF
-            sCadena = sCadena & oRS!fecemision & "|" & oRS!CODMOTIVO & "|" & oRS!DESCMOTIVO & "|" & oRS!TIPODOCAFECTADO & "|" & oRS!NUMDOCAFECTADO & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & oRS!CLI1 & "|" & oRS!TIPMONEDA & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOOPERINAFECTAS & "|" & oRS!MTOOPEREXONERADAS & "|" & oRS!MTOIGV & "|" & oRS!MTOISC & "|" & oRS!MTOOTROSTRIBUTOS & "|" & oRS!MTOIMPVENTA & "|"
-            oRS.MoveNext
+        Do While Not ors.EOF
+            sCadena = sCadena & ors!fecemision & "|" & ors!CODMOTIVO & "|" & ors!DESCMOTIVO & "|" & ors!TIPODOCAFECTADO & "|" & ors!NUMDOCAFECTADO & "|" & ors!TIPDOCUSUARIO & "|" & ors!NUMDOCUSUARIO & "|" & ors!CLI1 & "|" & ors!TIPMONEDA & "|" & ors!SUMOTROSCARGOS & "|" & ors!MTOOPERGRAVADAS & "|" & ors!MTOOPERINAFECTAS & "|" & ors!MTOOPEREXONERADAS & "|" & ors!MTOIGV & "|" & ors!MTOISC & "|" & ors!MTOOTROSTRIBUTOS & "|" & ors!MTOIMPVENTA & "|"
+            ors.MoveNext
         Loop
     
     ElseIf LK_CODTRA = 1111 Then
-         Do While Not oRS.EOF
-            sCadena = sCadena & oRS!FEC_GENERACcION & "|" & oRS!FEC_COMUNICACION & "|" & oRS!TIPDOCBAJA & "|" & oRS!NUMDOCBAJA & "|" & oRS!DESMOTIVOBAJA & "|"
-            oRS.MoveNext
+         Do While Not ors.EOF
+            sCadena = sCadena & ors!FEC_GENERACcION & "|" & ors!FEC_COMUNICACION & "|" & ors!TIPDOCBAJA & "|" & ors!NUMDOCBAJA & "|" & ors!DESMOTIVOBAJA & "|"
+            ors.MoveNext
         Loop
     Else
 
-        Do While Not oRS.EOF
+        Do While Not ors.EOF
             'sCadena = sCadena & oRS!TIPOPERACION & "|" & oRS!fecemision & "|" & oRS!hORA & "|" & oRS!FECHAVENC & "|" & oRS!codlocalemisor & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & oRS!rznsocialusuario & "|" & oRS!TIPMONEDA & "|" & oRS!MTOIGV & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOIMPVENTA & "|" & oRS!SUMDSCTOGLOBAL & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!TOTANTICIPOS & "|" & oRS!IMPTOTALVENTA & "|" & oRS!UBL & "|" & oRS!CUSTOMDOC & "|"
-            sCadena = sCadena & oRS!TIPOPERACION & "|" & oRS!fecemision & "|" & oRS!hORA & "|" & oRS!FECHAVENC & "|" & oRS!codlocalemisor & "|" & oRS!TIPDOCUSUARIO & "|" & oRS!NUMDOCUSUARIO & "|" & Trim(oRS!rznsocialusuario) & "|" & oRS!TIPMONEDA & "|" & oRS!MTOIGV & "|" & oRS!MTOOPERGRAVADAS & "|" & oRS!MTOIMPVENTA & "|" & oRS!SUMDSCTOGLOBAL & "|" & oRS!SUMOTROSCARGOS & "|" & oRS!TOTANTICIPOS & "|" & oRS!IMPTOTALVENTA & "|" & oRS!UBL & "|" & oRS!CUSTOMDOC & "|"
-            oRS.MoveNext
+            sCadena = sCadena & ors!TIPOPERACION & "|" & ors!fecemision & "|" & ors!hORA & "|" & ors!FECHAVENC & "|" & ors!codlocalemisor & "|" & ors!TIPDOCUSUARIO & "|" & ors!NUMDOCUSUARIO & "|" & Trim(ors!rznsocialusuario) & "|" & ors!TIPMONEDA & "|" & ors!MTOIGV & "|" & ors!MTOOPERGRAVADAS & "|" & ors!MTOIMPVENTA & "|" & ors!SUMDSCTOGLOBAL & "|" & ors!SUMOTROSCARGOS & "|" & ors!TOTANTICIPOS & "|" & ors!IMPTOTALVENTA & "|" & ors!UBL & "|" & ors!CUSTOMDOC & "|"
+            ors.MoveNext
         Loop
 
     End If
@@ -4985,12 +4985,12 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoCab = Nothing
     
     'DIRECCION
-    oRS.MoveFirst
+    ors.MoveFirst
     sCadena = ""
-    Do While Not oRS.EOF
+    Do While Not ors.EOF
         'sCadena = sCadena & oRS!ACA1 & "|" & oRS!ACA2 & "|" & oRS!ACA3 & "|" & oRS!ACA4 & "|" & oRS!PAIS & "|" & oRS!UBIGEO & "|" & oRS!dir & "|" & oRS!PAIS1 & "|" & oRS!UBIGEO1 & "|" & oRS!dir1 & "|"
-        sCadena = sCadena & oRS!ACA1 & "|" & oRS!ACA2 & "|" & oRS!ACA3 & "|" & oRS!ACA4 & "|" & oRS!ACA5 & "|" & oRS!PAIS & "|" & oRS!UBIGEO & "|" & oRS!dir & "|" & oRS!PAIS1 & "|" & oRS!UBIGEO1 & "|" & oRS!dir1 & "|"
-        oRS.MoveNext
+        sCadena = sCadena & ors!ACA1 & "|" & ors!ACA2 & "|" & ors!ACA3 & "|" & ors!ACA4 & "|" & ors!ACA5 & "|" & ors!PAIS & "|" & ors!UBIGEO & "|" & ors!dir & "|" & ors!PAIS1 & "|" & ors!UBIGEO1 & "|" & ors!dir1 & "|"
+        ors.MoveNext
     Loop
     
     'Escribimos LINEAS
@@ -5002,7 +5002,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     
     Dim oRSdet As ADODB.Recordset
 
-    Set oRSdet = oRS.NextRecordset
+    Set oRSdet = ors.NextRecordset
    
     sCadena = ""
     Dim c As Integer
@@ -5054,7 +5054,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoDet = Nothing
     
     Dim orsTri As ADODB.Recordset
-    Set orsTri = oRS.NextRecordset
+    Set orsTri = ors.NextRecordset
     
     sCadena = ""
     c = 1
@@ -5077,7 +5077,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     Set ArchivoTri = Nothing
     
     Dim orsLey As ADODB.Recordset
-    Set orsLey = oRS.NextRecordset
+    Set orsLey = ors.NextRecordset
     
     c = 1
     sCadena = ""
@@ -5098,7 +5098,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
     If cTipoDocto = "F" And LOC_TIPMOV = 10 Then
             'PAG
             Dim orsPAG As ADODB.Recordset
-            Set orsPAG = oRS.NextRecordset
+            Set orsPAG = ors.NextRecordset
             
             c = 1
             sCadena = ""
@@ -5118,7 +5118,7 @@ Private Sub CrearArchivoPlano2(cTipoDocto As String, cSerie As String, cNumero A
             
             'DPA
             Dim orsDPA As ADODB.Recordset
-            Set orsDPA = oRS.NextRecordset
+            Set orsDPA = ors.NextRecordset
             If UCase(xFormaPago) = "CREDITO" Or UCase(xFormaPago) = "CRÉDITO" Then
             If LK_CODCIA = "01" Then
                Set ArchivoDPA = obj_FSO.CreateTextFile(Leer_Ini(App.Path & "\config.ini", "CARPETA", "C:\") + sARCHIVOdpa, True)

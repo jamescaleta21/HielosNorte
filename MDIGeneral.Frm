@@ -391,7 +391,7 @@ Begin VB.MDIForm MDIForm1
          Shortcut        =   ^I
       End
       Begin VB.Menu SubmenuTit1 
-         Caption         =   "Datos de Ven&dedores"
+         Caption         =   "Datos de Usuarios"
          Enabled         =   0   'False
          Index           =   2
          Shortcut        =   ^D
@@ -819,11 +819,9 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Ordenes de Compra a Proveedores"
-         Enabled         =   0   'False
+         Caption         =   "&Registro de Empresas"
          Index           =   4
          Shortcut        =   ^O
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -831,11 +829,9 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Bloqueo de Periodos"
-         Enabled         =   0   'False
+         Caption         =   "Asignacion de Repartos"
          Index           =   6
          Shortcut        =   ^Q
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -843,10 +839,8 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "&Orden de Compra de Clientes"
-         Enabled         =   0   'False
+         Caption         =   "&Mantenimiento de Campañas"
          Index           =   8
-         Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
          Caption         =   "-"
@@ -1066,7 +1060,7 @@ Dim Wfile As String
 Dim WFORM As String
 Public Sub LLENA_ACCESO_OTROS(WSOTROS As String)
 Dim W1 As String * 2
-Dim i, wPosF, WPosV, cuenta As Integer
+Dim I, wPosF, WPosV, cuenta As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
@@ -1081,11 +1075,11 @@ cade = Trim(WSOTROS)
 cuenta = 0
 wPosF = 1
 a = 0
-For i = 1 To Len(cade)
- If Mid(cade, i, 1) = "." Then
+For I = 1 To Len(cade)
+ If Mid(cade, I, 1) = "." Then
    a = a + 1
  End If
-Next i
+Next I
 lk_OTROS_Count = a
 ReDim lk_OTROS(a)
 Do Until cuenta = a
@@ -1304,7 +1298,9 @@ ProBar.Value = ProBar.Value + 1
 If Len(CONST_SERVER) = 0 Or Len(CONST_UID) = 0 Then
   MsgBox "ADVERTENCIA ..!! DEBES DEFINIR EL NOMBRE DEL SERVIDOR , UID , PWD", 48, Pub_Titulo
 End If
-PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & CONST_PWD & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english;DATABASE=BDATOS"
+'PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & CONST_PWD & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english;DATABASE=BDATOS"
+PUB_ODBC = "ODBC;DRIVER={SQL Server};UID=" & CONST_UID & ";PWD=" & cClave & ";APP=Data From Designer;WSID=" & CONST_SERVER & ";LANGUAGE=us_english" ';DATABASE=BDATOS"
+
 'CONn$ = "dsn=" & wdsn & ";uid=sa;pwd=" & wAcceso & ";database=bdatos2;"
 ' * Permisos para los Menus *
 'Debug.Print PUB_ODBC
@@ -1865,7 +1861,7 @@ Dim var As String
 MsgBox "" & Chr(13) & "Visitenos en www.viarapidaperu.com", vbInformation, "Asesoria y Soporte"
 Exit Sub
 Dim ww As Form
-Dim i
+Dim I
 On Error GoTo OJO
 var = Trim(MDIForm1.ActiveForm.Name)
 If UCase(var) = "FORMGEN" Then
@@ -2013,8 +2009,8 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-'        frmARTI.Show
-        frmEmpresa.Show
+       frmARTI.Show
+       
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2365,20 +2361,19 @@ Private Sub submenutit7_Click(Index As Integer)
        frmPedidoHorario.Show
        Screen.MousePointer = 0
     Case 4
-        Screen.MousePointer = 11
-       Load FORM_PED ' frmOCProv
-       FORM_PED.Show
+       Screen.MousePointer = 11
+       frmEmpresa.Show
        Screen.MousePointer = 0
    Case 6
        Screen.MousePointer = 11
-       Load frmOpcion
+       'Load frmOpcion
+        frmRepartos.Show
        Screen.MousePointer = 0
-       frmOpcion.Show 1
     Case 8
        Screen.MousePointer = 11
-       Load frmOCCliente
-       Screen.MousePointer = 0
-       frmOCCliente.Show
+       'Load frmCampania
+       'Screen.MousePointer = 0
+       frmCampania.Show
     Case 10
        Screen.MousePointer = 11
        PUB_TIPOPRINT = 1
@@ -2399,25 +2394,7 @@ End Select
 End Sub
 
 
-Private Sub Timer1_Timer()
-'On Error GoTo SALE
-'Timer1.Enabled = False
-'If Trim(MDIForm1.gfecha.Caption) <> "" Then
-'  MDIForm1.gfecha.Caption = ""
-'Else
-'  MDIForm1.gfecha.Caption = Format(LK_FECHA_DIA, "dd/mm/yyyy")
-'End If
-'PSMSG_LLAVE(0) = LK_CODUSU
-'msg_llave.Requery
-'If Trim(msg_llave!USU_MSGBOX) <> "" Then
-'   MsgBox "Usted. Tiene un Mensaje de :" & Chr(13) & Chr(13) & Trim(msg_llave!USU_MSGBOX), vbExclamation, "Mensajeria Solution"
-'   msg_llave.Edit
-'   msg_llave!USU_MSGBOX = ""
-'   msg_llave.Update
-'End If
-'SALE:
-'
-End Sub
+
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim RetVal
