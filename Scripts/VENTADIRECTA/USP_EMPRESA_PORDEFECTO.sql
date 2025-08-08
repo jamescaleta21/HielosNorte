@@ -1,0 +1,31 @@
+IF EXISTS
+(
+    SELECT TOP 1
+           s.SPECIFIC_NAME
+    FROM INFORMATION_SCHEMA.ROUTINES s
+    WHERE s.ROUTINE_TYPE = 'PROCEDURE' -- Validación del tipo
+          AND ROUTINE_SCHEMA = 'dbo' -- Validación del esquema
+          AND s.ROUTINE_NAME = 'USP_EMPRESA_PORDEFECTO'
+) -- Validación del nombre
+BEGIN
+    DROP PROC [dbo].[USP_EMPRESA_PORDEFECTO];
+END;
+GO
+/*
+DECLARE @DATO INT
+EXEC USP_EMPRESA_PORDEFECTO @DATO OUT
+SELECT @DATO
+*/
+CREATE PROCEDURE [dbo].[USP_EMPRESA_PORDEFECTO]
+@IDEMPRESA INT OUT
+WITH ENCRYPTION
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT TOP 1 @IDEMPRESA =
+           e.IdEmpresa
+    FROM dbo.EMPRESA e
+    WHERE e.Activo = 1
+          AND e.Defecto = 1;
+END;
+GO
