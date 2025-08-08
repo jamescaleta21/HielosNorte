@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
 Begin VB.Form frmCLI 
    Caption         =   "Clientes / Proveedores"
    ClientHeight    =   7410
@@ -1609,7 +1609,9 @@ Begin VB.Form frmCLI
       End
       Begin VB.ComboBox cmbvendedor 
          Height          =   315
+         ItemData        =   "client.frx":049A
          Left            =   5700
+         List            =   "client.frx":049C
          Sorted          =   -1  'True
          Style           =   2  'Dropdown List
          TabIndex        =   141
@@ -1713,9 +1715,9 @@ Begin VB.Form frmCLI
       End
       Begin VB.ComboBox txtestado 
          Height          =   315
-         ItemData        =   "client.frx":049A
+         ItemData        =   "client.frx":049E
          Left            =   1515
-         List            =   "client.frx":04A4
+         List            =   "client.frx":04A8
          Style           =   2  'Dropdown List
          TabIndex        =   70
          Top             =   4380
@@ -1883,9 +1885,9 @@ Begin VB.Form frmCLI
          EndProperty
          ForeColor       =   &H00000080&
          Height          =   315
-         ItemData        =   "client.frx":04BB
+         ItemData        =   "client.frx":04BF
          Left            =   5085
-         List            =   "client.frx":04C5
+         List            =   "client.frx":04C9
          Style           =   2  'Dropdown List
          TabIndex        =   59
          Top             =   195
@@ -2671,7 +2673,7 @@ Begin VB.Form frmCLI
       EndProperty
       Height          =   735
       Left            =   10545
-      Picture         =   "client.frx":04EE
+      Picture         =   "client.frx":04F2
       Style           =   1  'Graphical
       TabIndex        =   31
       Top             =   3720
@@ -2697,7 +2699,7 @@ Begin VB.Form frmCLI
       EndProperty
       Height          =   735
       Left            =   10545
-      Picture         =   "client.frx":0C9C
+      Picture         =   "client.frx":0CA0
       Style           =   1  'Graphical
       TabIndex        =   32
       Top             =   4800
@@ -2717,7 +2719,7 @@ Begin VB.Form frmCLI
       EndProperty
       Height          =   735
       Left            =   10545
-      Picture         =   "client.frx":1512
+      Picture         =   "client.frx":1516
       Style           =   1  'Graphical
       TabIndex        =   27
       Top             =   480
@@ -2737,7 +2739,7 @@ Begin VB.Form frmCLI
       EndProperty
       Height          =   735
       Left            =   10545
-      Picture         =   "client.frx":23AC
+      Picture         =   "client.frx":23B0
       Style           =   1  'Graphical
       TabIndex        =   30
       Top             =   2550
@@ -2758,7 +2760,7 @@ Begin VB.Form frmCLI
       Height          =   735
       Left            =   10545
       MaskColor       =   &H00FFFFFF&
-      Picture         =   "client.frx":316E
+      Picture         =   "client.frx":3172
       Style           =   1  'Graphical
       TabIndex        =   28
       Top             =   1560
@@ -2918,7 +2920,7 @@ Dim CONTA As Integer
     CONTA = -1
     PUB_TIPREG = tip
     PUB_CODCIA = "00"
-    PUB_CODART = Val(CodRel)
+    PUB_CODART = val(CodRel)
     SQ_OPER = IIf(CodRel = 0, 2, 3)
     
     LEER_TAB_LLAVE
@@ -3030,11 +3032,11 @@ End Sub
 
 
 Public Sub BLOQUEA_TEXT()
-    txtnombre.Enabled = False
+    txtNombre.Enabled = False
     txtesposo.Enabled = False
     Txtesposa.Enabled = False
     TxtEmpresa.Enabled = False
-    Txtdireccion.Enabled = False
+    txtdireccion.Enabled = False
     Txtnumdir.Enabled = False
     TxtZona.Enabled = False
     TxtSubZona.Enabled = False
@@ -3094,7 +3096,7 @@ Public Sub DESBLOQUEA_TEXT()
     txtesposo.Enabled = True
     Txtesposa.Enabled = True
     TxtEmpresa.Enabled = True
-    Txtdireccion.Enabled = True
+    txtdireccion.Enabled = True
     Txtnumdir.Enabled = True
     TxtZona.Enabled = True
     TxtSubZona.Enabled = True
@@ -3196,8 +3198,8 @@ SQL = "select * FROM DIRCLI where codcia=? and DIRCLI=? AND codcli=? and cp=?"
   PS_DIREC.rdoParameters(3) = " "
   Set llave_Direc = PS_DIREC.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
   PS_DIREC(0) = LK_CODCIA
-  PS_DIREC(1) = Val(frmCLI.cboDireccion.ItemData(cboDireccion.ListIndex))
-  PS_DIREC(2) = Val(frmCLI.txt_key)
+  PS_DIREC(1) = val(frmCLI.cboDireccion.ItemData(cboDireccion.ListIndex))
+  PS_DIREC(2) = val(frmCLI.Txt_key)
   'OJO
   If Trim(Left$(CmbCGP.Text, 1)) = "C" Then
     PS_DIREC(3) = "C"
@@ -3208,11 +3210,11 @@ SQL = "select * FROM DIRCLI where codcia=? and DIRCLI=? AND codcli=? and cp=?"
   If llave_Direc.EOF Then Exit Sub
   
   Do Until llave_Direc.EOF
-   ASIGNA_INT TxtLugarTrab, Val(llave_Direc!CLI_LUGAR_TRAB)
-   ASIGNA_INT txtdepartamento1, Val(llave_Direc!CLI_DEPA1)
-   ASIGNA_INT TxtZonaTrabajo, Val(llave_Direc!cli_TRAB_ZONA)
-   ASIGNA_INT cboProvincia, Val(llave_Direc!CLI_CASA_SUBZONA)
-   ASIGNA_INT TxtSubZonaTrabajo, Val(llave_Direc!cli_TRAB_SUBZONA)
+   ASIGNA_INT TxtLugarTrab, val(llave_Direc!CLI_LUGAR_TRAB)
+   ASIGNA_INT txtdepartamento1, val(llave_Direc!CLI_DEPA1)
+   ASIGNA_INT TxtZonaTrabajo, val(llave_Direc!cli_TRAB_ZONA)
+   ASIGNA_INT cboProvincia, val(llave_Direc!CLI_CASA_SUBZONA)
+   ASIGNA_INT TxtSubZonaTrabajo, val(llave_Direc!cli_TRAB_SUBZONA)
    txtNumDirTrabajo = llave_Direc!NUMERO
    txtDirTrabajo = llave_Direc!direc
    txtpropiedad2 = llave_Direc!ref
@@ -3264,8 +3266,8 @@ End Sub
 
 Private Sub CmbCGP_Click()
 If llave1 <> "X" Then
-  txt_key.Enabled = False
-  If Trim(txtnombre.Text) <> "" Then
+  Txt_key.Enabled = False
+  If Trim(txtNombre.Text) <> "" Then
     LIMPIA_CLI
   End If
   CmbCGP_KeyPress 13
@@ -3274,7 +3276,7 @@ End Sub
 
 Private Sub CmbCGP_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
@@ -3346,9 +3348,9 @@ If KeyAscii = 13 Then
           LLENA_GRUPOS txtsubgrupo, 334
       End If
 
-    frmCLI.txt_key.Locked = False
-    frmCLI.txt_key.Enabled = True
-    frmCLI.txt_key.SetFocus
+    frmCLI.Txt_key.Locked = False
+    frmCLI.Txt_key.Enabled = True
+    frmCLI.Txt_key.SetFocus
     
 End If
 End Sub
@@ -3402,7 +3404,7 @@ If Left(cmdAgregar.Caption, 2) = "&A" And cmdAgregar.Enabled = True Then
     cmdEliminar.Enabled = False
     'AGREGADO
     'If Trim(Left$(CmbCGP, 1)) = "C" Then
-    cmdCancel.Enabled = True
+    cmdcancel.Enabled = True
     cmdDelete.Enabled = True
     cmdDireccion.Enabled = True
     cboDireccion.Enabled = True
@@ -3410,18 +3412,18 @@ If Left(cmdAgregar.Caption, 2) = "&A" And cmdAgregar.Enabled = True Then
     
     DESBLOQUEA_TEXT
     If LK_EMP <> "PAR" Then
-     txt_key.Locked = True
+     Txt_key.Locked = True
     End If
     LIMPIA_CLI
     If Left(CmbCGP.Text, 1) = "C" Then
         frmCLI.OptNombre(0).Value = True
-        frmCLI.txt_key = GENERA_CODI
+        frmCLI.Txt_key = GENERA_CODI
     ElseIf Left(CmbCGP.Text, 1) = "P" Then
         frmCLI.OptNombre(0).Value = True
-        frmCLI.txt_key = GENERA_PRO
+        frmCLI.Txt_key = GENERA_PRO
     End If
     frmCLI.txtesposo.SetFocus
-    txt_key.ToolTipText = ""
+    Txt_key.ToolTipText = ""
     CmbCGP.Enabled = False
     If frmCLI.cmbgrupo.ListCount <> 0 Then frmCLI.cmbgrupo.ListIndex = 12
     If frmCLI.cboDias.ListCount <> 0 Then frmCLI.cboDias.ListIndex = 0
@@ -3494,15 +3496,15 @@ PASACONTAB:
      If Not CONSIS_CLI Then
           Exit Sub
      End If
-     If LK_EMP = "PAR" And COD_ORIGINAL <> Val(txt_key.Text) Then
+     If LK_EMP = "PAR" And COD_ORIGINAL <> val(Txt_key.Text) Then
       SQ_OPER = 1
-      pu_codclie = Val(txt_key.Text)
+      pu_codclie = val(Txt_key.Text)
       pu_cp = "C"
       pu_codcia = LK_CODCIA
       LEER_CLILOC_LLAVE
       If Not cliloc_llave.EOF Then
          MsgBox "Cliente Existe en Compañia ..", 48, Pub_Titulo
-         Azul txt_key, txt_key
+         Azul Txt_key, Txt_key
          Exit Sub
       End If
      End If
@@ -3510,7 +3512,7 @@ PASACONTAB:
      CN.Execute "Begin Transaction", rdExecDirect
      pub_cadena = "SELECT * FROM CONTROLL"
      Set con_llave = CN.OpenResultset(pub_cadena, rdOpenKeyset, rdConcurLock)
-     frmCLI.txt_key = GENERA_CODI
+     frmCLI.Txt_key = GENERA_CODI
      If wGARANTES = 1 Then
            GRABAR_CLI "G"
      ElseIf wGARANTES = 2 Then
@@ -3526,7 +3528,7 @@ PASACONTAB:
   ElseIf Left(CmbCGP.Text, 1) = "P" Then
 
       If pasa = 1 Then
-         If EXISTE_CLI("P", Left(frmCLI.txtesposo.Text, 15), Trim(txt_key.Text)) Then
+         If EXISTE_CLI("P", Left(frmCLI.txtesposo.Text, 15), Trim(Txt_key.Text)) Then
             MENSAJE_CLI " Existen algunos Proveedor con estos NOMBRES .."
             frmCLI.ListExiste.SetFocus
             Exit Sub
@@ -3566,7 +3568,7 @@ PASACONTAB:
        CN.Execute "Begin Transaction", rdExecDirect
        pub_cadena = "SELECT * FROM CONTROLL"
        Set con_llave = CN.OpenResultset(pub_cadena, rdOpenKeyset, rdConcurLock)
-       frmCLI.txt_key = GENERA_PRO
+       frmCLI.Txt_key = GENERA_PRO
        GRABAR_CLI "P"
        con_llave.Close
        CN.Execute "Commit Transaction", rdExecDirect
@@ -3578,11 +3580,11 @@ PASACONTAB:
     cmdModificar.Enabled = True
 
     BLOQUEA_TEXT
-    txt_key.Locked = False
+    Txt_key.Locked = False
     CmbCGP.Enabled = True
     Screen.MousePointer = 0
     frmCLI.SSTab1.tab = 0
-    txt_key.ToolTipText = ""
+    Txt_key.ToolTipText = ""
     LIMPIA_CLI
     LOC_CTA_CLI = ""
     LOC_CTA_CLI2 = ""
@@ -3593,7 +3595,7 @@ ESCAPA:
    If Err.Number = 40002 Then
       Screen.MousePointer = 0
       MsgBox "El Codigo generado ya existe " & Chr(13) & "Se procede a generar el siguiente codigo y a continuación " & Chr(13) & "Intente Grabar Nuevamente...", 48, Pub_Titulo
-      frmCLI.txt_key = GENERA_CODI
+      frmCLI.Txt_key = GENERA_CODI
       Resume Next
       Exit Sub
    Else
@@ -3615,15 +3617,15 @@ End Sub
 
 Private Sub cmdagregar_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
 
 Private Sub cmdAgregar_KeyPress(KeyAscii As Integer)
 If KeyAscii = 27 Then
-   If frmCLI.txt_key.Visible Then
-      frmCLI.txt_key.SetFocus
+   If frmCLI.Txt_key.Visible Then
+      frmCLI.Txt_key.SetFocus
    End If
 End If
 
@@ -3635,14 +3637,14 @@ Dim dir As String
 Dim strRef As String
 Dim strDir As String
 On Error GoTo ErrorHandle
-If cmdCancel.Caption = "Cancelar" Then
-  cmdCancel.Caption = "Modificar"
+If cmdcancel.Caption = "Cancelar" Then
+  cmdcancel.Caption = "Modificar"
   cmdDireccion.Caption = "Agregar"
   cmdDelete.Enabled = True
   cboDireccion.ListIndex = 0
   Exit Sub
-ElseIf cmdCancel.Caption = "Grabar" Then
- cmdCancel.Caption = "Modificar"
+ElseIf cmdcancel.Caption = "Grabar" Then
+ cmdcancel.Caption = "Modificar"
  cmdDireccion.Caption = "Agregar"
  cmdDelete.Enabled = True
  strDir = Trim(txtDirTrabajo)
@@ -3656,21 +3658,21 @@ ElseIf cmdCancel.Caption = "Grabar" Then
     dir = dir + ", Dpt. " + Trim(Left$(txtdepartamento1, 30))
  SQL = "UPDATE DIRCLI " & _
  "SET DIREC='" & Trim(Mid(txtDirTrabajo, 1, 40)) & "',ref= '" & Trim(txtpropiedad2) & "',cli_lugar_trab='" & _
- Val(Right(frmCLI.TxtLugarTrab, 6)) & "',cli_trab_zona='" & _
- Val(Right(frmCLI.TxtZonaTrabajo.Text, 6)) & "',cli_depa1='" & _
- Val(Right(frmCLI.txtdepartamento1.Text, 6)) & "',cli_casa_subzona='" & _
- Val(Right(frmCLI.cboProvincia, 6)) & "',cli_trab_subzona='" & _
- Val(Right(frmCLI.TxtSubZonaTrabajo, 6)) & "',Numero='" & _
- Val(txtNumDirTrabajo) & "',dircomp='" & Mid(dir, 1, 100) & "' " & _
- "WHERE CODCIA='" & LK_CODCIA & "' AND CODCLI='" & Val(frmCLI.txt_key) & "' AND DIRCLI='" & Val(cboDireccion.ItemData(cboDireccion.ListIndex)) & "'"
+ val(Right(frmCLI.TxtLugarTrab, 6)) & "',cli_trab_zona='" & _
+ val(Right(frmCLI.TxtZonaTrabajo.Text, 6)) & "',cli_depa1='" & _
+ val(Right(frmCLI.txtdepartamento1.Text, 6)) & "',cli_casa_subzona='" & _
+ val(Right(frmCLI.cboProvincia, 6)) & "',cli_trab_subzona='" & _
+ val(Right(frmCLI.TxtSubZonaTrabajo, 6)) & "',Numero='" & _
+ val(txtNumDirTrabajo) & "',dircomp='" & Mid(dir, 1, 100) & "' " & _
+ "WHERE CODCIA='" & LK_CODCIA & "' AND CODCLI='" & val(frmCLI.Txt_key) & "' AND DIRCLI='" & val(cboDireccion.ItemData(cboDireccion.ListIndex)) & "'"
  CN.Execute SQL
  LLENA_DIRECCIONES
  cboDireccion.ListIndex = 0
  
-ElseIf cmdCancel.Caption = "Modificar" Then
+ElseIf cmdcancel.Caption = "Modificar" Then
  cmdDelete.Enabled = False
  cmdDireccion.Caption = "Cancelar"
- cmdCancel.Caption = "Grabar"
+ cmdcancel.Caption = "Grabar"
 End If
 Exit Sub
 ErrorHandle:
@@ -3685,21 +3687,21 @@ End Sub
 Private Sub cmdCancelar_Click()
 'agregado
 cmdDelete.Enabled = False
-cmdCancel.Enabled = False
+cmdcancel.Enabled = False
 cmdDireccion.Enabled = False
 cboProvincia.Enabled = False
 cboDireccion.Enabled = False
 
-If txt_key.Visible = False Then
+If Txt_key.Visible = False Then
   Exit Sub
 End If
 If Left(cmdAgregar.Caption, 2) = "&A" And Left(cmdModificar.Caption, 2) = "&M" Then
     LIMPIA_CLI
     cmdCancelar.Enabled = True
-    txt_key.Locked = False
+    Txt_key.Locked = False
     MENSAJE_CLI "Proceso Cancelado... !!!    "
-    txt_key.Enabled = True
-    txt_key.SetFocus
+    Txt_key.Enabled = True
+    Txt_key.SetFocus
     frmCLI.SSTab1.tab = 0
     Screen.MousePointer = 0
     pasa = 0
@@ -3716,20 +3718,20 @@ End If
         Else
            LLENA_CLI 1, "P"
         End If
-        txt_key.Locked = True
+        Txt_key.Locked = True
      Else
         GoSub ELI_TABLAS
         cmdAgregar.Caption = "&Agregar"
         cmdcontab.Enabled = False
         LIMPIA_CLI
-        txt_key.Locked = False
-        txt_key.SetFocus
+        Txt_key.Locked = False
+        Txt_key.SetFocus
      End If
      cmdAgregar.Enabled = True
      cmdEliminar.Enabled = True
      cmdModificar.Enabled = True
 
-     txt_key.ToolTipText = ""
+     Txt_key.ToolTipText = ""
      wGARANTES = 0
      BLOQUEA_TEXT
      MENSAJE_CLI "Proceso Cancelado... !!!    "
@@ -3744,7 +3746,7 @@ End If
 Exit Sub
 ELI_TABLAS:
 If LK_FLAG_GRIFO <> "A" Then Return
-pu_codclie = Val(txt_key.Text)
+pu_codclie = val(Txt_key.Text)
 If pu_codclie = 0 Then Return
 PSPLAC_LLAVE(0) = LK_CODCIA
 PSPLAC_LLAVE(1) = 2101
@@ -3770,7 +3772,7 @@ End Sub
 
 Private Sub cmdCancelar_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
@@ -3813,28 +3815,28 @@ End Sub
 
 Private Sub cmdCerrar_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
 
 Private Sub cmdCerrar_KeyPress(KeyAscii As Integer)
 If KeyAscii = 27 Then
-    frmCLI.txt_key.SetFocus
+    frmCLI.Txt_key.SetFocus
 End If
 End Sub
 
 Private Sub cmdconfirma_Click()
   If Op(0).Value And Left(frmCLI.CmbCGP, 1) = "C" Then
-     frmCLI.txt_key.Text = ListExiste.TextMatrix(ListExiste.Row, 1)
+     frmCLI.Txt_key.Text = ListExiste.TextMatrix(ListExiste.Row, 1)
      pasa = 1
      frmCLI.F14.Visible = False
      cmdagregar_Click
      Exit Sub
   End If
   If Op(0).Value And Left(frmCLI.CmbCGP, 1) = "P" Then
-    frmCLI.txtnombre.Text = ListExiste.TextMatrix(ListExiste.Row, 2)
-    frmCLI.txt_key.Text = ListExiste.TextMatrix(ListExiste.Row, 1)
+    frmCLI.txtNombre.Text = ListExiste.TextMatrix(ListExiste.Row, 2)
+    frmCLI.Txt_key.Text = ListExiste.TextMatrix(ListExiste.Row, 1)
      pasa = 1
      frmCLI.F14.Visible = False
      If Left(cmdAgregar.Caption, 2) = "&G" And cmdAgregar.Enabled = True Then cmdagregar_Click
@@ -3911,14 +3913,14 @@ PB.Visible = False
 frmBuscacta.Show 1
 LOC_CTA_CLI = Trim(frmBuscacta.tcuenta)
 LOC_DES_CLI = Trim(frmBuscacta.tnombre.Text)
-LOC_NIVEL = Val(frmBuscacta.txtdatos(0).Text)
+LOC_NIVEL = val(frmBuscacta.txtdatos(0).Text)
 LOC_CTA_SUP = Trim(frmBuscacta.txtdatos(1).Text)
 LOC_FLAG_AFEC = Trim(frmBuscacta.txtdatos(2).Text)
 LOC_ESTADO = Trim(frmBuscacta.txtdatos(3).Text)
-LOC_TIPO_CTA = Val(frmBuscacta.txtdatos(4).Text)
-LOC_SIGNO_D = Val(frmBuscacta.txtdatos(5).Text)
-LOC_SIGNO_H = Val(frmBuscacta.txtdatos(6).Text)
-LOC_ACT_PAS = Val(frmBuscacta.txtdatos(7).Text)
+LOC_TIPO_CTA = val(frmBuscacta.txtdatos(4).Text)
+LOC_SIGNO_D = val(frmBuscacta.txtdatos(5).Text)
+LOC_SIGNO_H = val(frmBuscacta.txtdatos(6).Text)
+LOC_ACT_PAS = val(frmBuscacta.txtdatos(7).Text)
 tcuenta = Trim(LOC_CTA_CLI)
 If Trim(LOC_DES_CLI) = "" And Trim(LOC_DES_CLI) = "" Then
  LOC_CANCELA = 1
@@ -3998,14 +4000,14 @@ PB.Visible = False
 frmBuscacta.Show 1
 LOC_CTA_CLI2 = Trim(frmBuscacta.tcuenta)
 LOC_DES_CLI2 = Trim(frmBuscacta.tnombre.Text)
-LOC_NIVEL2 = Val(frmBuscacta.txtdatos(0).Text)
+LOC_NIVEL2 = val(frmBuscacta.txtdatos(0).Text)
 LOC_CTA_SUP2 = Trim(frmBuscacta.txtdatos(1).Text)
 LOC_FLAG_AFEC2 = Trim(frmBuscacta.txtdatos(2).Text)
 LOC_ESTADO2 = Trim(frmBuscacta.txtdatos(3).Text)
-LOC_TIPO_CTA2 = Val(frmBuscacta.txtdatos(4).Text)
-LOC_SIGNO_D2 = Val(frmBuscacta.txtdatos(5).Text)
-LOC_SIGNO_H2 = Val(frmBuscacta.txtdatos(6).Text)
-LOC_ACT_PAS2 = Val(frmBuscacta.txtdatos(7).Text)
+LOC_TIPO_CTA2 = val(frmBuscacta.txtdatos(4).Text)
+LOC_SIGNO_D2 = val(frmBuscacta.txtdatos(5).Text)
+LOC_SIGNO_H2 = val(frmBuscacta.txtdatos(6).Text)
+LOC_ACT_PAS2 = val(frmBuscacta.txtdatos(7).Text)
 tcuenta2 = Trim(LOC_CTA_CLI2)
 If Trim(LOC_DES_CLI2) = "" And Trim(LOC_DES_CLI2) = "" Then
  LOC_CANCELA = 1
@@ -4033,8 +4035,8 @@ Private Sub cmdDelete_Click()
   With cboDireccion
   On Error GoTo ErrorDelete
   SQL = "DELETE FROM DIRCLI WHERE CODCIA='" & LK_CODCIA & "' " & _
-        "AND DIRCLI='" & Val(.ItemData(.ListIndex)) & "' AND " & _
-        "CODCLI='" & Val(frmCLI.txt_key) & "' AND CP= '" & Left(CmbCGP.Text, 1) & "'"
+        "AND DIRCLI='" & val(.ItemData(.ListIndex)) & "' AND " & _
+        "CODCLI='" & val(frmCLI.Txt_key) & "' AND CP= '" & Left(CmbCGP.Text, 1) & "'"
   End With
   
   If MsgBox("Esta seguro de Eliminar esta dirección", vbYesNo, "Eliminar Dirección") = vbYes Then
@@ -4057,7 +4059,7 @@ ErrorDelete:
 End Sub
 
 Private Sub cmddescto_Click()
-pu_codclie = Val(txt_key.Text)
+pu_codclie = val(Txt_key.Text)
 If pu_codclie = 0 Then Exit Sub
 'PUB_TIPREG = 2301
 'PUB_CODCIA = LK_CODCIA
@@ -4103,24 +4105,24 @@ If cmdDireccion.Caption = "Grabar" Then
      SQL = "insert into dircli " & _
      "(codcia,codcli,cp,direc,ref,CLI_LUGAR_TRAB, " & _
      "CLI_TRAB_ZONA,CLI_CASA_SUBZONA,CLI_TRAB_SUBZONA,NUMERO,DIRCOMP,CLI_DEPA1) " & _
-     "values('" & LK_CODCIA & "','" & Val(frmCLI.txt_key) & "', '" & Trim(Left$(CmbCGP.Text, 1)) & "','" & strDir & "','" & strRef & "','" & _
-     Val(Right(frmCLI.TxtLugarTrab, 6)) & "','" & _
-     Val(Right(frmCLI.TxtZonaTrabajo.Text, 6)) & "','" & _
-     Val(Right(frmCLI.cboProvincia, 6)) & "','" & _
-     Val(Right(frmCLI.TxtSubZonaTrabajo, 6)) & "','" & _
-     Val(txtNumDirTrabajo) & "','" & dir & "','" & _
-     Val(Right(frmCLI.txtdepartamento1, 6)) & "')"
+     "values('" & LK_CODCIA & "','" & val(frmCLI.Txt_key) & "', '" & Trim(Left$(CmbCGP.Text, 1)) & "','" & strDir & "','" & strRef & "','" & _
+     val(Right(frmCLI.TxtLugarTrab, 6)) & "','" & _
+     val(Right(frmCLI.TxtZonaTrabajo.Text, 6)) & "','" & _
+     val(Right(frmCLI.cboProvincia, 6)) & "','" & _
+     val(Right(frmCLI.TxtSubZonaTrabajo, 6)) & "','" & _
+     val(txtNumDirTrabajo) & "','" & dir & "','" & _
+     val(Right(frmCLI.txtdepartamento1, 6)) & "')"
      
      CN.Execute SQL
      LLENA_DIRECCIONES
      cboDireccion.SetFocus
      cmdDireccion.Caption = "Agregar"
-     cmdCancel.Caption = "Modificar"
+     cmdcancel.Caption = "Modificar"
     cmdDelete.Enabled = True
  ElseIf cmdDireccion.Caption = "Agregar" Then
   cmdDelete.Enabled = False
   cmdDireccion.Caption = "Grabar"
-  cmdCancel.Caption = "Cancelar"
+  cmdcancel.Caption = "Cancelar"
   TxtLugarTrab.ListIndex = -1
   txtdepartamento1.ListIndex = -1
   TxtZonaTrabajo.ListIndex = -1
@@ -4133,7 +4135,7 @@ If cmdDireccion.Caption = "Grabar" Then
  ElseIf cmdDireccion.Caption = "Cancelar" Then
  cmdDireccion.Caption = "Agregar"
  cmdDelete.Enabled = True
- cmdCancel.Caption = "Modificar"
+ cmdcancel.Caption = "Modificar"
  cboDireccion.ListIndex = 0
  End If
  'llave_rep01.Requery
@@ -4144,15 +4146,15 @@ End Sub
 Private Sub cmdEliminar_Click()
 Dim wcias As String
 On Error GoTo SALE
-If Len(txt_key) = 0 Or Len(txtnombre) = 0 Then
+If Len(Txt_key) = 0 Or Len(txtNombre) = 0 Then
    MENSAJE_CLI "NO a seleccionado NADA ... !"
    Exit Sub
 End If
   Dim PS_REP01 As rdoQuery
   Dim llave_rep01 As rdoResultset
   Screen.MousePointer = 11
-  LblMensaje.Visible = True
-  LblMensaje.Caption = "Verificando Data.  un Momento..."
+  lblMensaje.Visible = True
+  lblMensaje.Caption = "Verificando Data.  un Momento..."
   pub_cadena = "SELECT FAR_CODCIA FROM FACART WHERE FAR_CODCIA = ? AND FAR_CODCLIE = ? "
   Set PS_REP01 = CN.CreateQuery("", pub_cadena)
   PS_REP01.rdoParameters(0) = " "
@@ -4163,7 +4165,7 @@ End If
   PS_REP01(1) = cliloc_llave!cli_codclie
   llave_rep01.Requery
   If Not llave_rep01.EOF Then
-     LblMensaje.Visible = False
+     lblMensaje.Visible = False
      Screen.MousePointer = 0
      MsgBox "NO se Puede Eliminar ...  CLIENTE  TIENE H I S T O R I A.. (en Movimientos)", 48, Pub_Titulo
      Exit Sub
@@ -4178,14 +4180,14 @@ End If
   PS_REP01(1) = cliloc_llave!cli_codclie
   llave_rep01.Requery
   If Not llave_rep01.EOF Then
-     LblMensaje.Visible = False
+     lblMensaje.Visible = False
      Screen.MousePointer = 0
      MsgBox "NO se Puede Eliminar ...  CLIENTE  TIENE H I S T O R I A.. (en saldos Iniciales)", 48, Pub_Titulo
      Exit Sub
   End If
   
   Screen.MousePointer = 0
-  LblMensaje.Caption = ""
+  lblMensaje.Caption = ""
   If Trim(Nulo_Valors(GEN!gen_cli_cias)) <> "" Then
     wcias = Trim(GEN!gen_cli_cias)
     MsgBox "O J O ...  Al Eliminar este Cliente tambien debe hacerlo con las demas Compañias relacionadas : " & wcias, 48, Pub_Titulo
@@ -4199,8 +4201,8 @@ End If
   If Pub_Respuesta = vbYes Then   ' El usuario eligió
     Screen.MousePointer = 11
     cliloc_llave.Delete
-    frmCLI.txt_key.Text = ""
-    frmCLI.txt_key.Locked = False
+    frmCLI.Txt_key.Text = ""
+    frmCLI.Txt_key.Locked = False
     'If Trim(tcuenta.Text) <> "" And LK_EMP <> "CAM" Then
     '        SQ_OPER = 1
     '        PUB_CUENTA = Trim(tcuenta.Text)
@@ -4240,14 +4242,14 @@ End Sub
 
 Private Sub cmdEliminar_GotFocus()
 If ListView1.Visible Then
-frmCLI.txt_key.Text = ""
+frmCLI.Txt_key.Text = ""
 frmCLI.ListView1.Visible = False
 End If
 End Sub
 
 Private Sub cmdEliminar_KeyPress(KeyAscii As Integer)
 If KeyAscii = 27 Then
-    frmCLI.txt_key.SetFocus
+    frmCLI.Txt_key.SetFocus
 End If
 
 End Sub
@@ -4261,7 +4263,7 @@ Private Sub CmdEscapa_Click()
 End Sub
 
 Private Sub cmdmante_Click()
-pu_codclie = Val(txt_key.Text)
+pu_codclie = val(Txt_key.Text)
 If pu_codclie = 0 Then Exit Sub
 'PUB_TIPREG = 2101
 'PUB_CODCIA = LK_CODCIA
@@ -4274,7 +4276,7 @@ If pu_codclie = 0 Then Exit Sub
 End Sub
 
 Private Sub CmdModificar_Click()
-If Len(txt_key) = 0 Or Len(txtnombre) = 0 Then
+If Len(Txt_key) = 0 Or Len(txtNombre) = 0 Then
    MENSAJE_CLI "NO a seleccionado NADA ... !"
    Exit Sub
 End If
@@ -4287,7 +4289,7 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
     condi.Enabled = False
     'agregado
     'If Trim(Left$(CmbCGP, 1)) = "C" Then
-    cmdCancel.Enabled = True
+    cmdcancel.Enabled = True
     cmdDelete.Enabled = True
     cmdDireccion.Enabled = True
     cboDireccion.Enabled = True
@@ -4299,7 +4301,7 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
     If LK_CODUSU = "ADMIN" Or LK_CODUSU = "SUPERVISOR" Then
        lisdescto.Enabled = True
     End If
-    txt_key.Locked = True
+    Txt_key.Locked = True
     frmCLI.txtesposo.SetFocus
     pasa = 1
     LOC_CTA_CLI = ""
@@ -4308,7 +4310,7 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
  Else
    If Left(CmbCGP.Text, 1) = "C" Then
       If pasa = 1 Then
-         If EXISTE_CLI("C", Left(frmCLI.txtesposo.Text, 15), Trim(txt_key.Text)) Then
+         If EXISTE_CLI("C", Left(frmCLI.txtesposo.Text, 15), Trim(Txt_key.Text)) Then
             MENSAJE_CLI " Existen algunos clientes con estos NOMBRES .."
             frmCLI.ListExiste.SetFocus
             Exit Sub
@@ -4317,7 +4319,7 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
       pasa = 0
    ElseIf Left(CmbCGP.Text, 1) = "P" Then
      If pasa = 1 Then
-      If EXISTE_CLI("P", Left(frmCLI.txtesposo.Text, 15), Trim(txt_key.Text)) Then
+      If EXISTE_CLI("P", Left(frmCLI.txtesposo.Text, 15), Trim(Txt_key.Text)) Then
          MENSAJE_CLI " Existen algunos Proveedor con estos NOMBRES .."
          frmCLI.ListExiste.SetFocus
          Exit Sub
@@ -4362,7 +4364,7 @@ PASACONTAB:
     cmdEliminar.Enabled = True
     cmdAgregar.Enabled = True
     BLOQUEA_TEXT
-    txt_key.Locked = True
+    Txt_key.Locked = True
     CmbCGP.Enabled = True
     cmdCancelar.SetFocus
     Screen.MousePointer = 0
@@ -4374,7 +4376,7 @@ End Sub
 
 Private Sub cmdModificar_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
@@ -4384,7 +4386,7 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub condi_Click()
- t_diasfac.Text = Val(Right(condi.Text, 6))
+ t_diasfac.Text = val(Right(condi.Text, 6))
 End Sub
 
 Private Sub condi_KeyPress(KeyAscii As Integer)
@@ -4451,15 +4453,15 @@ If Pub_Respuesta = vbYes Then
     cliloc_llave!CLI_CUENTA_CONTAB = " "
     cliloc_llave!CLI_CUENTA_CONTAB2 = " "
     cliloc_llave!CLI_DET_TOT = " "
-    cliloc_llave!cli_limcre2 = Val(txtlimite.Text)
-    cliloc_llave!cli_limcre = Val(Txtlimsoles.Text)
+    cliloc_llave!cli_limcre2 = val(txtlimite.Text)
+    cliloc_llave!cli_limcre = val(Txtlimsoles.Text)
     cliloc_llave.Update
     MsgBox "Cliente Creado ", 48, Pub_Titulo
 
    Exit Sub
 End If
 
-   If Val(frmCLI.txt_key.Text) <= 0 Then
+   If val(frmCLI.Txt_key.Text) <= 0 Then
       MsgBox " Consulte  y  despues Copiar.."
       Exit Sub
    End If
@@ -4488,18 +4490,18 @@ End If
     cliloc_llave!CLI_NOMBRE_ESPOSA = Txtesposa.Text
     cliloc_llave!CLI_NOMBRE_EMPRESA = TxtEmpresa.Text
     ASIGNA_123
-    cliloc_llave!CLI_NOMBRE = frmCLI.txtnombre.Text
-    cliloc_llave!CLI_CASA_DIREC = Txtdireccion.Text
-    cliloc_llave!CLI_CASA_NUM = Val(Txtnumdir.Text)
-    cliloc_llave!CLI_CASA_ZONA = Val(Right(TxtZona.Text, 6))
-    cliloc_llave!CLI_LUGAR_CASA = Val(Right(TxtLugarCasa.Text, 6))
-    cliloc_llave!CLI_LUGAR_TRAB = Val(Right(TxtLugarTrab.Text, 6))
-    cliloc_llave!CLI_CASA_SUBZONA = Val(Right(TxtSubZona.Text, 6))
-    cliloc_llave!CLI_ZONA_NEW = Val(Right(txtZonaNew.Text, 6))
+    cliloc_llave!CLI_NOMBRE = frmCLI.txtNombre.Text
+    cliloc_llave!CLI_CASA_DIREC = txtdireccion.Text
+    cliloc_llave!CLI_CASA_NUM = val(Txtnumdir.Text)
+    cliloc_llave!CLI_CASA_ZONA = val(Right(TxtZona.Text, 6))
+    cliloc_llave!CLI_LUGAR_CASA = val(Right(TxtLugarCasa.Text, 6))
+    cliloc_llave!CLI_LUGAR_TRAB = val(Right(TxtLugarTrab.Text, 6))
+    cliloc_llave!CLI_CASA_SUBZONA = val(Right(TxtSubZona.Text, 6))
+    cliloc_llave!CLI_ZONA_NEW = val(Right(txtZonaNew.Text, 6))
     cliloc_llave!CLI_TRAB_DIREC = txtDirTrabajo.Text
     cliloc_llave!CLI_TRAB_NUM = Nulo_Valor0(txtNumDirTrabajo.Text)
-    cliloc_llave!cli_TRAB_ZONA = Val(Right(frmCLI.TxtZonaTrabajo.Text, 6))
-    cliloc_llave!cli_TRAB_SUBZONA = Val(Right(TxtSubZonaTrabajo.Text, 6))
+    cliloc_llave!cli_TRAB_ZONA = val(Right(frmCLI.TxtZonaTrabajo.Text, 6))
+    cliloc_llave!cli_TRAB_SUBZONA = val(Right(TxtSubZonaTrabajo.Text, 6))
     cliloc_llave!cli_ruc_esposo = txtRUCesposo.Text
     cliloc_llave!cli_RUC_ESPOSA = txtRUCesposa.Text
     cliloc_llave!CLI_RUC_EMPRESA = txtRUCempresa.Text
@@ -4510,14 +4512,14 @@ End If
     cliloc_llave!CLI_AUTOAVALUO = frmCLI.txtautovaluo.Text
     cliloc_llave!CLI_AUTO1 = frmCLI.txtauto1.Text
     cliloc_llave!cli_auto2 = frmCLI.txtauto2.Text
-    cliloc_llave!CLI_PRENDA = Val(Right(frmCLI.cboDias.Text, 6))
-    cliloc_llave!CLI_CIA_REF = Val(Right(frmCLI.cmbvendedor.Text, 6))
+    cliloc_llave!CLI_PRENDA = val(Right(frmCLI.cboDias.Text, 6))
+    cliloc_llave!CLI_CIA_REF = val(Right(frmCLI.cmbvendedor.Text, 6))
     cliloc_llave!CLI_TELEF1 = frmCLI.txttelefono1.Text
     cliloc_llave!CLI_TELEF2 = frmCLI.txttelefono2.Text
     cliloc_llave!CLI_OTRO_CONTR = frmCLI.otrocontrato.Value
     cliloc_llave!CLI_LETRA = frmCLI.letraotorgado.Value
-    cliloc_llave!CLI_GRUPO = Val(Right(frmCLI.cmbgrupo.Text, 6))
-    cliloc_llave!CLI_SUBGRUPO = Val(Right(frmCLI.txtsubgrupo.Text, 6))
+    cliloc_llave!CLI_GRUPO = val(Right(frmCLI.cmbgrupo.Text, 6))
+    cliloc_llave!CLI_SUBGRUPO = val(Right(frmCLI.txtsubgrupo.Text, 6))
     cliloc_llave!CLI_nucleo = frmCLI.txtNucleo.Text
     cliloc_llave!CLI_estado = Left(frmCLI.txtestado.Text, 1)
     cliloc_llave!CLI_programado = Nulo_Valors(txtprog.Text)
@@ -4528,8 +4530,8 @@ End If
       txtDTX.Text = " "
     End If
     cliloc_llave!CLI_DET_TOT = txtDTX.Text
-    cliloc_llave!cli_limcre2 = Val(txtlimite.Text)
-    cliloc_llave!cli_limcre = Val(Txtlimsoles.Text)
+    cliloc_llave!cli_limcre2 = val(txtlimite.Text)
+    cliloc_llave!cli_limcre = val(Txtlimsoles.Text)
 cliloc_llave.Update
 MsgBox "Proceso Copiado .... ", 48, Pub_Titulo
 Unload frmCLI
@@ -4816,7 +4818,7 @@ llave1 = "X"
 CmbCGP.ListIndex = 0
 llave1 = ""
 Screen.MousePointer = 0
-txt_key.MaxLength = 15
+Txt_key.MaxLength = 15
 cmdcontab.Enabled = False
 t_diasfac.Visible = True
 
@@ -4845,7 +4847,7 @@ sutra_llave.MoveNext
 Loop
 txtauto1.Locked = True
 txtauto2.Locked = True
-frmCLI.txt_key.TabIndex = 0
+frmCLI.Txt_key.TabIndex = 0
 copia.Visible = True
 Exit Sub
 Resume Next
@@ -4865,7 +4867,7 @@ SQL = "select d.DIRCLI,d.DirComp from dircli  d where d.codcia=? and d.codcli=? 
   PS_dir.rdoParameters(2) = " "
   Set llave_dir = PS_dir.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
   PS_dir(0) = LK_CODCIA
-  PS_dir(1) = Val(frmCLI.txt_key)
+  PS_dir(1) = val(frmCLI.Txt_key)
   If Trim(Left$(CmbCGP.Text, 1)) = "C" Then
     PS_dir(2) = "C"
   Else
@@ -4879,7 +4881,7 @@ SQL = "select d.DIRCLI,d.DirComp from dircli  d where d.codcia=? and d.codcli=? 
   cboDireccion.Clear
   Do Until llave_dir.EOF
    cboDireccion.AddItem llave_dir!dircomp
-   cboDireccion.ItemData(cboDireccion.NewIndex) = Val(llave_dir!DIRCLI)
+   cboDireccion.ItemData(cboDireccion.NewIndex) = val(llave_dir!DIRCLI)
    llave_dir.MoveNext
   Loop
   'SELECCIONAR EL PRIMER ITEM
@@ -4887,12 +4889,12 @@ SQL = "select d.DIRCLI,d.DirComp from dircli  d where d.codcia=? and d.codcli=? 
 End Sub
 Public Sub ALLINVISIBLE()
     frmCLI.lcuenta.Visible = False
-    txt_key.Visible = False
-    txtnombre.Visible = False
+    Txt_key.Visible = False
+    txtNombre.Visible = False
     txtesposo.Visible = False
     Txtesposa.Visible = False
     TxtEmpresa.Visible = False
-    Txtdireccion.Visible = False
+    txtdireccion.Visible = False
     Txtnumdir.Visible = False
     TxtZona.Visible = False
     TxtSubZona.Visible = False
@@ -4936,12 +4938,12 @@ Public Sub ALLINVISIBLE()
 End Sub
 Public Sub ALLVISIBLE()
     frmCLI.lcuenta.Visible = True
-    txt_key.Visible = True
-    txtnombre.Visible = True
+    Txt_key.Visible = True
+    txtNombre.Visible = True
     txtesposo.Visible = True
     Txtesposa.Visible = True
     TxtEmpresa.Visible = True
-    Txtdireccion.Visible = True
+    txtdireccion.Visible = True
     Txtnumdir.Visible = True
     TxtZona.Visible = True
     TxtSubZona.Visible = True
@@ -4995,13 +4997,13 @@ Public Sub LLENA_123()
 End Sub
 Public Sub ASIGNA_123()
   If frmCLI.OptNombre(0).Value Then
-     frmCLI.txtnombre.Text = Nulo_Valors(frmCLI.txtesposo.Text)
+     frmCLI.txtNombre.Text = Nulo_Valors(frmCLI.txtesposo.Text)
      cliloc_llave!CLI_123 = 1
   ElseIf frmCLI.OptNombre(1).Value Then
-     frmCLI.txtnombre.Text = Nulo_Valors(frmCLI.Txtesposa.Text)
+     frmCLI.txtNombre.Text = Nulo_Valors(frmCLI.Txtesposa.Text)
      cliloc_llave!CLI_123 = 2
   ElseIf frmCLI.OptNombre(2).Value Then
-     frmCLI.txtnombre.Text = Nulo_Valors(frmCLI.TxtEmpresa.Text)
+     frmCLI.txtNombre.Text = Nulo_Valors(frmCLI.TxtEmpresa.Text)
      cliloc_llave!CLI_123 = 3
   End If
 End Sub
@@ -5023,7 +5025,7 @@ llave_rep01.Requery
 
 Do Until llave_rep01.EOF
   If llave_rep01!ALL_SIGNO_CAR = -1 Then
-     WGUARDA_IMP = Val(llave_rep01!ALL_NUMDOC)
+     WGUARDA_IMP = val(llave_rep01!ALL_NUMDOC)
   End If
   llave_rep01.Edit
   llave_rep01!ALL_NUMGUIA = WGUARDA_IMP
@@ -5043,7 +5045,7 @@ llave_rep01.Requery
 
 Do Until llave_rep01.EOF
 If llave_rep01!ALL_SIGNO_CCM = -1 Then
-  WGUARDA_IMP = Val(llave_rep01!ALL_IMPORTE)
+  WGUARDA_IMP = val(llave_rep01!ALL_IMPORTE)
 Else
   llave_rep01.Edit
   llave_rep01!ALL_IMPORTE = WGUARDA_IMP
@@ -5099,7 +5101,7 @@ End If
 Screen.MousePointer = 11
 SQ_OPER = 1
 PUB_TIPREG = LOC_TIPREG
-PUB_NUMTAB = Val(lblnom(Index).Tag)
+PUB_NUMTAB = val(lblnom(Index).Tag)
 PUB_CODCIA = LK_CODCIA
 LEER_TAB_LLAVE
 If tab_llave.EOF Then
@@ -5109,7 +5111,7 @@ Else
 End If
   tab_llave!TAB_CODCIA = LK_CODCIA
   tab_llave!TAB_TIPREG = LOC_TIPREG
-  tab_llave!TAB_NUMTAB = Val(lblnom(Index).Tag)
+  tab_llave!TAB_NUMTAB = val(lblnom(Index).Tag)
   tab_llave!tab_NOMLARGO = Left(wnombre, 40)
   tab_llave!tab_nomcorto = Left(wnombre, 10)
   tab_llave.Update
@@ -5126,7 +5128,7 @@ End Sub
 
 Private Sub lisdescto_ItemCheck(Item As Integer)
   If Screen.MousePointer = 11 Then Exit Sub
-  If Val(Trim(Right(lisdescto.List(Item), 6))) = Val(Trim(Right(txtsubgrupo.Text, 6))) Then
+  If val(Trim(Right(lisdescto.List(Item), 6))) = val(Trim(Right(txtsubgrupo.Text, 6))) Then
       lisdescto.Selected(Item) = True
       MsgBox "Esta Cambiando la opcion por Defecto. ", 48, Pub_Titulo
       Exit Sub
@@ -5153,7 +5155,7 @@ End Sub
 
 Private Sub ListView1_DblClick()
  loc_key = ListView1.SelectedItem.Index
- txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
+ Txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
  txt_key_KeyPress 13
 End Sub
 
@@ -5169,7 +5171,7 @@ End Sub
 Private Sub ListView1_ItemClick(ByVal Item As ComctlLib.ListItem)
 If loc_key <> 0 Then
  loc_key = ListView1.SelectedItem.Index
- txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
+ Txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
 End If
 
 End Sub
@@ -5177,8 +5179,8 @@ End Sub
 Private Sub ListView1_KeyPress(KeyAscii As Integer)
 If KeyAscii = 27 Then
  ListView1.Visible = False
- txt_key.Text = ""
- txt_key.SetFocus
+ Txt_key.Text = ""
+ Txt_key.SetFocus
  Exit Sub
 End If
 If KeyAscii <> 13 Then
@@ -5200,17 +5202,17 @@ End Sub
 
 Private Sub PARPADEA_Timer()
  CU = CU + 1
- LblMensaje.Visible = True
+ lblMensaje.Visible = True
  If CU > 4 Then
    CU = 0
-   Parpadea.Enabled = False
-   LblMensaje.Visible = False
+   PARPADEA.Enabled = False
+   lblMensaje.Visible = False
  End If
 End Sub
 
 Public Sub ASIGNA_INT(WCONTROL As ComboBox, txt As Long)
 For fila = 0 To WCONTROL.ListCount - 1
-    If Val(Trim(Right(WCONTROL.List(fila), 6))) = txt Then
+    If val(Trim(Right(WCONTROL.List(fila), 6))) = txt Then
         WCONTROL.ListIndex = fila
         Exit Sub
     End If
@@ -5218,7 +5220,7 @@ Next fila
 End Sub
 Public Sub ASIGNA_subgrupo(WCONTROL As ComboBox, txt As String)
 For fila = 0 To WCONTROL.ListCount - 1
-    If Val(Trim(Right(WCONTROL.List(fila), 3))) = Val(txt) Then
+    If val(Trim(Right(WCONTROL.List(fila), 3))) = val(txt) Then
         WCONTROL.ListIndex = fila
         Exit Sub
     End If
@@ -5233,24 +5235,24 @@ Screen.MousePointer = 11
         '**  BAN = 0 BUSCA DATOS NUEVAMENTE
         If loc_key > ListView1.ListItems.count Or loc_key = 0 Then
          Else
-          txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).SubItems(1))
+          Txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).SubItems(1))
         End If
         pu_cp = Left(CmbCGP.Text, 2)
-        pu_codclie = Val(txt_key.Text)
+        pu_codclie = val(Txt_key.Text)
         SQ_OPER = 1
         pu_codcia = LK_CODCIA
         LEER_CLILOC_LLAVE
     End If
-    loc_ultcod = Val(cliloc_llave!cli_codclie)
-    frmCLI.txt_key.Text = cliloc_llave!cli_codclie
+    loc_ultcod = val(cliloc_llave!cli_codclie)
+    frmCLI.Txt_key.Text = cliloc_llave!cli_codclie
     LLENA_123
-    txtnombre.Text = Nulo_Valors(cliloc_llave!CLI_NOMBRE)
-    txtnombre.MaxLength = cliloc_llave(3).Size
+    txtNombre.Text = Nulo_Valors(cliloc_llave!CLI_NOMBRE)
+    txtNombre.MaxLength = cliloc_llave(3).Size
     txtesposo.Text = Trim(Nulo_Valors(cliloc_llave!CLI_NOMBRE_ESPOSO))
     txtesposo.MaxLength = cliloc_llave(4).Size
     Txtesposa.Text = Trim(Nulo_Valors(cliloc_llave!CLI_NOMBRE_ESPOSA))
     TxtEmpresa.Text = Trim(Nulo_Valors(cliloc_llave!CLI_NOMBRE_EMPRESA))
-    Txtdireccion.Text = Trim(Nulo_Valors(cliloc_llave!CLI_CASA_DIREC))
+    txtdireccion.Text = Trim(Nulo_Valors(cliloc_llave!CLI_CASA_DIREC))
     Me.txtSecuencia.Text = Nulo_Valors(cliloc_llave!cli_precios)        '(@#)1-A
    ' txtdireccion.MaxLength = cliloc_llave(10).Size
     Txtnumdir.Text = Trim(Nulo_Valor0(cliloc_llave!CLI_CASA_NUM))
@@ -5297,8 +5299,8 @@ Screen.MousePointer = 11
     LLENA_BLOQ
     ASIGNA_INT cmbgrupo, Nulo_Valors(cliloc_llave!CLI_GRUPO)
     ASIGNA_INT Cmbcate, Nulo_Valor0(cliloc_llave!CLI_division)
-    ASIGNA_INT cboDias, Val(Nulo_Valors(cliloc_llave!CLI_PRENDA))
-    ASIGNA_INT cmbvendedor, Val(Nulo_Valors(cliloc_llave!CLI_CIA_REF))
+    ASIGNA_INT cboDias, val(Nulo_Valors(cliloc_llave!CLI_PRENDA))
+    ASIGNA_INT cmbvendedor, val(Nulo_Valors(cliloc_llave!CLI_CIA_REF))
     ASIGNA_subgrupo txtsubgrupo, Nulo_Valors(cliloc_llave!CLI_SUBGRUPO)
     frmCLI.txtNucleo.Text = Nulo_Valor0(cliloc_llave!CLI_nucleo)
     ASIGNA_INT condi, Nulo_Valor0(cliloc_llave!cli_DIAS_FAC)
@@ -5328,7 +5330,7 @@ Screen.MousePointer = 11
     t_fechafac.Text = Format(cliloc_llave!cli_fecha_fac, "dd/mm/yyyy")
     t_diasfac.Text = Nulo_Valor0(cliloc_llave!cli_DIAS_FAC)
     frmCLI.t_diascred.Text = Nulo_Valor0(cliloc_llave!cli_dias_cred)
-    pu_codclie = Val(txt_key.Text)
+    pu_codclie = val(Txt_key.Text)
     If LK_FLAG_GRIFO = "A" Then
       LLENA_DESCTO
     End If
@@ -5338,7 +5340,7 @@ Screen.MousePointer = 11
      If Trim(key_descto) = "" Then Exit For
      If lisdescto.ListCount > 0 Then
       For I = 0 To lisdescto.ListCount - 1
-        If Val(Right(lisdescto.List(I), 6)) = Val(key_descto) Then
+        If val(Right(lisdescto.List(I), 6)) = val(key_descto) Then
           lisdescto.Selected(I) = True
         End If
       Next I
@@ -5350,12 +5352,12 @@ End Sub
 
 Public Sub LIMPIA_CLI()
    tempo_ruc = ""
-    txt_key.Text = ""
-    txtnombre.Text = ""
+    Txt_key.Text = ""
+    txtNombre.Text = ""
     txtesposo.Text = ""
     Txtesposa.Text = ""
     TxtEmpresa.Text = ""
-    Txtdireccion.Text = ""
+    txtdireccion.Text = ""
     Txtnumdir.Text = ""
     TxtZona.ListIndex = -1
     TxtSubZona.ListIndex = -1
@@ -5439,7 +5441,7 @@ End Sub
 
 Private Sub SSTab1_GotFocus()
 If ListView1.Visible Then
- frmCLI.txt_key.Text = ""
+ frmCLI.Txt_key.Text = ""
  frmCLI.ListView1.Visible = False
 End If
 End Sub
@@ -5447,7 +5449,7 @@ End Sub
 Private Sub t_diascred_KeyPress(KeyAscii As Integer)
 SOLO_ENTERO KeyAscii
 If KeyAscii = 13 Then
-    frmCLI.Txtdireccion.SetFocus
+    frmCLI.txtdireccion.SetFocus
     Exit Sub
     If frmCLI.cmdModificar.Enabled Then
           frmCLI.cmdModificar.SetFocus
@@ -5513,7 +5515,7 @@ End If
 End Sub
 
 Private Sub txt_key_GotFocus()
- Azul txt_key, txt_key
+ Azul Txt_key, Txt_key
 End Sub
 
 Private Sub txt_key_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -5530,7 +5532,7 @@ End If
 If Not ListView1.Visible Then
  Exit Sub
 End If
-If KeyCode <> 40 And KeyCode <> 38 And KeyCode <> 34 And KeyCode <> 33 And txt_key.Text = "" Then
+If KeyCode <> 40 And KeyCode <> 38 And KeyCode <> 34 And KeyCode <> 33 And Txt_key.Text = "" Then
   loc_key = 1
   Set ListView1.SelectedItem = ListView1.ListItems(loc_key)
   ListView1.ListItems.Item(loc_key).Selected = True
@@ -5562,8 +5564,8 @@ GoTo fin
 POSICION:
   ListView1.ListItems.Item(loc_key).Selected = True
   ListView1.ListItems.Item(loc_key).EnsureVisible
-  txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
-  txt_key.SelStart = Len(txt_key.Text)
+  Txt_key.Text = Trim(ListView1.ListItems.Item(loc_key).Text) & " "
+  Txt_key.SelStart = Len(Txt_key.Text)
 fin:
 Exit Sub
 SALE:
@@ -5582,25 +5584,25 @@ If LK_EMP = "PAR" And Left(cmdAgregar.Caption, 2) = "&G" Then
   Exit Sub
 End If
 End If
-If KeyAscii = 13 And Left(txt_key.Text, 1) = "+" Then GoTo buscar
-If KeyAscii = 27 And Trim(txtnombre.Text) = "" Then
- txt_key.Text = ""
+If KeyAscii = 13 And Left(Txt_key.Text, 1) = "+" Then GoTo buscar
+If KeyAscii = 27 And Trim(txtNombre.Text) = "" Then
+ Txt_key.Text = ""
 End If
 If KeyAscii <> 13 Or Left(cmdAgregar.Caption, 2) = "&G" Or Left(cmdModificar.Caption, 2) = "&G" Then
    GoTo fin
 End If
    
 On Error GoTo CODI_ERR
-pu_codclie = Val(txt_key.Text)
+pu_codclie = val(Txt_key.Text)
 On Error GoTo 0
-If Len(txt_key.Text) = 0 Then
+If Len(Txt_key.Text) = 0 Then
    Exit Sub
 End If
 'fra2.Refresh
-If pu_codclie <> 0 And IsNumeric(txt_key.Text) = True Then
-   If Len(Trim(txt_key.Text)) = LK_DIG_RUC Then ' LONG DEL RUC
+If pu_codclie <> 0 And IsNumeric(Txt_key.Text) = True Then
+   If Len(Trim(Txt_key.Text)) = LK_DIG_RUC Then ' LONG DEL RUC
         pu_cp = Left(CmbCGP.Text, 1)
-        PUB_RUC = Trim(txt_key.Text)
+        PUB_RUC = Trim(Txt_key.Text)
         SQ_OPER = 4
         pu_codcia = LK_CODCIA
         LEER_CLI_LLAVE
@@ -5608,19 +5610,19 @@ If pu_codclie <> 0 And IsNumeric(txt_key.Text) = True Then
            MsgBox "R.U.C. No Existe ", 48, Pub_Titulo
            Exit Sub
         End If
-        txt_key.Text = cli_ruc!cli_codclie
+        Txt_key.Text = cli_ruc!cli_codclie
    End If
     SQ_OPER = 1
    On Error GoTo mucho
    pu_codcia = LK_CODCIA
    pu_cp = Left(CmbCGP.Text, 1)
-   pu_codclie = Val(txt_key.Text)
+   pu_codclie = val(Txt_key.Text)
    LEER_CLILOC_LLAVE
    On Error GoTo 0
    If cliloc_llave.EOF Then
-     Azul txt_key, txt_key
+     Azul Txt_key, Txt_key
      MsgBox "REGISTRO NO EXISTE ...", 48, Pub_Titulo
-     txt_key.SetFocus
+     Txt_key.SetFocus
      GoTo fin
    End If
    Screen.MousePointer = 11
@@ -5632,7 +5634,7 @@ If pu_codclie <> 0 And IsNumeric(txt_key.Text) = True Then
    If Left(CmbCGP.Text, 1) = "P" Then
          LLENA_CLI 1, "P"
    End If
-   frmCLI.txt_key.Locked = True
+   frmCLI.Txt_key.Locked = True
    frmCLI.cmdModificar.SetFocus
    Screen.MousePointer = 0
 Else
@@ -5640,7 +5642,7 @@ Else
      Exit Sub
    End If
    valor = UCase(ListView1.ListItems.Item(loc_key).Text)
-   If Trim(UCase(txt_key.Text)) = Left(valor, Len(Trim(txt_key.Text))) Then
+   If Trim(UCase(Txt_key.Text)) = Left(valor, Len(Trim(Txt_key.Text))) Then
    Else
       Exit Sub
    End If
@@ -5652,7 +5654,7 @@ Else
    If Left(CmbCGP.Text, 1) = "P" Then
          LLENA_CLI 0, "P"
    End If
-   frmCLI.txt_key.Locked = True
+   frmCLI.Txt_key.Locked = True
    cmdCancelar.Enabled = True
    frmCLI.cmdModificar.SetFocus
 End If
@@ -5664,14 +5666,14 @@ CODI_ERR:
 Exit Sub
 
 buscar:
-var = Mid(txt_key.Text, 2, Len(txt_key.Text))
+var = Mid(Txt_key.Text, 2, Len(Txt_key.Text))
 numarchi = alta_vista_nombre(ListView1, var, Left(CmbCGP.Text, 1))
 If numarchi = 0 Then
   ListView1.Visible = False
   MsgBox "Alta Vista: No Existe .. Esta descripcion..", 48, Pub_Titulo
 Else
   ListView1.Visible = True
-  txt_key.SetFocus
+  Txt_key.SetFocus
 End If
 loc_key = 1
 Exit Sub
@@ -5683,13 +5685,13 @@ End Sub
 Private Sub txt_key_KeyUp(KeyCode As Integer, Shift As Integer)
 Dim NADA
 Dim var
-If Len(txt_key.Text) = 0 Or IsNumeric(txt_key.Text) = True Then
+If Len(Txt_key.Text) = 0 Or IsNumeric(Txt_key.Text) = True Then
    ListView1.Visible = False
    Exit Sub
 End If
-If ListView1.Visible = False And KeyCode <> 13 Or Len(txt_key.Text) = 1 Then
-    If txt_key.Text = "" Then txt_key.Text = " "
-    var = Asc(txt_key.Text)
+If ListView1.Visible = False And KeyCode <> 13 Or Len(Txt_key.Text) = 1 Then
+    If Txt_key.Text = "" Then Txt_key.Text = " "
+    var = Asc(Txt_key.Text)
     var = var + 1
     NADA = var
     If var = 33 Or var = 91 Then
@@ -5699,14 +5701,14 @@ If ListView1.Visible = False And KeyCode <> 13 Or Len(txt_key.Text) = 1 Then
     End If
     numarchi = 1
     'archi = "SELECT CLI_CODCLIE, CLI_CODCIA, CLI_CP, CLI_NOMBRE,CLI_CASA_DIREC,CLI_ZONA_NEW, CLI_CASA_NUM FROM CLIENTES WHERE  CLI_CP = '" & Left(CmbCGP.Text, 1) & "' AND CLI_CODCIA = '" & LK_CODCIA & "' AND CLI_NOMBRE BETWEEN '" & txt_key.Text & "' AND  '" & VAR & "' ORDER BY CLI_NOMBRE"
-    archi = "SELECT CLI_CODCLIE , CLI_CODCIA, CLI_CP, CLI_NOMBRE, CLI_CASA_DIREC,CLI_ZONA_NEW, CLI_CASA_NUM, TAB_NOMLARGO  FROM CLIENTES,TABLAS WHERE (TAB_CODCIA = '00') AND (TAB_TIPREG = 35) AND (TAB_NUMTAB = CLI_ZONA_NEW) AND CLI_CP = '" & Left(CmbCGP.Text, 1) & "' AND CLI_CODCIA = '" & LK_CODCIA & "' AND CLI_NOMBRE BETWEEN '" & txt_key.Text & "' AND  '" & var & "' ORDER BY CLI_NOMBRE"
+    archi = "SELECT CLI_CODCLIE , CLI_CODCIA, CLI_CP, CLI_NOMBRE, CLI_CASA_DIREC,CLI_ZONA_NEW, CLI_CASA_NUM, TAB_NOMLARGO  FROM CLIENTES,TABLAS WHERE (TAB_CODCIA = '00') AND (TAB_TIPREG = 35) AND (TAB_NUMTAB = CLI_ZONA_NEW) AND CLI_CP = '" & Left(CmbCGP.Text, 1) & "' AND CLI_CODCIA = '" & LK_CODCIA & "' AND CLI_NOMBRE BETWEEN '" & Txt_key.Text & "' AND  '" & var & "' ORDER BY CLI_NOMBRE"
     PROC_LISVIEW ListView1
     loc_key = 1
     If NADA = 33 Or NADA = 91 Then
       If ListView1.Visible = False Then
         loc_key = 0
         MsgBox "No existe Datos ...", 48, Pub_Titulo
-        txt_key.Text = ""
+        Txt_key.Text = ""
       End If
     End If
     Exit Sub
@@ -5720,7 +5722,7 @@ If KeyCode = 40 Or KeyCode = 38 Or KeyCode = 34 Or KeyCode = 33 Then
 End If
 Dim itmFound As ListItem    ' Variable FoundItem.
 If ListView1.Visible Then
-  Set itmFound = ListView1.FindItem(LTrim(txt_key.Text), lvwText, , lvwPartial)
+  Set itmFound = ListView1.FindItem(LTrim(Txt_key.Text), lvwText, , lvwPartial)
   If itmFound Is Nothing Then
   Else
    itmFound.EnsureVisible
@@ -5800,11 +5802,11 @@ Private Sub txtdepartamento1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Txtdireccion_GotFocus()
-Azul Txtdireccion, Txtdireccion
+Azul txtdireccion, txtdireccion
 
 End Sub
 
-Private Sub txtdireccion_KeyPress(KeyAscii As Integer)
+Private Sub txtDireccion_KeyPress(KeyAscii As Integer)
 If KeyAscii = 13 Then
    frmCLI.Txtnumdir.SetFocus
 End If
@@ -5813,7 +5815,7 @@ End Sub
 Private Sub Txtdireccion_LostFocus()
 'If Left(CmbCGP.Text, 1) = "C" Then
   If Trim(txtDirTrabajo.Text) = "" Then
-    txtDirTrabajo.Text = Trim(Txtdireccion.Text)
+    txtDirTrabajo.Text = Trim(txtdireccion.Text)
   End If
 'End If
 End Sub
@@ -5915,7 +5917,7 @@ If Trim(TOTCIAS) <> "" And Left(CmbCGP.Text, 1) = "C" Then
              If VAR_CIAS = LK_CODCIA Then GoTo pasa
              SQ_OPER = 1
              pu_cp = wCGH
-             pu_codclie = Val(frmCLI.txt_key.Text)
+             pu_codclie = val(frmCLI.Txt_key.Text)
              pu_codcia = VAR_CIAS
              LEER_CLILOC_LLAVE
              If cliloc_llave.EOF Then
@@ -5928,7 +5930,7 @@ If Trim(TOTCIAS) <> "" And Left(CmbCGP.Text, 1) = "C" Then
              End If
 pasa:
            Else
-             frmCLI.txt_key = GENERA_CODI
+             frmCLI.Txt_key = GENERA_CODI
              cliloc_llave.AddNew
              Modo = "A"
              GoSub grabar
@@ -5943,15 +5945,15 @@ pasa:
     VAR_CIAS = LK_CODCIA
     SQ_OPER = 1
     pu_cp = wCGH
-    pu_codclie = Val(frmCLI.txt_key.Text)
+    pu_codclie = val(frmCLI.Txt_key.Text)
     pu_codcia = VAR_CIAS
     LEER_CLILOC_LLAVE
     If cliloc_llave.EOF Then
       MsgBox "No Grabo en la Compañia : " + VAR_CIAS + " No Existe cliente ", 48, Pub_Titulo
     Else
       cliloc_llave.Edit
-      cliloc_llave!cli_limcre2 = Val(frmCLI.txtlimite.Text)
-      cliloc_llave!cli_limcre = Val(frmCLI.Txtlimsoles.Text)
+      cliloc_llave!cli_limcre2 = val(frmCLI.txtlimite.Text)
+      cliloc_llave!cli_limcre = val(frmCLI.Txtlimsoles.Text)
       Modo = "E"
       GoSub grabar
       cliloc_llave.Update
@@ -5980,13 +5982,13 @@ Exit Sub
 grabar:
     If Modo = "A" Then
        cliloc_llave!CLI_CP = wCGH
-       cliloc_llave!cli_codclie = Val(frmCLI.txt_key.Text)
+       cliloc_llave!cli_codclie = val(frmCLI.Txt_key.Text)
        cliloc_llave!cli_SALDO = 0
        cliloc_llave!CLI_DET_TOT = "D"
        cliloc_llave!CLI_MONEDA = "S"
        cliloc_llave!cli_limcre2 = 0
        If Left(CmbCGP.Text, 1) = "C" Then
-        loc_ultcod = Val(frmCLI.txt_key.Text)
+        loc_ultcod = val(frmCLI.Txt_key.Text)
        End If
     Else
       If Trim(tempo_ruc) <> Trim(txtRUCesposo.Text) Then
@@ -5997,7 +5999,7 @@ grabar:
             PS_REP09(2) = 0
             Set llave_rep09 = PS_REP09.OpenResultset(rdOpenKeyset, rdConcurValues)
             PS_REP09(0) = LK_CODCIA
-            PS_REP09(1) = Val(frmCLI.txt_key.Text)
+            PS_REP09(1) = val(frmCLI.Txt_key.Text)
             PS_REP09(2) = Left(CmbCGP.Text, 1)
             llave_rep09.Requery
             PB.Visible = True
@@ -6022,28 +6024,28 @@ grabar:
     cliloc_llave!CLI_NOMBRE_ESPOSA = Txtesposa.Text
     cliloc_llave!CLI_NOMBRE_EMPRESA = TxtEmpresa.Text
     ASIGNA_123
-    cliloc_llave!CLI_NOMBRE = frmCLI.txtnombre.Text
-    cliloc_llave!CLI_CASA_DIREC = Txtdireccion.Text
-    cliloc_llave!CLI_CASA_NUM = Val(Txtnumdir.Text)
-    cliloc_llave!CLI_DEPA1 = Val(Right(txtdepartamento.Text, 6))
-    cliloc_llave!CLI_CASA_ZONA = Val(Right(TxtZona.Text, 6))
-    cliloc_llave!CLI_CASA_SUBZONA = Val(Right(TxtSubZona.Text, 6))
-    cliloc_llave!CLI_LUGAR_CASA = Val(Right(TxtLugarCasa.Text, 8))
-    cliloc_llave!CLI_LUGAR_TRAB = Val(Right(TxtLugarTrab.Text, 8))
-    cliloc_llave!CLI_ZONA_NEW = Val(Right(txtZonaNew.Text, 8))
+    cliloc_llave!CLI_NOMBRE = frmCLI.txtNombre.Text
+    cliloc_llave!CLI_CASA_DIREC = txtdireccion.Text
+    cliloc_llave!CLI_CASA_NUM = val(Txtnumdir.Text)
+    cliloc_llave!CLI_DEPA1 = val(Right(txtdepartamento.Text, 6))
+    cliloc_llave!CLI_CASA_ZONA = val(Right(TxtZona.Text, 6))
+    cliloc_llave!CLI_CASA_SUBZONA = val(Right(TxtSubZona.Text, 6))
+    cliloc_llave!CLI_LUGAR_CASA = val(Right(TxtLugarCasa.Text, 8))
+    cliloc_llave!CLI_LUGAR_TRAB = val(Right(TxtLugarTrab.Text, 8))
+    cliloc_llave!CLI_ZONA_NEW = val(Right(txtZonaNew.Text, 8))
     cliloc_llave!CLI_TRAB_DIREC = txtDirTrabajo.Text
     cliloc_llave!CLI_TRAB_NUM = Nulo_Valor0(txtNumDirTrabajo.Text)
-    cliloc_llave!cli_TRAB_ZONA = Val(Right(frmCLI.TxtZonaTrabajo.Text, 8))
+    cliloc_llave!cli_TRAB_ZONA = val(Right(frmCLI.TxtZonaTrabajo.Text, 8))
     '(@#)1-A inicio
     If Len(Trim(Me.txtSecuencia.Text)) = 0 Then
     cliloc_llave!cli_precios = 0
     Else
-    cliloc_llave!cli_precios = Val(Me.txtSecuencia.Text)
+    cliloc_llave!cli_precios = val(Me.txtSecuencia.Text)
     End If
     '(@#)1-A fin
     cliloc_llave!cli_hosting = 0
     'AGREGADO PARA GRABAR LA PROVINCIA DE TRABAJO 06/12/2001
-    cliloc_llave!cli_TRAB_PROV = Val(Right(frmCLI.cboProvincia.Text, 8))
+    cliloc_llave!cli_TRAB_PROV = val(Right(frmCLI.cboProvincia.Text, 8))
     'AGREGADO PARA GRABAR LA PRIMERA DIRECCION
     If cboDireccion.Text = "" Then 'And Trim(Left$(CmbCGP.Text, 1)) = "C" Then
      Dim strDir As String
@@ -6076,7 +6078,7 @@ grabar:
 '       CN.Execute SQL
 SALTAdire:
     End If
-    cliloc_llave!cli_TRAB_SUBZONA = Val(Right(TxtSubZonaTrabajo.Text, 6))
+    cliloc_llave!cli_TRAB_SUBZONA = val(Right(TxtSubZonaTrabajo.Text, 6))
     cliloc_llave!cli_ruc_esposo = txtRUCesposo.Text
     cliloc_llave!cli_RUC_ESPOSA = txtRUCesposa.Text
     cliloc_llave!CLI_RUC_EMPRESA = txtRUCempresa.Text
@@ -6087,15 +6089,15 @@ SALTAdire:
     cliloc_llave!CLI_AUTOAVALUO = frmCLI.txtautovaluo.Text
     cliloc_llave!CLI_AUTO1 = frmCLI.txtauto1.Text
     cliloc_llave!cli_auto2 = frmCLI.txtauto2.Text
-    cliloc_llave!CLI_PRENDA = Val(Right(frmCLI.cboDias.Text, 6))
-    cliloc_llave!CLI_CIA_REF = Val(Right(frmCLI.cmbvendedor.Text, 6))
+    cliloc_llave!CLI_PRENDA = val(Right(frmCLI.cboDias.Text, 6))
+    cliloc_llave!CLI_CIA_REF = val(Right(frmCLI.cmbvendedor.Text, 6))
     cliloc_llave!CLI_TELEF1 = frmCLI.txttelefono1.Text
     cliloc_llave!CLI_TELEF2 = frmCLI.txttelefono2.Text
     cliloc_llave!CLI_OTRO_CONTR = frmCLI.otrocontrato.Value
     cliloc_llave!CLI_LETRA = frmCLI.letraotorgado.Value
-    cliloc_llave!CLI_GRUPO = Val(Right(frmCLI.cmbgrupo.Text, 6))
-    cliloc_llave!CLI_SUBGRUPO = Val(Right(frmCLI.txtsubgrupo.Text, 6))
-    cliloc_llave!CLI_division = Val(Right(frmCLI.Cmbcate.Text, 6))
+    cliloc_llave!CLI_GRUPO = val(Right(frmCLI.cmbgrupo.Text, 6))
+    cliloc_llave!CLI_SUBGRUPO = val(Right(frmCLI.txtsubgrupo.Text, 6))
+    cliloc_llave!CLI_division = val(Right(frmCLI.Cmbcate.Text, 6))
     cliloc_llave!CLI_nucleo = frmCLI.txtNucleo.Text
     cliloc_llave!CLI_estado = Left(frmCLI.txtestado.Text, 1)
     cliloc_llave!CLI_programado = Nulo_Valors(txtprog.Text)
@@ -6105,8 +6107,8 @@ SALTAdire:
     Else
      cliloc_llave!cli_fecha_fac = Format(LK_FECHA_DIA, "dd/mm/yyyy")
     End If
-     cliloc_llave!cli_DIAS_FAC = Val(t_diasfac.Text)
-     cliloc_llave!cli_dias_cred = Val(frmCLI.t_diascred.Text)
+     cliloc_llave!cli_DIAS_FAC = val(t_diasfac.Text)
+     cliloc_llave!cli_dias_cred = val(frmCLI.t_diascred.Text)
    '  <<< Actualiza La Cta. solo de la Cia Actual >>>
    '' If VAR_CIAS = LK_CODCIA Then
       cliloc_llave!CLI_CUENTA_CONTAB = Trim(frmCLI.tcuenta.Text)
@@ -6118,8 +6120,8 @@ SALTAdire:
     End If
     cliloc_llave!CLI_DET_TOT = txtDTX.Text
     If Trim(TOTCIAS) = "" Then
-      cliloc_llave!cli_limcre2 = Val(txtlimite.Text)
-      cliloc_llave!cli_limcre = Val(Txtlimsoles.Text)
+      cliloc_llave!cli_limcre2 = val(txtlimite.Text)
+      cliloc_llave!cli_limcre = val(Txtlimsoles.Text)
     End If
     pub_cadena = ""
     For fila = 0 To lisdescto.ListCount - 1
@@ -6135,8 +6137,8 @@ Return
 End Sub
 
 Public Sub MENSAJE_CLI(TEXTO As String)
-  LblMensaje.Caption = TEXTO
-  Parpadea.Enabled = True
+  lblMensaje.Caption = TEXTO
+  PARPADEA.Enabled = True
 End Sub
 Public Function GENERA_PRO() As Double
 Dim NUMCAD, FIJO As String
@@ -6166,12 +6168,12 @@ If NUMCAD = "1" Or NUMCAD = "2" Or NUMCAD = "0" Then
   VINT1 = 2
 End If
 If VINT1 > 1 Then
-    VSTR4 = Val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
+    VSTR4 = val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
 End If
 
 For I = 1 To VINT1 - 2
    VSTR1 = Mid(VSTR4, I, 1)
-   VINT2 = VINT2 + Val(VSTR1)
+   VINT2 = VINT2 + val(VSTR1)
 Next I
 VINT3 = VINT2 * 13 - 5
 
@@ -6181,7 +6183,7 @@ If Len(VSTR3) = 1 Then
 End If
 FIJO = VSTR4
 STRpub_cadena = FIJO & VSTR3
-INTpub_cadena = Val(STRpub_cadena)
+INTpub_cadena = val(STRpub_cadena)
 GENERA_PRO = INTpub_cadena
 End Function
 
@@ -6204,9 +6206,9 @@ LEER_CLILOC_LLAVE
 If cliloc_mayor.EOF Then
     NUMCAD = "1"
     If LK_EMP = "PAR" Then
-      INTpub_cadena = Val(NUMCAD)
-      If COD_ORIGINAL <> 0 And INTpub_cadena <> Val(txt_key.Text) Then
-        INTpub_cadena = Val(txt_key.Text)
+      INTpub_cadena = val(NUMCAD)
+      If COD_ORIGINAL <> 0 And INTpub_cadena <> val(Txt_key.Text) Then
+        INTpub_cadena = val(Txt_key.Text)
         GoTo GEN
       End If
       COD_ORIGINAL = INTpub_cadena
@@ -6216,9 +6218,9 @@ Else
     cliloc_mayor.MoveLast
     NUMCAD = cliloc_mayor!cli_codclie
     If LK_EMP = "PAR" Then
-      INTpub_cadena = Val(NUMCAD) + 1
-      If COD_ORIGINAL <> 0 And INTpub_cadena <> Val(txt_key.Text) Then
-        INTpub_cadena = Val(txt_key.Text)
+      INTpub_cadena = val(NUMCAD) + 1
+      If COD_ORIGINAL <> 0 And INTpub_cadena <> val(Txt_key.Text) Then
+        INTpub_cadena = val(Txt_key.Text)
         GoTo GEN
       End If
       COD_ORIGINAL = INTpub_cadena
@@ -6234,11 +6236,11 @@ If NUMCAD = "1" Or NUMCAD = "2" Or NUMCAD = "0" Then
   VINT1 = 2
 End If
 If VINT1 > 1 Then
-    VSTR4 = Val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
+    VSTR4 = val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
 End If
 For I = 1 To VINT1 - 2
    VSTR1 = Mid(VSTR4, I, 1)
-   VINT2 = VINT2 + Val(VSTR1)
+   VINT2 = VINT2 + val(VSTR1)
 Next I
 VINT3 = VINT2 * 9
 
@@ -6248,7 +6250,7 @@ If Len(VSTR3) = 1 Then
 End If
 FIJO = VSTR4
 STRpub_cadena = FIJO & VSTR3
-INTpub_cadena = Val(STRpub_cadena)
+INTpub_cadena = val(STRpub_cadena)
 GEN:
 GENERA_CODI = INTpub_cadena
 
@@ -6360,7 +6362,7 @@ If frmCLI.txtRUCesposo.Text <> "" Then
  PS_REP01(0) = LK_CODCIA
  PS_REP01(1) = Left(frmCLI.CmbCGP, 1)
  PS_REP01(2) = frmCLI.txtRUCesposo.Text
- PS_REP01(3) = frmCLI.txt_key.Text
+ PS_REP01(3) = frmCLI.Txt_key.Text
  llave_rep01.Requery
  If Not llave_rep01.EOF Then
    MsgBox "RUC Existe en otro Cliente : " + Trim(llave_rep01!CLI_NOMBRE), 48, Pub_Titulo
@@ -6377,7 +6379,7 @@ If frmCLI.txtRUCesposa.Text <> "" Then
  PS_REP02(0) = LK_CODCIA
  PS_REP02(1) = Left(frmCLI.CmbCGP, 1)
  PS_REP02(2) = frmCLI.txtRUCesposa.Text
- PS_REP02(3) = frmCLI.txt_key.Text
+ PS_REP02(3) = frmCLI.Txt_key.Text
  llave_rep02.Requery
  If Not llave_rep02.EOF Then
    MsgBox "DNI Existe en otro Cliente : " + Trim(llave_rep02!CLI_NOMBRE), 48, Pub_Titulo
@@ -6470,7 +6472,7 @@ End Sub
 
 Private Sub TxtLugarCasa_KeyPress(KeyAscii As Integer)
 If KeyAscii = 13 Then
-    frmCLI.Txtdireccion.SetFocus
+    frmCLI.txtdireccion.SetFocus
 End If
 
 End Sub
@@ -6574,7 +6576,7 @@ End Sub
 Private Sub Txtnumdir_LostFocus()
 On Error GoTo sigue
 'If Left(CmbCGP.Text, 1) = "C" Then
-  If Val(txtNumDirTrabajo.Text) = 0 Then
+  If val(txtNumDirTrabajo.Text) = 0 Then
     txtNumDirTrabajo.Text = Txtnumdir.Text
   End If
 'End If
@@ -6696,7 +6698,7 @@ End Sub
 Private Sub txtsubgrupo_Click()
   Dim I As Integer
       For I = 0 To txtsubgrupo.ListCount - 1
-        If Val(Right(lisdescto.List(I), 6)) = Val(Right(txtsubgrupo.Text, 6)) Then
+        If val(Right(lisdescto.List(I), 6)) = val(Right(txtsubgrupo.Text, 6)) Then
           lisdescto.Selected(I) = True
          Else
           lisdescto.Selected(I) = False
@@ -7032,7 +7034,7 @@ SQ_OPER = 1
 PUB_TIPREG = LOC_TIPREG
 PUB_CODCIA = LK_CODCIA
 For fila = 0 To lblnom.count - 1
- PUB_NUMTAB = Val(lblnom(fila).Tag)
+ PUB_NUMTAB = val(lblnom(fila).Tag)
  LEER_TAB_LLAVE
  If tab_llave.EOF Then
  Else
@@ -7388,7 +7390,7 @@ xl.APPLICATION.Visible = True
 WS_FILA = 2
 
 Do Until Trim(xl.Cells(WS_FILA, 1)) = ""
-    If Val(Trim(xl.Cells(WS_FILA, 1))) = 0 Then
+    If val(Trim(xl.Cells(WS_FILA, 1))) = 0 Then
       MsgBox "no agregado"
       GoTo SALTA_ARTI
     End If
@@ -7398,10 +7400,10 @@ Do Until Trim(xl.Cells(WS_FILA, 1)) = ""
     End If
 '    WS_FILA = WS_FILA - 1
     cmdagregar_Click
-    txtnombre.Text = Trim(xl.Cells(WS_FILA, 2)) ' & " " & Trim(xl.Cells(WS_FILA, 6)) & " " & Trim(xl.Cells(WS_FILA, 7)) & " " & Trim(xl.Cells(WS_FILA, 8)) ' NOMBRE
+    txtNombre.Text = Trim(xl.Cells(WS_FILA, 2)) ' & " " & Trim(xl.Cells(WS_FILA, 6)) & " " & Trim(xl.Cells(WS_FILA, 7)) & " " & Trim(xl.Cells(WS_FILA, 8)) ' NOMBRE
     txtesposo.Text = Trim(xl.Cells(WS_FILA, 2)) ' & " " & Trim(xl.Cells(WS_FILA, 6)) & " " & Trim(xl.Cells(WS_FILA, 7)) & " " & Trim(xl.Cells(WS_FILA, 8)) ' NOMBRE
     'TxtEmpresa.Text = Trim(xl.Cells(WS_FILA, 4)) ' CONTACTO
-    Txtdireccion.Text = Trim(xl.Cells(WS_FILA, 3)) ' & "-" & Trim(xl.Cells(WS_FILA, 16))
+    txtdireccion.Text = Trim(xl.Cells(WS_FILA, 3)) ' & "-" & Trim(xl.Cells(WS_FILA, 16))
     txtDirTrabajo.Text = Trim(xl.Cells(WS_FILA, 3)) ' & "-" & Trim(xl.Cells(WS_FILA, 16))
     frmCLI.txtRUCesposo.Text = Trim(xl.Cells(WS_FILA, 4))
    ' frmCLI.txtRUCesposa.Text = Trim(Trim(xl.Cells(WS_FILA, 11))) ' DNI

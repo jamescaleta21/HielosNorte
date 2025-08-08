@@ -1499,7 +1499,7 @@ If WF_REINICIAR <> 2 Then
     MDIForm1.WindowState = 1
     EN.Close
     CN.Close
-    Pub_ConnAdo.Close
+    If Pub_ConnAdo.State = adStateOpen Then Pub_ConnAdo.Close
     Unload MDIForm1
     Screen.MousePointer = 0
     End
@@ -2009,8 +2009,10 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-       frmARTI.Show
-       
+        'frmARTI.Show
+        frmMantVDCategoria.Show
+        frmMantVDCliente.Show
+        frmMantVDProducto.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11

@@ -466,15 +466,15 @@ Begin VB.Form frmARTI
       TabCaption(1)   =   "&Porcentajes"
       TabPicture(1)   =   "Arti.frx":1060
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "CERO"
+      Tab(1).Control(0)=   "Fcomi"
       Tab(1).Control(1)=   "Fop"
-      Tab(1).Control(2)=   "Fcomi"
+      Tab(1).Control(2)=   "CERO"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Almacen Defectuosos"
       TabPicture(2)   =   "Arti.frx":107C
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "frmpro"
-      Tab(2).Control(1)=   "frarelacion"
+      Tab(2).Control(0)=   "frarelacion"
+      Tab(2).Control(1)=   "frmpro"
       Tab(2).ControlCount=   2
       Begin ComctlLib.ProgressBar pgb_Progress 
          Height          =   210
@@ -3999,13 +3999,13 @@ For fila = 2 To 3
     End If
     WSUBFAMI = 1
     wnombre = artloc_llave!art_nombre
-    For i = 0 To art_familia.ListCount - 1
-      art_familia.ListIndex = i
+    For I = 0 To art_familia.ListCount - 1
+      art_familia.ListIndex = I
       If WFAMILIA = val(Right(art_familia.Text, 6)) Then
          wnombre = Trim(Left(art_familia.Text, 6)) & " " & Trim(Left(art_grupo.Text, 15)) & " " & Trim(Left(art_numero.Text, 15)) & "-" & Trim(Left(art_marca.Text, 15))  ' & " " & Left(art_linea.Text, 3) ' Trim(Left(art_linea.Text, 5))
          Exit For
       End If
-    Next i
+    Next I
     WNUMERO = artloc_llave!art_numero
     wgrupo = artloc_llave!art_subgru
     WLINEA = artloc_llave!art_linea
@@ -4139,7 +4139,7 @@ End Sub
 Private Sub cmdpath_Click()
 With cdlfoto
 On Error GoTo ErrorHandle
-  .FLAGS = cdlOFNHideReadOnly
+  .flags = cdlOFNHideReadOnly
   .Filter = "Archivos de Imagenes |*.jpg|*.bmp"
   .FilterIndex = 2
   .ShowOpen
@@ -4969,7 +4969,7 @@ frmARTI.SSTab1.tab = 0
 VAR_ACTIVAR = 0
 End Sub
 Public Sub LIMPIA_ARTI()
-Dim i As Integer
+Dim I As Integer
 txtMin.Text = ""
 txtMax.Text = ""
 frmARTI.txt_alterno.Text = ""
@@ -5116,7 +5116,7 @@ End Sub
 Public Sub GRABAR_ARTI()
 Dim wSTOCK  As Currency
 Dim ws_igv As Currency
-Dim i As Integer
+Dim I As Integer
 Dim WS_IMPORTE As Currency
 Dim WS_FLAG_UNIDAD As Integer
 Dim WORIGINAL As Currency
@@ -5396,7 +5396,7 @@ End Sub
 Public Function GENERA_CODI() As Double
 Dim NUMCAD, FIJO As String
 Dim DIGI As String * 2
-Dim i, VINT1, VINT2, VINT3, VINT4 As Double
+Dim I, VINT1, VINT2, VINT3, VINT4 As Double
 Dim VSTR1, VSTR2, VSTR3, VSTR4 As String
 Dim VFIJO As Double
 Dim VVARI As Integer
@@ -5429,10 +5429,10 @@ If VINT1 > 1 Then
     VSTR4 = val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
 End If
 
-For i = 1 To VINT1 - 2
-   VSTR1 = Mid(VSTR4, i, 1)
+For I = 1 To VINT1 - 2
+   VSTR1 = Mid(VSTR4, I, 1)
    VINT2 = VINT2 + val(VSTR1)
-Next i
+Next I
 VINT3 = VINT2 * 7
 
 VSTR3 = Right(CStr(VINT3), 2)
@@ -5615,7 +5615,7 @@ End Sub
 Private Sub txt_key_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim i
+Dim I
 Dim itmFound As Object
 
 If KeyAscii = 27 Then
@@ -5749,7 +5749,7 @@ End If
 End Sub
 
 Public Function CONSIS_UNIDAD() As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim QUIEN As String
 QUIEN = 0
 For fila = 1 To grid_unid.Rows - 1
@@ -6873,7 +6873,7 @@ Private Sub txt_alterno_KeyPress(KeyAscii As Integer)
 
     Dim tf    As Integer
 
-    Dim i
+    Dim I
 
     Dim itmFound As Object
 
@@ -7773,9 +7773,9 @@ Public Sub opcional()
             MsgBox "no hay relacion  =  " & art_rela!pa_codpa
         Else
 
-            If val(Nulo_Valor0(art_rela!tot)) <> 0 Then
+            If val(Nulo_Valor0(art_rela!TOT)) <> 0 Then
                 arm_llave.Edit
-                arm_llave!arm_saldo_s2 = val(Nulo_Valor0(art_rela!tot))
+                arm_llave!arm_saldo_s2 = val(Nulo_Valor0(art_rela!TOT))
                 arm_llave.Update
 
             End If
@@ -8430,7 +8430,7 @@ Private Sub cmd_AddItem_Click()
 
     Dim sCnnSQL        As String
 
-    Dim i              As Long
+    Dim I              As Long
 
     Dim s_Sql          As String
 
@@ -9078,7 +9078,7 @@ End Sub
 
 Private Function FindInCmb(ByVal cbo As ComboBox, ByVal s_Familia As String) As Boolean
 
-    Dim i     As Long
+    Dim I     As Long
 
     Dim aux   As Boolean
 
@@ -9086,12 +9086,12 @@ Private Function FindInCmb(ByVal cbo As ComboBox, ByVal s_Familia As String) As 
 
     aux = False
 
-    For i = 0 To cbo.ListCount - 1
-        aux_f = cbo.List(i)
+    For I = 0 To cbo.ListCount - 1
+        aux_f = cbo.List(I)
         aux_f = Trim$(Left$(aux_f, Len(aux_f) - 10))
 
         If Trim(aux_f) = Trim(s_Familia) Then
-            cbo.ListIndex = i
+            cbo.ListIndex = I
             aux = True
             Exit For
 

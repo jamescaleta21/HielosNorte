@@ -9,8 +9,9 @@ Public EN As rdoEnvironment
 Public ODBCRUTA As String
 Public PSX As rdoQuery
 'CONEXION ADO
+Public wdsn As String
 Public Pub_ConnAdo As New ADODB.Connection
-
+Public oCnnRemoto As New ADODB.Connection
 Public PSVEN As rdoQuery
 '************************
 'CREADO
