@@ -87,6 +87,7 @@ Form=Forms\frmMantVDCliente.frm
 Form=Forms\frmMantVDProducto.frm
 Object={FEC367D0-B73E-4DD0-80FD-1F56BC27B04A}#1.0#0; McToolBar.ocx
 Form=Forms\frmMantVDProductoPrecio.frm
+Form=Forms\frmVDProductoBonificacion.frm
 IconForm="RCRYSTAL"
 Startup="Splash"
 HelpFile=""

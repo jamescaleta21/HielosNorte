@@ -646,23 +646,6 @@ EliminarRegistrosRecordSet oRSPrecios
 
 End Sub
 
-Private Sub cargaIDempresaDefecto()
-
-    On Error GoTo defecto
-
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_PORDEFECTO]"
-    oCmdEjec.CommandType = adCmdStoredProc
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamOutput, , 0)
-    oCmdEjec.Execute
-    pIDempresa = oCmdEjec.Parameters("@IDEMPRESA").Value
-    CerrarConexion False
-    Exit Sub
-defecto:
-    MsgBox Err.Description, vbCritical, Pub_Titulo
-
-End Sub
-
 Private Sub productoSearch(xdato As String)
     MousePointer = vbHourglass
 
@@ -934,7 +917,7 @@ If oRSPrecios.State = adStateOpen Then oRSPrecios.Close
     oRSPrecios.Fields.Append "idcategoria", adInteger ' oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
     oRSPrecios.Open
         
-    cargaIDempresaDefecto
+    pIDempresa = devuelveIDempresaXdefecto
     ConfigurarLV
     DesactivarControles Me
     Estado_Botones InicializarFormulario
@@ -959,13 +942,7 @@ Private Sub lvProducto_DblClick()
 Mandar_Datos
 End Sub
 
-Private Sub mebFin_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.cmdAdd
-End Sub
 
-Private Sub mebIni_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.mebFin
-End Sub
 
 Private Sub mtbProducto_Click(ByVal ButtonIndex As Long)
 

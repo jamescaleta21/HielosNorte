@@ -2013,6 +2013,7 @@ Select Case Index
         frmMantVDCategoria.Show
         frmMantVDCliente.Show
         frmMantVDProducto.Show
+        frmVDProductoBonificacion.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11

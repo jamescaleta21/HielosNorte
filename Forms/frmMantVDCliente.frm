@@ -127,9 +127,9 @@ Begin VB.Form frmMantVDCliente
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDCliente.frx":685A
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0)=   "txtSearch"
       Tab(0).Control(1)=   "lvCliente"
-      Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2)=   "Label1"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Cliente"
       TabPicture(1)   =   "frmMantVDCliente.frx":6876
@@ -674,23 +674,6 @@ Sub Mandar_Datos()
 
 End Sub
 
-Private Sub cargaIDempresaDefecto()
-
-    On Error GoTo defecto
-
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_PORDEFECTO]"
-    oCmdEjec.CommandType = adCmdStoredProc
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamOutput, , 0)
-    oCmdEjec.Execute
-    pIDempresa = oCmdEjec.Parameters("@IDEMPRESA").Value
-    CerrarConexion False
-    Exit Sub
-defecto:
-    MsgBox Err.Description, vbCritical, Pub_Titulo
-
-End Sub
-
 Private Sub clienteSearch(xdato As String)
 MousePointer = vbHourglass
     On Error GoTo xSearch
@@ -847,7 +830,7 @@ If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
 Private Sub Form_Load()
-cargaIDempresaDefecto
+pIDempresa = devuelveIDempresaXdefecto
 ConfigurarLV
 DesactivarControles Me
 Estado_Botones InicializarFormulario
@@ -889,6 +872,9 @@ Private Sub mtbCliente_Click(ByVal ButtonIndex As Long)
             ElseIf ValidarFecha(Me.mebFecNac.Text, True) = False Then
                 MsgBox "Fecha incorrecta.", vbCritical, Pub_Titulo
                 Me.mebFecNac.SetFocus
+                ElseIf Me.DatVendedor.BoundText = -1 Then
+                MsgBox "Debe elegir el vendedor.", vbInformation, Pub_Titulo
+                Me.DatVendedor.SetFocus
             Else
                 MousePointer = vbHourglass
                 LimpiaParametros oCmdEjec, True

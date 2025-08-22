@@ -57,13 +57,9 @@ Begin VB.Form frmProductoPromocion
       TabPicture(1)   =   "frmProductoPromocion.frx":001C
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Frame3"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Frame4"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).ControlCount=   4
       Begin VB.Frame Frame4 
          BeginProperty Font 
@@ -1180,6 +1176,8 @@ Private Sub cargarProductosCombo()
     Me.DatBonificacion.ListField = orsData(1).Name
     Me.DatBonificacion.BoundColumn = orsData(0).Name
     Me.DatBonificacion.BoundText = -1
+    
+    CerrarConexion True
 
 End Sub
 
@@ -1236,12 +1234,6 @@ Private Sub EnviarDatos()
     Me.lvPromocion.ListItems.Clear
     Me.mebPIni.SetFocus
     obtenerInformacionPromocion Me.lvArticulos.SelectedItem.Text
-End Sub
-
-Private Sub lvArticulos_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-If Button = 2 Then
-PopupMenu mnuElimina
-End If
 End Sub
 
 Private Sub lvBonificacion_ItemClick(ByVal Item As MSComctlLib.ListItem)
@@ -1350,20 +1342,20 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
     
     Loop
     
-    Dim orsBoni As ADODB.Recordset
+    Dim oRSboni As ADODB.Recordset
 
-    Set orsBoni = orsData.NextRecordset
+    Set oRSboni = orsData.NextRecordset
     
-    Do While Not orsBoni.EOF
-        Set itemx = Me.lvBonificacion.ListItems.Add(, , orsBoni!cant)
-        itemx.SubItems(1) = orsBoni!idboni
-        itemx.SubItems(2) = orsBoni!PRODUCTO
-        itemx.SubItems(3) = orsBoni!boni
-        itemx.SubItems(4) = orsBoni!PRE
-        itemx.SubItems(5) = orsBoni!tope
-        If Not IsNull(orsBoni!vigini) Then Me.mebBIni.Text = Nulo_Valors(orsBoni!vigini)
-        If Not IsNull(orsBoni!vigfin) Then Me.mebBFin.Text = Nulo_Valors(orsBoni!vigfin)
-        orsBoni.MoveNext
+    Do While Not oRSboni.EOF
+        Set itemx = Me.lvBonificacion.ListItems.Add(, , oRSboni!cant)
+        itemx.SubItems(1) = oRSboni!idboni
+        itemx.SubItems(2) = oRSboni!producto
+        itemx.SubItems(3) = oRSboni!boni
+        itemx.SubItems(4) = oRSboni!PRE
+        itemx.SubItems(5) = oRSboni!tope
+        If Not IsNull(oRSboni!vigini) Then Me.mebBIni.Text = Nulo_Valors(oRSboni!vigini)
+        If Not IsNull(oRSboni!vigfin) Then Me.mebBFin.Text = Nulo_Valors(oRSboni!vigfin)
+        oRSboni.MoveNext
     Loop
   
     If Me.lvPromocion.ListItems.count <> 0 Or Me.lvPromocion.ListItems.count <> 0 Then

@@ -160,13 +160,6 @@ gacepta = False
 Me.lblCategoria.Tag = gIDcategoria
 End Sub
 
-Private Sub mebFin_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.ComActivo
-End Sub
-
-Private Sub mebIni_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.mebFin
-End Sub
 
 Private Sub txtAddPrecio_KeyPress(KeyAscii As Integer)
 HandleEnterKey KeyAscii, Me.ComActivo

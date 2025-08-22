@@ -466,15 +466,15 @@ Begin VB.Form frmARTI
       TabCaption(1)   =   "&Porcentajes"
       TabPicture(1)   =   "Arti.frx":1060
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Fcomi"
+      Tab(1).Control(0)=   "CERO"
       Tab(1).Control(1)=   "Fop"
-      Tab(1).Control(2)=   "CERO"
+      Tab(1).Control(2)=   "Fcomi"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Almacen Defectuosos"
       TabPicture(2)   =   "Arti.frx":107C
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "frarelacion"
-      Tab(2).Control(1)=   "frmpro"
+      Tab(2).Control(0)=   "frmpro"
+      Tab(2).Control(1)=   "frarelacion"
       Tab(2).ControlCount=   2
       Begin ComctlLib.ProgressBar pgb_Progress 
          Height          =   210
@@ -4139,7 +4139,7 @@ End Sub
 Private Sub cmdpath_Click()
 With cdlfoto
 On Error GoTo ErrorHandle
-  .flags = cdlOFNHideReadOnly
+  .FLAGS = cdlOFNHideReadOnly
   .Filter = "Archivos de Imagenes |*.jpg|*.bmp"
   .FilterIndex = 2
   .ShowOpen

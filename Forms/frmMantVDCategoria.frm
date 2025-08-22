@@ -134,12 +134,12 @@ Begin VB.Form frmMantVDCategoria
       TabCaption(1)   =   "Categoria"
       TabPicture(1)   =   "frmMantVDCategoria.frx":6536
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(1)=   "Label3"
-      Tab(1).Control(2)=   "Label4"
-      Tab(1).Control(3)=   "lblidCategoria"
-      Tab(1).Control(4)=   "lblActivo"
-      Tab(1).Control(5)=   "txtDenominacion"
+      Tab(1).Control(0)=   "txtDenominacion"
+      Tab(1).Control(1)=   "lblActivo"
+      Tab(1).Control(2)=   "lblidCategoria"
+      Tab(1).Control(3)=   "Label4"
+      Tab(1).Control(4)=   "Label3"
+      Tab(1).Control(5)=   "Label2"
       Tab(1).ControlCount=   6
       Begin VB.TextBox txtDenominacion 
          Height          =   360
@@ -268,23 +268,6 @@ Sub Mandar_Datos()
         Estado_Botones AntesDeActualizar
 
     End With
-
-End Sub
-
-Private Sub cargaIDempresaDefecto()
-
-    On Error GoTo defecto
-
-    LimpiaParametros oCmdEjec
-    oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_PORDEFECTO]"
-    oCmdEjec.CommandType = adCmdStoredProc
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamOutput, , 0)
-    oCmdEjec.Execute
-    pIDempresa = oCmdEjec.Parameters("@IDEMPRESA").Value
-    CerrarConexion False
-    Exit Sub
-defecto:
-    MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
 
@@ -437,7 +420,7 @@ If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
 Private Sub Form_Load()
-cargaIDempresaDefecto
+pIDempresa = devuelveIDempresaXdefecto
 ConfigurarLV
 DesactivarControles Me
 Estado_Botones InicializarFormulario

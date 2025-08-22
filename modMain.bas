@@ -2,6 +2,21 @@ Attribute VB_Name = "modMain"
 Public Const cClave As String = "anteromariano"
 Public oRSmain As ADODB.Recordset
 
+Public Function devuelveIDempresaXdefecto() As Integer
+    On Error GoTo defecto
+
+    LimpiaParametros oCmdEjec
+    oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_PORDEFECTO]"
+    oCmdEjec.CommandType = adCmdStoredProc
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamOutput, , 0)
+    oCmdEjec.Execute
+    devuelveIDempresaXdefecto = oCmdEjec.Parameters("@IDEMPRESA").Value
+    CerrarConexion False
+    Exit Function
+defecto:
+    MsgBox Err.Description, vbCritical, Pub_Titulo
+End Function
+
 Public Sub LimpiarMaskEdBox(oMask As String, objControl As MaskEdBox)
 objControl.Mask = ""
 objControl.Text = ""
