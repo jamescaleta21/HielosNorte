@@ -242,8 +242,8 @@ Public ws_pub_mensaje As String
 Public NL As String
 Public fila As Long
 Public WStop As Boolean
-Declare Function SetWindowPos Lib "User32" (ByVal h&, ByVal hb&, ByVal X&, ByVal Y&, ByVal cx&, ByVal cy&, ByVal F&) As Long
-Declare Function FindWindow Lib "User32" (ByVal lpClassName As Any, ByVal lpWindowName As Any) As Long
+Declare Function SetWindowPos Lib "user32" (ByVal h&, ByVal hb&, ByVal x&, ByVal y&, ByVal cx&, ByVal cy&, ByVal f&) As Long
+Declare Function FindWindow Lib "user32" (ByVal lpClassName As Any, ByVal lpWindowName As Any) As Long
 Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long
 Public Const FLAGS = 1 Or 2
 Public Const HWND_TOPMOST = -1
@@ -329,8 +329,8 @@ End If
 
 End Sub
 Public Sub ACT_FORMGEN()
- Dim i
- Dim C As Integer
+ Dim I
+ Dim c As Integer
  Dim TIPREG
  '''*****TEMPORAL *******''
     PUB_TIPREG = 999
@@ -345,27 +345,27 @@ Public Sub ACT_FORMGEN()
  FORMGEN.Print " "
  FORMGEN.Print " "
  FORMGEN.Print "Actualizando...."
- C = 0
- For i = 0 To FORMGEN.Controls.count - 1
-     FORMGEN.Print "                " & FORMGEN.Controls(i).Name
-       If Not (FORMGEN.Controls(i).Tag = 0 Or FORMGEN.Controls(i).Tag > 400) Then
+ c = 0
+ For I = 0 To FORMGEN.Controls.count - 1
+     FORMGEN.Print "                " & FORMGEN.Controls(I).Name
+       If Not (FORMGEN.Controls(I).Tag = 0 Or FORMGEN.Controls(I).Tag > 400) Then
 '   MsgBox FORMGEN.Controls(i).Name
         tab_mayor.AddNew
         tab_mayor!TAB_CODCIA = "00"
         tab_mayor!TAB_TIPREG = PUB_TIPREG
-        tab_mayor!TAB_NUMTAB = FORMGEN.Controls(i).Tag
+        tab_mayor!TAB_NUMTAB = FORMGEN.Controls(I).Tag
         
-        tab_mayor!tab_nomcorto = Val(i)
-        tab_mayor!tab_NOMLARGO = Trim(FORMGEN.Controls(i).Name)
+        tab_mayor!tab_nomcorto = val(I)
+        tab_mayor!tab_NOMLARGO = Trim(FORMGEN.Controls(I).Name)
         tab_mayor.Update
-        C = C + 1
+        c = c + 1
       End If
- Next i
+ Next I
 FORMGEN.Cls
 FORMGEN.Print " "
 FORMGEN.Print " "
 FORMGEN.Print " Proceso Terminado..."
-MsgBox "Cantidad de Controles Actualizados....  : " & C & "  O K !!", 48, Pub_Titulo
+MsgBox "Cantidad de Controles Actualizados....  : " & c & "  O K !!", 48, Pub_Titulo
 FORMGEN.Cls
 
 End Sub
@@ -380,8 +380,8 @@ Dim RESTA As Currency
 Dim ENTERO As Double
 Dim LETRAS(120) As String * 1
 Dim wa As String
-Dim i, N, t As Integer
-Dim C As Integer
+Dim I, n, t As Integer
+Dim c As Integer
 Dim DU As Integer
 Dim d As Integer
 Dim u As Integer
@@ -439,19 +439,19 @@ VECTOR(2) = Mid(NUMERO, 4, 3)
 VECTOR(3) = Mid(NUMERO, 7, 3)
 VECTOR(4) = Mid(NUMERO, 10, 3)
 pub_cadena = ""
-For i = 1 To 4
+For I = 1 To 4
     t = 0
-    N = 1
-    cdu = Val(VECTOR(i))
-    C = Int(cdu / 100)
-    DU = cdu - (C * 100)
+    n = 1
+    cdu = val(VECTOR(I))
+    c = Int(cdu / 100)
+    DU = cdu - (c * 100)
     d = Int(DU / 10)
     u = DU - (d * 10)
     If cdu > 99 Then
-        wa = Trim(CENTEN(C))
+        wa = Trim(CENTEN(c))
         pub_cadena = pub_cadena + wa
-        If C > 1 Then
-            If C = 5 Then
+        If c > 1 Then
+            If c = 5 Then
                 wa = "ENTOS "
                 pub_cadena = pub_cadena + wa
             Else
@@ -499,11 +499,11 @@ For i = 1 To 4
         pub_cadena = pub_cadena + wa
     End If
     t = t + cdu
-    If cdu <> u And i = 1 Then
+    If cdu <> u And I = 1 Then
         wa = " MIL "
         pub_cadena = pub_cadena + wa
     End If
-    If t <> 0 And i = 2 Then
+    If t <> 0 And I = 2 Then
         If cdu = 1 And t = 1 Then
             wa = " MILLON "
             pub_cadena = pub_cadena + wa
@@ -512,11 +512,11 @@ For i = 1 To 4
             pub_cadena = pub_cadena + wa
         End If
     End If
-    If cdu <> 0 And i = 3 Then
+    If cdu <> 0 And I = 3 Then
         wa = " MIL "
         pub_cadena = pub_cadena + wa
     End If
-    If i = 4 Then
+    If I = 4 Then
         wa = " " & WS_DEC
         pub_cadena = pub_cadena + wa
     End If
@@ -532,7 +532,7 @@ End Function
 
 Public Function NUM_NEGA(Optional valor) As String
 Dim temp1 As String
-If Val(valor) < 0 Then
+If val(valor) < 0 Then
  temp1 = Format(valor, "##,###,##0.00")
  temp1 = Mid(temp1, 2, Len(temp1))
  temp1 = "(" & temp1 & ")"
@@ -556,11 +556,11 @@ Dim vfarcantidad As Integer  '--JC
 Dim itmX As Object 'ListItem
 If Not IsMissing(wmax) Then wmaximo = wmax Else wmaximo = 1000
 Set PSX = CN.CreateQuery("", archi)
-Set X = PSX.OpenResultset(rdOpenForwardOnly)
-X.Requery
+Set x = PSX.OpenResultset(rdOpenForwardOnly)
+x.Requery
 LV1.ListItems.Clear
 LV1.ColumnHeaders.Clear
-If X.EOF Then LV1.Visible = False: Exit Sub
+If x.EOF Then LV1.Visible = False: Exit Sub
 LV1.Top = 2000
 'LV1.Left = 3300
 'LV1.Width = 6500
@@ -598,30 +598,30 @@ Else
  LV1.ColumnHeaders.Add 3, , "Placa", 1000
  LV1.ColumnHeaders.Add 4, , "Chofer", 2500
 End If
-Do Until X.EOF Or X.AbsolutePosition - 1 >= wmaximo
-   If numarchi = 1 Or numarchi = 3 Then Set itmX = LV1.ListItems.Add(, , Trim(CStr(X.rdoColumns(3)))) Else Set itmX = LV1.ListItems.Add(, , Trim(CStr(X.rdoColumns(2))))
-   If numarchi = 3 Then itmX.SubItems(1) = Trim(CStr(X.rdoColumns(2))) Else: itmX.SubItems(1) = Trim(CStr(X.rdoColumns(0)))
+Do Until x.EOF Or x.AbsolutePosition - 1 >= wmaximo
+   If numarchi = 1 Or numarchi = 3 Then Set itmX = LV1.ListItems.Add(, , Trim(CStr(x.rdoColumns(3)))) Else Set itmX = LV1.ListItems.Add(, , Trim(CStr(x.rdoColumns(2))))
+   If numarchi = 3 Then itmX.SubItems(1) = Trim(CStr(x.rdoColumns(2))) Else: itmX.SubItems(1) = Trim(CStr(x.rdoColumns(0)))
    If numarchi = 2 Then
-    itmX.SubItems(2) = Trim(CStr(X.rdoColumns(3)))
+    itmX.SubItems(2) = Trim(CStr(x.rdoColumns(3)))
     End If
    If numarchi = 2 Then
-    itmX.SubItems(3) = Trim(CStr(X.rdoColumns(4)))
+    itmX.SubItems(3) = Trim(CStr(x.rdoColumns(4)))
     End If
     
    If numarchi = 0 Or numarchi = 3 Then
     '' itmX.SubItems(2) = Trim(CStr(X.rdoColumns(0)))
       If numarchi = 3 Then
-        itmX.SubItems(3) = Format(X.rdoColumns(4) / X.rdoColumns(5), "0.000")
+        itmX.SubItems(3) = Format(x.rdoColumns(4) / x.rdoColumns(5), "0.000")
       Else
         'itmX.SubItems(2) = Trim(X.rdoColumns(6))
         'itmX.SubItems(3) = Trim(X.rdoColumns(7))
         'itmX.SubItems(4) = Format(X.rdoColumns(4) / X.rdoColumns(5), "0.000")
         'itmX.SubItems(5) = Trim(X.rdoColumns(3))
         ' Inicio Modificado
-        itmX.SubItems(2) = Trim(X.rdoColumns(3))
-        itmX.SubItems(3) = Trim(X.rdoColumns(6))
-        itmX.SubItems(4) = Trim(X.rdoColumns(7))
-        itmX.SubItems(5) = Format(X.rdoColumns(4) / X.rdoColumns(5), "0.000")
+        itmX.SubItems(2) = Trim(x.rdoColumns(3))
+        itmX.SubItems(3) = Trim(x.rdoColumns(6))
+        itmX.SubItems(4) = Trim(x.rdoColumns(7))
+        itmX.SubItems(5) = Format(x.rdoColumns(4) / x.rdoColumns(5), "0.000")
     
         '*********DANDO LOS DATOS
 '        PUB_CADENA1 = "SELECT isnull(sum(far_cantidad),0) FROM FACART " & _
@@ -672,12 +672,12 @@ Do Until X.EOF Or X.AbsolutePosition - 1 >= wmaximo
 '
       End If
    End If
-   If numarchi = 1 Then itmX.SubItems(2) = Trim(CStr(Nulo_Valors(X.rdoColumns(4)))) + " # " + Trim(CStr(X.rdoColumns(6))):  itmX.SubItems(3) = Trim(CStr(X!tab_NOMLARGO))
+   If numarchi = 1 Then itmX.SubItems(2) = Trim(CStr(Nulo_Valors(x.rdoColumns(4)))) + " # " + Trim(CStr(x.rdoColumns(6))):  itmX.SubItems(3) = Trim(CStr(x!tab_NOMLARGO))
 
-   itmX.Tag = X.AbsolutePosition
-   X.MoveNext
+   itmX.Tag = x.AbsolutePosition
+   x.MoveNext
 Loop
-LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & X.RowCount & " Muestra un Maximo de: " & wmaximo
+LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & x.RowCount & " Muestra un Maximo de: " & wmaximo
 LV1.Visible = True
 'DoEvents
 Exit Sub
@@ -689,9 +689,9 @@ If Err.Number = 40002 Then Exit Sub Else MsgBox Err.Description, 48, Pub_Titulo
 End Sub
 
 Public Sub BORRA_FIELDS(NUM As Integer, ARRAYY As Variant)
-Dim X As Integer
-For X = 1 To NUM
- ARRAYY(X).Text = ""
+Dim x As Integer
+For x = 1 To NUM
+ ARRAYY(x).Text = ""
 Next
 
 End Sub
@@ -744,13 +744,13 @@ Else
 End If
 LK_EMP_PTO = Nulo_Valors(par_llave!PAR_PTO_VTA)
 LK_FLAG_GRIFO = Nulo_Valors(par_llave!PAR_FLAG_GRIFO)
-If LK_FLAG_GRIFO = "A" Then
+'If LK_FLAG_GRIFO = "A" Then
   MDIForm1.menugrifo.Visible = True
   MDIForm1.menugrifo.Enabled = True
-Else
-  MDIForm1.menugrifo.Visible = False
-  MDIForm1.menugrifo.Enabled = False
-End If
+'Else
+ ' MDIForm1.menugrifo.Visible = False
+ ' MDIForm1.menugrifo.Enabled = False
+'End If
 
 If Format(LK_FECHA_DIA, "dd/mm/yyyy") = "30/12/1899" Then
  MsgBox "Generar el Calendario de Esta Empresa.", 48, Pub_Titulo
@@ -771,7 +771,7 @@ Else
 End If
 'FrmParGen.txtcolor.Text =
 On Error GoTo ecolor
-If Val(Nulo_Valors(par_llave!PAR_COLOR)) <> 0 Then
+If val(Nulo_Valors(par_llave!PAR_COLOR)) <> 0 Then
  MDIForm1.lblciagen.BackColor = QBColor(Left(Nulo_Valors(par_llave!PAR_COLOR), 2))
  MDIForm1.lblciagen.ForeColor = QBColor(Mid(Nulo_Valors(par_llave!PAR_COLOR), 3, 4))
 Else
@@ -920,8 +920,8 @@ End Function
 
 Public Sub LLENA_LISTRANSA(wlista As ListBox, wtra As Integer)
  Dim SN As String
- Dim i As Integer
- Dim J As Integer
+ Dim I As Integer
+ Dim j As Integer
     lis_tra.Requery
     wlista.Clear
     wlista.Visible = False
@@ -938,25 +938,25 @@ Public Sub LLENA_LISTRANSA(wlista As ListBox, wtra As Integer)
        '     If lis_tra!tra_key = 2107 Then GoTo otro2
        ' End If
         SN = "N"
-        i = 0
-        Do Until SN = "S" Or i = 10
-            i = i + 1
-            J = 0
-            Do Until SN = "S" Or J = 10
-                J = J + 1
-                If lk_GRUPOS(J) = lis_tra(92 + i) And lk_GRUPOS(J) <> 0 Then
+        I = 0
+        Do Until SN = "S" Or I = 10
+            I = I + 1
+            j = 0
+            Do Until SN = "S" Or j = 10
+                j = j + 1
+                If lk_GRUPOS(j) = lis_tra(92 + I) And lk_GRUPOS(j) <> 0 Then
                     SN = "S"
                  End If
             Loop
         Loop
         If SN = "N" And LK_CODUSU <> "ADMIN" Then
-            J = 1
-            Do Until lk_CODTRAS(J) = "" Or SN = "Y" Or J = 10
-               If Left(lk_CODTRAS(J), 4) = lis_tra(0) Then
+            j = 1
+            Do Until lk_CODTRAS(j) = "" Or SN = "Y" Or j = 10
+               If Left(lk_CODTRAS(j), 4) = lis_tra(0) Then
                   SN = "Y"
                   Exit Do
                 End If
-                J = J + 1
+                j = j + 1
             Loop
             If SN = "N" And LK_CODUSU <> "ADMIN" Then
             Else
@@ -986,12 +986,12 @@ End Function
 
 Public Sub Permisos()
 Dim W1 As String * 2
-Dim i, wPosF, WPosV, cuenta As Integer
+Dim I, wPosF, WPosV, cuenta As Integer
 Dim WC As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
-Dim F As Integer
+Dim f As Integer
 Dim a As Integer
 Dim wAcceso(7) As String * 40
 On Error GoTo sigue
@@ -1028,11 +1028,11 @@ For WC = 1 To 7
     ' Next i
     'End If
     
-    For i = 1 To Len(cade)
-        If Mid(cade, i, 1) = "." Then
+    For I = 1 To Len(cade)
+        If Mid(cade, I, 1) = "." Then
             a = a + 1
         End If
-    Next i
+    Next I
     
     Do Until cuenta = a
         cuenta = cuenta + 1
@@ -1260,7 +1260,7 @@ Dim indice As Integer
 Dim wm As Integer
 Dim llave_rep01 As rdoResultset
 Dim PS_REP01 As rdoQuery
-Dim i As Integer
+Dim I As Integer
 Dim valor
 Dim loc_xl As Object
 Dim wRuta As String
@@ -1375,7 +1375,7 @@ pasa_todo:
          FORMGEN.Reportes.Action = 1
          DoEvents
          On Error GoTo 0
-       If LK_CODTRA = 2401 And Val(FORMGEN.i_numguia.Text) > 0 Then
+       If LK_CODTRA = 2401 And val(FORMGEN.i_numguia.Text) > 0 Then
          FORMGEN.Reportes.WindowTitle = "GUIA DE VENTA  " & FORMGEN.Reportes.WindowTitle
          FORMGEN.Reportes.ReportFileName = wRuta & "GRE006.RPT"
          pub_mensaje = "Ahora Desea Imprimir la " & Trim(FORMGEN.Reportes.WindowTitle) & "   ¿ Continuar... ?"
@@ -1424,7 +1424,7 @@ End If
 loc_xl.Workbooks.Open WSRUTA, 0, True, 4, PUB_CLAVE, PUB_CLAVE
 fila = 2
 wm = 1
-Do Until Val(tra_llave(fila)) = 0 Or fila = 62
+Do Until val(tra_llave(fila)) = 0 Or fila = 62
   wm = wm + 1
   If Trim(Nulo_Valors(llave_rep01(wm))) <> "" Then
       indice = TABLA_TAG(tra_llave(fila))
@@ -1441,12 +1441,12 @@ Do Until Val(tra_llave(fila)) = 0 Or fila = 62
         valor = FORMGEN.Controls(indice).Text
        On Error GoTo 0
       End If
-      For i = 1 To loc_xl.Names.count
-         If Right(loc_xl.Names(i).Name, 3) = Trim(Format(tra_llave(fila), "000")) Then
-           loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(i).Value).Value = valor
+      For I = 1 To loc_xl.Names.count
+         If Right(loc_xl.Names(I).Name, 3) = Trim(Format(tra_llave(fila), "000")) Then
+           loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(I).Value).Value = valor
            Exit For
          End If
-      Next i
+      Next I
   End If
   
 fila = fila + 4
@@ -1454,39 +1454,39 @@ fila = fila + 4
 Loop
 If Trim(Nulo_Valors(llave_rep01!REP_CIA)) <> "" Then
   valor = Mid(MDIForm1.stb_EB.Panels("cia"), 4, Len(MDIForm1.stb_EB.Panels("cia")))
-  For i = 1 To loc_xl.Names.count
-    If loc_xl.Names(i).Name = llave_rep01!REP_CIA Then
-      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(i).Value).Value = valor
+  For I = 1 To loc_xl.Names.count
+    If loc_xl.Names(I).Name = llave_rep01!REP_CIA Then
+      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(I).Value).Value = valor
       Exit For
     End If
-  Next i
+  Next I
 End If
 If Trim(Nulo_Valors(llave_rep01!REP_DIA)) <> "" Then
   valor = Format(LK_FECHA_DIA, "dd/mm/yyyy")
-  For i = 1 To loc_xl.Names.count
-    If loc_xl.Names(i).Name = llave_rep01!REP_DIA Then
-      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(i).Value).Value = valor
+  For I = 1 To loc_xl.Names.count
+    If loc_xl.Names(I).Name = llave_rep01!REP_DIA Then
+      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(I).Value).Value = valor
       Exit For
     End If
-  Next i
+  Next I
 End If
 If Trim(Nulo_Valors(llave_rep01!REP_USU)) <> "A" Then
   valor = LK_CODUSU
-  For i = 1 To loc_xl.Names.count
-    If loc_xl.Names(i).Name = llave_rep01!REP_USU Then
-      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(i).Value).Value = valor
+  For I = 1 To loc_xl.Names.count
+    If loc_xl.Names(I).Name = llave_rep01!REP_USU Then
+      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(I).Value).Value = valor
       Exit For
     End If
-  Next i
+  Next I
 End If
 If Trim(Nulo_Valors(llave_rep01!REP_TRA)) <> "A" Then
   valor = tra_llave!TRA_KEY
-  For i = 1 To loc_xl.Names.count
-    If loc_xl.Names(i).Name = llave_rep01!REP_TRA Then
-      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(i).Value).Value = valor
+  For I = 1 To loc_xl.Names.count
+    If loc_xl.Names(I).Name = llave_rep01!REP_TRA Then
+      loc_xl.APPLICATION.Range(loc_xl.APPLICATION.Names(I).Value).Value = valor
       Exit For
     End If
-  Next i
+  Next I
 End If
 loc_xl.DisplayAlerts = False
 If Trim(Nulo_Valors(llave_rep01!REP_IMP)) <> "A" Then
@@ -1592,11 +1592,11 @@ Dim wmaximo As Integer
 Dim itmX As ListItem
 If Not IsMissing(wmax) Then wmaximo = wmax Else wmaximo = 1000
 Set PSX = CN.CreateQuery("", archi)
-Set X = PSX.OpenResultset(rdOpenForwardOnly)
-X.Requery
+Set x = PSX.OpenResultset(rdOpenForwardOnly)
+x.Requery
 LV1.ListItems.Clear
 LV1.ColumnHeaders.Clear
-If X.EOF Then LV1.Visible = False: Exit Sub
+If x.EOF Then LV1.Visible = False: Exit Sub
 LV1.Top = 1800
 LV1.Left = 3000
 LV1.Width = 6500
@@ -1606,15 +1606,15 @@ If numarchi = 99 Then ' para codigos alternos
  LV1.ColumnHeaders.Add 1, , "Descripción", 4000
  LV1.ColumnHeaders.Add 2, , "Cod.", 400
 End If
-Do Until X.EOF Or X.AbsolutePosition - 1 >= wmaximo
+Do Until x.EOF Or x.AbsolutePosition - 1 >= wmaximo
    If numarchi = 99 Then
-     Set itmX = LV1.ListItems.Add(, , Trim(CStr(X.rdoColumns(3))))
-          itmX.SubItems(1) = Trim(CStr(X.rdoColumns(2)))
+     Set itmX = LV1.ListItems.Add(, , Trim(CStr(x.rdoColumns(3))))
+          itmX.SubItems(1) = Trim(CStr(x.rdoColumns(2)))
    End If
-   itmX.Tag = X.AbsolutePosition
-   X.MoveNext
+   itmX.Tag = x.AbsolutePosition
+   x.MoveNext
 Loop
-LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & X.RowCount & " Muestra un Maximo de: " & wmaximo
+LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & x.RowCount & " Muestra un Maximo de: " & wmaximo
 Exit Sub
 SALE:
 If Err.Number = 40002 Then Exit Sub Else MsgBox Err.Description, 48, Pub_Titulo
@@ -1625,11 +1625,11 @@ Public Sub ACT_TIPO_CAMBIO()
 Dim WC
 WC = InputBox("Tipo de Cambio para - Fecha: " + Format(LK_FECHA_DIA, "dd/mm/yyyy") + " es :", "Actualizar Tipo de Cambio ", Format(LK_TIPO_CAMBIO, "0.0000000"))
 If WC = "" Then Exit Sub
-If Val(WC) <= 0 Then
+If val(WC) <= 0 Then
    MsgBox " NO Procede...", 48, Pub_Titulo
    Exit Sub
 End If
-LK_TIPO_CAMBIO = Format(Val(WC), "0.0000000")
+LK_TIPO_CAMBIO = Format(val(WC), "0.0000000")
 GEN.Edit
 GEN!gen_tipo_cambio = LK_TIPO_CAMBIO
 GEN.Update
@@ -1647,7 +1647,7 @@ If cal_llave.EOF Then
   JALAR_TC = 0
   Exit Function
 End If
-If Val(WES) = 3 Then
+If val(WES) = 3 Then
  If IsNull(cal_llave!cal_tipo_cambio) Then
     JALAR_TC = 0
     Exit Function
@@ -1655,7 +1655,7 @@ If Val(WES) = 3 Then
  JALAR_TC = cal_llave!cal_tipo_cambio
 End If
 
-If Val(WES) = 4 Then
+If val(WES) = 4 Then
  If IsNull(cal_llave!CAL_TC_MERCA) Then
     JALAR_TC = 0
     Exit Function
@@ -1664,14 +1664,14 @@ If Val(WES) = 4 Then
 End If
 
 
-If Val(WES) = 1 Then
+If val(WES) = 1 Then
  If IsNull(cal_llave!cal_tc_ingre) Then
     JALAR_TC = 0
     Exit Function
  End If
  JALAR_TC = cal_llave!cal_tc_ingre
 End If
-If Val(WES) = -1 Then
+If val(WES) = -1 Then
  If IsNull(cal_llave!cal_tc_salid) Then
     JALAR_TC = 0
     Exit Function
@@ -1687,11 +1687,11 @@ Dim wmaximo As Integer
 Dim itmX As Object
 If Not IsMissing(wmax) Then wmaximo = wmax Else wmaximo = 1000
 Set PSX = CN.CreateQuery("", archi)
-Set X = PSX.OpenResultset(rdOpenForwardOnly)
-X.Requery
+Set x = PSX.OpenResultset(rdOpenForwardOnly)
+x.Requery
 LV1.ListItems.Clear
 LV1.ColumnHeaders.Clear
-If X.EOF Then LV1.Visible = False: Exit Sub
+If x.EOF Then LV1.Visible = False: Exit Sub
 LV1.Top = 3380
 LV1.Height = 2900
 LV1.Width = 10100
@@ -1701,18 +1701,18 @@ If numarchi = 9 Then
  LV1.ColumnHeaders.Add 2, , "Codigo.", 1000
  LV1.ColumnHeaders.Add 3, , "Interno", 0
 End If
-Do Until X.EOF Or X.AbsolutePosition - 1 >= wmaximo
+Do Until x.EOF Or x.AbsolutePosition - 1 >= wmaximo
   If numarchi = 9 Then
-    Set itmX = LV1.ListItems.Add(, , Trim(CStr(X.rdoColumns(1))))
-    itmX.SubItems(1) = Trim(CStr(X.rdoColumns(2)))
+    Set itmX = LV1.ListItems.Add(, , Trim(CStr(x.rdoColumns(1))))
+    itmX.SubItems(1) = Trim(CStr(x.rdoColumns(2)))
    ' itmX.SubItems(3) = Format(X.rdoColumns(4), "0.00")
-    itmX.SubItems(2) = Format(X.rdoColumns(0), "0.00")
+    itmX.SubItems(2) = Format(x.rdoColumns(0), "0.00")
    '      itmX.SubItems(3) = Format(X.rdoColumns(3), "0.00")
   End If
-  itmX.Tag = X.AbsolutePosition
-  X.MoveNext
+  itmX.Tag = x.AbsolutePosition
+  x.MoveNext
 Loop
-LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & X.RowCount & " Muestra un Maximo de: " & wmaximo
+LV1.ToolTipText = "Encontrados : " & itmX.Tag & "/" & x.RowCount & " Muestra un Maximo de: " & wmaximo
 LV1.Visible = True
 'DoEvents
 Exit Sub
@@ -1739,12 +1739,12 @@ If tab_mayor.EOF Then
   CHE_BLOQ_MES = 1
 Else
     Do Until tab_mayor.EOF
-      If tab_mayor!TAB_NUMTAB = Val(Format(cop_llave!cop_fecha_proceso, "yyyy")) Then
+      If tab_mayor!TAB_NUMTAB = val(Format(cop_llave!cop_fecha_proceso, "yyyy")) Then
         wcadena = Trim(tab_mayor!tab_NOMLARGO)
       End If
       tab_mayor.MoveNext
     Loop
-    wvalor = Mid(wcadena, Val(Format(cop_llave!cop_fecha_proceso, "mm")) + 1, 1)
+    wvalor = Mid(wcadena, val(Format(cop_llave!cop_fecha_proceso, "mm")) + 1, 1)
     If wvalor = "1" Then
        'MsgBox "<<<< Mes CERRADO Operaciones >>>>", vbCritical, Pub_Titulo
        CHE_BLOQ_MES = 1
@@ -1784,7 +1784,7 @@ par_MOV_NRO_MOV = 0
 par_MOV_TIPMOV = WTIPMOV
 par_MOV_FECHA = cop_llave!cop_fecha_proceso2
 par_MOV_fecha_EMI = cop_llave!cop_fecha_proceso2
-par_MOV_nro_MES = Val(cop_llave!cop_nro_mes)
+par_MOV_nro_MES = val(cop_llave!cop_nro_mes)
 par_MOV_MONEDA = "S"
 par_MOV_FLAG_DES = " "
 If par_MOV_TIPMOV = 1 Then
@@ -1818,8 +1818,8 @@ par_MOV_NRO_VOUCHER = par_MOV_NRO_VOUCHER + 1
 'EE.Application.Visible = True
 Do Until FLAGX = "A"
    correla = correla + 1
-   If Val(EE.Cells(correla, 1)) = 0 Then
-     If UCase(Left(Trim(EE.Cells(correla, 1)), 5)) = "TOTAL" And Val(EE.Cells(correla + 1, 1)) <> 0 Then
+   If val(EE.Cells(correla, 1)) = 0 Then
+     If UCase(Left(Trim(EE.Cells(correla, 1)), 5)) = "TOTAL" And val(EE.Cells(correla + 1, 1)) <> 0 Then
         par_MOV_NRO_MOV = 0
         par_MOV_NRO_VOUCHER = par_MOV_NRO_VOUCHER + 1
         par_MOV_DETALLE = "Resúmen Ingresos de Caja "
@@ -1831,7 +1831,7 @@ Do Until FLAGX = "A"
    End If
    par_MOV_CODCTA = Format(EE.Cells(correla, 1), "##########")
    par_MOV_DH = Format(EE.Cells(correla, 5), "#")
-   par_MOV_IMPORTE = Val(redondea(EE.Cells(correla, 3))) + Val(redondea(EE.Cells(correla, 4)))
+   par_MOV_IMPORTE = val(redondea(EE.Cells(correla, 3))) + val(redondea(EE.Cells(correla, 4)))
    par_MOV_CODCIA = Format(cop_llave!cop_codcia, "00")
    ' CONSISTENCIAS DE NEGATIVOS
    If par_MOV_IMPORTE < 0 Then
@@ -1960,10 +1960,10 @@ Do Until ch_llave.EOF
       PUB_CHENUM = 0
       WS_TOT = fa_llave!CAR_IMP_INI
       PUB_FBG = fa_llave!car_FBG
-      WS_IMPORTE_AMORT = Val((ch_llave!car_importe))
+      WS_IMPORTE_AMORT = val((ch_llave!car_importe))
       pub_signo_car = -1
       fa_llave.Edit
-      fa_llave!car_importe = Format(Val(fa_llave!car_importe) + Val((ch_llave!car_importe)), "0.00")
+      fa_llave!car_importe = Format(val(fa_llave!car_importe) + val((ch_llave!car_importe)), "0.00")
       fa_llave.Update
       pub_numoper = pub_numoper + 1
       GoSub REGISTRAR
@@ -1976,7 +1976,7 @@ Do Until ch_llave.EOF
       PUB_CONCEPTO = "Liquidacion automatica"
       PUB_NUMFAC_C = ch_llave!CAR_NUMFAC_C
       PUB_NUMSER_C = ch_llave!CAR_NUMSER_C
-      PUB_CHENUM = Val(ch_llave!car_NUM_CHEQUE)
+      PUB_CHENUM = val(ch_llave!car_NUM_CHEQUE)
       WS_TOT = ch_llave!CAR_IMP_INI
       PUB_FBG = ch_llave!car_FBG
       ch_llave.Edit

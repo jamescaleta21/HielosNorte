@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -123,8 +123,8 @@ Begin VB.MDIForm MDIForm1
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   9480
-      _ExtentX        =   16722
+      Width           =   20340
+      _ExtentX        =   35878
       _ExtentY        =   688
       ButtonWidth     =   661
       ButtonHeight    =   635
@@ -322,9 +322,9 @@ Begin VB.MDIForm MDIForm1
       Height          =   330
       Left            =   0
       TabIndex        =   3
-      Top             =   6180
-      Width           =   9480
-      _ExtentX        =   16722
+      Top             =   10500
+      Width           =   20340
+      _ExtentX        =   35878
       _ExtentY        =   582
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -360,7 +360,7 @@ Begin VB.MDIForm MDIForm1
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   3528
+            Object.Width           =   17657
             MinWidth        =   3528
          EndProperty
       EndProperty
@@ -531,23 +531,21 @@ Begin VB.MDIForm MDIForm1
       End
    End
    Begin VB.Menu menugrifo 
-      Caption         =   "&Grifos"
-      Enabled         =   0   'False
-      Visible         =   0   'False
+      Caption         =   "&Venta Directa"
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Definición de Turnos"
+         Caption         =   "C&ategorias"
          Index           =   0
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Islas y Responsables"
+         Caption         =   "&Clientes"
          Index           =   1
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Parte Diario de Grifero"
+         Caption         =   "&Productos"
          Index           =   2
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "&Stock por Regla"
+         Caption         =   "&Bonificaciones"
          Index           =   3
       End
       Begin VB.Menu submenugrifo 
@@ -556,7 +554,9 @@ Begin VB.MDIForm MDIForm1
       End
       Begin VB.Menu submenugrifo 
          Caption         =   "&Transacciones II"
+         Enabled         =   0   'False
          Index           =   5
+         Visible         =   0   'False
       End
    End
    Begin VB.Menu menutit3 
@@ -865,8 +865,6 @@ Begin VB.MDIForm MDIForm1
    End
    Begin VB.Menu menuAyuda 
       Caption         =   "&Ayuda"
-      Enabled         =   0   'False
-      Visible         =   0   'False
       Begin VB.Menu menuAyudaSistema 
          Caption         =   "&Quienes somos..."
       End
@@ -1130,13 +1128,14 @@ LK_PASA_BOLETAS = Nulo_Valors(GEN!gen_pasa_boletas)
 'LK_FACTORMAN = Nulo_Valor0(GEN!GEN_FACTORMAN)
 
 'MDIForm1.StatusBar1.Panels(3).Text = "T.C.= S/. " + Format(LK_TIPO_CAMBIO, "0.0000")
-If LK_FLAG_GRIFO = "A" Then
+'If LK_FLAG_GRIFO = "A" Then
+  
   MDIForm1.menugrifo.Visible = True
   MDIForm1.menugrifo.Enabled = True
-Else
-  MDIForm1.menugrifo.Visible = False
-  MDIForm1.menugrifo.Enabled = False
-End If
+'Else
+ ' MDIForm1.menugrifo.Visible = False
+ ' MDIForm1.menugrifo.Enabled = False
+'End If
 
 'TXTCIA.Visible = False
 DoEvents
@@ -1823,6 +1822,10 @@ KARDEX.Show
 Screen.MousePointer = 0
 End Sub
 
+Private Sub menugrifo_Click()
+
+End Sub
+
 Private Sub menuMoli_Click(Index As Integer)
 If Trim(menuMoli(Index).Caption) = "" Then
  Exit Sub
@@ -1967,34 +1970,21 @@ Private Sub submenugrifo_Click(Index As Integer)
 Select Case Index
 Case 0
     Screen.MousePointer = 11
-    PUB_TIPREG = 2102
-    PUB_CODCIA = LK_CODCIA
-    Load FrmDatArti
-    FrmDatArti.Caption = "TURNOS DE GRIFOS -  TAB_TIPREG = " & PUB_TIPREG
-    Screen.MousePointer = 0
-    FrmDatArti.Show 1
+     frmMantVDCategoria.Show
+     Screen.MousePointer = 0
 Case 1
     Screen.MousePointer = 11
-    Load Frmislas
-    Frmislas.Show
+    frmMantVDCliente.Show
     Screen.MousePointer = 0
     Exit Sub
 Case 2
     Screen.MousePointer = 11
-    Load frmPARTE
-    frmPARTE.Show
+    frmMantVDProducto.Show
     Screen.MousePointer = 0
     Exit Sub
 Case 3
     Screen.MousePointer = 11
-    Load frmStockG
-    Screen.MousePointer = 0
-    frmStockG.Show 1
-    Exit Sub
-Case 5
-    Screen.MousePointer = 11
-    Load FORM_GRIFO
-    FORM_GRIFO.Show
+    frmVDProductoBonificacion.Show
     Screen.MousePointer = 0
     Exit Sub
 End Select
@@ -2009,11 +1999,7 @@ On Error GoTo SALE
 Select Case Index
     Case 0
         Screen.MousePointer = 11
-        'frmARTI.Show
-        frmMantVDCategoria.Show
-        frmMantVDCliente.Show
-        frmMantVDProducto.Show
-        frmVDProductoBonificacion.Show
+        frmARTI.Show
         Screen.MousePointer = 0
     Case 1
         Screen.MousePointer = 11
@@ -2396,7 +2382,32 @@ Private Sub submenutit7_Click(Index As Integer)
 End Select
 End Sub
 
-
+Private Sub submenutit8_Click(Index As Integer)
+  Select Case Index
+    Case 0
+       Screen.MousePointer = 11
+'       Load frmPrecios
+'       frmPrecios.Show
+'       Screen.MousePointer = 0
+         frmMantVDCategoria.Show
+        'frmPedidoHorario.Show
+        Screen.MousePointer = 0
+     Case 1
+       Screen.MousePointer = 11
+       frmPedidoHorario.Show
+       Screen.MousePointer = 0
+    Case 2
+       Screen.MousePointer = 11
+        frmMantVDProducto.Show
+       Screen.MousePointer = 0
+   Case 3
+       Screen.MousePointer = 11
+       'Load frmOpcion
+        frmVDProductoBonificacion.Show
+       Screen.MousePointer = 0
+    
+End Select
+End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
