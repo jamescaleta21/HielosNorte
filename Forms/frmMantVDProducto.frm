@@ -62,9 +62,9 @@ Begin VB.Form frmMantVDProducto
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDProducto.frx":1444
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
+      Tab(0).Control(0)=   "Label1"
       Tab(0).Control(1)=   "lvProducto"
-      Tab(0).Control(2)=   "Label1"
+      Tab(0).Control(2)=   "txtSearch"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
       TabPicture(1)   =   "frmMantVDProducto.frx":1460
@@ -400,6 +400,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private vPUNTO As Boolean 'variable para controld epunto sin utilizar ocx
+Private vPUNTOc As Boolean 'variable para controld epunto sin utilizar ocx
 Private VNuevo As Boolean
 Private pIDempresa As Integer
 Private oRSPrecios As New ADODB.Recordset
@@ -1212,8 +1213,21 @@ End Sub
 
 
 
+Private Sub txtAddPrecio_Change()
+If InStr(Me.txtAddPrecio.Text, ".") Then
+    vPUNTOc = True
+Else
+    vPUNTOc = False
+End If
+End Sub
+
 Private Sub txtAddPrecio_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ If NumerosyPunto(KeyAscii) Then KeyAscii = 0
+  If KeyAscii = 46 Then
+        If vPUNTOc Or Len(Trim(Me.txtAddPrecio.Text)) = 0 Then
+            KeyAscii = 0
+        End If
+    End If
  HandleEnterKey KeyAscii, Me.cmdAdd
 End Sub
 
