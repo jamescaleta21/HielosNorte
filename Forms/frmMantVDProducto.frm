@@ -62,9 +62,9 @@ Begin VB.Form frmMantVDProducto
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDProducto.frx":1444
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0)=   "txtSearch"
       Tab(0).Control(1)=   "lvProducto"
-      Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2)=   "Label1"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
       TabPicture(1)   =   "frmMantVDProducto.frx":1460
@@ -399,7 +399,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-   
+Private vPUNTO As Boolean 'variable para controld epunto sin utilizar ocx
 Private VNuevo As Boolean
 Private pIDempresa As Integer
 Private oRSPrecios As New ADODB.Recordset
@@ -1217,6 +1217,14 @@ Private Sub txtAddPrecio_KeyPress(KeyAscii As Integer)
  HandleEnterKey KeyAscii, Me.cmdAdd
 End Sub
 
+Private Sub txtPrecioBase_Change()
+If InStr(Me.txtPrecioBase.Text, ".") Then
+    vPUNTO = True
+Else
+    vPUNTO = False
+End If
+End Sub
+
 Private Sub txtStock_KeyPress(KeyAscii As Integer)
 KeyAscii = Mayusculas(KeyAscii)
 HandleEnterKey KeyAscii, Me.datAddCategoria
@@ -1238,7 +1246,11 @@ If KeyAscii = vbKeyReturn Then productoSearch Me.txtSearch.Text
 End Sub
 
 Private Sub txtPrecioBase_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
-KeyAscii = Mayusculas(KeyAscii)
+ If NumerosyPunto(KeyAscii) Then KeyAscii = 0
+ If KeyAscii = 46 Then
+        If vPUNTO Or Len(Trim(Me.txtPrecioBase.Text)) = 0 Then
+            KeyAscii = 0
+        End If
+    End If
 HandleEnterKey KeyAscii, Me.txtStock
 End Sub

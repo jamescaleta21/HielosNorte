@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFormGenPedidos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Pedido"
@@ -469,9 +469,9 @@ oCmdEjec.Execute
 LimpiaParametros oCmdEjec
 oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_UPDATE]"
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPEDIDO", adBigInt, adParamInput, , Me.lblIDpedido.Caption)
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCLIENTE", adInteger, adParamInput, 2, Me.lblIDcliente.Caption)
+oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCLIENTE", adInteger, adParamInput, 2, Me.lblIdCliente.Caption)
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@TOTAL", adDouble, adParamInput, , Me.lblTotal.Caption)
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.lblIDvendedor.Caption)
+oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.lblIdVendedor.Caption)
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@USUARIO", adVarChar, adParamInput, 20, LK_CODUSU)
 oCmdEjec.Execute
 
@@ -523,26 +523,26 @@ Set ORSd = oCmdEjec.Execute
 
 If Not ORSd.EOF Then
     Me.lblCliente.Caption = ORSd!cliente
-    Me.lblIDcliente.Caption = ORSd!idcliente
-    Me.lblIDvendedor.Caption = ORSd!idven
+    Me.lblIdCliente.Caption = ORSd!idcliente
+    Me.lblIdVendedor.Caption = ORSd!IDVEN
     Me.lblVendedor.Caption = ORSd!vendedor
-    Me.lblIDpedido.Caption = ORSd!IDe
+    Me.lblIDpedido.Caption = ORSd!ide
     Me.lblFecha.Caption = ORSd!fecha
-    Me.lblTotal.Caption = ORSd!total
+    Me.lblTotal.Caption = ORSd!Total
     Me.lblObservacion.Caption = ORSd!obs
 End If
 
-Dim orsT As ADODB.Recordset
-Set orsT = ORSd.NextRecordset
+Dim ORSt As ADODB.Recordset
+Set ORSt = ORSd.NextRecordset
 
 Dim itemx As Object
-Do While Not orsT.EOF
-    Set itemx = Me.lvDetalle.ListItems.Add(, , orsT!cant)
-    itemx.Tag = orsT!ideproducto
-    itemx.SubItems(1) = orsT!producto
-    itemx.SubItems(2) = orsT!PRE
-    itemx.SubItems(3) = orsT!imp
-    orsT.MoveNext
+Do While Not ORSt.EOF
+    Set itemx = Me.lvDetalle.ListItems.Add(, , ORSt!cant)
+    itemx.Tag = ORSt!IDEPRODUCTO
+    itemx.SubItems(1) = ORSt!producto
+    itemx.SubItems(2) = ORSt!PRE
+    itemx.SubItems(3) = ORSt!imp
+    ORSt.MoveNext
 Loop
 vBuscar = True
 End Sub
@@ -725,7 +725,7 @@ Private Sub txtProducto_KeyPress(KeyAscii As Integer)
                     Set Item = Me.lvSearch.ListItems.Add(, , oRsPago!cod)
                     Item.SubItems(1) = Trim(oRsPago!prod)
                     Item.SubItems(2) = oRsPago!PRE
-                    Item.Tag = oRsPago!IDe
+                    Item.Tag = oRsPago!ide
                     oRsPago.MoveNext
                 Loop
 
@@ -751,7 +751,7 @@ End Sub
 
 Private Sub CalculoImporte()
 If IsNumeric(Me.txtCantidad.Text) And IsNumeric(Me.txtPrecio.Text) Then
-    Me.lblImporte.Caption = Val(Me.txtCantidad.Text) * Val(Me.txtPrecio.Text)
+    Me.lblImporte.Caption = val(Me.txtCantidad.Text) * val(Me.txtPrecio.Text)
     Else
     Me.lblImporte.Caption = "0.00"
 End If
