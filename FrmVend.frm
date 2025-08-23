@@ -149,10 +149,22 @@ Begin VB.Form FrmVen
          TabIndex        =   83
          Top             =   120
          Width           =   3135
+         Begin MSDataListLib.DataCombo DatPerfil 
+            Height          =   315
+            Left            =   1080
+            TabIndex        =   103
+            Top             =   2040
+            Width           =   1695
+            _ExtentX        =   2990
+            _ExtentY        =   556
+            _Version        =   393216
+            Style           =   2
+            Text            =   ""
+         End
          Begin MSDataListLib.DataCombo DatEmpresa 
             Height          =   315
             Left            =   1080
-            TabIndex        =   96
+            TabIndex        =   95
             Top             =   2400
             Width           =   1695
             _ExtentX        =   2990
@@ -161,21 +173,11 @@ Begin VB.Form FrmVen
             Style           =   2
             Text            =   ""
          End
-         Begin VB.ComboBox ComPerfil 
+         Begin VB.ComboBox comPrecio 
             Height          =   315
             ItemData        =   "FrmVend.frx":3BAC
             Left            =   1080
-            List            =   "FrmVend.frx":3BC2
-            Style           =   2  'Dropdown List
-            TabIndex        =   95
-            Top             =   2040
-            Width           =   1695
-         End
-         Begin VB.ComboBox comPrecio 
-            Height          =   315
-            ItemData        =   "FrmVend.frx":3C15
-            Left            =   1080
-            List            =   "FrmVend.frx":3C1F
+            List            =   "FrmVend.frx":3BB6
             Style           =   2  'Dropdown List
             TabIndex        =   93
             Top             =   1680
@@ -199,9 +201,9 @@ Begin VB.Form FrmVen
          End
          Begin VB.ComboBox comLogeo 
             Height          =   315
-            ItemData        =   "FrmVend.frx":3C2B
+            ItemData        =   "FrmVend.frx":3BC2
             Left            =   1080
-            List            =   "FrmVend.frx":3C35
+            List            =   "FrmVend.frx":3BCC
             Style           =   2  'Dropdown List
             TabIndex        =   87
             Top             =   600
@@ -209,9 +211,9 @@ Begin VB.Form FrmVen
          End
          Begin VB.ComboBox ComActivo 
             Height          =   315
-            ItemData        =   "FrmVend.frx":3C41
+            ItemData        =   "FrmVend.frx":3BD8
             Left            =   1080
-            List            =   "FrmVend.frx":3C4B
+            List            =   "FrmVend.frx":3BE2
             Style           =   2  'Dropdown List
             TabIndex        =   86
             Top             =   240
@@ -223,7 +225,7 @@ Begin VB.Form FrmVen
             Caption         =   "Pertenece a:"
             Height          =   195
             Left            =   135
-            TabIndex        =   97
+            TabIndex        =   96
             Top             =   2460
             Width           =   915
          End
@@ -567,12 +569,12 @@ Begin VB.Form FrmVen
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Definición de Serie"
-      TabPicture(0)   =   "FrmVend.frx":3C57
+      TabPicture(0)   =   "FrmVend.frx":3BEE
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "F2"
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Archivos de Impresión"
-      TabPicture(1)   =   "FrmVend.frx":3C73
+      TabPicture(1)   =   "FrmVend.frx":3C0A
       Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Label4"
       Tab(1).Control(0).Enabled=   0   'False
@@ -602,33 +604,33 @@ Begin VB.Form FrmVen
       Tab(1).Control(12).Enabled=   0   'False
       Tab(1).ControlCount=   13
       TabCaption(2)   =   "Datos de Repartidor"
-      TabPicture(2)   =   "FrmVend.frx":3C8F
+      TabPicture(2)   =   "FrmVend.frx":3C26
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label14"
-      Tab(2).Control(1)=   "Label15"
-      Tab(2).Control(2)=   "Label16"
-      Tab(2).Control(3)=   "txtBrevete"
-      Tab(2).Control(4)=   "txtPlaca"
-      Tab(2).Control(5)=   "txtCapacidad"
+      Tab(2).Control(0)=   "txtCapacidad"
+      Tab(2).Control(1)=   "txtPlaca"
+      Tab(2).Control(2)=   "txtBrevete"
+      Tab(2).Control(3)=   "Label16"
+      Tab(2).Control(4)=   "Label15"
+      Tab(2).Control(5)=   "Label14"
       Tab(2).ControlCount=   6
       Begin VB.TextBox txtCapacidad 
          Height          =   330
          Left            =   -72120
-         TabIndex        =   103
+         TabIndex        =   102
          Top             =   1920
          Width           =   1695
       End
       Begin VB.TextBox txtPlaca 
          Height          =   330
          Left            =   -72120
-         TabIndex        =   102
+         TabIndex        =   101
          Top             =   1320
          Width           =   1695
       End
       Begin VB.TextBox txtBrevete 
          Height          =   330
          Left            =   -72120
-         TabIndex        =   101
+         TabIndex        =   100
          Top             =   720
          Width           =   1695
       End
@@ -1454,7 +1456,7 @@ Begin VB.Form FrmVen
          Caption         =   "CAPACIDAD EN KG:"
          Height          =   195
          Left            =   -73785
-         TabIndex        =   100
+         TabIndex        =   99
          Top             =   1988
          Width           =   1500
       End
@@ -1464,7 +1466,7 @@ Begin VB.Form FrmVen
          Caption         =   "PLACA:"
          Height          =   195
          Left            =   -72840
-         TabIndex        =   99
+         TabIndex        =   98
          Top             =   1388
          Width           =   555
       End
@@ -1474,7 +1476,7 @@ Begin VB.Form FrmVen
          Caption         =   "BREVETE:"
          Height          =   195
          Left            =   -73080
-         TabIndex        =   98
+         TabIndex        =   97
          Top             =   788
          Width           =   795
       End
@@ -1712,7 +1714,7 @@ Public Sub GRABAR_VEN()
     End If
 
     ven_llave!VEM_CODVEN = val(FrmVen.Txt_key.Text)
-    ven_llave!VEM_NOMBRE = FrmVen.txtNombre.Text
+    ven_llave!VEM_NOMBRE = FrmVen.txtnombre.Text
     ven_llave!vem_codcia = LK_CODCIA
     ven_llave!VEM_SERIE_G = val(FrmVen.serie_g.Text)
     ven_llave!VEM_NUMFAC_G_INI = val(FrmVen.numfac_g.Text)
@@ -1768,7 +1770,7 @@ Public Sub GRABAR_VEN()
     ven_llave!vem_activo = Me.ComActivo.ListIndex
     ven_llave!vem_movil = Me.comLogeo.ListIndex
     ven_llave!vem_price = Me.comPrecio.ListIndex
-    ven_llave!vem_idperfil = Me.ComPerfil.ListIndex
+    ven_llave!vem_idperfil = Me.DatPerfil.BoundText
     ven_llave!VEM_IDEMPRESA = Me.DatEmpresa.BoundText
 
     If Me.comLogeo.ListIndex = 1 Then
@@ -1788,7 +1790,7 @@ Public Sub GRABAR_VEN()
 
     End If
     'DATOS DEL REPARTIDOR - INICIO
-    ven_llave!vem_brevete = Trim(Me.txtbrevete.Text)
+    ven_llave!vem_brevete = Trim(Me.txtBrevete.Text)
     ven_llave!vem_placa = Trim(Me.txtPlaca.Text)
     ven_llave!vem_capacidad_kg = Me.txtCapacidad.Text
     'DATOS DEL REPARTIDOR - FIN
@@ -1838,7 +1840,7 @@ Public Sub GRABAR_VEN()
 End Sub
 
 Public Sub MENSAJE_VEN(TEXTO As String)
-  lblMensaje.Caption = TEXTO
+  LblMensaje.Caption = TEXTO
   PARPADEA.Enabled = True
 End Sub
 
@@ -1857,7 +1859,7 @@ If ban = 0 Then
 End If
 
 FrmVen.Txt_key.Text = Trim(Nulo_Valors(ven_llave!VEM_CODVEN))
-FrmVen.txtNombre.Text = Trim(Nulo_Valors(ven_llave!VEM_NOMBRE))
+FrmVen.txtnombre.Text = Trim(Nulo_Valors(ven_llave!VEM_NOMBRE))
 FrmVen.serie_g.Text = Trim(Nulo_Valors(ven_llave!VEM_SERIE_G))
 
 FrmVen.serie_nc.Text = Trim(Nulo_Valors(ven_llave!VEM_SERIE_N))
@@ -1892,11 +1894,11 @@ FrmVen.ComActivo.ListIndex = IIf(ven_llave!vem_activo, 1, 0)
 FrmVen.comLogeo.ListIndex = IIf(ven_llave!vem_movil, 1, 0)
 FrmVen.txtUser.Text = ven_llave!vem_login
 FrmVen.comPrecio.ListIndex = IIf(ven_llave!vem_price, 1, 0)
-FrmVen.ComPerfil.ListIndex = IIf(Trim(Nulo_Valors(ven_llave!vem_idperfil)) = "", 0, ven_llave!vem_idperfil)
+FrmVen.DatPerfil.BoundText = IIf(Trim(Nulo_Valors(ven_llave!vem_idperfil)) = "", 0, ven_llave!vem_idperfil)
 FrmVen.DatEmpresa.BoundText = ven_llave!VEM_IDEMPRESA
 'PARTE MOVIL FIN
 'DATOS DE REPARTIDOR - INICIO
-Me.txtbrevete.Text = Nulo_Valors(ven_llave!vem_brevete)
+Me.txtBrevete.Text = Nulo_Valors(ven_llave!vem_brevete)
 Me.txtPlaca.Text = Nulo_Valors(ven_llave!vem_placa)
 Me.txtCapacidad.Text = Nulo_Valor0(ven_llave!vem_capacidad_kg)
 'DATOS DE REPARTIDOR - FIN
@@ -1943,7 +1945,7 @@ End If
 End Sub
 Public Sub LIMPIA_VEN()
 Txt_key.Text = ""
-txtNombre.Text = ""
+txtnombre.Text = ""
 serie_g.Text = ""
 numfac_g.Text = ""
 Serie_b.Text = ""
@@ -1989,12 +1991,12 @@ txtnd.Text = ""
 
 Me.txtUser.Text = ""
 Me.txtPass = ""
-Me.txtbrevete.Text = ""
+Me.txtBrevete.Text = ""
 Me.txtPlaca.Text = ""
 Me.txtCapacidad.Text = 0
 
 cmbtransporte.ListIndex = -1
-Me.ComPerfil.ListIndex = 0
+Me.DatPerfil.BoundText = -1
 End Sub
 
 Private Sub cheboleta_Click()
@@ -2024,7 +2026,7 @@ Private Sub cmdagregar_Click()
         cmdModificar.Enabled = False
         cmdEliminar.Enabled = False
         LIMPIA_VEN
-        DESBLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+        DESBLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
         DESBLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
         DESBLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
         remi.Enabled = True
@@ -2036,7 +2038,7 @@ Private Sub cmdagregar_Click()
         Me.txtUser.Enabled = True
         Me.txtUser.Text = ""
         Me.txtPass.Text = ""
-        FrmVen.txtNombre.SetFocus
+        FrmVen.txtnombre.SetFocus
         'AGREGAMOS EN BLANCO
     Else
 
@@ -2065,9 +2067,9 @@ Private Sub cmdagregar_Click()
 
         End If
 
-        If FrmVen.txtNombre.Text = "" Or Len(FrmVen.txtNombre.Text) = 0 Then
+        If FrmVen.txtnombre.Text = "" Or Len(FrmVen.txtnombre.Text) = 0 Then
             MsgBox "Ingrese Nombre de Vendedor ..!!!", 48, Pub_Titulo
-            Azul txtNombre, txtNombre
+            Azul txtnombre, txtnombre
             Exit Sub
 
         End If
@@ -2086,9 +2088,9 @@ Private Sub cmdagregar_Click()
 
         End If
 
-        If Me.ComPerfil.ListIndex = 0 Then
+        If Me.DatPerfil.BoundText = -1 Then
             MsgBox "Debe elegir el perfil del Usuario.", vbCritical, Pub_Titulo
-            Me.ComPerfil.SetFocus
+            Me.DatPerfil.SetFocus
             Exit Sub
 
         End If
@@ -2103,28 +2105,28 @@ Private Sub cmdagregar_Click()
         End If
         
         'VALIDACION PARA TRANSPORTISTA - INICIO
-        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtbrevete.Text)) = 0 Then
+        If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtBrevete.Text)) = 0 Then
             Me.SSTab1.tab = 2
             MsgBox "Debe ingresar el Brevete del Repartidor", vbCritical, Pub_Titulo
-            Me.txtbrevete.SetFocus
+            Me.txtBrevete.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
+        If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Debe ingresar la Placa del vehiculo.", vbCritical, Pub_Titulo
             Me.txtPlaca.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
+        If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Debe ingresar la capacidad del vehiculo.", vbCritical, Pub_Titulo
             Me.txtCapacidad.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And val(Me.txtCapacidad.Text) <= 0 Then
+        If Me.DatPerfil.BoundText = 3 And val(Me.txtCapacidad.Text) <= 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Capacidad ingresada incorrecta.", vbInformation, Pub_Titulo
             Me.txtCapacidad.SetFocus
@@ -2153,7 +2155,7 @@ Private Sub cmdagregar_Click()
         cmdEliminar.Enabled = True
         cmdModificar.Enabled = True
         LIMPIA_VEN
-        BLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+        BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
         BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
         BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
         remi.Enabled = False
@@ -2186,7 +2188,7 @@ End If
      If Left(cmdModificar.Caption, 2) = "&G" Then
         cmdModificar.Caption = "&Modificar"
         LLENA_VEN 1
-        BLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+        BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
         BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
         BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
         remi.Enabled = False
@@ -2196,7 +2198,7 @@ End If
      Else
         cmdAgregar.Caption = "&Agregar"
         LIMPIA_VEN
-        BLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+        BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
         BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
         BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
         remi.Enabled = False
@@ -2232,7 +2234,7 @@ Private Sub cmdEliminar_Click()
 Dim PS_REP01 As rdoQuery
 Dim llave_rep01 As rdoResultset
 
-If Len(Txt_key) = 0 Or Len(txtNombre) = 0 Then
+If Len(Txt_key) = 0 Or Len(txtnombre) = 0 Then
    MENSAJE_VEN "NO a seleccionado NADA ... !"
    Exit Sub
 End If
@@ -2277,16 +2279,16 @@ If Left(cmdModificar.Caption, 2) = "&M" Then
     cmdEliminar.Enabled = False
     cmdCancelar.Enabled = True
     Txt_key.Locked = True
-    DESBLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+    DESBLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
     DESBLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
     DESBLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
     remi.Enabled = True
     txtfechaing.Enabled = True
     Me.txtUser.Enabled = False
-    txtNombre.SetFocus
+    txtnombre.SetFocus
 Else
     '*Grabar las modificaciones
-    If txtNombre.Text = "" Or Len(txtNombre.Text) = 0 Then
+    If txtnombre.Text = "" Or Len(txtnombre.Text) = 0 Then
          MsgBox " Nombre Invalido ....", 48, Pub_Titulo
          Exit Sub
     End If
@@ -2296,34 +2298,34 @@ Else
       Azul2 txtfechaing, txtfechaing
       Exit Sub
     End If
-    If Me.ComPerfil.ListIndex = 0 Then
+    If Me.DatPerfil.BoundText = -1 Then
         MsgBox "Debe elegir el perfil del usuario.", vbCritical, Pub_Titulo
-        Me.ComPerfil.SetFocus
+        Me.DatPerfil.SetFocus
         Exit Sub
     End If
     'VALIDACIONES DEL REPARTIDOR - INICIO
-    If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtbrevete.Text)) = 0 Then
+    If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtBrevete.Text)) = 0 Then
             Me.SSTab1.tab = 2
             MsgBox "Debe ingresar el Brevete del Repartidor", vbCritical, Pub_Titulo
-            Me.txtbrevete.SetFocus
+            Me.txtBrevete.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
+        If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtPlaca.Text)) = 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Debe ingresar la Placa del vehiculo.", vbCritical, Pub_Titulo
             Me.txtPlaca.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
+        If Me.DatPerfil.BoundText = 3 And Len(Trim(Me.txtCapacidad.Text)) = 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Debe ingresar la capacidad del vehiculo.", vbCritical, Pub_Titulo
             Me.txtCapacidad.SetFocus
             Exit Sub
         End If
         
-        If Me.ComPerfil.ListIndex = 3 And val(Me.txtCapacidad.Text) <= 0 Then
+        If Me.DatPerfil.BoundText = 3 And val(Me.txtCapacidad.Text) <= 0 Then
         Me.SSTab1.tab = 2
             MsgBox "Capacidad ingresada incorrecta.", vbInformation, Pub_Titulo
             Me.txtCapacidad.SetFocus
@@ -2339,7 +2341,7 @@ Else
      cmdAgregar.Enabled = True
      cmdEliminar.Enabled = True
      Txt_key.Locked = True
-     BLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+     BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
      BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
      BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
      remi.Enabled = False
@@ -2349,8 +2351,9 @@ End If
 
 End Sub
 
-Private Sub ComPerfil_Click()
-If Me.ComPerfil.ListIndex = 3 Then
+
+Private Sub DatPerfil_Click(Area As Integer)
+If Me.DatPerfil.BoundText = "3" Then
     Me.SSTab1.TabVisible(2) = True
 Else
     Me.SSTab1.TabVisible(2) = False
@@ -2358,46 +2361,106 @@ End If
 End Sub
 
 Private Sub Form_Load()
-Unload FORMGEN
-If LK_CODCIA = "04" Then
-'  FrmVen.Caption = "&Chofer / Solic."
-'  F1.Caption = "&Chofer / Solic."
-Else
-'  FrmVen.Caption = "&Vendedor"
- ' F1.Caption = "Vendedor"
-End If
+    Unload FORMGEN
 
-loc_key = 0
-LIMPIA_VEN
-BLOQUEA_TEXT txtNombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
-BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
-BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
-remi.Enabled = False
-txtfechaing.Enabled = False
-Txt_key.Enabled = True
-F2.Visible = False
-If LK_FLAG_FACTURACION = "V" Then
-  F2.Visible = True
-End If
+    If LK_CODCIA = "04" Then
+        '  FrmVen.Caption = "&Chofer / Solic."
+        '  F1.Caption = "&Chofer / Solic."
+    Else
 
-LlenaTransporte
-LlenaEmpresa
-pub_cadena = "SELECT * FROM TRANSPORTE WHERE TRN_KEY = ? ORDER BY TRN_NOMBRE"
-Set PS_TRAONE = CN.CreateQuery("", pub_cadena)
-PS_TRAONE(0) = 0
-Set TRANSPORTEONE = PS_TRAONE.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
+        '  FrmVen.Caption = "&Vendedor"
+        ' F1.Caption = "Vendedor"
+    End If
 
-Me.SSTab1.TabVisible(2) = False
+    loc_key = 0
+    LIMPIA_VEN
+    BLOQUEA_TEXT txtnombre, serie_g, numfac_g, Serie_b, numfac_b, serie_f, numfac_f, numfac_p, numfac_p_f, serie_p
+    BLOQUEA_TEXT numfac_g_f, numfac_b_f, numfac_f_f, cheguia, cheboleta, chefactura, txtdireccion, txttelecasa, txttelecelu, Check1
+    BLOQUEA_TEXT serie_nc, numfac_nc, numfac_nc_f, chenc, serie_nd, numfac_nd, numfac_nd_f, chend, cmbtransporte
+    remi.Enabled = False
+    txtfechaing.Enabled = False
+    Txt_key.Enabled = True
+    F2.Visible = False
+
+    If LK_FLAG_FACTURACION = "V" Then
+        F2.Visible = True
+
+    End If
+
+    LlenaTransporte
+    LlenaEmpresa
+    LlenaPerfil
+    pub_cadena = "SELECT * FROM TRANSPORTE WHERE TRN_KEY = ? ORDER BY TRN_NOMBRE"
+    Set PS_TRAONE = CN.CreateQuery("", pub_cadena)
+    PS_TRAONE(0) = 0
+    Set TRANSPORTEONE = PS_TRAONE.OpenResultset(rdOpenKeyset, rdConcurReadOnly)
+
+    Me.SSTab1.TabVisible(2) = False
+    
+
 End Sub
 
 Private Sub LlenaEmpresa()
-LimpiaParametros oCmdEjec
-oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_LIST]"
-Dim orsDatos  As ADODB.Recordset
-Set orsDatos = oCmdEjec.Execute
-Set Me.DatEmpresa.RowSource = orsDatos
-Me.DatEmpresa.ListField = orsDatos(1).Name
-Me.DatEmpresa.BoundColumn = orsDatos(0).Name
+    LimpiaParametros oCmdEjec
+    oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_LIST]"
+
+   
+    Set oRSmain = oCmdEjec.Execute
+
+    Dim orsTEMP1 As New ADODB.Recordset
+
+    orsTEMP1.CursorLocation = adUseClient
+    orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+    orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+    orsTEMP1.Open
+    
+    ' Copiar datos del Recordset
+    oRSmain.MoveFirst
+
+    Do Until oRSmain.EOF
+        orsTEMP1.AddNew
+        orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+        orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+        orsTEMP1.Update
+        oRSmain.MoveNext
+    Loop
+    Set Me.DatEmpresa.RowSource = orsTEMP1
+    Me.DatEmpresa.ListField = orsTEMP1(1).Name
+    Me.DatEmpresa.BoundColumn = orsTEMP1(0).Name
+    CerrarConexion False
+
+End Sub
+
+Private Sub LlenaPerfil()
+    LimpiaParametros oCmdEjec
+    oCmdEjec.CommandText = "[dbo].[USP_PERFIL_LIST]"
+    Set oRSmain = oCmdEjec.Execute
+
+    Dim orsTEMP1 As New ADODB.Recordset
+
+    orsTEMP1.CursorLocation = adUseClient
+    orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+    orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+    orsTEMP1.Open
+    
+    ' Copiar datos del Recordset
+    oRSmain.MoveFirst
+
+    Do Until oRSmain.EOF
+        orsTEMP1.AddNew
+        orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+        orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+        orsTEMP1.Update
+        oRSmain.MoveNext
+    Loop
+        
+    Set Me.DatPerfil.RowSource = orsTEMP1
+    Me.DatPerfil.ListField = orsTEMP1.Fields(1).Name
+    Me.DatPerfil.BoundColumn = orsTEMP1.Fields(0).Name
+    Me.DatPerfil.BoundText = -1
+
+    CerrarConexion False
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -2710,7 +2773,7 @@ Dim valor As String
 Dim tf As Integer
 Dim I
 Dim itmFound As ListItem
-If KeyAscii = 27 And Trim(txtNombre.Text) = "" Then
+If KeyAscii = 27 And Trim(txtnombre.Text) = "" Then
  Txt_key.Text = ""
 End If
 If KeyAscii <> 13 Then
@@ -2814,11 +2877,11 @@ End Sub
 
 Private Sub PARPADEA_Timer()
  CU = CU + 1
- lblMensaje.Visible = True 'Not LblMensaje.Visible
+ LblMensaje.Visible = True 'Not LblMensaje.Visible
  If CU > 8 Then
    CU = 0
    PARPADEA.Enabled = False
-   lblMensaje.Visible = False
+   LblMensaje.Visible = False
  End If
 End Sub
 
@@ -2835,7 +2898,7 @@ End If
 End Sub
 
 Private Sub txtnombre_GotFocus()
-Azul txtNombre, txtNombre
+Azul txtnombre, txtnombre
 End Sub
 
 Private Sub txtnombre_KeyPress(KeyAscii As Integer)

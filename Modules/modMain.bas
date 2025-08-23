@@ -1,5 +1,5 @@
 Attribute VB_Name = "modMain"
-Public Const cClave As String = "accesodenegado$1"
+Public Const cClave As String = "anteromariano"
 Public oRSmain As ADODB.Recordset
 
 Public Function devuelveIDempresaXdefecto() As Integer

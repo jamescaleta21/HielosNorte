@@ -62,9 +62,9 @@ Begin VB.Form frmMantVDProducto
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDProducto.frx":1444
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
+      Tab(0).Control(0)=   "Label1"
       Tab(0).Control(1)=   "lvProducto"
-      Tab(0).Control(2)=   "Label1"
+      Tab(0).Control(2)=   "txtSearch"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
       TabPicture(1)   =   "frmMantVDProducto.frx":1460
