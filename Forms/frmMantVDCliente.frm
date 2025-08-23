@@ -1122,6 +1122,10 @@ KeyAscii = Mayusculas(KeyAscii)
 HandleEnterKey KeyAscii, Me.DatVendedor
 End Sub
 
+Private Sub txtdni_Change()
+ValidarSoloNumeros Me.txtdni
+End Sub
+
 Private Sub txtNombreCorto_KeyPress(KeyAscii As Integer)
 KeyAscii = Mayusculas(KeyAscii)
 HandleEnterKey KeyAscii, Me.mebFecNac
@@ -1133,12 +1137,16 @@ HandleEnterKey KeyAscii, Me.txtNombreCorto
 End Sub
 
 Private Sub txtdni_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ KeyAscii = SoloNumeros(KeyAscii)
 HandleEnterKey KeyAscii, Me.txtRS
 End Sub
 
+Private Sub txtRuc_Change()
+ValidarSoloNumeros Me.txtRuc
+End Sub
+
 Private Sub txtRuc_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+KeyAscii = SoloNumeros(KeyAscii)
  HandleEnterKey KeyAscii, Me.txtRS
 End Sub
 
@@ -1147,8 +1155,12 @@ KeyAscii = Mayusculas(KeyAscii)
 If KeyAscii = vbKeyReturn Then clienteSearch Me.txtSearch.Text
 End Sub
 
+Private Sub txtTelefono_Change()
+ValidarSoloNumeros Me.txtTelefono
+End Sub
+
 Private Sub txtTelefono_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ KeyAscii = SoloNumeros(KeyAscii)
 KeyAscii = Mayusculas(KeyAscii)
 HandleEnterKey KeyAscii, Me.txtDireccion
 End Sub

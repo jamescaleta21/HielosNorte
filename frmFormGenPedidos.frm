@@ -356,8 +356,6 @@ Attribute VB_Exposed = False
 Public gIDpedido As Double
 Private loc_key  As Integer
 Private vBuscar As Boolean 'variable para la busqueda de clientes
-Private vPUNTOc As Boolean 'variable para controld epunto sin utilizar ocx
-Private vPUNTOp As Boolean 'variable para controld epunto sin utilizar ocx
 Public vGraba As Boolean 'variable para validar si pulsó el boton grabar
 Public vTotal As Double 'variable para almacenar el total del pedido para enviarlo al listviewpedidos del formgen
 
@@ -469,9 +467,9 @@ oCmdEjec.Execute
 LimpiaParametros oCmdEjec
 oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_UPDATE]"
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPEDIDO", adBigInt, adParamInput, , Me.lblIDpedido.Caption)
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCLIENTE", adInteger, adParamInput, 2, Me.lblIdCliente.Caption)
+oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCLIENTE", adInteger, adParamInput, 2, Me.lblIDcliente.Caption)
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@TOTAL", adDouble, adParamInput, , Me.lblTotal.Caption)
-oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.lblIdVendedor.Caption)
+oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.lblIDvendedor.Caption)
 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@USUARIO", adVarChar, adParamInput, 20, LK_CODUSU)
 oCmdEjec.Execute
 
@@ -482,15 +480,15 @@ oCmdEjec.Execute
 
 LimpiaParametros oCmdEjec
 oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_REGISTRADETALLE]"
-Dim I As Integer
-For I = 1 To Me.lvDetalle.ListItems.count
+Dim i As Integer
+For i = 1 To Me.lvDetalle.ListItems.count
     LimpiaParametros oCmdEjec
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPEDIDO", adBigInt, adParamInput, , Me.lblIDpedido.Caption)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lvDetalle.ListItems(I).Tag)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SECUENCIA", adBigInt, adParamInput, , I)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CANTIDAD", adDouble, adParamInput, , Me.lvDetalle.ListItems(I).Text)
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@PRECIO", adDouble, adParamInput, , Me.lvDetalle.ListItems(I).SubItems(2))
-    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IMPORTE", adDouble, adParamInput, , Me.lvDetalle.ListItems(I).SubItems(3))
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lvDetalle.ListItems(i).Tag)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SECUENCIA", adBigInt, adParamInput, , i)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CANTIDAD", adDouble, adParamInput, , Me.lvDetalle.ListItems(i).Text)
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@PRECIO", adDouble, adParamInput, , Me.lvDetalle.ListItems(i).SubItems(2))
+    oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IMPORTE", adDouble, adParamInput, , Me.lvDetalle.ListItems(i).SubItems(3))
     oCmdEjec.Execute
 Next
 
@@ -523,8 +521,8 @@ Set ORSd = oCmdEjec.Execute
 
 If Not ORSd.EOF Then
     Me.lblCliente.Caption = ORSd!cliente
-    Me.lblIdCliente.Caption = ORSd!idcliente
-    Me.lblIdVendedor.Caption = ORSd!IDVEN
+    Me.lblIDcliente.Caption = ORSd!idcliente
+    Me.lblIDvendedor.Caption = ORSd!IDVEN
     Me.lblVendedor.Caption = ORSd!vendedor
     Me.lblIDpedido.Caption = ORSd!ide
     Me.lblFecha.Caption = ORSd!fecha
@@ -594,22 +592,12 @@ Me.cmdDel.Enabled = True
 End Sub
 
 Private Sub txtCantidad_Change()
-If InStr(Me.txtCantidad.Text, ".") Then
-    vPUNTOc = True
-Else
-    vPUNTOc = False
-End If
+ValidarSoloNumerosPunto Me.txtCantidad
 CalculoImporte
 End Sub
 
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
-    If KeyAscii = 46 Then
-        If vPUNTOc Or Len(Trim(Me.txtCantidad.Text)) = 0 Then
-            KeyAscii = 0
-        End If
-    End If
-    
+KeyAscii = SoloNumerosPunto(Me.txtCantidad, KeyAscii)
     If KeyAscii = vbKeyReturn Then
         Me.txtPrecio.SetFocus
         Me.txtPrecio.SelStart = 0
@@ -620,23 +608,12 @@ End Sub
 
 
 Private Sub txtPrecio_Change()
-If InStr(Me.txtPrecio.Text, ".") Then
-    vPUNTOp = True
-Else
-    vPUNTOp = False
-End If
+ValidarSoloNumerosPunto Me.txtPrecio
 CalculoImporte
 End Sub
 
 Private Sub txtPrecio_KeyPress(KeyAscii As Integer)
- If NumerosyPunto(KeyAscii) Then KeyAscii = 0
-    If KeyAscii = 46 Then
-        If vPUNTOp Or Len(Trim(Me.txtPrecio.Text)) = 0 Then
-            KeyAscii = 0
-
-        End If
-
-    End If
+KeyAscii = SoloNumerosPunto(Me.txtPrecio, KeyAscii)
     
     If KeyAscii = vbKeyReturn Then
         cmdAdd_Click

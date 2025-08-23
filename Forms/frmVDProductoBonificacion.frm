@@ -946,16 +946,24 @@ HandleEnterKey KeyAscii, Me.mebBFin
 End Sub
 
 
+Private Sub txtCantidad_Change()
+ValidarSoloNumeros Me.txtCantidad
+End Sub
+
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ KeyAscii = SoloNumeros(KeyAscii)
  HandleEnterKey KeyAscii, Me.DatBonificacion
 End Sub
 
 
 
+Private Sub txtrecibe_Change()
+ValidarSoloNumeros Me.txtrecibe
+End Sub
+
 Private Sub txtrecibe_KeyPress(KeyAscii As Integer)
 
-    If SoloNumeros(KeyAscii) Then KeyAscii = 0
+   KeyAscii = SoloNumeros(KeyAscii)
     HandleEnterKey KeyAscii, Me.txtTope
 
 End Sub
@@ -1018,7 +1026,11 @@ CerrarConexion True
 
 End Sub
 
+Private Sub txtTope_Change()
+ValidarSoloNumeros Me.txtTope
+End Sub
+
 Private Sub txtTope_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+KeyAscii = SoloNumeros(KeyAscii)
  If KeyAscii = vbKeyReturn Then cmdBoniAdd_Click
 End Sub

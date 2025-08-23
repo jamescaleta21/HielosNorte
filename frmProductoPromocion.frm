@@ -19,6 +19,7 @@ Begin VB.Form frmProductoPromocion
       Italic          =   0   'False
       Strikethrough   =   0   'False
    EndProperty
+   KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
@@ -36,6 +37,7 @@ Begin VB.Form frmProductoPromocion
       _ExtentY        =   19076
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -49,17 +51,20 @@ Begin VB.Form frmProductoPromocion
       EndProperty
       TabCaption(0)   =   "Listado de Articulos"
       TabPicture(0)   =   "frmProductoPromocion.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "lvArticulos"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Asignar Promoción"
       TabPicture(1)   =   "frmProductoPromocion.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Frame1"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
+      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Frame3"
+      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Frame4"
+      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).ControlCount=   4
       Begin VB.Frame Frame4 
          BeginProperty Font 
@@ -72,7 +77,7 @@ Begin VB.Form frmProductoPromocion
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1095
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   36
          Top             =   9600
          Width           =   12495
@@ -110,7 +115,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame3 
          Height          =   3975
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   30
          Top             =   5640
          Width           =   12495
@@ -382,7 +387,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin VB.Frame Frame2 
          Height          =   3855
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   25
          Top             =   1800
          Width           =   12495
@@ -610,7 +615,7 @@ Begin VB.Form frmProductoPromocion
             Strikethrough   =   0   'False
          EndProperty
          Height          =   1335
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   22
          Top             =   480
          Width           =   12495
@@ -657,7 +662,7 @@ Begin VB.Form frmProductoPromocion
       End
       Begin MSComctlLib.ListView lvArticulos 
          Height          =   10215
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   1
          Top             =   480
          Width           =   12615
@@ -691,8 +696,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private vPUNTO As Boolean 'variable para controld epunto sin utilizar ocx
-
 Private Sub cmdBoniAdd_Click()
 
     If Len(Trim(Me.txtCantidad.Text)) = 0 Then
@@ -1137,6 +1140,10 @@ Private Sub DatBonificacion_KeyDown(KeyCode As Integer, Shift As Integer)
 HandleEnterKey KeyCode, Me.txtrecibe
 End Sub
 
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+If KeyCode = vbKeyEscape Then Unload Me
+End Sub
+
 Private Sub Form_Load()
 CentrarFormulario MDIForm1, Me
 ConfigurarLV
@@ -1261,48 +1268,53 @@ Private Sub mebPIni_KeyPress(KeyAscii As Integer)
 HandleEnterKey KeyAscii, Me.mebPFin
 End Sub
 
+Private Sub txtCantidad_Change()
+ValidarSoloNumeros Me.txtCantidad
+End Sub
+
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
- If SoloNumeros(KeyAscii) Then KeyAscii = 0
+ KeyAscii = SoloNumeros(KeyAscii)
  HandleEnterKey KeyAscii, Me.DatBonificacion
 End Sub
 
+Private Sub txtDesde_Change()
+ValidarSoloNumeros Me.txtDesde
+End Sub
+
 Private Sub txtDesde_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+KeyAscii = SoloNumeros(KeyAscii)
 HandleEnterKey KeyAscii, Me.txtHasta
 End Sub
 
+Private Sub txtHasta_Change()
+ValidarSoloNumeros Me.txtHasta
+End Sub
+
 Private Sub txtHasta_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+KeyAscii = SoloNumeros(KeyAscii)
 If KeyAscii = vbKeyReturn Then Me.txtPrecio.SetFocus
 End Sub
 
 Private Sub txtPrecio_Change()
-If InStr(Me.txtPrecio.Text, ".") Then
-    vPUNTO = True
-Else
-    vPUNTO = False
-End If
+ValidarSoloNumerosPunto Me.txtPrecio
 
 End Sub
 
 Private Sub txtPrecio_KeyPress(KeyAscii As Integer)
 
-    If NumerosyPunto(KeyAscii) Then KeyAscii = 0
-    If KeyAscii = 46 Then
-        If vPUNTO Or Len(Trim(Me.txtPrecio.Text)) = 0 Then
-            KeyAscii = 0
-
-        End If
-
-    End If
+   KeyAscii = SoloNumerosPunto(Me.txtPrecio, KeyAscii)
     
     If KeyAscii = vbKeyReturn Then cmdPromAdd_Click
     
 End Sub
 
+Private Sub txtrecibe_Change()
+ValidarSoloNumeros Me.txtrecibe
+End Sub
+
 Private Sub txtrecibe_KeyPress(KeyAscii As Integer)
 
-    If SoloNumeros(KeyAscii) Then KeyAscii = 0
+    KeyAscii = SoloNumeros(KeyAscii)
     HandleEnterKey KeyAscii, Me.txtTope
 
 End Sub
@@ -1371,7 +1383,11 @@ cDatos:
 
 End Sub
 
+Private Sub txtTope_Change()
+ValidarSoloNumeros Me.txtTope
+End Sub
+
 Private Sub txtTope_KeyPress(KeyAscii As Integer)
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+KeyAscii = SoloNumeros(KeyAscii)
  If KeyAscii = vbKeyReturn Then cmdBoniAdd_Click
 End Sub

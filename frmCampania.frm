@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form frmCampania 
    BorderStyle     =   1  'Fixed Single
@@ -119,7 +119,7 @@ Begin VB.Form frmCampania
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   84606977
+         Format          =   212336641
          CurrentDate     =   45478
       End
       Begin VB.TextBox txtNombre 
@@ -165,7 +165,7 @@ Begin VB.Form frmCampania
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   84606977
+         Format          =   212336641
          CurrentDate     =   45478
       End
       Begin VB.Label lblIde 
@@ -242,15 +242,15 @@ Begin VB.Form frmCampania
    End
    Begin MSComctlLib.Toolbar tbMenu 
       Align           =   1  'Align Top
-      Height          =   630
+      Height          =   660
       Left            =   0
       TabIndex        =   7
       Top             =   0
       Width           =   9135
       _ExtentX        =   16113
-      _ExtentY        =   1111
-      ButtonWidth     =   1482
-      ButtonHeight    =   953
+      _ExtentY        =   1164
+      ButtonWidth     =   1667
+      ButtonHeight    =   1005
       AllowCustomize  =   0   'False
       Appearance      =   1
       ImageList       =   "ilCampania"
@@ -285,7 +285,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private VNuevo As Boolean
-Private vPUNTO As Boolean 'variable para controld epunto sin utilizar ocx
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 If KeyCode = vbKeyEscape Then Unload Me
 End Sub
@@ -440,7 +439,7 @@ Private Sub tbMenu_ButtonClick(ByVal Button As MSComctlLib.Button)
 
                             If VNuevo Then
                                 oCmdEjec.CommandText = "[dbo].[USP_CAMPANIA_REGISTRAR_CLOUD]"
-                                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCAMPANIA", adInteger, adParamInput, , orsProcesa!IDe)
+                                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCAMPANIA", adInteger, adParamInput, , orsProcesa!ide)
                             Else
                                 oCmdEjec.CommandText = "[dbo].[USP_CAMPANIA_MODIFICAR_CLOUD]"
                                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCAMPANIA", adInteger, adParamInput, , Me.lblIde.Caption)
@@ -650,10 +649,10 @@ Private Sub RealizarBusqueda(Optional vSearch As String = "")
     Do While Not ORSf.EOF
 
         With Me.lvListado.ListItems.Add(, , Trim(ORSf!nom))
-            .Tag = Trim(ORSf!IDe)
+            .Tag = Trim(ORSf!ide)
             .SubItems(1) = ORSf!ini
             .SubItems(2) = ORSf!fin
-            .SubItems(3) = ORSf!ACTIVO
+            .SubItems(3) = ORSf!activo
             .SubItems(4) = ORSf!MONTO
         End With
         ORSf.MoveNext
@@ -676,24 +675,11 @@ Me.tbMenu.Buttons(5).Enabled = False
 End Sub
 
 Private Sub txtMonto_Change()
-If InStr(Me.txtMonto.Text, ".") Then
-    vPUNTO = True
-Else
-    vPUNTO = False
-End If
+ValidarSoloNumerosPunto Me.txtMonto
 End Sub
 
 Private Sub txtMonto_KeyPress(KeyAscii As Integer)
-If NumerosyPunto(KeyAscii) Then KeyAscii = 0
-    If KeyAscii = 46 Then
-        If vPUNTO Or Len(Trim(Me.txtMonto.Text)) = 0 Then
-            KeyAscii = 0
-
-        End If
-
-    End If
-    
-  
+KeyAscii = SoloNumerosPunto(Me.txtMonto, KeyAscii)
 End Sub
 
 Private Sub txtnombre_KeyPress(KeyAscii As Integer)

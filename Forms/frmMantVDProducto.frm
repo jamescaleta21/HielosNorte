@@ -62,9 +62,9 @@ Begin VB.Form frmMantVDProducto
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDProducto.frx":1444
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0)=   "txtSearch"
       Tab(0).Control(1)=   "lvProducto"
-      Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2)=   "Label1"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
       TabPicture(1)   =   "frmMantVDProducto.frx":1460
@@ -119,6 +119,7 @@ Begin VB.Form frmMantVDProducto
             Begin VB.TextBox txtAddPrecio 
                Height          =   360
                Left            =   8160
+               MaxLength       =   6
                TabIndex        =   21
                Tag             =   "X"
                Top             =   600
@@ -209,6 +210,7 @@ Begin VB.Form frmMantVDProducto
             Begin VB.TextBox txtPrecioBase 
                Height          =   360
                Left            =   2640
+               MaxLength       =   6
                TabIndex        =   6
                Tag             =   "X"
                Top             =   1200
@@ -399,8 +401,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private vPUNTO As Boolean 'variable para controld epunto sin utilizar ocx
-Private vPUNTOc As Boolean 'variable para controld epunto sin utilizar ocx
 Private VNuevo As Boolean
 Private pIDempresa As Integer
 Private oRSPrecios As New ADODB.Recordset
@@ -1211,32 +1211,17 @@ Elimina:
 
 End Sub
 
-
-
 Private Sub txtAddPrecio_Change()
-If InStr(Me.txtAddPrecio.Text, ".") Then
-    vPUNTOc = True
-Else
-    vPUNTOc = False
-End If
+ValidarSoloNumerosPunto Me.txtAddPrecio
 End Sub
 
 Private Sub txtAddPrecio_KeyPress(KeyAscii As Integer)
- If NumerosyPunto(KeyAscii) Then KeyAscii = 0
-  If KeyAscii = 46 Then
-        If vPUNTOc Or Len(Trim(Me.txtAddPrecio.Text)) = 0 Then
-            KeyAscii = 0
-        End If
-    End If
+KeyAscii = SoloNumerosPunto(Me.txtAddPrecio, KeyAscii)
  HandleEnterKey KeyAscii, Me.cmdAdd
 End Sub
 
 Private Sub txtPrecioBase_Change()
-If InStr(Me.txtPrecioBase.Text, ".") Then
-    vPUNTO = True
-Else
-    vPUNTO = False
-End If
+ValidarSoloNumerosPunto Me.txtPrecioBase
 End Sub
 
 Private Sub txtStock_KeyPress(KeyAscii As Integer)
@@ -1260,11 +1245,6 @@ If KeyAscii = vbKeyReturn Then productoSearch Me.txtSearch.Text
 End Sub
 
 Private Sub txtPrecioBase_KeyPress(KeyAscii As Integer)
- If NumerosyPunto(KeyAscii) Then KeyAscii = 0
- If KeyAscii = 46 Then
-        If vPUNTO Or Len(Trim(Me.txtPrecioBase.Text)) = 0 Then
-            KeyAscii = 0
-        End If
-    End If
+KeyAscii = SoloNumerosPunto(Me.txtPrecioBase, KeyAscii)
 HandleEnterKey KeyAscii, Me.txtStock
 End Sub

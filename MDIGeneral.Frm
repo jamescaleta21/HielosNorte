@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -119,13 +119,13 @@ Begin VB.MDIForm MDIForm1
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   390
+      Height          =   600
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   20340
-      _ExtentX        =   35878
-      _ExtentY        =   688
+      Width           =   9480
+      _ExtentX        =   16722
+      _ExtentY        =   1058
       ButtonWidth     =   661
       ButtonHeight    =   635
       Appearance      =   1
@@ -322,9 +322,9 @@ Begin VB.MDIForm MDIForm1
       Height          =   330
       Left            =   0
       TabIndex        =   3
-      Top             =   10500
-      Width           =   20340
-      _ExtentX        =   35878
+      Top             =   6180
+      Width           =   9480
+      _ExtentX        =   16722
       _ExtentY        =   582
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -360,7 +360,7 @@ Begin VB.MDIForm MDIForm1
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   17657
+            Object.Width           =   3528
             MinWidth        =   3528
          EndProperty
       EndProperty
@@ -1058,7 +1058,7 @@ Dim Wfile As String
 Dim WFORM As String
 Public Sub LLENA_ACCESO_OTROS(WSOTROS As String)
 Dim W1 As String * 2
-Dim I, wPosF, WPosV, cuenta As Integer
+Dim i, wPosF, WPosV, cuenta As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
@@ -1073,11 +1073,11 @@ cade = Trim(WSOTROS)
 cuenta = 0
 wPosF = 1
 a = 0
-For I = 1 To Len(cade)
- If Mid(cade, I, 1) = "." Then
+For i = 1 To Len(cade)
+ If Mid(cade, i, 1) = "." Then
    a = a + 1
  End If
-Next I
+Next i
 lk_OTROS_Count = a
 ReDim lk_OTROS(a)
 Do Until cuenta = a
@@ -1822,10 +1822,6 @@ KARDEX.Show
 Screen.MousePointer = 0
 End Sub
 
-Private Sub menugrifo_Click()
-
-End Sub
-
 Private Sub menuMoli_Click(Index As Integer)
 If Trim(menuMoli(Index).Caption) = "" Then
  Exit Sub
@@ -1864,7 +1860,7 @@ Dim var As String
 MsgBox "" & Chr(13) & "Visitenos en www.viarapidaperu.com", vbInformation, "Asesoria y Soporte"
 Exit Sub
 Dim ww As Form
-Dim I
+Dim i
 On Error GoTo OJO
 var = Trim(MDIForm1.ActiveForm.Name)
 If UCase(var) = "FORMGEN" Then

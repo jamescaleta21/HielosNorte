@@ -42,25 +42,31 @@ Begin VB.Form frmEmpresa
          NumButtons      =   6
          BeginProperty Button1 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Nuevo"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button2 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Guardar"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button3 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Editar"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button4 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Cancelar"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button5 {0713F354-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button6 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Eliminar"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -82,8 +88,8 @@ Begin VB.Form frmEmpresa
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmEmpresa.frx":0000
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
-      Tab(0).Control(1)=   "lvListado"
+      Tab(0).Control(0)=   "lvListado"
+      Tab(0).Control(1)=   "txtSearch"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Empresa"
       TabPicture(1)   =   "frmEmpresa.frx":001C
@@ -285,7 +291,7 @@ ESTADO:
 
             If MsgBox("¿Desea continuar con la Operación?", vbQuestion + vbYesNo, gNombreProyecto) = vbYes Then
 
-                On Error GoTo elimina
+                On Error GoTo Elimina
 
                 LimpiaParametros oCmdEjec
                 oCmdEjec.CommandText = "[dbo].[USP_EMPRESA_ELIMINAR]"
@@ -301,7 +307,7 @@ ESTADO:
                
                 Exit Sub
 
-elimina:
+Elimina:
                 MsgBox Err.Description, vbInformation, NombreProyecto
 
             End If
@@ -400,7 +406,7 @@ Sub grabarEmpresa()
     Set orsGraba = oCmdEjec.Execute
    
     If Not orsGraba.EOF Then
-        If orsGraba!code = 0 Then
+        If orsGraba!Code = 0 Then
             MostrarEmpresas
             DesactivarControles Me
             Estado_Botones grabar
@@ -443,31 +449,31 @@ Private Sub MostrarEmpresas()
 
     If Len(Trim(Me.txtSearch.Text)) <> 0 Then oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@SEARCH", adVarChar, adParamInput, 100, Me.txtSearch.Text)
 
-    Dim ORSdatos As New ADODB.Recordset
+    Dim orsDatos As New ADODB.Recordset
 
-    Set ORSdatos = oCmdEjec.Execute
+    Set orsDatos = oCmdEjec.Execute
 
-    Dim itemX As Object
+    Dim itemx As Object
 
-    Do While Not ORSdatos.EOF
-        Set itemX = Me.lvListado.ListItems.Add(, , ORSdatos!idempresa)
-        itemX.SubItems(1) = ORSdatos!denominacion
+    Do While Not orsDatos.EOF
+        Set itemx = Me.lvListado.ListItems.Add(, , orsDatos!idempresa)
+        itemx.SubItems(1) = orsDatos!DENOMINACION
 
-        If ORSdatos!defecto Then
-            itemX.SubItems(2) = "SI"
+        If orsDatos!defecto Then
+            itemx.SubItems(2) = "SI"
         Else
-            itemX.SubItems(2) = "NO"
+            itemx.SubItems(2) = "NO"
 
         End If
 
-        If ORSdatos!ACTIVO Then
-            itemX.SubItems(3) = "SI"
+        If orsDatos!activo Then
+            itemx.SubItems(3) = "SI"
         Else
-            itemX.SubItems(3) = "NO"
+            itemx.SubItems(3) = "NO"
 
         End If
     
-        ORSdatos.MoveNext
+        orsDatos.MoveNext
     Loop
 
     Exit Sub
@@ -481,9 +487,12 @@ Private Sub txtDenominacion_KeyPress(KeyAscii As Integer)
 KeyAscii = Mayusculas(KeyAscii)
 End Sub
 
-Private Sub txtIdEmpresa_KeyPress(KeyAscii As Integer)
+Private Sub txtIdEmpresa_Change()
+ValidarSoloNumeros Me.txtIdEmpresa
+End Sub
 
-If SoloNumeros(KeyAscii) Then KeyAscii = 0
+Private Sub txtIdEmpresa_KeyPress(KeyAscii As Integer)
+KeyAscii = SoloNumeros(KeyAscii)
 End Sub
 
 Private Sub txtSearch_KeyPress(KeyAscii As Integer)
