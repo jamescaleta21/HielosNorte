@@ -5,16 +5,15 @@ INSERT INTO dbo.PERFIL
     ACTIVO,
     FE_REGISTER,
     CU_REGISTER
-   
 )
 VALUES
-(   4,       -- IDPERFIL - int
-    'Cliente',      -- DENOMINACION - varchar(50)
-    1,    -- ACTIVO - bit
+(   4,         -- IDPERFIL - int
+    'Cliente', -- DENOMINACION - varchar(50)
+    1,         -- ACTIVO - bit
     GETDATE(), -- FE_REGISTER - datetime
-    'SYSTEM'      -- CU_REGISTER - varchar(20)
+    'SYSTEM'   -- CU_REGISTER - varchar(20)
 
-    )
+    );
 INSERT INTO dbo.PERFIL
 (
     IDPERFIL,
@@ -22,13 +21,47 @@ INSERT INTO dbo.PERFIL
     ACTIVO,
     FE_REGISTER,
     CU_REGISTER
-   
 )
 VALUES
-(   5,       -- IDPERFIL - int
-    'Venta Directa',      -- DENOMINACION - varchar(50)
-    1,    -- ACTIVO - bit
-    GETDATE(), -- FE_REGISTER - datetime
-    'SYSTEM'      -- CU_REGISTER - varchar(20)
+(   5,               -- IDPERFIL - int
+    'Venta Directa', -- DENOMINACION - varchar(50)
+    1,               -- ACTIVO - bit
+    GETDATE(),       -- FE_REGISTER - datetime
+    'SYSTEM'         -- CU_REGISTER - varchar(20)
 
-    )
+    );
+INSERT INTO dbo.PERFIL
+(
+    IDPERFIL,
+    DENOMINACION,
+    ACTIVO,
+    FE_REGISTER,
+    CU_REGISTER
+)
+VALUES
+(   6,               -- IDPERFIL - int
+    'Supervisor VD', -- DENOMINACION - varchar(50)
+    1,               -- ACTIVO - bit
+    GETDATE(),       -- FE_REGISTER - datetime
+    'SYSTEM');
+UPDATE dbo.PRODUCTO_PROMOCION
+SET FECINI = '2025-01-01',
+    FECFIN = '2025-12-31'
+WHERE FECINI IS NULL
+      AND FECFIN IS NULL;
+UPDATE dbo.PRODUCTO_PROMOCION_LOG
+SET FECINI = '2025-01-01',
+    FECFIN = '2025-12-31'
+WHERE FECINI IS NULL
+      AND FECFIN IS NULL;
+
+UPDATE dbo.PRODUCTO_BONIFICACION
+SET FECINI = '2025-01-01',
+    FECFIN = '2025-12-31'
+WHERE FECINI IS NULL
+      AND FECFIN IS NULL;
+UPDATE dbo.PRODUCTO_BONIFICACION_LOG
+SET FECINI = '2025-01-01',
+    FECFIN = '2025-12-31'
+WHERE FECINI IS NULL
+      AND FECFIN IS NULL;
