@@ -73,7 +73,7 @@ Begin VB.Form frmVDProductoBonificacion
          EndProperty
          Height          =   1095
          Left            =   -74760
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   5760
          Width           =   12495
          Begin VB.CommandButton cmdCancelar 
@@ -82,7 +82,7 @@ Begin VB.Form frmVDProductoBonificacion
             Left            =   11040
             Picture         =   "frmVDProductoBonificacion.frx":0038
             Style           =   1  'Graphical
-            TabIndex        =   13
+            TabIndex        =   14
             Top             =   240
             Width           =   1335
          End
@@ -92,7 +92,7 @@ Begin VB.Form frmVDProductoBonificacion
             Left            =   8160
             Picture         =   "frmVDProductoBonificacion.frx":07A2
             Style           =   1  'Graphical
-            TabIndex        =   11
+            TabIndex        =   12
             Top             =   240
             Width           =   1335
          End
@@ -103,7 +103,7 @@ Begin VB.Form frmVDProductoBonificacion
             Left            =   9600
             Picture         =   "frmVDProductoBonificacion.frx":0F0C
             Style           =   1  'Graphical
-            TabIndex        =   12
+            TabIndex        =   13
             Top             =   240
             Width           =   1335
          End
@@ -111,13 +111,25 @@ Begin VB.Form frmVDProductoBonificacion
       Begin VB.Frame Frame3 
          Height          =   3975
          Left            =   -74760
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   1800
          Width           =   12495
+         Begin MSDataListLib.DataCombo DatCategoria 
+            Height          =   360
+            Left            =   6360
+            TabIndex        =   7
+            Top             =   1920
+            Width           =   3855
+            _ExtentX        =   6800
+            _ExtentY        =   635
+            _Version        =   393216
+            Style           =   2
+            Text            =   ""
+         End
          Begin VB.TextBox txtTope 
             Height          =   360
             Left            =   10320
-            TabIndex        =   7
+            TabIndex        =   8
             Top             =   1920
             Width           =   1095
          End
@@ -133,12 +145,12 @@ Begin VB.Form frmVDProductoBonificacion
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Left            =   11160
+            Left            =   11650
             Picture         =   "frmVDProductoBonificacion.frx":1296
             Style           =   1  'Graphical
-            TabIndex        =   10
+            TabIndex        =   11
             Top             =   2880
-            Width           =   990
+            Width           =   750
          End
          Begin VB.CommandButton cmdBoniAdd 
             BeginProperty Font 
@@ -151,20 +163,21 @@ Begin VB.Form frmVDProductoBonificacion
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Left            =   11160
+            Left            =   11650
             Picture         =   "frmVDProductoBonificacion.frx":1620
             Style           =   1  'Graphical
-            TabIndex        =   9
+            TabIndex        =   10
             Top             =   2400
-            Width           =   990
+            Width           =   750
          End
          Begin MSComctlLib.ListView lvBonificacion 
             Height          =   1455
             Left            =   120
-            TabIndex        =   8
+            TabIndex        =   9
+            TabStop         =   0   'False
             Top             =   2400
-            Width           =   10935
-            _ExtentX        =   19288
+            Width           =   11535
+            _ExtentX        =   20346
             _ExtentY        =   2566
             View            =   3
             LabelEdit       =   1
@@ -189,25 +202,25 @@ Begin VB.Form frmVDProductoBonificacion
          End
          Begin VB.TextBox txtrecibe 
             Height          =   360
-            Left            =   9120
-            TabIndex        =   6
+            Left            =   120
+            TabIndex        =   5
             Top             =   1920
             Width           =   1095
          End
          Begin VB.TextBox txtCantidad 
             Height          =   360
-            Left            =   10320
+            Left            =   1200
             TabIndex        =   4
             Top             =   1200
             Width           =   1095
          End
          Begin MSDataListLib.DataCombo DatBonificacion 
             Height          =   360
-            Left            =   120
-            TabIndex        =   5
+            Left            =   1320
+            TabIndex        =   6
             Top             =   1920
-            Width           =   8895
-            _ExtentX        =   15690
+            Width           =   4935
+            _ExtentX        =   8705
             _ExtentY        =   635
             _Version        =   393216
             Style           =   2
@@ -270,6 +283,16 @@ Begin VB.Form frmVDProductoBonificacion
             Mask            =   "##/##/####"
             PromptChar      =   "_"
          End
+         Begin VB.Label Label1 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Categoria:"
+            Height          =   240
+            Left            =   6360
+            TabIndex        =   29
+            Top             =   1680
+            Width           =   1035
+         End
          Begin VB.Line Line2 
             BorderStyle     =   2  'Dash
             X1              =   240
@@ -283,7 +306,7 @@ Begin VB.Form frmVDProductoBonificacion
             Caption         =   "Vigencia:"
             Height          =   240
             Left            =   1320
-            TabIndex        =   27
+            TabIndex        =   28
             Top             =   660
             Width           =   915
          End
@@ -293,7 +316,7 @@ Begin VB.Form frmVDProductoBonificacion
             Caption         =   "Desde:"
             Height          =   240
             Left            =   2640
-            TabIndex        =   26
+            TabIndex        =   27
             Top             =   660
             Width           =   690
          End
@@ -303,7 +326,7 @@ Begin VB.Form frmVDProductoBonificacion
             Caption         =   "Hasta:"
             Height          =   240
             Left            =   6000
-            TabIndex        =   25
+            TabIndex        =   26
             Top             =   660
             Width           =   660
          End
@@ -313,7 +336,7 @@ Begin VB.Form frmVDProductoBonificacion
             Caption         =   "Tope Boni:"
             Height          =   240
             Left            =   10320
-            TabIndex        =   24
+            TabIndex        =   25
             Top             =   1680
             Width           =   1065
          End
@@ -321,7 +344,6 @@ Begin VB.Form frmVDProductoBonificacion
             Alignment       =   2  'Center
             Appearance      =   0  'Flat
             BackColor       =   &H80000005&
-            Caption         =   "Label2"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   12
@@ -333,19 +355,19 @@ Begin VB.Form frmVDProductoBonificacion
             EndProperty
             ForeColor       =   &H80000008&
             Height          =   375
-            Left            =   120
-            TabIndex        =   22
+            Left            =   2400
+            TabIndex        =   23
             Tag             =   "X"
             Top             =   1200
-            Width           =   8775
+            Width           =   9015
          End
          Begin VB.Label Label8 
             AutoSize        =   -1  'True
             BackStyle       =   0  'Transparent
             Caption         =   "Recibe:"
             Height          =   240
-            Left            =   9120
-            TabIndex        =   21
+            Left            =   120
+            TabIndex        =   22
             Top             =   1680
             Width           =   735
          End
@@ -354,8 +376,8 @@ Begin VB.Form frmVDProductoBonificacion
             BackStyle       =   0  'Transparent
             Caption         =   "Por cada:"
             Height          =   240
-            Left            =   9240
-            TabIndex        =   20
+            Left            =   120
+            TabIndex        =   21
             Top             =   1260
             Width           =   960
          End
@@ -364,8 +386,8 @@ Begin VB.Form frmVDProductoBonificacion
             BackStyle       =   0  'Transparent
             Caption         =   "Producto:"
             Height          =   240
-            Left            =   120
-            TabIndex        =   19
+            Left            =   1320
+            TabIndex        =   20
             Top             =   1680
             Width           =   975
          End
@@ -375,7 +397,7 @@ Begin VB.Form frmVDProductoBonificacion
             Caption         =   "ASIGNAR BONIFICACIÓN"
             Height          =   240
             Left            =   120
-            TabIndex        =   18
+            TabIndex        =   19
             Top             =   240
             Width           =   2385
          End
@@ -392,7 +414,7 @@ Begin VB.Form frmVDProductoBonificacion
          EndProperty
          Height          =   1335
          Left            =   -74760
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   480
          Width           =   12495
          Begin VB.Label lblIdProducto 
@@ -408,7 +430,7 @@ Begin VB.Form frmVDProductoBonificacion
             EndProperty
             Height          =   195
             Left            =   11280
-            TabIndex        =   16
+            TabIndex        =   17
             Tag             =   "X"
             Top             =   120
             Visible         =   0   'False
@@ -430,7 +452,7 @@ Begin VB.Form frmVDProductoBonificacion
             ForeColor       =   &H80000008&
             Height          =   675
             Left            =   360
-            TabIndex        =   15
+            TabIndex        =   16
             Tag             =   "X"
             Top             =   360
             Width           =   11715
@@ -608,15 +630,18 @@ Private Sub cmdBoniAdd_Click()
 
         Set Item = Me.lvBonificacion.ListItems.Add(, , Me.txtCantidad.Text)
         Item.Tag = idMaxBoni
-        Item.SubItems(1) = Me.DatBonificacion.BoundText
-        Item.SubItems(2) = Me.DatBonificacion.Text
-        Item.SubItems(3) = Me.txtrecibe.Text
-        Item.SubItems(4) = Me.txtTope.Text
+        Item.SubItems(1) = Me.lblProducto2.Caption ' Me.DatBonificacion.BoundText
+        Item.SubItems(2) = Me.DatCategoria.BoundText ' Me.DatBonificacion.Text
+        Item.SubItems(3) = Me.DatCategoria.Text ' Me.txtrecibe.Text
+        Item.SubItems(4) = Me.txtrecibe.Text
+        Item.SubItems(5) = Me.DatBonificacion.BoundText ' .txtTope.Text
+        Item.SubItems(6) = Me.DatBonificacion.Text ' Me.DatCategoria.BoundText
+        Item.SubItems(7) = Me.txtTope.Text
     Else
 
         For Each itemx In Me.lvBonificacion.ListItems
 
-            If Me.DatBonificacion.BoundText = itemx.SubItems(1) Then
+            If Me.DatCategoria.BoundText = itemx.SubItems(2) Then
                 cruce = True
                 Exit For
 
@@ -632,19 +657,21 @@ Private Sub cmdBoniAdd_Click()
             idMaxBoni = ObtenerMaximoIDBoni(oRSboni)
             Set Item = Me.lvBonificacion.ListItems.Add(, , Me.txtCantidad.Text)
             Item.Tag = idMaxBoni
-            Item.SubItems(1) = Me.DatBonificacion.BoundText
-            Item.SubItems(2) = Me.DatBonificacion.Text
-            Item.SubItems(3) = Me.txtrecibe.Text
-            Item.SubItems(4) = Me.txtTope.Text
+            Item.SubItems(1) = Me.lblProducto2.Caption ' Me.DatBonificacion.BoundText
+            Item.SubItems(2) = Me.DatCategoria.BoundText ' Me.DatBonificacion.Text
+            Item.SubItems(3) = Me.DatCategoria.Text ' Me.txtrecibe.Text
+            Item.SubItems(4) = Me.txtrecibe.Text
+            Item.SubItems(5) = Me.DatBonificacion.BoundText ' .txtTope.Text
+            Item.SubItems(6) = Me.DatBonificacion.Text ' Me.DatCategoria.BoundText
+            Item.SubItems(7) = Me.txtTope.Text
 
         End If
 
     End If
     
-
-    
     Me.txtCantidad.Text = ""
     Me.DatBonificacion.BoundText = -1
+    Me.DatCategoria.BoundText = -1
     Me.txtrecibe.Text = ""
     Me.txtTope.Text = ""
     
@@ -678,7 +705,7 @@ Private Sub cmdEliminar_Click()
 
     MousePointer = vbHourglass
     LimpiaParametros oCmdEjec, True
-    oCmdEjec.CommandText = "[vd].[USP_PROMOCION_BONIFICACION_DELETE]"
+    oCmdEjec.CommandText = "[vd].[USP_PRODUCTO_BONIFICACION_DELETE]"
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDEMPRESA", adInteger, adParamInput, , pIDempresa)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDPRODUCTO", adBigInt, adParamInput, , Me.lblIdProducto.Caption)
     oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CURRENTUSER", adBSTR, adParamInput, 20, LK_CODUSU)
@@ -759,14 +786,16 @@ Private Sub cmdGrabar_Click()
             strBonificacion = strBonificacion & "<d "
             strBonificacion = strBonificacion & "idboni=""" & itemx.Tag & """ "
             strBonificacion = strBonificacion & "cantbase=""" & itemx.Text & """ "
-            strBonificacion = strBonificacion & "idpboni=""" & itemx.SubItems(1) & """ "
-            strBonificacion = strBonificacion & "cantboni=""" & itemx.SubItems(3) & """ "
-            strBonificacion = strBonificacion & "tope=""" & IIf(Len(Trim(itemx.SubItems(4))) = 0, "", itemx.SubItems(4)) & """ "
+            strBonificacion = strBonificacion & "idpboni=""" & itemx.SubItems(5) & """ "
+            strBonificacion = strBonificacion & "cantboni=""" & itemx.SubItems(4) & """ "
+            strBonificacion = strBonificacion & "tope=""" & IIf(Len(Trim(itemx.SubItems(7))) = 0, "", itemx.SubItems(7)) & """ "
+            strBonificacion = strBonificacion & "idcat=""" & itemx.SubItems(2) & """ "
             strBonificacion = strBonificacion & "/>"
         Next
         strBonificacion = strBonificacion & "</r>"
         
-        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@xBONIFICACION", adBSTR, adParamInput, 4000, strBonificacion)
+        oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@xBONIFICACION", adVarChar, adParamInput, 4000, strBonificacion)
+        
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FINI", adVarChar, adParamInput, 8, ConvertirFechaFormat_yyyyMMdd(Me.mebBIni.Text))
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FFIN", adVarChar, adParamInput, 8, ConvertirFechaFormat_yyyyMMdd(Me.mebBFin.Text))
 
@@ -815,7 +844,11 @@ End Sub
 
 
 Private Sub DatBonificacion_KeyDown(KeyCode As Integer, Shift As Integer)
-HandleEnterKey KeyCode, Me.txtrecibe
+HandleEnterKey KeyCode, Me.DatCategoria
+End Sub
+
+Private Sub DatCategoria_KeyDown(KeyCode As Integer, Shift As Integer)
+HandleEnterKey KeyCode, Me.txtTope
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -887,35 +920,64 @@ Private Sub cargarProductosCombo()
     Me.DatBonificacion.BoundColumn = orsTEMP1(0).Name
     Me.DatBonificacion.BoundText = -1
     
+    Set oRSmain = oRSmain.NextRecordset
+    Dim orsTEMP2 As New ADODB.Recordset
+    
+    orsTEMP2.CursorLocation = adUseClient
+    orsTEMP2.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+    orsTEMP2.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+    orsTEMP2.Open
+    
+    oRSmain.MoveFirst
+    
+    Do Until oRSmain.EOF
+        orsTEMP2.AddNew
+        orsTEMP2.Fields(0).Value = oRSmain.Fields(0).Value
+        orsTEMP2.Fields(1).Value = oRSmain.Fields(1).Value
+        orsTEMP2.Update
+        oRSmain.MoveNext
+    Loop
+    
+    Set Me.DatCategoria.RowSource = orsTEMP2
+    Me.DatCategoria.ListField = orsTEMP2(1).Name
+    Me.DatCategoria.BoundColumn = orsTEMP2(0).Name
+    Me.DatCategoria.BoundText = -1
+    
     CerrarConexion True
 
 End Sub
 
 Private Sub ConfigurarLV()
-With Me.lvArticulos
-    .ColumnHeaders.Add , , "Código", 1500
-    .ColumnHeaders.Add , , "Producto", 7000
-    .FullRowSelect = True
-    .Gridlines = True
-    .HideColumnHeaders = False
-    .View = lvwReport
-    .HideSelection = False
-End With
 
-With Me.lvBonificacion
-    .ColumnHeaders.Add , , "Por cada"
-    .ColumnHeaders.Add , , "idpBoni", 0
-    .ColumnHeaders.Add , , "Bonificación", 5500
-    .ColumnHeaders.Add , , "Recibe"
-    .ColumnHeaders.Add , , "Tope", 900
-    .FullRowSelect = True
-    .Gridlines = True
-    .HideColumnHeaders = False
-    .View = lvwReport
-    .HideSelection = False
-    
+    With Me.lvArticulos
+        .ColumnHeaders.Add , , "Código", 1500
+        .ColumnHeaders.Add , , "Producto", 7000
+        .FullRowSelect = True
+        .Gridlines = True
+        .HideColumnHeaders = False
+        .View = lvwReport
+        .HideSelection = False
 
-End With
+    End With
+
+    With Me.lvBonificacion
+        .ColumnHeaders.Add , , "Por cada"
+        .ColumnHeaders.Add , , "Producto", 2500
+        .ColumnHeaders.Add , , "idCategoria", 0
+        .ColumnHeaders.Add , , "Categoria", 1800
+         .ColumnHeaders.Add , , "Recibe"
+        .ColumnHeaders.Add , , "idpBoni", 0
+        .ColumnHeaders.Add , , "Bonificación", 2500
+        .ColumnHeaders.Add , , "Tope", 900
+
+        .FullRowSelect = True
+        .Gridlines = True
+        .HideColumnHeaders = False
+        .View = lvwReport
+        .HideSelection = False
+
+    End With
+
 End Sub
 
 Private Sub lvArticulos_DblClick()
@@ -930,6 +992,7 @@ Private Sub EnviarDatos()
     Me.lblProducto2.Caption = Me.lvArticulos.SelectedItem.SubItems(1)
     cargarProductosCombo
     obtenerInformacionPromocion Me.lvArticulos.SelectedItem.Text
+    Me.mebBIni.SetFocus
 End Sub
 
 Private Sub lvBonificacion_ItemClick(ByVal Item As MSComctlLib.ListItem)
@@ -952,7 +1015,7 @@ End Sub
 
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
  KeyAscii = SoloNumeros(KeyAscii)
- HandleEnterKey KeyAscii, Me.DatBonificacion
+ HandleEnterKey KeyAscii, Me.txtrecibe
 End Sub
 
 
@@ -964,7 +1027,7 @@ End Sub
 Private Sub txtrecibe_KeyPress(KeyAscii As Integer)
 
    KeyAscii = SoloNumeros(KeyAscii)
-    HandleEnterKey KeyAscii, Me.txtTope
+    HandleEnterKey KeyAscii, Me.DatBonificacion
 
 End Sub
 
@@ -991,10 +1054,14 @@ Private Sub obtenerInformacionPromocion(cIDProducto As Integer)
     Do While Not oRSmain.EOF
         Set itemx = Me.lvBonificacion.ListItems.Add(, , oRSmain!cant_base)
         itemx.Tag = oRSmain!idboni
-        itemx.SubItems(1) = oRSmain!idpboni
-        itemx.SubItems(2) = oRSmain!producto
-        itemx.SubItems(3) = oRSmain!cant_boni
-        itemx.SubItems(4) = oRSmain!tope
+        itemx.SubItems(1) = Me.lblProducto2.Caption ' oRSmain!idpboni
+        itemx.SubItems(2) = oRSmain!idcat ' oRSmain!producto
+        itemx.SubItems(3) = oRSmain!nomcat ' oRSmain!cant_boni
+                itemx.SubItems(4) = oRSmain!cant_boni
+        itemx.SubItems(5) = oRSmain!idpboni
+        itemx.SubItems(6) = oRSmain!producto
+
+        itemx.SubItems(7) = oRSmain!tope
         If Not IsNull(oRSmain!FINI) Then Me.mebBIni.Text = Nulo_Valors(oRSmain!FINI)
         If Not IsNull(oRSmain!ffin) Then Me.mebBFin.Text = Nulo_Valors(oRSmain!ffin)
         oRSmain.MoveNext
