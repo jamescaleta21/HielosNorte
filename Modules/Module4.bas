@@ -82,6 +82,7 @@ Public Sub LimpiaParametros(oCmd As ADODB.Command, Optional esRemoto As Boolean 
 '        c_Pass = Leer_Ini(App.Path & "\config.ini", "C_PASS", "c:\")
 '        c_Pass = objAES.DeCodificarB64(c_Pass, sSemilla)
         'FIN CLOUD
+        If oCnnRemoto.State = adStateOpen Then oCnnRemoto.Close
         oCnnRemoto.Provider = "SQLOLEDB.1"
         'oCnnRemoto.Open "Server=" + c_Server + ";Database=" + c_DataBase + ";Uid=" + c_User + ";Pwd=" + c_Pass + ";"
         oCnnRemoto.Open strCadenaConexion

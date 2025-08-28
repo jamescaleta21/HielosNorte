@@ -127,9 +127,9 @@ Begin VB.Form frmMantVDCliente
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDCliente.frx":685A
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
+      Tab(0).Control(0)=   "Label1"
       Tab(0).Control(1)=   "lvCliente"
-      Tab(0).Control(2)=   "Label1"
+      Tab(0).Control(2)=   "txtSearch"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Cliente"
       TabPicture(1)   =   "frmMantVDCliente.frx":6876
@@ -605,10 +605,10 @@ Private Sub cargarDatosAdicionales()
             End If
         
             ' Configurar datCategoria
-            Set Me.datCategoria.RowSource = orsTEMP2
-            Me.datCategoria.ListField = orsTEMP2.Fields(1).Name
-            Me.datCategoria.BoundColumn = orsTEMP2.Fields(0).Name
-            Me.datCategoria.BoundText = -1
+            Set Me.DatCategoria.RowSource = orsTEMP2
+            Me.DatCategoria.ListField = orsTEMP2.Fields(1).Name
+            Me.DatCategoria.BoundColumn = orsTEMP2.Fields(0).Name
+            Me.DatCategoria.BoundText = -1
 
         End If
 
@@ -655,7 +655,7 @@ Sub Mandar_Datos()
             Me.txtdni.Text = oRSmain!DNI
             Me.txtDireccion.Text = oRSmain!dir
             Me.DatVendedor.BoundText = oRSmain!IDVEN
-            Me.datCategoria.BoundText = oRSmain!IDcat
+            Me.DatCategoria.BoundText = oRSmain!idcat
 
             If Len(Trim(oRSmain!FNAC)) <> 0 Then Me.mebFecNac.Text = oRSmain!FNAC
             Me.txtTelefono.Text = oRSmain!TEL
@@ -818,7 +818,7 @@ End With
 End Sub
 
 Private Sub DatVendedor_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.datCategoria
+HandleEnterKey KeyAscii, Me.DatCategoria
 End Sub
 
 Private Sub dtpFechNac_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -911,7 +911,7 @@ Private Sub mtbCliente_Click(ByVal ButtonIndex As Long)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@RS", adVarChar, adParamInput, 100, Trim(Me.txtRS.Text))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DIR", adVarChar, adParamInput, 300, Trim(Me.txtDireccion.Text))
-                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.datCategoria.BoundText)
+                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.DatCategoria.BoundText)
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECNAC", adVarChar, adParamInput, 8, Trim(strFecha))

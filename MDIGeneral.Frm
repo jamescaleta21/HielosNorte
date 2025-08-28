@@ -119,13 +119,13 @@ Begin VB.MDIForm MDIForm1
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   600
+      Height          =   390
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   9480
       _ExtentX        =   16722
-      _ExtentY        =   1058
+      _ExtentY        =   688
       ButtonWidth     =   661
       ButtonHeight    =   635
       Appearance      =   1
@@ -1058,7 +1058,7 @@ Dim Wfile As String
 Dim WFORM As String
 Public Sub LLENA_ACCESO_OTROS(WSOTROS As String)
 Dim W1 As String * 2
-Dim i, wPosF, WPosV, cuenta As Integer
+Dim I, wPosF, WPosV, cuenta As Integer
 Dim sal As Boolean
 Dim cade As String
 Dim WNUM As Integer
@@ -1073,11 +1073,11 @@ cade = Trim(WSOTROS)
 cuenta = 0
 wPosF = 1
 a = 0
-For i = 1 To Len(cade)
- If Mid(cade, i, 1) = "." Then
+For I = 1 To Len(cade)
+ If Mid(cade, I, 1) = "." Then
    a = a + 1
  End If
-Next i
+Next I
 lk_OTROS_Count = a
 ReDim lk_OTROS(a)
 Do Until cuenta = a
@@ -1860,7 +1860,7 @@ Dim var As String
 MsgBox "" & Chr(13) & "Visitenos en www.viarapidaperu.com", vbInformation, "Asesoria y Soporte"
 Exit Sub
 Dim ww As Form
-Dim i
+Dim I
 On Error GoTo OJO
 var = Trim(MDIForm1.ActiveForm.Name)
 If UCase(var) = "FORMGEN" Then
@@ -2213,6 +2213,7 @@ Select Case Index
 '        Load FrmPreUnidad
 '        FrmPreUnidad.Show
          frmFormGenPedidos_Consulta.Show
+         frmFormGenPedidosVD_Consulta.Show
         Screen.MousePointer = 0
     
     Case 8
