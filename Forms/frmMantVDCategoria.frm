@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Object = "{FEC367D0-B73E-4DD0-80FD-1F56BC27B04A}#1.0#0"; "McToolBar.ocx"
 Begin VB.Form frmMantVDCategoria 
    BorderStyle     =   1  'Fixed Single
@@ -134,12 +134,12 @@ Begin VB.Form frmMantVDCategoria
       TabCaption(1)   =   "Categoria"
       TabPicture(1)   =   "frmMantVDCategoria.frx":6536
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "txtDenominacion"
-      Tab(1).Control(1)=   "lblActivo"
-      Tab(1).Control(2)=   "lblidCategoria"
-      Tab(1).Control(3)=   "Label4"
-      Tab(1).Control(4)=   "Label3"
-      Tab(1).Control(5)=   "Label2"
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(1)=   "Label3"
+      Tab(1).Control(2)=   "Label4"
+      Tab(1).Control(3)=   "lblidCategoria"
+      Tab(1).Control(4)=   "lblActivo"
+      Tab(1).Control(5)=   "txtDenominacion"
       Tab(1).ControlCount=   6
       Begin VB.TextBox txtDenominacion 
          Height          =   360
@@ -336,7 +336,7 @@ Private Sub Estado_Botones(val As Valores)
             Me.mtbCategoria.ButtonEnabled = False
             Me.mtbCategoria.Button_Index = 7
             Me.mtbCategoria.ButtonEnabled = False
-            Me.SSTCategoria.tab = 0
+            Me.SSTCategoria.Tab = 0
 
         Case Nuevo, Editar
             Me.lblActivo.Caption = "SI"
@@ -356,7 +356,7 @@ Private Sub Estado_Botones(val As Valores)
             Me.mtbCategoria.ButtonEnabled = False
             Me.lvCategoria.Enabled = False
             Me.txtSearch.Enabled = False
-            Me.SSTCategoria.tab = 1
+            Me.SSTCategoria.Tab = 1
 
         Case buscar
             Me.mtbCategoria.Button_Index = 1
@@ -367,7 +367,7 @@ Private Sub Estado_Botones(val As Valores)
             Me.mtbCategoria.ButtonEnabled = False
             Me.mtbCategoria.Button_Index = 4
             Me.mtbCategoria.ButtonEnabled = False
-            Me.SSTCategoria.tab = 0
+            Me.SSTCategoria.Tab = 0
 
         Case AntesDeActualizar
                  Me.mtbCategoria.Button_Index = 1
@@ -394,7 +394,7 @@ Private Sub Estado_Botones(val As Valores)
             End If
              Me.mtbCategoria.Button_Index = 7
             Me.mtbCategoria.ButtonEnabled = True
-            Me.SSTCategoria.tab = 1
+            Me.SSTCategoria.Tab = 1
 
     End Select
 
@@ -420,12 +420,12 @@ If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
 Private Sub Form_Load()
-pIDempresa = devuelveIDempresaXdefecto
-ConfigurarLV
-DesactivarControles Me
-Estado_Botones InicializarFormulario
-categoriaSearch Me.txtSearch.Text
-CentrarFormulario MDIForm1, Me
+'pIDempresa = devuelveIDempresaXdefecto
+'ConfigurarLV
+'DesactivarControles Me
+'Estado_Botones InicializarFormulario
+'categoriaSearch Me.txtSearch.Text
+'CentrarFormulario MDIForm1, Me
 End Sub
 
 Private Sub lvCategoria_DblClick()

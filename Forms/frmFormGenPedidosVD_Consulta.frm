@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{C4847593-972C-11D0-9567-00A0C9273C2A}#8.0#0"; "crviewer.dll"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
 Begin VB.Form frmFormGenPedidosVD_Consulta 
    Caption         =   "Pedidos por Vendedor"
    ClientHeight    =   8925
@@ -104,7 +104,7 @@ Begin VB.Form frmFormGenPedidosVD_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   206503937
+         Format          =   79757313
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 
@@ -216,6 +216,7 @@ Private Sub cmdMostrar_Click()
 
         Next
 
+If oRSmain.RecordCount <> 0 Then
         orsTEMP1.CursorLocation = adUseClient
         orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
         orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
@@ -225,6 +226,8 @@ Private Sub cmdMostrar_Click()
         orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
         orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
         orsTEMP1.Open
+        
+        
     
         ' Copiar datos del Recordset
         oRSmain.MoveFirst
@@ -246,6 +249,12 @@ Private Sub cmdMostrar_Click()
 
         Me.crvReporte.ReportSource = vReporte
         Me.crvReporte.ViewReport
+        Else
+        vReporte.Database.SetDataSource oRSmain, 3, 1
+        Me.crvReporte.ReportSource = vReporte
+        Me.crvReporte.ViewReport
+         MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+        End If
     Else
         LimpiaParametros oCmdEjec, True
         oCmdEjec.CommandText = "[vd].[USP_PEDIDO_RESUMEN_TOTAL]"
@@ -271,6 +280,8 @@ Private Sub cmdMostrar_Click()
 
         Next
         
+        If oRSmain.RecordCount <> 0 Then
+        
         orsTEMP1.CursorLocation = adUseClient
         orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
         orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
@@ -297,6 +308,12 @@ Private Sub cmdMostrar_Click()
 
         Me.crvReporte.ReportSource = vReporte
         Me.crvReporte.ViewReport
+        Else
+         vReporte.Database.SetDataSource oRSmain, 3, 1
+        Me.crvReporte.ReportSource = vReporte
+        Me.crvReporte.ViewReport
+        MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+        End If
 
     End If
 

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H00E0E0E0&
    Caption         =   "Solution-Módulo de Gestión Comercial "
@@ -549,7 +549,7 @@ Begin VB.MDIForm MDIForm1
          Index           =   3
       End
       Begin VB.Menu submenugrifo 
-         Caption         =   "-"
+         Caption         =   "Reporte de Ventas"
          Index           =   4
       End
       Begin VB.Menu submenugrifo 
@@ -1983,6 +1983,12 @@ Case 3
     frmVDProductoBonificacion.Show
     Screen.MousePointer = 0
     Exit Sub
+Case 4
+    Screen.MousePointer = 11
+    frmFormGenPedidosVD_Consulta.Show
+    Screen.MousePointer = 0
+    Exit Sub
+    
 End Select
 
 
@@ -2213,7 +2219,7 @@ Select Case Index
 '        Load FrmPreUnidad
 '        FrmPreUnidad.Show
          frmFormGenPedidos_Consulta.Show
-         frmFormGenPedidosVD_Consulta.Show
+         
         Screen.MousePointer = 0
     
     Case 8
