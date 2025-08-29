@@ -1,14 +1,13 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
-Object = "{FEC367D0-B73E-4DD0-80FD-1F56BC27B04A}#1.0#0"; "McToolBar.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMantVDCategoria 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Maestro de Categorias [Venta Directa]"
-   ClientHeight    =   6435
+   ClientHeight    =   5850
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   9450
+   ClientWidth     =   9465
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   9.75
@@ -24,62 +23,46 @@ Begin VB.Form frmMantVDCategoria
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   6435
-   ScaleWidth      =   9450
-   Begin ToolBar.McToolBar mtbCategoria 
+   ScaleHeight     =   5850
+   ScaleWidth      =   9465
+   Begin MSComctlLib.Toolbar mtbCategoria 
       Align           =   1  'Align Top
-      Height          =   1050
+      Height          =   660
       Left            =   0
       TabIndex        =   10
       Top             =   0
-      Width           =   9450
-      _ExtentX        =   16669
-      _ExtentY        =   1852
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
+      Width           =   9465
+      _ExtentX        =   16695
+      _ExtentY        =   1164
+      ButtonWidth     =   1879
+      ButtonHeight    =   1005
+      AllowCustomize  =   0   'False
+      Appearance      =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   7
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Nuevo"
+         EndProperty
+         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Grabar"
+         EndProperty
+         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Editar"
+         EndProperty
+         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Cancelar"
+         EndProperty
+         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Desactivar"
+         EndProperty
+         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Activar"
+         EndProperty
+         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Eliminar"
+         EndProperty
       EndProperty
-      Button_Count    =   7
-      ButtonsWidth    =   90
-      ButtonsHeight   =   70
-      ButtonsPerRow   =   7
-      HoverColor      =   -2147483635
-      TooTipStyle     =   0
-      ButtonsMode     =   4
-      ButtonsPerRow_Chev=   7
-      ButtonCaption1  =   "&Nuevo"
-      ButtonIcon1     =   "frmMantVDCategoria.frx":058A
-      ButtonToolTipIcon1=   1
-      ButtonIconAllignment1=   0
-      ButtonCaption2  =   "&Guardar"
-      ButtonIcon2     =   "frmMantVDCategoria.frx":1264
-      ButtonToolTipIcon2=   1
-      ButtonIconAllignment2=   0
-      ButtonCaption3  =   "&Modificar"
-      ButtonIcon3     =   "frmMantVDCategoria.frx":1F3E
-      ButtonToolTipIcon3=   1
-      ButtonIconAllignment3=   0
-      ButtonCaption4  =   "&Cancelar"
-      ButtonIcon4     =   "frmMantVDCategoria.frx":2C18
-      ButtonToolTipIcon4=   1
-      ButtonIconAllignment4=   0
-      ButtonCaption5  =   "&Desactivar"
-      ButtonIcon5     =   "frmMantVDCategoria.frx":38F2
-      ButtonToolTipIcon5=   1
-      ButtonIconAllignment5=   0
-      ButtonCaption6  =   "&Activar"
-      ButtonIcon6     =   "frmMantVDCategoria.frx":45CC
-      ButtonToolTipIcon6=   1
-      ButtonIconAllignment6=   0
-      ButtonCaption7  =   "&Eliminar"
-      ButtonIcon7     =   "frmMantVDCategoria.frx":52A6
-      ButtonToolTipIcon7=   1
-      ButtonIconAllignment7=   0
    End
    Begin MSComctlLib.ImageList ilCategoria 
       Left            =   10680
@@ -92,10 +75,38 @@ Begin VB.Form frmMantVDCategoria
       MaskColor       =   12632256
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   1
+         NumListImages   =   8
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMantVDCategoria.frx":5F80
-            Key             =   "category"
+            Picture         =   "frmMantVDCategoria.frx":058A
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":0924
+            Key             =   "save"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":0CBE
+            Key             =   "edit"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":1058
+            Key             =   "undo"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":13F2
+            Key             =   "desactive"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":198C
+            Key             =   "active"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":1F26
+            Key             =   "delete"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCategoria.frx":22C0
+            Key             =   "cat"
          EndProperty
       EndProperty
    End
@@ -104,7 +115,7 @@ Begin VB.Form frmMantVDCategoria
       Left            =   120
       TabIndex        =   0
       TabStop         =   0   'False
-      Top             =   1200
+      Top             =   720
       Width           =   9255
       _ExtentX        =   16325
       _ExtentY        =   8916
@@ -122,7 +133,7 @@ Begin VB.Form frmMantVDCategoria
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Listado"
-      TabPicture(0)   =   "frmMantVDCategoria.frx":651A
+      TabPicture(0)   =   "frmMantVDCategoria.frx":285A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1"
       Tab(0).Control(0).Enabled=   0   'False
@@ -132,14 +143,14 @@ Begin VB.Form frmMantVDCategoria
       Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Categoria"
-      TabPicture(1)   =   "frmMantVDCategoria.frx":6536
+      TabPicture(1)   =   "frmMantVDCategoria.frx":2876
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(1)=   "Label3"
-      Tab(1).Control(2)=   "Label4"
-      Tab(1).Control(3)=   "lblidCategoria"
-      Tab(1).Control(4)=   "lblActivo"
-      Tab(1).Control(5)=   "txtDenominacion"
+      Tab(1).Control(0)=   "txtDenominacion"
+      Tab(1).Control(1)=   "lblActivo"
+      Tab(1).Control(2)=   "lblidCategoria"
+      Tab(1).Control(3)=   "Label4"
+      Tab(1).Control(4)=   "Label3"
+      Tab(1).Control(5)=   "Label2"
       Tab(1).ControlCount=   6
       Begin VB.TextBox txtDenominacion 
          Height          =   360
@@ -291,7 +302,7 @@ Private Sub categoriaSearch(xdato As String)
         Dim itemx As Object
 
         Do While Not oRSmain.EOF
-            Set itemx = Me.lvCategoria.ListItems.Add(, , oRSmain!IDCATEGORIA, Me.ilCategoria.ListImages(1).Key, Me.ilCategoria.ListImages(1).Key)
+            Set itemx = Me.lvCategoria.ListItems.Add(, , oRSmain!IDCATEGORIA, Me.ilCategoria.ListImages(8).Key, Me.ilCategoria.ListImages(8).Key)
             itemx.SubItems(1) = oRSmain!DENOMINACION
             itemx.SubItems(2) = oRSmain!activo
 
@@ -322,79 +333,53 @@ Private Sub Estado_Botones(val As Valores)
     Select Case val
 
         Case InicializarFormulario, grabar, cancelar, Eliminar, Desactivar, Activar
-              Me.mtbCategoria.Button_Index = 1
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.mtbCategoria.Button_Index = 2
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 3
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 4
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 5
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 6
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 7
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.SSTCategoria.Tab = 0
+
+            Me.mtbCategoria.Buttons(1).Enabled = True
+            Me.mtbCategoria.Buttons(2).Enabled = False
+            Me.mtbCategoria.Buttons(3).Enabled = False
+            Me.mtbCategoria.Buttons(4).Enabled = False
+            Me.mtbCategoria.Buttons(5).Enabled = False
+            Me.mtbCategoria.Buttons(6).Enabled = False
+            Me.mtbCategoria.Buttons(7).Enabled = False
+            Me.SSTCategoria.tab = 0
 
         Case Nuevo, Editar
             Me.lblActivo.Caption = "SI"
-             Me.mtbCategoria.Button_Index = 1
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 2
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.mtbCategoria.Button_Index = 3
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 4
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.mtbCategoria.Button_Index = 5
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 6
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 7
-            Me.mtbCategoria.ButtonEnabled = False
+            Me.mtbCategoria.Buttons(1).Enabled = False
+            Me.mtbCategoria.Buttons(2).Enabled = True
+            Me.mtbCategoria.Buttons(3).Enabled = False
+            Me.mtbCategoria.Buttons(4).Enabled = True
+            Me.mtbCategoria.Buttons(5).Enabled = False
+            Me.mtbCategoria.Buttons(6).Enabled = False
+            Me.mtbCategoria.Buttons(7).Enabled = False
             Me.lvCategoria.Enabled = False
             Me.txtSearch.Enabled = False
-            Me.SSTCategoria.Tab = 1
+            Me.SSTCategoria.tab = 1
 
         Case buscar
-            Me.mtbCategoria.Button_Index = 1
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.mtbCategoria.Button_Index = 2
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 3
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 4
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.SSTCategoria.Tab = 0
+            Me.mtbCategoria.Buttons(1).Enabled = True
+            Me.mtbCategoria.Buttons(2).Enabled = False
+            Me.mtbCategoria.Buttons(3).Enabled = False
+            Me.mtbCategoria.Buttons(4).Enabled = False
+            Me.SSTCategoria.tab = 0
 
         Case AntesDeActualizar
-                 Me.mtbCategoria.Button_Index = 1
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 2
-            Me.mtbCategoria.ButtonEnabled = False
-            Me.mtbCategoria.Button_Index = 3
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.mtbCategoria.Button_Index = 4
-            Me.mtbCategoria.ButtonEnabled = True
+            Me.mtbCategoria.Buttons(1).Enabled = False
+            Me.mtbCategoria.Buttons(2).Enabled = False
+            Me.mtbCategoria.Buttons(3).Enabled = True
+            Me.mtbCategoria.Buttons(4).Enabled = True
 
             If Me.lblActivo.Caption = "SI" Then
-                Me.mtbCategoria.Button_Index = 5
-                Me.mtbCategoria.ButtonEnabled = True
-                Me.mtbCategoria.Button_Index = 6
-                Me.mtbCategoria.ButtonEnabled = False
+                Me.mtbCategoria.Buttons(5).Enabled = True
+                Me.mtbCategoria.Buttons(6).Enabled = False
 
             Else
-                Me.mtbCategoria.Button_Index = 5
-                Me.mtbCategoria.ButtonEnabled = False
-                Me.mtbCategoria.Button_Index = 6
-                Me.mtbCategoria.ButtonEnabled = True
+                Me.mtbCategoria.Buttons(5).Enabled = False
+                Me.mtbCategoria.Buttons(6).Enabled = True
             
             End If
-             Me.mtbCategoria.Button_Index = 7
-            Me.mtbCategoria.ButtonEnabled = True
-            Me.SSTCategoria.Tab = 1
+             Me.mtbCategoria.Buttons(7).Enabled = True
+            Me.SSTCategoria.tab = 1
 
     End Select
 
@@ -420,22 +405,30 @@ If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
 Private Sub Form_Load()
-'pIDempresa = devuelveIDempresaXdefecto
-'ConfigurarLV
-'DesactivarControles Me
-'Estado_Botones InicializarFormulario
-'categoriaSearch Me.txtSearch.Text
-'CentrarFormulario MDIForm1, Me
+    pIDempresa = devuelveIDempresaXdefecto
+    ConfigurarLV
+    DesactivarControles Me
+    Estado_Botones InicializarFormulario
+    categoriaSearch Me.txtSearch.Text
+    CentrarFormulario MDIForm1, Me
+    Me.mtbCategoria.ImageList = Me.ilCategoria
+
+    Dim i As Integer
+
+    For i = 1 To 7
+        Me.mtbCategoria.Buttons(i).Image = Me.ilCategoria.ListImages.Item(i).Index
+    Next
+
 End Sub
 
 Private Sub lvCategoria_DblClick()
 Mandar_Datos
 End Sub
 
-Private Sub mtbCategoria_Click(ByVal ButtonIndex As Long)
+Private Sub mtbCategoria_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Select Case ButtonIndex
-
+    Select Case Button.Index
+ 
         Case 1 'NUEVO
             ActivarControles Me
             LimpiarControles Me
@@ -489,7 +482,8 @@ Private Sub mtbCategoria_Click(ByVal ButtonIndex As Long)
                     Else
                         
                         MsgBox oRSmain!Message, vbCritical, Pub_Titulo
-CerrarConexion True
+                        CerrarConexion True
+
                     End If
 
                 End If
@@ -646,10 +640,6 @@ Elimina:
             End If
 
     End Select
-End Sub
-
-Private Sub tbCategoria_ButtonClick(ByVal Button As MSComctlLib.Button)
-
 
 End Sub
 

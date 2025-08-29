@@ -3,14 +3,13 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
-Object = "{FEC367D0-B73E-4DD0-80FD-1F56BC27B04A}#1.0#0"; "McToolBar.ocx"
 Begin VB.Form frmMantVDCliente 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Maestro de Clientes [Venta Directa]"
-   ClientHeight    =   8400
+   ClientHeight    =   8010
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   9495
+   ClientWidth     =   9480
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   9.75
@@ -26,62 +25,46 @@ Begin VB.Form frmMantVDCliente
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   8400
-   ScaleWidth      =   9495
-   Begin ToolBar.McToolBar mtbCliente 
+   ScaleHeight     =   8010
+   ScaleWidth      =   9480
+   Begin MSComctlLib.Toolbar mtbCliente 
       Align           =   1  'Align Top
-      Height          =   1050
+      Height          =   660
       Left            =   0
       TabIndex        =   29
       Top             =   0
-      Width           =   9495
-      _ExtentX        =   16748
-      _ExtentY        =   1852
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
+      Width           =   9480
+      _ExtentX        =   16722
+      _ExtentY        =   1164
+      ButtonWidth     =   1879
+      ButtonHeight    =   1005
+      AllowCustomize  =   0   'False
+      Appearance      =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   7
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Nuevo"
+         EndProperty
+         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Guardar"
+         EndProperty
+         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Modificar"
+         EndProperty
+         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Cancelar"
+         EndProperty
+         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Desactivar"
+         EndProperty
+         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Activar"
+         EndProperty
+         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Eliminar"
+         EndProperty
       EndProperty
-      Button_Count    =   7
-      ButtonsWidth    =   90
-      ButtonsHeight   =   70
-      ButtonsPerRow   =   7
-      HoverColor      =   -2147483635
-      TooTipStyle     =   0
-      ButtonsMode     =   4
-      ButtonsPerRow_Chev=   7
-      ButtonCaption1  =   "&Nuevo"
-      ButtonIcon1     =   "frmMantVDCliente.frx":08CA
-      ButtonToolTipIcon1=   1
-      ButtonIconAllignment1=   0
-      ButtonCaption2  =   "&Guardar"
-      ButtonIcon2     =   "frmMantVDCliente.frx":15A4
-      ButtonToolTipIcon2=   1
-      ButtonIconAllignment2=   0
-      ButtonCaption3  =   "&Modificar"
-      ButtonIcon3     =   "frmMantVDCliente.frx":227E
-      ButtonToolTipIcon3=   1
-      ButtonIconAllignment3=   0
-      ButtonCaption4  =   "&Cancelar"
-      ButtonIcon4     =   "frmMantVDCliente.frx":2F58
-      ButtonToolTipIcon4=   1
-      ButtonIconAllignment4=   0
-      ButtonCaption5  =   "&Desactivar"
-      ButtonIcon5     =   "frmMantVDCliente.frx":3C32
-      ButtonToolTipIcon5=   1
-      ButtonIconAllignment5=   0
-      ButtonCaption6  =   "&Activar"
-      ButtonIcon6     =   "frmMantVDCliente.frx":490C
-      ButtonToolTipIcon6=   1
-      ButtonIconAllignment6=   0
-      ButtonCaption7  =   "&Eliminar"
-      ButtonIcon7     =   "frmMantVDCliente.frx":55E6
-      ButtonToolTipIcon7=   1
-      ButtonIconAllignment7=   0
    End
    Begin MSComctlLib.ImageList ilCliente 
       Left            =   9720
@@ -94,9 +77,37 @@ Begin VB.Form frmMantVDCliente
       MaskColor       =   12632256
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   1
+         NumListImages   =   8
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmMantVDCliente.frx":62C0
+            Picture         =   "frmMantVDCliente.frx":08CA
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":0C64
+            Key             =   "save"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":0FFE
+            Key             =   "edit"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":1398
+            Key             =   "undo"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":1732
+            Key             =   "desactive"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":1CCC
+            Key             =   "active"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":2266
+            Key             =   "delete"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDCliente.frx":2600
             Key             =   "client"
          EndProperty
       EndProperty
@@ -106,13 +117,12 @@ Begin VB.Form frmMantVDCliente
       Left            =   120
       TabIndex        =   0
       TabStop         =   0   'False
-      Top             =   1200
+      Top             =   800
       Width           =   9255
       _ExtentX        =   16325
       _ExtentY        =   12515
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -125,29 +135,27 @@ Begin VB.Form frmMantVDCliente
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Listado"
-      TabPicture(0)   =   "frmMantVDCliente.frx":685A
-      Tab(0).ControlEnabled=   0   'False
+      TabPicture(0)   =   "frmMantVDCliente.frx":2B9A
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "lvCliente"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Cliente"
-      TabPicture(1)   =   "frmMantVDCliente.frx":6876
-      Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "lblIdCliente"
+      TabPicture(1)   =   "frmMantVDCliente.frx":2BB6
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "FraDatospersonales"
+      Tab(1).Control(1)=   "optDni"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "FraRuc"
+      Tab(1).Control(2)=   "optRuc"
       Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "FraDni"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "optRuc"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "optDni"
-      Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "FraDatospersonales"
-      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(4)=   "FraRuc"
+      Tab(1).Control(5)=   "lblIdCliente"
+      Tab(1).Control(6)=   "Label2"
       Tab(1).ControlCount=   7
       Begin VB.Frame FraDatospersonales 
          BeginProperty Font 
@@ -160,7 +168,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3975
-         Left            =   720
+         Left            =   -74280
          TabIndex        =   19
          Top             =   2400
          Width           =   7695
@@ -387,7 +395,7 @@ Begin VB.Form frmMantVDCliente
       Begin VB.OptionButton optDni 
          Caption         =   "Dni"
          Height          =   255
-         Left            =   4920
+         Left            =   -70080
          TabIndex        =   6
          TabStop         =   0   'False
          Top             =   1320
@@ -396,7 +404,7 @@ Begin VB.Form frmMantVDCliente
       Begin VB.OptionButton optRuc 
          Caption         =   "Ruc"
          Height          =   255
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   5
          TabStop         =   0   'False
          Top             =   1320
@@ -413,7 +421,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   4680
+         Left            =   -70320
          TabIndex        =   18
          Top             =   1320
          Width           =   3735
@@ -447,7 +455,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   720
+         Left            =   -74280
          TabIndex        =   17
          Top             =   1320
          Width           =   3735
@@ -463,14 +471,14 @@ Begin VB.Form frmMantVDCliente
       End
       Begin VB.TextBox txtSearch 
          Height          =   360
-         Left            =   -73560
+         Left            =   1440
          TabIndex        =   1
          Top             =   480
          Width           =   7695
       End
       Begin MSComctlLib.ListView lvCliente 
          Height          =   6015
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   2
          Top             =   960
          Width           =   9015
@@ -502,7 +510,7 @@ Begin VB.Form frmMantVDCliente
          BorderStyle     =   1  'Fixed Single
          ForeColor       =   &H80000008&
          Height          =   360
-         Left            =   2280
+         Left            =   -72720
          TabIndex        =   16
          Tag             =   "X"
          Top             =   600
@@ -513,7 +521,7 @@ Begin VB.Form frmMantVDCliente
          BackStyle       =   0  'Transparent
          Caption         =   "Id Cliente:"
          Height          =   240
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   15
          Top             =   660
          Width           =   1035
@@ -523,7 +531,7 @@ Begin VB.Form frmMantVDCliente
          BackStyle       =   0  'Transparent
          Caption         =   "Busqueda"
          Height          =   240
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   14
          Top             =   540
          Width           =   945
@@ -605,10 +613,10 @@ Private Sub cargarDatosAdicionales()
             End If
         
             ' Configurar datCategoria
-            Set Me.DatCategoria.RowSource = orsTEMP2
-            Me.DatCategoria.ListField = orsTEMP2.Fields(1).Name
-            Me.DatCategoria.BoundColumn = orsTEMP2.Fields(0).Name
-            Me.DatCategoria.BoundText = -1
+            Set Me.datCategoria.RowSource = orsTEMP2
+            Me.datCategoria.ListField = orsTEMP2.Fields(1).Name
+            Me.datCategoria.BoundColumn = orsTEMP2.Fields(0).Name
+            Me.datCategoria.BoundText = -1
 
         End If
 
@@ -655,7 +663,7 @@ Sub Mandar_Datos()
             Me.txtdni.Text = oRSmain!DNI
             Me.txtDireccion.Text = oRSmain!dir
             Me.DatVendedor.BoundText = oRSmain!IDVEN
-            Me.DatCategoria.BoundText = oRSmain!idcat
+            Me.datCategoria.BoundText = oRSmain!idcat
 
             If Len(Trim(oRSmain!FNAC)) <> 0 Then Me.mebFecNac.Text = oRSmain!FNAC
             Me.txtTelefono.Text = oRSmain!TEL
@@ -693,7 +701,7 @@ MousePointer = vbHourglass
         Dim itemx As Object
 
         Do While Not oRSmain.EOF
-            Set itemx = Me.lvCliente.ListItems.Add(, , oRSmain!ide, Me.ilCliente.ListImages(1).Key, Me.ilCliente.ListImages(1).Key)
+            Set itemx = Me.lvCliente.ListItems.Add(, , oRSmain!ide, Me.ilCliente.ListImages(8).Key, Me.ilCliente.ListImages(8).Key)
             itemx.SubItems(1) = oRSmain!rso
             itemx.SubItems(2) = oRSmain!ACT
 
@@ -723,79 +731,51 @@ Private Sub Estado_Botones(val As Valores)
     Select Case val
 
         Case InicializarFormulario, grabar, cancelar, Eliminar, Desactivar, Activar
-            Me.mtbCliente.Button_Index = 1
-            Me.mtbCliente.ButtonEnabled = True
-            Me.mtbCliente.Button_Index = 2
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 3
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 4
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 5
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 6
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 7
-            Me.mtbCliente.ButtonEnabled = False
+            Me.mtbCliente.Buttons(1).Enabled = True
+            Me.mtbCliente.Buttons(2).Enabled = False
+            Me.mtbCliente.Buttons(3).Enabled = False
+            Me.mtbCliente.Buttons(4).Enabled = False
+            Me.mtbCliente.Buttons(5).Enabled = False
+            Me.mtbCliente.Buttons(6).Enabled = False
+            Me.mtbCliente.Buttons(7).Enabled = False
             Me.SSTCliente.tab = 0
 
         Case Nuevo, Editar
             Me.lblActivo.Caption = "SI"
-            Me.mtbCliente.Button_Index = 1
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 2
-            Me.mtbCliente.ButtonEnabled = True
-            Me.mtbCliente.Button_Index = 3
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 4
-            Me.mtbCliente.ButtonEnabled = True
-            Me.mtbCliente.Button_Index = 5
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 6
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 7
-            Me.mtbCliente.ButtonEnabled = False
+            Me.mtbCliente.Buttons(1).Enabled = False
+            Me.mtbCliente.Buttons(2).Enabled = True
+            Me.mtbCliente.Buttons(3).Enabled = False
+            Me.mtbCliente.Buttons(4).Enabled = True
+            Me.mtbCliente.Buttons(5).Enabled = False
+            Me.mtbCliente.Buttons(6).Enabled = False
+            Me.mtbCliente.Buttons(7).Enabled = False
             Me.lvCliente.Enabled = False
             Me.txtSearch.Enabled = False
             Me.SSTCliente.tab = 1
 
         Case buscar
-            Me.mtbCliente.Button_Index = 1
-            Me.mtbCliente.ButtonEnabled = True
-            Me.mtbCliente.Button_Index = 2
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 3
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 4
-            Me.mtbCliente.ButtonEnabled = False
+            Me.mtbCliente.Buttons(1).Enabled = True
+            Me.mtbCliente.Buttons(2).Enabled = False
+            Me.mtbCliente.Buttons(3).Enabled = False
+            Me.mtbCliente.Buttons(4).Enabled = False
             Me.SSTCliente.tab = 0
 
         Case AntesDeActualizar
-            Me.mtbCliente.Button_Index = 1
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 2
-            Me.mtbCliente.ButtonEnabled = False
-            Me.mtbCliente.Button_Index = 3
-            Me.mtbCliente.ButtonEnabled = True
-            Me.mtbCliente.Button_Index = 4
-            Me.mtbCliente.ButtonEnabled = True
+            Me.mtbCliente.Buttons(1).Enabled = False
+            Me.mtbCliente.Buttons(2).Enabled = False
+            Me.mtbCliente.Buttons(3).Enabled = True
+            Me.mtbCliente.Buttons(4).Enabled = True
 
             If Me.lblActivo.Caption = "SI" Then
-                Me.mtbCliente.Button_Index = 5
-                Me.mtbCliente.ButtonEnabled = True
-                Me.mtbCliente.Button_Index = 6
-                Me.mtbCliente.ButtonEnabled = False
+                Me.mtbCliente.Buttons(5).Enabled = True
+                Me.mtbCliente.Buttons(6).Enabled = False
 
             Else
-                Me.mtbCliente.Button_Index = 5
-                Me.mtbCliente.ButtonEnabled = False
-                Me.mtbCliente.Button_Index = 6
-                Me.mtbCliente.ButtonEnabled = True
+                Me.mtbCliente.Buttons(5).Enabled = False
+                Me.mtbCliente.Buttons(6).Enabled = True
             
             End If
-
-            Me.mtbCliente.Button_Index = 7
-            Me.mtbCliente.ButtonEnabled = True
+            Me.mtbCliente.Buttons(7).Enabled = True
             Me.SSTCliente.tab = 1
 
     End Select
@@ -812,13 +792,13 @@ With Me.lvCliente
     .View = lvwReport
     .FullRowSelect = True
     .ColumnHeaders.Add , , "IDE"
-    .ColumnHeaders.Add , , "CATEGORIA", 3000
+    .ColumnHeaders.Add , , "CATEGORIA", 5000
     .ColumnHeaders.Add , , "ACTIVO"
 End With
 End Sub
 
 Private Sub DatVendedor_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.DatCategoria
+HandleEnterKey KeyAscii, Me.datCategoria
 End Sub
 
 Private Sub dtpFechNac_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -830,12 +810,20 @@ If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
 Private Sub Form_Load()
-pIDempresa = devuelveIDempresaXdefecto
-ConfigurarLV
-DesactivarControles Me
-Estado_Botones InicializarFormulario
-clienteSearch Me.txtSearch.Text
-CentrarFormulario MDIForm1, Me
+    pIDempresa = devuelveIDempresaXdefecto
+    ConfigurarLV
+    DesactivarControles Me
+    Estado_Botones InicializarFormulario
+    clienteSearch Me.txtSearch.Text
+    CentrarFormulario MDIForm1, Me
+    Me.mtbCliente.ImageList = Me.ilCliente
+
+    Dim i As Integer
+
+    For i = 1 To 7
+        Me.mtbCliente.Buttons(i).Image = Me.ilCliente.ListImages.Item(i).Index
+    Next
+
 End Sub
 
 Private Sub lvCliente_DblClick()
@@ -847,9 +835,10 @@ Private Sub mebFecNac_KeyPress(KeyAscii As Integer)
 HandleEnterKey KeyAscii, Me.txtTelefono
 End Sub
 
-Private Sub mtbCliente_Click(ByVal ButtonIndex As Long)
 
-    Select Case ButtonIndex
+
+Private Sub mtbCliente_ButtonClick(ByVal Button As MSComctlLib.Button)
+   Select Case Button.Index
 
         Case 1 'NUEVO
             ActivarControles Me
@@ -911,7 +900,7 @@ Private Sub mtbCliente_Click(ByVal ButtonIndex As Long)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@RS", adVarChar, adParamInput, 100, Trim(Me.txtRS.Text))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DIR", adVarChar, adParamInput, 300, Trim(Me.txtDireccion.Text))
-                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.DatCategoria.BoundText)
+                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.datCategoria.BoundText)
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECNAC", adVarChar, adParamInput, 8, Trim(strFecha))
@@ -1092,7 +1081,6 @@ Elimina:
             End If
 
     End Select
-
 End Sub
 
 Private Sub optDni_Click()

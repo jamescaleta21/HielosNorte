@@ -42,31 +42,25 @@ Begin VB.Form frmEmpresa
          NumButtons      =   6
          BeginProperty Button1 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Nuevo"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button2 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Guardar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button3 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Editar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button4 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Cancelar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button5 {0713F354-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Button6 {0713F354-850A-101B-AFC0-4210102A8DA7} 
             Caption         =   "&Eliminar"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -82,34 +76,29 @@ Begin VB.Form frmEmpresa
       _ExtentY        =   9763
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmEmpresa.frx":0000
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "lvListado"
-      Tab(0).Control(1)=   "txtSearch"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "txtSearch"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "lvListado"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Empresa"
       TabPicture(1)   =   "frmEmpresa.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label2"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Label3"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "txtDenominacion"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "cboPrincipal"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "txtIdEmpresa"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
       Begin VB.TextBox txtIdEmpresa 
          Height          =   375
-         Left            =   2760
+         Left            =   -72240
          TabIndex        =   3
          Top             =   2160
          Width           =   855
@@ -117,7 +106,7 @@ Begin VB.Form frmEmpresa
       Begin VB.ComboBox cboPrincipal 
          Height          =   315
          ItemData        =   "frmEmpresa.frx":0038
-         Left            =   2760
+         Left            =   -72240
          List            =   "frmEmpresa.frx":0042
          Style           =   2  'Dropdown List
          TabIndex        =   5
@@ -126,14 +115,14 @@ Begin VB.Form frmEmpresa
       End
       Begin VB.TextBox txtDenominacion 
          Height          =   375
-         Left            =   2760
+         Left            =   -72240
          TabIndex        =   4
          Top             =   2760
          Width           =   4215
       End
       Begin MSComctlLib.ListView lvListado 
          Height          =   4575
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   2
          Top             =   840
          Width           =   8295
@@ -152,7 +141,7 @@ Begin VB.Form frmEmpresa
       End
       Begin VB.TextBox txtSearch 
          Height          =   285
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   1
          Top             =   480
          Width           =   8295
@@ -162,7 +151,7 @@ Begin VB.Form frmEmpresa
          BackStyle       =   0  'Transparent
          Caption         =   "Es Principal:"
          Height          =   195
-         Left            =   1545
+         Left            =   -73455
          TabIndex        =   9
          Top             =   3420
          Width           =   1050
@@ -172,7 +161,7 @@ Begin VB.Form frmEmpresa
          BackStyle       =   0  'Transparent
          Caption         =   "Denominación:"
          Height          =   195
-         Left            =   1305
+         Left            =   -73695
          TabIndex        =   7
          Top             =   2850
          Width           =   1290
@@ -182,7 +171,7 @@ Begin VB.Form frmEmpresa
          BackStyle       =   0  'Transparent
          Caption         =   "Identificador:"
          Height          =   195
-         Left            =   1440
+         Left            =   -73560
          TabIndex        =   6
          Top             =   2250
          Width           =   1155

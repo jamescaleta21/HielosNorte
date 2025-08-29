@@ -2,14 +2,13 @@ VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
-Object = "{FEC367D0-B73E-4DD0-80FD-1F56BC27B04A}#1.0#0"; "McToolBar.ocx"
 Begin VB.Form frmMantVDProducto 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Maestro de Productos [Venta Directa]"
-   ClientHeight    =   9030
+   ClientHeight    =   8625
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   11895
+   ClientWidth     =   11910
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   9.75
@@ -25,22 +24,89 @@ Begin VB.Form frmMantVDProducto
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   9030
-   ScaleWidth      =   11895
+   ScaleHeight     =   8625
+   ScaleWidth      =   11910
+   Begin MSComctlLib.Toolbar mtbProducto 
+      Align           =   1  'Align Top
+      Height          =   660
+      Left            =   0
+      TabIndex        =   25
+      Top             =   0
+      Width           =   11910
+      _ExtentX        =   21008
+      _ExtentY        =   1164
+      ButtonWidth     =   1879
+      ButtonHeight    =   1005
+      AllowCustomize  =   0   'False
+      Appearance      =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   7
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Nuevo"
+         EndProperty
+         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Guardar"
+         EndProperty
+         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Modificar"
+         EndProperty
+         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Cancelar"
+         EndProperty
+         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Desactivar"
+         EndProperty
+         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Activar"
+         EndProperty
+         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "&Eliminar"
+         EndProperty
+      EndProperty
+   End
    Begin MSComctlLib.ImageList ilProducto 
       Left            =   11880
       Top             =   1440
       _ExtentX        =   1005
       _ExtentY        =   1005
       BackColor       =   -2147483643
-      ImageWidth      =   24
-      ImageHeight     =   24
+      ImageWidth      =   16
+      ImageHeight     =   16
       MaskColor       =   12632256
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   1
+         NumListImages   =   8
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmMantVDProducto.frx":0CCA
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":1064
+            Key             =   "save"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":13FE
+            Key             =   "edit"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":1798
+            Key             =   "undo"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":1B32
+            Key             =   "desactive"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":20CC
+            Key             =   "active"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":2666
+            Key             =   "delete"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmMantVDProducto.frx":2A00
             Key             =   "product"
          EndProperty
       EndProperty
@@ -50,31 +116,32 @@ Begin VB.Form frmMantVDProducto
       Left            =   120
       TabIndex        =   0
       TabStop         =   0   'False
-      Top             =   1200
+      Top             =   800
       Width           =   11655
       _ExtentX        =   20558
       _ExtentY        =   13573
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado"
-      TabPicture(0)   =   "frmMantVDProducto.frx":1444
-      Tab(0).ControlEnabled=   0   'False
+      TabPicture(0)   =   "frmMantVDProducto.frx":2D9A
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "lvProducto"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
-      TabPicture(1)   =   "frmMantVDProducto.frx":1460
-      Tab(1).ControlEnabled=   -1  'True
+      TabPicture(1)   =   "frmMantVDProducto.frx":2DB6
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FraProducto"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       Begin VB.Frame FraProducto 
          Height          =   7215
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   4
          Top             =   360
          Width           =   11055
@@ -87,7 +154,7 @@ Begin VB.Form frmMantVDProducto
             Begin VB.CommandButton cmdAdd 
                Height          =   360
                Left            =   10200
-               Picture         =   "frmMantVDProducto.frx":147C
+               Picture         =   "frmMantVDProducto.frx":2DD2
                Style           =   1  'Graphical
                TabIndex        =   23
                Tag             =   "X"
@@ -140,7 +207,7 @@ Begin VB.Form frmMantVDProducto
             Begin VB.CommandButton cmdDel 
                Height          =   360
                Left            =   10200
-               Picture         =   "frmMantVDProducto.frx":1806
+               Picture         =   "frmMantVDProducto.frx":315C
                Style           =   1  'Graphical
                TabIndex        =   24
                Tag             =   "X"
@@ -305,14 +372,14 @@ Begin VB.Form frmMantVDProducto
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73560
+         Left            =   1440
          TabIndex        =   1
          Top             =   480
          Width           =   9975
       End
       Begin MSComctlLib.ListView lvProducto 
          Height          =   6495
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   2
          Top             =   960
          Width           =   11295
@@ -334,66 +401,11 @@ Begin VB.Form frmMantVDProducto
          BackStyle       =   0  'Transparent
          Caption         =   "Busqueda"
          Height          =   240
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   3
          Top             =   547
          Width           =   945
       End
-   End
-   Begin ToolBar.McToolBar mtbProducto 
-      Align           =   1  'Align Top
-      Height          =   1050
-      Left            =   0
-      TabIndex        =   25
-      Top             =   0
-      Width           =   11895
-      _ExtentX        =   20981
-      _ExtentY        =   1852
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Button_Count    =   7
-      ButtonsWidth    =   90
-      ButtonsHeight   =   70
-      ButtonsPerRow   =   7
-      HoverColor      =   -2147483635
-      TooTipStyle     =   0
-      ButtonsMode     =   4
-      ButtonsPerRow_Chev=   7
-      ButtonCaption1  =   "&Nuevo"
-      ButtonIcon1     =   "frmMantVDProducto.frx":1B90
-      ButtonToolTipIcon1=   1
-      ButtonIconAllignment1=   0
-      ButtonCaption2  =   "&Guardar"
-      ButtonIcon2     =   "frmMantVDProducto.frx":286A
-      ButtonToolTipIcon2=   1
-      ButtonIconAllignment2=   0
-      ButtonCaption3  =   "&Modificar"
-      ButtonIcon3     =   "frmMantVDProducto.frx":3544
-      ButtonToolTipIcon3=   1
-      ButtonIconAllignment3=   0
-      ButtonCaption4  =   "&Cancelar"
-      ButtonIcon4     =   "frmMantVDProducto.frx":421E
-      ButtonToolTipIcon4=   1
-      ButtonIconAllignment4=   0
-      ButtonCaption5  =   "&Desactivar"
-      ButtonIcon5     =   "frmMantVDProducto.frx":4EF8
-      ButtonToolTipIcon5=   1
-      ButtonIconAllignment5=   0
-      ButtonCaption6  =   "&Activar"
-      ButtonIcon6     =   "frmMantVDProducto.frx":5BD2
-      ButtonToolTipIcon6=   1
-      ButtonIconAllignment6=   0
-      ButtonCaption7  =   "&Eliminar"
-      ButtonIcon7     =   "frmMantVDProducto.frx":68AC
-      ButtonToolTipIcon7=   1
-      ButtonIconAllignment7=   0
    End
 End
 Attribute VB_Name = "frmMantVDProducto"
@@ -612,7 +624,7 @@ EliminarRegistrosRecordSet oRSPrecios
         Do While Not ORSt.EOF
             Set itemx = Me.lvPrecios.ListItems.Add(, , ORSt!cat, Me.ilProducto.ListImages(1).Key, Me.ilProducto.ListImages(1).Key)
             itemx.Tag = ORSt!idpre
-            itemx.SubItems(1) = ORSt!IDcat
+            itemx.SubItems(1) = ORSt!idcat
             itemx.SubItems(2) = ORSt!PRE
             itemx.SubItems(3) = ORSt!ACT
                If ORSt!ACT = "NO" Then
@@ -667,7 +679,7 @@ Private Sub productoSearch(xdato As String)
         Dim itemx As Object
 
         Do While Not oRSmain.EOF
-            Set itemx = Me.lvProducto.ListItems.Add(, , oRSmain!codalt, Me.ilProducto.ListImages(1).Key, Me.ilProducto.ListImages(1).Key)
+            Set itemx = Me.lvProducto.ListItems.Add(, , oRSmain!codalt, Me.ilProducto.ListImages(8).Key, Me.ilProducto.ListImages(8).Key)
             itemx.Tag = oRSmain!ide
             itemx.SubItems(1) = oRSmain!prod
             itemx.SubItems(2) = oRSmain!ACT
@@ -699,82 +711,55 @@ Private Sub Estado_Botones(val As Valores)
     Select Case val
 
         Case InicializarFormulario, grabar, cancelar, Eliminar, Desactivar, Activar
-            Me.mtbProducto.Button_Index = 1
-            Me.mtbProducto.ButtonEnabled = True
-            Me.mtbProducto.Button_Index = 2
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 3
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 4
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 5
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 6
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 7
-            Me.mtbProducto.ButtonEnabled = False
+            Me.mtbProducto.Buttons(1).Enabled = True
+            Me.mtbProducto.Buttons(2).Enabled = False
+            Me.mtbProducto.Buttons(3).Enabled = False
+            Me.mtbProducto.Buttons(4).Enabled = False
+            Me.mtbProducto.Buttons(5).Enabled = False
+            Me.mtbProducto.Buttons(6).Enabled = False
+            Me.mtbProducto.Buttons(7).Enabled = False
             Me.lvPrecios.Enabled = False
             Me.SSTProducto.tab = 0
 
         Case Nuevo, Editar
             Me.lblActivo.Caption = "SI"
-            Me.mtbProducto.Button_Index = 1
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 2
-            Me.mtbProducto.ButtonEnabled = True
-            Me.mtbProducto.Button_Index = 3
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 4
-            Me.mtbProducto.ButtonEnabled = True
-            Me.mtbProducto.Button_Index = 5
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 6
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 7
-            Me.mtbProducto.ButtonEnabled = False
+            Me.mtbProducto.Buttons(1).Enabled = False
+            Me.mtbProducto.Buttons(2).Enabled = True
+            Me.mtbProducto.Buttons(3).Enabled = False
+            Me.mtbProducto.Buttons(4).Enabled = True
+            Me.mtbProducto.Buttons(5).Enabled = False
+            Me.mtbProducto.Buttons(6).Enabled = False
+            Me.mtbProducto.Buttons(7).Enabled = False
             Me.lvProducto.Enabled = False
             Me.txtSearch.Enabled = False
             Me.lvPrecios.Enabled = True
             Me.SSTProducto.tab = 1
 
         Case buscar
-            Me.mtbProducto.Button_Index = 1
-            Me.mtbProducto.ButtonEnabled = True
-            Me.mtbProducto.Button_Index = 2
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 3
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 4
-            Me.mtbProducto.ButtonEnabled = False
+            Me.mtbProducto.Buttons(1).Enabled = True
+            Me.mtbProducto.Buttons(2).Enabled = False
+            Me.mtbProducto.Buttons(3).Enabled = False
+            Me.mtbProducto.Buttons(4).Enabled = False
             Me.SSTProducto.tab = 0
 
         Case AntesDeActualizar
-            Me.mtbProducto.Button_Index = 1
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 2
-            Me.mtbProducto.ButtonEnabled = False
-            Me.mtbProducto.Button_Index = 3
-            Me.mtbProducto.ButtonEnabled = True
-            Me.mtbProducto.Button_Index = 4
-            Me.mtbProducto.ButtonEnabled = True
+            Me.mtbProducto.Buttons(1).Enabled = False
+            Me.mtbProducto.Buttons(2).Enabled = False
+            Me.mtbProducto.Buttons(3).Enabled = True
+            Me.mtbProducto.Buttons(4).Enabled = True
 
             If Me.lblActivo.Caption = "SI" Then
-                Me.mtbProducto.Button_Index = 5
-                Me.mtbProducto.ButtonEnabled = True
-                Me.mtbProducto.Button_Index = 6
-                Me.mtbProducto.ButtonEnabled = False
+                Me.mtbProducto.Buttons(5).Enabled = True
+                Me.mtbProducto.Buttons(6).Enabled = False
 
             Else
-                Me.mtbProducto.Button_Index = 5
-                Me.mtbProducto.ButtonEnabled = False
-                Me.mtbProducto.Button_Index = 6
-                Me.mtbProducto.ButtonEnabled = True
+                Me.mtbProducto.Buttons(5).Enabled = False
+                Me.mtbProducto.Buttons(6).Enabled = True
             
             End If
 
             Me.lvPrecios.Enabled = False
-            Me.mtbProducto.Button_Index = 7
-            Me.mtbProducto.ButtonEnabled = True
+            Me.mtbProducto.Buttons(7).Enabled = True
             Me.SSTProducto.tab = 1
 
     End Select
@@ -924,7 +909,12 @@ If oRSPrecios.State = adStateOpen Then oRSPrecios.Close
     Estado_Botones InicializarFormulario
     productoSearch Me.txtSearch.Text
     CentrarFormulario MDIForm1, Me
-    
+    Me.mtbProducto.ImageList = Me.ilProducto
+    Dim i As Integer
+
+    For i = 1 To 7
+        Me.mtbProducto.Buttons(i).Image = Me.ilProducto.ListImages.Item(i).Index
+    Next
 End Sub
 
 Private Sub lvPrecios_DblClick()
@@ -943,11 +933,9 @@ Private Sub lvProducto_DblClick()
 Mandar_Datos
 End Sub
 
+Private Sub mtbProducto_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-
-Private Sub mtbProducto_Click(ByVal ButtonIndex As Long)
-
-    Select Case ButtonIndex
+    Select Case Button.Index
 
         Case 1
             EliminarRegistrosRecordSet oRSPrecios
@@ -973,9 +961,6 @@ Private Sub mtbProducto_Click(ByVal ButtonIndex As Long)
             ElseIf val(Trim(Me.txtPrecioBase.Text)) <= 0 And Me.lvPrecios.ListItems.count = 0 Then
                 MsgBox "[Precio Base] incorrecto,Debe ser mayor a Cero (0)" + vbCrLf + "si no va a registrar precios por Caracteristicas.", vbCritical, Pub_Titulo
                 Me.datAddCategoria.SetFocus
-            ElseIf Len(Trim(Me.txtStock.Text)) = 0 Then
-                MsgBox "Debe ingresar el [Stock] del Producto.", vbCritical, Pub_Titulo
-                Me.txtStock.SetFocus
             ElseIf Not validaCategorias Then
                 MsgBox "Faltan Categorias que debe agregar.", vbCritical, Pub_Titulo
             Else
@@ -1006,7 +991,7 @@ Private Sub mtbProducto_Click(ByVal ButtonIndex As Long)
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODALTERNO", adVarChar, adParamInput, 20, Trim(Me.txtCodAlternativo.Text))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DESCRIPCION", adVarChar, adParamInput, 100, Trim(Me.txtDescripcion.Text))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@PRECIO", adDouble, adParamInput, , Trim(Me.txtPrecioBase.Text))
-                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@STOCK", adInteger, adParamInput, , Trim(Me.txtStock.Text))
+                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@STOCK", adInteger, adParamInput, , IIf(Len(Trim(Me.txtStock.Text)) = 0, 0, Trim(Me.txtStock.Text)))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@UDUSARIO", adVarChar, adParamInput, 20, LK_CODUSU)
 
                 Dim strItems As String
@@ -1225,6 +1210,7 @@ ValidarSoloNumerosPunto Me.txtPrecioBase
 End Sub
 
 Private Sub txtStock_KeyPress(KeyAscii As Integer)
+KeyAscii = SoloNumeros(KeyAscii)
 KeyAscii = Mayusculas(KeyAscii)
 HandleEnterKey KeyAscii, Me.datAddCategoria
 End Sub
