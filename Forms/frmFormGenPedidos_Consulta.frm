@@ -95,16 +95,6 @@ Begin VB.Form frmFormGenPedidos_Consulta
          Top             =   240
          Width           =   2055
       End
-      Begin VB.CommandButton cmdMostrar 
-         Caption         =   "&Mostrar"
-         Height          =   600
-         Left            =   14760
-         Picture         =   "frmFormGenPedidos_Consulta.frx":03C3
-         Style           =   1  'Graphical
-         TabIndex        =   3
-         Top             =   240
-         Width           =   1455
-      End
       Begin MSComCtl2.DTPicker dtpFecha 
          Height          =   315
          Left            =   6120
@@ -114,7 +104,7 @@ Begin VB.Form frmFormGenPedidos_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   205193217
+         Format          =   206569473
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 
@@ -128,6 +118,16 @@ Begin VB.Form frmFormGenPedidos_Consulta
          _Version        =   393216
          Style           =   2
          Text            =   ""
+      End
+      Begin VB.CommandButton cmdMostrar 
+         Caption         =   "&Mostrar"
+         Height          =   600
+         Left            =   14760
+         Picture         =   "frmFormGenPedidos_Consulta.frx":03C3
+         Style           =   1  'Graphical
+         TabIndex        =   3
+         Top             =   240
+         Width           =   1455
       End
       Begin VB.Label Label3 
          Caption         =   "Estado:"
@@ -215,59 +215,84 @@ Private Sub cmdMostrar_Click()
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@CODCIA", adChar, adParamInput, 2, LK_CODCIA)
         oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FILTRO", adInteger, adParamInput, , Me.cboFiltro.ListIndex)
 
-        Dim orsData As ADODB.Recordset
-
         Set oRSmain = oCmdEjec.Execute
+        
+        If oRSmain.RecordCount <> 0 Then
 
-        orsTEMP1.CursorLocation = adUseClient
-        orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(7).Name, oRSmain(7).Type, oRSmain(7).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(8).Name, oRSmain(8).Type, oRSmain(8).DefinedSize
-        orsTEMP1.Open
+            orsTEMP1.CursorLocation = adUseClient
+            orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(7).Name, oRSmain(7).Type, oRSmain(7).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(8).Name, oRSmain(8).Type, oRSmain(8).DefinedSize
+            orsTEMP1.Open
     
-        ' Copiar datos del Recordset
-        oRSmain.MoveFirst
+            ' Copiar datos del Recordset
+            oRSmain.MoveFirst
 
-        Do Until oRSmain.EOF
-            orsTEMP1.AddNew
-            orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
-            orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
-            orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
-            orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
-            orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
-            orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
-            orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
-            orsTEMP1.Fields(7).Value = oRSmain.Fields(7).Value
-            orsTEMP1.Fields(8).Value = oRSmain.Fields(8).Value
-            orsTEMP1.Update
-            oRSmain.MoveNext
-        Loop
+            Do Until oRSmain.EOF
+                orsTEMP1.AddNew
+                orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+                orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+                orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
+                orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
+                orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
+                orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
+                orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
+                orsTEMP1.Fields(7).Value = oRSmain.Fields(7).Value
+                orsTEMP1.Fields(8).Value = oRSmain.Fields(8).Value
+                orsTEMP1.Update
+                oRSmain.MoveNext
+            Loop
        
-        Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedor.rpt")
+            Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedor.rpt")
     
-        Set colParam = vReporte.ParameterFields
+            Set colParam = vReporte.ParameterFields
     
-        For Each objParam In colParam
+            For Each objParam In colParam
 
-            Select Case objParam.ParameterFieldName
+                Select Case objParam.ParameterFieldName
 
-                Case "pCant"
-                    objParam.AddCurrentValue CStr(vCAnt)
+                    Case "pCant"
+                        objParam.AddCurrentValue CStr(vCAnt)
 
-            End Select
+                End Select
 
-        Next
+            Next
     
-        vReporte.Database.SetDataSource orsTEMP1, 3, 1
+            vReporte.Database.SetDataSource orsTEMP1, 3, 1
 
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+        Else
+            Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedor.rpt")
+    
+            Set colParam = vReporte.ParameterFields
+    
+            For Each objParam In colParam
+
+                Select Case objParam.ParameterFieldName
+
+                    Case "pCant"
+                        objParam.AddCurrentValue CStr(vCAnt)
+
+                End Select
+
+            Next
+      
+            vReporte.Database.SetDataSource oRSmain, 3, 1
+
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+            
+            MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+
+        End If
+
     Else
         LimpiaParametros oCmdEjec
         oCmdEjec.CommandText = "[dbo].[USP_PEDIDO_RESUMEN_TOTAL]"
@@ -279,59 +304,85 @@ Private Sub cmdMostrar_Click()
 
         Set oRSmain = oCmdEjec.Execute
         
-        orsTEMP1.CursorLocation = adUseClient
-        orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(7).Name, oRSmain(7).Type, oRSmain(7).DefinedSize
-        orsTEMP1.Open
+        If oRSmain.RecordCount <> 0 Then
+        
+            orsTEMP1.CursorLocation = adUseClient
+            orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(7).Name, oRSmain(7).Type, oRSmain(7).DefinedSize
+            orsTEMP1.Open
     
-        ' Copiar datos del Recordset
-        oRSmain.MoveFirst
+            ' Copiar datos del Recordset
+            oRSmain.MoveFirst
 
-        Do Until oRSmain.EOF
-            orsTEMP1.AddNew
-            orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
-            orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
-            orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
-            orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
-            orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
-            orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
-            orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
-            orsTEMP1.Fields(7).Value = oRSmain.Fields(7).Value
-            orsTEMP1.Update
-            oRSmain.MoveNext
-        Loop
+            Do Until oRSmain.EOF
+                orsTEMP1.AddNew
+                orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+                orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+                orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
+                orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
+                orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
+                orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
+                orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
+                orsTEMP1.Fields(7).Value = oRSmain.Fields(7).Value
+                orsTEMP1.Update
+                oRSmain.MoveNext
+            Loop
 
-        Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedorRES.rpt")
+            Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedorRES.rpt")
     
-        Set colParam = vReporte.ParameterFields
+            Set colParam = vReporte.ParameterFields
     
-        For Each objParam In colParam
+            For Each objParam In colParam
 
-            Select Case objParam.ParameterFieldName
+                Select Case objParam.ParameterFieldName
 
-                Case "pCant"
-                    objParam.AddCurrentValue CStr(vCAnt)
+                    Case "pCant"
+                        objParam.AddCurrentValue CStr(vCAnt)
 
-            End Select
+                End Select
 
-        Next
+            Next
     
-        vReporte.Database.SetDataSource orsTEMP1, 3, 1
+            vReporte.Database.SetDataSource orsTEMP1, 3, 1
 
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+        Else
+            Set vReporte = objCrystal.OpenReport(PUB_RUTA_OTRO & "ReportePedidoVendedorRES.rpt")
+    
+            Set colParam = vReporte.ParameterFields
+    
+            For Each objParam In colParam
+
+                Select Case objParam.ParameterFieldName
+
+                    Case "pCant"
+                        objParam.AddCurrentValue CStr(vCAnt)
+
+                End Select
+
+            Next
+    
+            vReporte.Database.SetDataSource oRSmain, 3, 1
+
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+            MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+
+        End If
 
     End If
 
     CerrarConexion False
     Exit Sub
 cMostrar:
+    CerrarConexion False
     MsgBox Err.Description, vbCritical, Pub_Titulo
 
 End Sub
