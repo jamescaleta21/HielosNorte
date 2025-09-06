@@ -557,9 +557,13 @@ Begin VB.MDIForm MDIForm1
          Index           =   5
       End
       Begin VB.Menu submenugrifo 
+         Caption         =   "Reporte Listado Clientes x Vendedor"
+         Index           =   6
+      End
+      Begin VB.Menu submenugrifo 
          Caption         =   "&Transacciones II"
          Enabled         =   0   'False
-         Index           =   6
+         Index           =   7
          Visible         =   0   'False
       End
    End
@@ -1992,7 +1996,11 @@ Case 5
     frmFormGenPedidosVD_Consulta.Show
     Screen.MousePointer = 0
     Exit Sub
-    
+    Case 6
+    Screen.MousePointer = vbHourglass
+    frmVDlistadoclientesXvendedor.Show
+    Screen.MousePointer = vbDefault
+    Exit Sub
 End Select
 
 

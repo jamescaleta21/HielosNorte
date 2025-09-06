@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{C4847593-972C-11D0-9567-00A0C9273C2A}#8.0#0"; "crviewer.dll"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form frmFormGenPedidosVD_Consulta 
    Caption         =   "Pedidos por Vendedor"
    ClientHeight    =   8925
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   16560
+   ClientWidth     =   16380
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   8.25
@@ -22,11 +22,11 @@ Begin VB.Form frmFormGenPedidosVD_Consulta
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    ScaleHeight     =   8925
-   ScaleWidth      =   16560
+   ScaleWidth      =   16380
    ShowInTaskbar   =   0   'False
    Begin VB.Frame fraReporte 
       Height          =   7935
-      Left            =   120
+      Left            =   0
       TabIndex        =   6
       Top             =   960
       Width           =   16335
@@ -63,7 +63,7 @@ Begin VB.Form frmFormGenPedidosVD_Consulta
    End
    Begin VB.Frame frafiltro 
       Height          =   975
-      Left            =   120
+      Left            =   0
       TabIndex        =   5
       Top             =   0
       Width           =   16335
@@ -88,7 +88,7 @@ Begin VB.Form frmFormGenPedidosVD_Consulta
       Begin VB.CommandButton cmdMostrar 
          Caption         =   "&Mostrar"
          Height          =   600
-         Left            =   14760
+         Left            =   14780
          Picture         =   "frmFormGenPedidosVD_Consulta.frx":038A
          Style           =   1  'Graphical
          TabIndex        =   2
@@ -104,7 +104,7 @@ Begin VB.Form frmFormGenPedidosVD_Consulta
          _ExtentX        =   3625
          _ExtentY        =   556
          _Version        =   393216
-         Format          =   79757313
+         Format          =   378339329
          CurrentDate     =   44900
       End
       Begin MSDataListLib.DataCombo DatVendedor 
@@ -146,18 +146,23 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private pIDempresa As Integer
+
 Private Sub chkres_Click()
-If chkres.Value = 0 Then
-chkres.Caption = "Detallado"
-Else
-chkres.Caption = "Resumido"
-End If
+
+    If chkres.Value = 0 Then
+        chkres.Caption = "Detallado"
+    Else
+        chkres.Caption = "Resumido"
+
+    End If
+
 End Sub
 
 Private Sub cmdMostrar_Click()
 
-    If Me.DatVendedor.BoundText = "" Then
+    If Me.DatVendedor.BoundText = "-1" Then
         MsgBox "Debe elegir el vendedor.", vbInformation, Pub_Titulo
         Me.DatVendedor.SetFocus
         Exit Sub
@@ -216,45 +221,45 @@ Private Sub cmdMostrar_Click()
 
         Next
 
-If oRSmain.RecordCount <> 0 Then
-        orsTEMP1.CursorLocation = adUseClient
-        orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
-        orsTEMP1.Open
-        
-        
+        If oRSmain.RecordCount <> 0 Then
+            orsTEMP1.CursorLocation = adUseClient
+            orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(5).Name, oRSmain(5).Type, oRSmain(5).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(6).Name, oRSmain(6).Type, oRSmain(6).DefinedSize
+            orsTEMP1.Open
     
-        ' Copiar datos del Recordset
-        oRSmain.MoveFirst
+            ' Copiar datos del Recordset
+            oRSmain.MoveFirst
 
-        Do Until oRSmain.EOF
-            orsTEMP1.AddNew
-            orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
-            orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
-            orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
-            orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
-            orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
-            orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
-            orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
-            orsTEMP1.Update
-            oRSmain.MoveNext
-        Loop
+            Do Until oRSmain.EOF
+                orsTEMP1.AddNew
+                orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+                orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+                orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
+                orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
+                orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
+                orsTEMP1.Fields(5).Value = oRSmain.Fields(5).Value
+                orsTEMP1.Fields(6).Value = oRSmain.Fields(6).Value
+                orsTEMP1.Update
+                oRSmain.MoveNext
+            Loop
         
-        vReporte.Database.SetDataSource orsTEMP1, 3, 1
+            vReporte.Database.SetDataSource orsTEMP1, 3, 1
 
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
         Else
-        vReporte.Database.SetDataSource oRSmain, 3, 1
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
-         MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+            vReporte.Database.SetDataSource oRSmain, 3, 1
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+            MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+
         End If
+
     Else
         LimpiaParametros oCmdEjec, True
         oCmdEjec.CommandText = "[vd].[USP_PEDIDO_RESUMEN_TOTAL]"
@@ -282,37 +287,38 @@ If oRSmain.RecordCount <> 0 Then
         
         If oRSmain.RecordCount <> 0 Then
         
-        orsTEMP1.CursorLocation = adUseClient
-        orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
-        orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
-        orsTEMP1.Open
+            orsTEMP1.CursorLocation = adUseClient
+            orsTEMP1.Fields.Append oRSmain(0).Name, oRSmain(0).Type, oRSmain(0).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(1).Name, oRSmain(1).Type, oRSmain(1).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(2).Name, oRSmain(2).Type, oRSmain(2).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(3).Name, oRSmain(3).Type, oRSmain(3).DefinedSize
+            orsTEMP1.Fields.Append oRSmain(4).Name, oRSmain(4).Type, oRSmain(4).DefinedSize
+            orsTEMP1.Open
     
-        ' Copiar datos del Recordset
-        oRSmain.MoveFirst
+            ' Copiar datos del Recordset
+            oRSmain.MoveFirst
 
-        Do Until oRSmain.EOF
-            orsTEMP1.AddNew
-            orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
-            orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
-            orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
-            orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
-            orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
-            orsTEMP1.Update
-            oRSmain.MoveNext
-        Loop
+            Do Until oRSmain.EOF
+                orsTEMP1.AddNew
+                orsTEMP1.Fields(0).Value = oRSmain.Fields(0).Value
+                orsTEMP1.Fields(1).Value = oRSmain.Fields(1).Value
+                orsTEMP1.Fields(2).Value = oRSmain.Fields(2).Value
+                orsTEMP1.Fields(3).Value = oRSmain.Fields(3).Value
+                orsTEMP1.Fields(4).Value = oRSmain.Fields(4).Value
+                orsTEMP1.Update
+                oRSmain.MoveNext
+            Loop
     
-        vReporte.Database.SetDataSource orsTEMP1, 3, 1
+            vReporte.Database.SetDataSource orsTEMP1, 3, 1
 
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
         Else
-         vReporte.Database.SetDataSource oRSmain, 3, 1
-        Me.crvReporte.ReportSource = vReporte
-        Me.crvReporte.ViewReport
-        MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+            vReporte.Database.SetDataSource oRSmain, 3, 1
+            Me.crvReporte.ReportSource = vReporte
+            Me.crvReporte.ViewReport
+            MsgBox "No se encontraron registros.", vbInformation, Pub_Titulo
+
         End If
 
     End If
@@ -327,7 +333,9 @@ cMostrar:
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
-If KeyCode = vbKeyEscape Then Unload Me
+
+    If KeyCode = vbKeyEscape Then Unload Me
+
 End Sub
 
 Private Sub Form_Load()
@@ -381,17 +389,19 @@ cCarga:
 End Sub
 
 Private Sub Form_Resize()
-If Me.WindowState = vbMinimized Then Exit Sub
+
+     If Me.WindowState = vbMinimized Then Exit Sub
     'Me.crvReporte.Top = 0
     Me.fraReporte.Left = 0
     Me.fraReporte.Height = Me.ScaleHeight - 1000
     Me.fraReporte.Width = Me.ScaleWidth
-    Me.frafiltro.Height = Me.ScaleHeight - 1000
-    Me.frafiltro.Width = Me.ScaleWidth
+'    Me.frafiltro.Height = Me.ScaleHeight - 1000
+   Me.frafiltro.Width = Me.fraReporte.Width
     'Me.crvReporte.Zoom 100
-    
-   ' Me.crvReporte.Left = 0
+     Me.cmdMostrar.Left = (Me.fraReporte.Width - Me.cmdMostrar.Width) - 100
+    ' Me.crvReporte.Left = 0
     Me.crvReporte.Height = Me.ScaleHeight - 1300
-    Me.crvReporte.Width = Me.ScaleWidth - 100
+    Me.crvReporte.Width = Me.ScaleWidth - 200
+
 End Sub
 
