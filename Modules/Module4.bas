@@ -29,8 +29,7 @@ Public Declare Function RemoveMenu Lib "User32" _
         ByVal wFlags As Long) As Long
         
 Public oCmdEjec As New ADODB.Command
-Public objAES As New clsSecurity
-Public objCryp As New clsCrypto
+
 
 Public Sub CerrarConexion(esRemoto As Boolean)
 
@@ -63,12 +62,13 @@ Public Sub LimpiaParametros(oCmd As ADODB.Command, Optional esRemoto As Boolean 
         Dim sSemilla As String
         sSemilla = LeerValorRegistro("Semilla")
         
-        sSemilla = objCryp.DecryptText(sSemilla)
+        sSemilla = DecryptText(sSemilla)
         
-        sSemilla = objAES.Semilla(sSemilla)
+        sSemilla = Semilla(sSemilla)
+        'sSemilla = Semilla("GTSoftware")
         
         strCadenaConexion = LeerValorRegistro("ConexionCloud")
-        strCadenaConexion = objAES.DeCodificarB64(strCadenaConexion, sSemilla)
+        strCadenaConexion = DeCodificarB64(strCadenaConexion, sSemilla)
 
 '        c_Server = Leer_Ini(App.Path & "\config.ini", "C_SERVER", "c:\")
 '        c_Server = objAES.DeCodificarB64(c_Server, sSemilla)
@@ -108,8 +108,8 @@ Public Sub LimpiaParametros(oCmd As ADODB.Command, Optional esRemoto As Boolean 
 
     oCmd.CommandType = adCmdStoredProc
 
-    For I = oCmd.Parameters.count - 1 To 0 Step -1
-        oCmd.Parameters.Delete I
+    For i = oCmd.Parameters.count - 1 To 0 Step -1
+        oCmd.Parameters.Delete i
     Next
 
 End Sub
@@ -144,16 +144,16 @@ End Sub
 
 
 Public Sub LimpiarControles(Frm As Form)
-   Dim I
-   For I = 0 To Frm.Controls.count - 1
-      If TypeOf Frm.Controls(I) Is TextBox Then
-         Frm.Controls(I).Text = ""
-      ElseIf TypeOf Frm.Controls(I) Is label And Frm.Controls(I).Tag = "X" Then
-          Frm.Controls(I).Caption = ""
-      ElseIf TypeOf Frm.Controls(I) Is ComboBox Then
-Frm.Controls(I).ListIndex = -1
+   Dim i
+   For i = 0 To Frm.Controls.count - 1
+      If TypeOf Frm.Controls(i) Is TextBox Then
+         Frm.Controls(i).Text = ""
+      ElseIf TypeOf Frm.Controls(i) Is label And Frm.Controls(i).Tag = "X" Then
+          Frm.Controls(i).Caption = ""
+      ElseIf TypeOf Frm.Controls(i) Is ComboBox Then
+Frm.Controls(i).ListIndex = -1
       End If
-   Next I
+   Next i
 End Sub
 
 Public Sub ActivarControles(Frm As Form)

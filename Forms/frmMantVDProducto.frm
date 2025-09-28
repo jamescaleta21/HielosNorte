@@ -803,11 +803,11 @@ Private Sub cmdAdd_Click()
     ElseIf Len(Trim(Me.txtAddPrecio.Text)) = 0 Then
         MsgBox "Debe ingresar el Precio.", vbInformation, Pub_Titulo
         Me.txtAddPrecio.SetFocus
-    ElseIf Me.txtAddPrecio.Text <= 0 Then
-        MsgBox "Precio ingresado incorrecto.", vbInformation, Pub_Titulo
-        Me.txtAddPrecio.SetFocus
-        Me.txtAddPrecio.SelStart = 0
-        Me.txtAddPrecio.SelLength = Len(Me.txtAddPrecio.Text)
+'    ElseIf Me.txtAddPrecio.Text <= 0 Then
+'        MsgBox "Precio ingresado incorrecto.", vbInformation, Pub_Titulo
+'        Me.txtAddPrecio.SetFocus
+'        Me.txtAddPrecio.SelStart = 0
+'        Me.txtAddPrecio.SelLength = Len(Me.txtAddPrecio.Text)
   
     Else
 

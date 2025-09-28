@@ -7,7 +7,7 @@ Begin VB.Form frmMantVDCategoria
    ClientHeight    =   5850
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   9465
+   ClientWidth     =   9480
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   9.75
@@ -24,15 +24,15 @@ Begin VB.Form frmMantVDCategoria
    MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   5850
-   ScaleWidth      =   9465
+   ScaleWidth      =   9480
    Begin MSComctlLib.Toolbar mtbCategoria 
       Align           =   1  'Align Top
       Height          =   660
       Left            =   0
       TabIndex        =   10
       Top             =   0
-      Width           =   9465
-      _ExtentX        =   16695
+      Width           =   9480
+      _ExtentX        =   16722
       _ExtentY        =   1164
       ButtonWidth     =   1879
       ButtonHeight    =   1005
@@ -145,12 +145,12 @@ Begin VB.Form frmMantVDCategoria
       TabCaption(1)   =   "Categoria"
       TabPicture(1)   =   "frmMantVDCategoria.frx":2876
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "txtDenominacion"
-      Tab(1).Control(1)=   "lblActivo"
-      Tab(1).Control(2)=   "lblidCategoria"
-      Tab(1).Control(3)=   "Label4"
-      Tab(1).Control(4)=   "Label3"
-      Tab(1).Control(5)=   "Label2"
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(1)=   "Label3"
+      Tab(1).Control(2)=   "Label4"
+      Tab(1).Control(3)=   "lblidCategoria"
+      Tab(1).Control(4)=   "lblActivo"
+      Tab(1).Control(5)=   "txtDenominacion"
       Tab(1).ControlCount=   6
       Begin VB.TextBox txtDenominacion 
          Height          =   360
