@@ -122,25 +122,26 @@ Begin VB.Form frmMantVDProducto
       _ExtentY        =   13573
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDProducto.frx":2D9A
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtSearch"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "lvProducto"
-      Tab(0).Control(2)=   "Label1"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "txtSearch"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Producto"
       TabPicture(1)   =   "frmMantVDProducto.frx":2DB6
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FraProducto"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       Begin VB.Frame FraProducto 
          Height          =   7215
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   4
          Top             =   360
          Width           =   11055
@@ -371,14 +372,14 @@ Begin VB.Form frmMantVDProducto
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73560
+         Left            =   1440
          TabIndex        =   1
          Top             =   480
          Width           =   9975
       End
       Begin MSComctlLib.ListView lvProducto 
          Height          =   6495
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   2
          Top             =   960
          Width           =   11295
@@ -400,7 +401,7 @@ Begin VB.Form frmMantVDProducto
          BackStyle       =   0  'Transparent
          Caption         =   "Busqueda"
          Height          =   240
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   3
          Top             =   547
          Width           =   945
@@ -765,7 +766,7 @@ Private Sub Estado_Botones(val As Valores)
 
 End Sub
 
-Private Sub ConfigurarLV()
+Private Sub configurarLV()
 Me.lvProducto.Icons = Me.ilProducto
 Me.lvProducto.SmallIcons = Me.ilProducto
 
@@ -903,7 +904,7 @@ If oRSPrecios.State = adStateOpen Then oRSPrecios.Close
     oRSPrecios.Open
         
     pIDempresa = devuelveIDempresaXdefecto
-    ConfigurarLV
+    configurarLV
     DesactivarControles Me
     Estado_Botones InicializarFormulario
     productoSearch Me.txtSearch.Text

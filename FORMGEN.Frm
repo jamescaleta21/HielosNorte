@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.Ocx"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
-Object = "{F6E4F630-E903-11D5-8BB9-0080AD40A177}#1.18#0"; "oscontrolsuser.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{F6E4F630-E903-11D5-8BB9-0080AD40A177}#1.18#0"; "OSControlsUser.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Begin VB.Form FORMGEN 
    BackColor       =   &H00C0C0C0&
@@ -1556,7 +1556,6 @@ Begin VB.Form FORMGEN
                MinWidth        =   2293
                Text            =   "SubTotal"
                TextSave        =   "SubTotal"
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
             BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -1566,7 +1565,6 @@ Begin VB.Form FORMGEN
                MinWidth        =   2293
                Text            =   "Descto.(%)"
                TextSave        =   "Descto.(%)"
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
             BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -1576,13 +1574,11 @@ Begin VB.Form FORMGEN
                MinWidth        =   2293
                Text            =   "Impto."
                TextSave        =   "Impto."
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
             BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
                Object.Width           =   776
                MinWidth        =   776
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
             BeginProperty Panel5 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -1592,7 +1588,6 @@ Begin VB.Form FORMGEN
                MinWidth        =   2293
                Text            =   "Total"
                TextSave        =   "Total"
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -1623,7 +1618,6 @@ Begin VB.Form FORMGEN
                Alignment       =   1
                Object.Width           =   2293
                MinWidth        =   2293
-               Key             =   ""
                Object.Tag             =   ""
                Object.ToolTipText     =   "SubTotal"
             EndProperty
@@ -1631,7 +1625,6 @@ Begin VB.Form FORMGEN
                Alignment       =   1
                Object.Width           =   2293
                MinWidth        =   2293
-               Key             =   ""
                Object.Tag             =   ""
                Object.ToolTipText     =   "Descto.(%)"
             EndProperty
@@ -1639,21 +1632,18 @@ Begin VB.Form FORMGEN
                Alignment       =   1
                Object.Width           =   2293
                MinWidth        =   2293
-               Key             =   ""
                Object.Tag             =   ""
                Object.ToolTipText     =   "Impto."
             EndProperty
             BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
                Object.Width           =   776
                MinWidth        =   776
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
             BeginProperty Panel5 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
                Alignment       =   1
                Object.Width           =   2293
                MinWidth        =   2293
-               Key             =   ""
                Object.Tag             =   ""
                Object.ToolTipText     =   "Total"
             EndProperty
@@ -2977,6 +2967,7 @@ Begin VB.Form FORMGEN
       _ExtentY        =   661
       _Version        =   393217
       BackColor       =   14737632
+      Enabled         =   -1  'True
       MultiLine       =   0   'False
       TextRTF         =   $"FORMGEN.frx":5D2C
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -5306,14 +5297,14 @@ Public Function LEE_CARACU() As Boolean
     End If
 End Function
 Public Function VERIFICA_REPET() As Integer
-Dim I As Integer
+Dim i As Integer
 VERIFICA_REPET = 0
-For I = 2 To grid_fac.Row - 1
-If grid_fac.TextMatrix(I, 16) = art_LLAVE!ART_KEY Then
+For i = 2 To grid_fac.Row - 1
+If grid_fac.TextMatrix(i, 16) = art_LLAVE!ART_KEY Then
   MsgBox "Ojo ...Articulo ya existe en lista", 48, Pub_Titulo
   VERIFICA_REPET = 1
 End If
-Next I
+Next i
 End Function
 Public Sub LIMPIA_PREC()
 Dim fil
@@ -9237,9 +9228,9 @@ End Sub
 
 
 Private Sub chkAll_Click()
-Dim itemX As Object
-For Each itemX In Me.lvwPedidos.ListItems
-    itemX.Checked = Me.chkAll.Value
+Dim itemx As Object
+For Each itemx In Me.lvwPedidos.ListItems
+    itemx.Checked = Me.chkAll.Value
 Next
 End Sub
 
@@ -9332,12 +9323,12 @@ Private Sub cmdcanped_Click()
 End Sub
 
 Private Sub cmdClearDocs_Click()
-Dim I As Integer
-    For I = gridl.Rows - 2 To 1 Step -1
-        If gridl.TextMatrix(I + 1, 28) = "" Then
-            gridl.RemoveItem (I + 1)
+Dim i As Integer
+    For i = gridl.Rows - 2 To 1 Step -1
+        If gridl.TextMatrix(i + 1, 28) = "" Then
+            gridl.RemoveItem (i + 1)
         End If
-   Next I
+   Next i
    calcula_totales2
 End Sub
 
@@ -9654,7 +9645,7 @@ Do Until loc_pedidos.EOF
     
     loListItem.ListSubItems.Add Key:="CodClie", Text:=loc_pedidos!idcliente
     loListItem.ListSubItems.Add Key:="NomClie", Text:=Trim(loc_pedidos!cliente)
-    loListItem.ListSubItems.Add Key:="Total", Text:=Format(loc_pedidos!total, "#,##0.00")
+    loListItem.ListSubItems.Add Key:="Total", Text:=Format(loc_pedidos!Total, "#,##0.00")
     loListItem.ListSubItems.Add Key:="Dir", Text:=loc_pedidos!dir
     loListItem.ListSubItems.Add Key:="Observ", Text:=loc_pedidos!obs
     
@@ -9703,7 +9694,7 @@ Dim sNumFac As Long
 Dim sNumSer As String
 Dim sFBG As String
 Dim sNumSec As Integer
-Dim I As Integer
+Dim i As Integer
 Dim iCount As Integer
 Dim longit As String * 15
 Dim WIGV_G As Currency
@@ -9712,9 +9703,9 @@ Dim iFila As Integer
     sNumFac = gridl.TextMatrix(gridl.Row, 3)
     sNumSer = gridl.TextMatrix(gridl.Row, 2)
     sFBG = gridl.TextMatrix(gridl.Row, 1)
-    For I = 1 To lvwArticulos.ListItems.count
-        If lvwArticulos.ListItems(I).Checked Then
-            sNumSec = val(lvwArticulos.ListItems(I).ListSubItems(8).Text)
+    For i = 1 To lvwArticulos.ListItems.count
+        If lvwArticulos.ListItems(i).Checked Then
+            sNumSec = val(lvwArticulos.ListItems(i).ListSubItems(8).Text)
             archi = "SELECT * FROM FACART WHERE FAR_TIPMOV=10 AND FAR_CODCIA = '" & LK_CODCIA & "' AND FAR_NUMSER = '" & Trim(sNumSer) & "' AND FAR_NUMFAC = " & sNumFac & " AND FAR_NUMSEC = " & sNumSec
             Set PSX = CN.CreateQuery("", archi)
             Set x = PSX.OpenResultset(rdOpenKeyset)
@@ -9812,7 +9803,7 @@ Dim iFila As Integer
             End If
         End If
         Cantidad = 0
-    Next I
+    Next i
     calcula_totales
     cmdCancelar_Click
 Exit Sub
@@ -9849,7 +9840,7 @@ End Sub
 Private Sub Diario_Click()
 Dim WS_SALDO As Currency
 Dim Tit As String
-Dim I As Integer
+Dim i As Integer
 Dim success%
 Dim flag_cuenta As Integer
 If FLAG_DIARIO = "A" Then Exit Sub
@@ -10741,7 +10732,7 @@ Dim WS_MONEDA As String * 1
 Dim ws_mon_canje As String * 1
 Const ingre = 2
 Const MODIF = 1
-Dim I As Integer
+Dim i As Integer
 Dim n As Integer
 Dim LOC_SALDO_CAR As Currency
 Dim WS_DESCTO1, WS_DESCTO2 As Currency
@@ -12184,11 +12175,11 @@ Else
    
 Do Until far_llave.EOF
    If far_llave!far_estado = "E" Then GoTo SALTA_OTRO
-   I = 0
+   i = 0
    far_menor3.AddNew
-   Do Until I = 79
-      If Not IsNull(far_llave(I)) Then far_menor3(I) = far_llave(I)
-      I = I + 1
+   Do Until i = 79
+      If Not IsNull(far_llave(i)) Then far_menor3(i) = far_llave(i)
+      i = i + 1
    Loop
    WS_NUMSEC = WS_NUMSEC + 200
    far_menor3!FAR_NUMSEC = WS_NUMSEC
@@ -14477,8 +14468,8 @@ FAR_TRANS.MoveFirst
 grid_trans.Visible = False
 grid_fac.Rows = 3
 fila = grid_fac.Rows - 1
-Dim l As Integer ' declaro para recorrer y ver saldo es cero
-l = 0
+Dim L As Integer ' declaro para recorrer y ver saldo es cero
+L = 0
 Do Until FAR_TRANS.EOF
     
    'If KeyCode = 13 And LK_CODTRA = 1405 And Val(grid_fac.TextMatrix(grid_fac.Row, 4)) = 0 Then
@@ -14494,8 +14485,8 @@ Do Until FAR_TRANS.EOF
     GoTo otro2
    End If
    
-   l = l + 1
-   If val(grid_trans.TextMatrix(l, 6)) = 0 Then
+   L = L + 1
+   If val(grid_trans.TextMatrix(L, 6)) = 0 Then
     GoTo otro2
    End If
    
@@ -14607,7 +14598,7 @@ grid_trans.Visible = False
 grid_fac.Rows = 3
 fila = grid_fac.Rows - 1
 'Dim l As Integer ' declaro para recorrer y ver saldo es cero
-l = 0
+L = 0
 Do Until FAR_TRANS.EOF
     
 '   If KeyAscii = 13 And LK_CODTRA = 1450 And Val(grid_fac.TextMatrix(grid_fac.Row, 4)) = 0 Then
@@ -14625,8 +14616,8 @@ Do Until FAR_TRANS.EOF
    
    If FAR_TRANS!far_transito <> "P" Then GoTo otro2
       
-   l = l + 1
-   If val(grid_trans.TextMatrix(l, 6)) = 0 Then
+   L = L + 1
+   If val(grid_trans.TextMatrix(L, 6)) = 0 Then
     GoTo otro22
    End If
    
@@ -15088,7 +15079,7 @@ Private Sub i_codban_KeyPress(KeyAscii As Integer)
 On Error GoTo SALE
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 
 If KeyAscii = 27 Then
@@ -15312,7 +15303,7 @@ End Sub
 Private Sub i_codban2_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 
 If KeyAscii = 27 Then
@@ -15858,7 +15849,7 @@ End Sub
 
 Private Sub i_codven_KeyUp(KeyCode As Integer, Shift As Integer)
 Dim var
-Dim pos1, CARAC, I, izq, der
+Dim pos1, CARAC, i, izq, der
 
 If KeyCode = 45 Then
    var = InputBox("Digite clave de acceso : ")
@@ -18053,16 +18044,16 @@ End Sub
 
 Private Sub letche_Click()
 Dim ww
-Dim I
+Dim i
 If gridl.Visible = True Then
    ww = gridl.TextMatrix(2, 24)
-   I = 2
-   Do Until I = gridl.Rows
-       If ww <> gridl.TextMatrix(I, 24) And val(gridl.TextMatrix(I, 25)) <> 0 Then
+   i = 2
+   Do Until i = gridl.Rows
+       If ww <> gridl.TextMatrix(i, 24) And val(gridl.TextMatrix(i, 25)) <> 0 Then
     '      MsgBox "No Procede en monedas diferentes...           "
     '      Exit Sub
        End If
-       I = I + 1
+       i = i + 1
     Loop
 End If
 pasa_cabeza_canje
@@ -18089,11 +18080,11 @@ SS:
    ww = InputBox("Ingrese Cantidad de Documentos")
    If ww = "" Or val(ww) > 100 Or val(ww) = 0 Then GoTo SS
    grid_canje.Rows = ww + 2
-   I = 0
-   Do Until I > ww + 1
-   FORMGEN.grid_canje.RowHeight(I) = 350
-   FORMGEN.grid_canje.TextMatrix(I, 3) = 0 '3
-   I = I + 1
+   i = 0
+   Do Until i > ww + 1
+   FORMGEN.grid_canje.RowHeight(i) = 350
+   FORMGEN.grid_canje.TextMatrix(i, 3) = 0 '3
+   i = i + 1
    Loop
    
 End If
@@ -18226,7 +18217,7 @@ Dim WDIAS As Integer
 Dim wCONDI As Integer
 Dim wdia1 As String
 Dim wDIA2 As String
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 wCONDI = -1
 If KeyAscii = 27 Then
@@ -18432,7 +18423,7 @@ End Sub
 Public Sub i_codven_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 
 If KeyAscii = 27 Then
@@ -18537,7 +18528,7 @@ End Sub
 
 
 Public Sub i_def_LostFocus()
-Dim pos1, CARAC, I, izq, der
+Dim pos1, CARAC, i, izq, der
 If i_def.ListIndex = -1 Then Exit Sub
 'Aqui se lee la contabilidad
 pos1 = InStr(1, FORMGEN.i_def.List(i_def.ListIndex), ".", 1)
@@ -18620,35 +18611,35 @@ If FORMGEN.Frame4.Visible = True Then
       grid_fac.ColWidth(10) = 700
    End If
    
-   I = 1
+   i = 1
    GoSub destinos
    If grid_fac.ColWidth(2) <> 0 Then
-      I = 2
+      i = 2
       GoSub destinos
    End If
    
    If grid_fac.ColWidth(3) <> 0 Then
-      I = 3
+      i = 3
       GoSub destinos
    End If
    
-   I = 4
+   i = 4
    GoSub destinos
    
    If grid_fac.ColWidth(5) <> 0 Then
-      I = 5
+      i = 5
       GoSub destinos
    End If
    
    If grid_fac.ColWidth(6) <> 0 Then
-      I = 6
+      i = 6
       GoSub destinos
       If LK_CODTRA = 2401 And PUB_TIPMOV = 10 Then
         tab_derecha(6) = 42
       End If
    End If
    If grid_fac.ColWidth(7) <> 0 Then
-      I = 7
+      i = 7
       GoSub destinos
    End If
    
@@ -18658,23 +18649,23 @@ If FORMGEN.Frame4.Visible = True Then
    End If
    
    If grid_fac.ColWidth(8) <> 0 Then
-      I = 8
+      i = 8
       GoSub destinos
    End If
    If grid_fac.ColWidth(9) <> 0 Then
-      I = 9
+      i = 9
       GoSub destinos
    End If
    If grid_fac.ColWidth(10) <> 0 Then
-      I = 10
+      i = 10
       GoSub destinos
    End If
    If grid_fac.ColWidth(12) <> 0 Then
-      I = 12
+      i = 12
       GoSub destinos
    End If
    If grid_fac.ColWidth(42) <> 0 Then
-      I = 13
+      i = 13
       GoSub destinos
    End If
    If SUT_LLAVE!SUT_PRECIO = "2" And PUB_TIPMOV = 10 Then
@@ -18858,21 +18849,21 @@ End If
 Exit Sub
 
 destinos:
-   izq = I - 1
-   der = I + 1
-   tab_derecha(I) = 1
-   tab_izquierda(I) = 1
+   izq = i - 1
+   der = i + 1
+   tab_derecha(i) = 1
+   tab_izquierda(i) = 1
    Do Until der > 12 And izq < 1
       If der < 13 Then
       If grid_fac.ColWidth(der) <> 0 Then
-         tab_derecha(I) = der
+         tab_derecha(i) = der
          der = 13
       End If
       End If
       
       If izq > 0 Then
          If grid_fac.ColWidth(izq) <> 0 Then
-            tab_izquierda(I) = izq
+            tab_izquierda(i) = izq
             izq = 0
          End If
       End If
@@ -20643,7 +20634,7 @@ End Sub
 Private Sub textovar_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I, car
+Dim i, car
 Dim itmFound As Object    ' Variable FoundItem.
 car = Chr(KeyAscii)
 car = UCase(car)
@@ -21330,7 +21321,7 @@ End Sub
 Private Sub textovarL_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I, car
+Dim i, car
 Dim itmFound As Object    ' Variable FoundItem.
 car = Chr(KeyAscii)
 car = UCase(car)
@@ -21707,7 +21698,7 @@ Dim Control As Object
 Dim PRIMER As Integer
 Dim pos1, pos2, DIF As Integer
 Dim CARAC, CARAC2 As String
-Dim I, j, WS_SECUENCIA As Integer
+Dim i, j, WS_SECUENCIA As Integer
 inicio:
 'SOLO_DECIMAL TRANS, KeyAscii
 pub_flag_cambio = 0
@@ -21844,13 +21835,13 @@ If Trim(loc_codoper) <> "" Then
    End If
 End If
 SN = "N"
-I = 0
-Do Until SN = "S" Or I = 10
-   I = I + 1
+i = 0
+Do Until SN = "S" Or i = 10
+   i = i + 1
    j = 0
    Do Until SN = "S" Or j = 10
      j = j + 1
-     If lk_GRUPOS(j) = tra_llave(92 + I) And lk_GRUPOS(j) <> 0 Then
+     If lk_GRUPOS(j) = tra_llave(92 + i) And lk_GRUPOS(j) <> 0 Then
          SN = "S"
      End If
    Loop
@@ -22047,22 +22038,22 @@ Else
    PUB_SECUENCIA = val(CARAC)
 End If
 If PUB_SECUENCIA = 0 Then
-   I = 0
+   i = 0
    GoTo listo
 End If
 SN = "N"
-I = 0
+i = 0
 
-Do Until SN = "S" Or I > FORMGEN.i_def.ListCount - 1
-   pos1 = InStr(1, FORMGEN.i_def.List(I), ".", 1)
+Do Until SN = "S" Or i > FORMGEN.i_def.ListCount - 1
+   pos1 = InStr(1, FORMGEN.i_def.List(i), ".", 1)
    pos1 = pos1 - 1
-   CARAC = Mid(FORMGEN.i_def.List(I), 1, pos1)
+   CARAC = Mid(FORMGEN.i_def.List(i), 1, pos1)
 
    If PUB_SECUENCIA = val(CARAC) Then
       SN = "S"
       Exit Do
    End If
-I = I + 1
+i = i + 1
 Loop
 
 If SN = "N" And LK_CODUSU <> "ADMIN" Then
@@ -24770,23 +24761,23 @@ Dim WPRECIO As String * 8
 Dim wcantidad As String * 8
 Dim wsuttotal As String * 10
 Dim wcod As String * 10
-Dim P As Integer
+Dim p As Integer
 
 Printer.Print "FECHA: " & LK_FECHA_DIA
 Printer.Print "USUARIO: " & LK_CODUSU
 Printer.Print ""
 wnombre = "PRODUCTO"
 Printer.Print "CODIGO    "; " "; wnombre; "CANT."; "  "; "  PRECIO TOTAL "
-For P = 2 To FORMGEN.grid_fac.Rows - 1
-  If Trim(FORMGEN.grid_fac.TextMatrix(P, 1)) <> "" Then
-    wcod = Trim(FORMGEN.grid_fac.TextMatrix(P, 1))
-    wnombre = Trim(FORMGEN.grid_fac.TextMatrix(P, 0))
-    WPRECIO = Format(Trim(FORMGEN.grid_fac.TextMatrix(P, 6)), "##0.00")
-    wcantidad = Format(Trim(FORMGEN.grid_fac.TextMatrix(P, 4)), "##0.00")
-    wsuttotal = Format(Trim(FORMGEN.grid_fac.TextMatrix(P, 7)), "##0.00")
-    Printer.Print wcod; " "; wnombre; " "; wcantidad; " "; Trim(Left(FORMGEN.grid_fac.TextMatrix(P, 5), 8)); " "; WPRECIO; " "; wsuttotal
+For p = 2 To FORMGEN.grid_fac.Rows - 1
+  If Trim(FORMGEN.grid_fac.TextMatrix(p, 1)) <> "" Then
+    wcod = Trim(FORMGEN.grid_fac.TextMatrix(p, 1))
+    wnombre = Trim(FORMGEN.grid_fac.TextMatrix(p, 0))
+    WPRECIO = Format(Trim(FORMGEN.grid_fac.TextMatrix(p, 6)), "##0.00")
+    wcantidad = Format(Trim(FORMGEN.grid_fac.TextMatrix(p, 4)), "##0.00")
+    wsuttotal = Format(Trim(FORMGEN.grid_fac.TextMatrix(p, 7)), "##0.00")
+    Printer.Print wcod; " "; wnombre; " "; wcantidad; " "; Trim(Left(FORMGEN.grid_fac.TextMatrix(p, 5), 8)); " "; WPRECIO; " "; wsuttotal
   End If
-Next P
+Next p
 Printer.EndDoc
 
 End Sub
@@ -24800,7 +24791,7 @@ Dim ww_cantidad As Currency
 Dim ww_codclie As Long
 
 Dim var As String
-Dim pos1, CARAC, I, izq, der
+Dim pos1, CARAC, i, izq, der
 Dim TF_TIPMOV
 
 'VAR = InputBox("Digite : ACEPTO", "")
@@ -25322,7 +25313,7 @@ End Sub
 Private Sub txtCodVen_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 
 If KeyAscii = 27 Then
@@ -25377,7 +25368,7 @@ End Sub
 
 Private Sub txtCodVen_KeyUp(KeyCode As Integer, Shift As Integer)
 Dim var
-Dim pos1, CARAC, I, izq, der
+Dim pos1, CARAC, i, izq, der
 
 If KeyCode = 45 Then
  
@@ -25587,30 +25578,30 @@ Dim iPos As Integer
 Dim mSignos(1 To 12) As Integer
 Dim CountSignos As Integer
 Dim FactorAcum As Double
-Dim I As Integer
+Dim i As Integer
 Dim vPor As String
     DesctosSuc = Trim(grid_fac.TextMatrix(iRow, 42))
     LenCadena = Len(DesctosSuc)
-    For I = 1 To LenCadena
-        Signo = Mid(DesctosSuc, I, 1)
+    For i = 1 To LenCadena
+        Signo = Mid(DesctosSuc, i, 1)
         If InStr(1, Signo, "+") <> 0 Then
             CountSignos = CountSignos + 1
-            mSignos(CountSignos) = I
+            mSignos(CountSignos) = i
         End If
-    Next I
+    Next i
     If CountSignos > 0 Then
-        For I = 1 To CountSignos + 1
-            If I = 1 Then
-                vPor = Mid(DesctosSuc, 1, mSignos(I) - 1)
+        For i = 1 To CountSignos + 1
+            If i = 1 Then
+                vPor = Mid(DesctosSuc, 1, mSignos(i) - 1)
                 FactorAcum = (100 - val(vPor)) / 100
-            ElseIf I = CountSignos + 1 Then
-                vPor = Mid(DesctosSuc, mSignos(I - 1) + 1, LenCadena - mSignos(I - 1))
+            ElseIf i = CountSignos + 1 Then
+                vPor = Mid(DesctosSuc, mSignos(i - 1) + 1, LenCadena - mSignos(i - 1))
                 FactorAcum = FactorAcum * ((100 - val(vPor)) / 100)
             Else
-                vPor = Mid(DesctosSuc, mSignos(I - 1) + 1, mSignos(I) - mSignos(I - 1) - 1)
+                vPor = Mid(DesctosSuc, mSignos(i - 1) + 1, mSignos(i) - mSignos(i - 1) - 1)
                 FactorAcum = FactorAcum * ((100 - val(vPor)) / 100)
             End If
-        Next I
+        Next i
         FactorAcum = 100 - 100 * FactorAcum
     Else
         FactorAcum = val(DesctosSuc)
@@ -25677,7 +25668,7 @@ End Sub
 Private Sub i_codcho_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object    ' Variable FoundItem.
 
 If KeyAscii = 27 Then
@@ -25741,7 +25732,7 @@ End Sub
 
 Private Sub i_codcho_KeyUp(KeyCode As Integer, Shift As Integer)
 Dim var
-Dim pos1, CARAC, I, izq, der
+Dim pos1, CARAC, i, izq, der
     
     If Len(i_codcho.Text) = 0 Or IsNumeric(i_codcho.Text) Then
        LV_CHO.Visible = False
@@ -25881,9 +25872,9 @@ Dim FlagSolicitud As Integer
         LEER_CLI_LLAVE
         If Not cli_llave.EOF Then
             lblcli.Caption = cli_llave("CLI_NOMBRE")
-            txtruc.Text = cli_llave("CLI_RUC_ESPOSO")
+            txtRuc.Text = cli_llave("CLI_RUC_ESPOSO")
         End If
-        txtruc.Text = ped_llave("Ped_RUCCLIE")
+        txtRuc.Text = ped_llave("Ped_RUCCLIE")
         txtNroDoc.Text = Nulo_Valor0(ped_llave("PED_NUMDOC"))
         
         PUB_IMPTO = ped_llave("Ped_IGV")
@@ -26192,7 +26183,7 @@ Private Sub cmdcancelOC_Click()
     lblcli.Caption = ""
     txtNroDoc.Text = ""
     txtFecha.Text = "__/__/____"
-    txtruc.Text = ""
+    txtRuc.Text = ""
     stbSubtotales.Panels(1).Text = "0.000"
     stbSubtotales.Panels(3).Text = "0.000"
     stbSubtotales.Panels(2).Text = "0.000"
@@ -26493,7 +26484,7 @@ End Sub
 
 Private Sub CountDias_Change()
 Dim ww As Integer
-Dim I As Integer
+Dim i As Integer
 Dim TotalCanje As Double
 Dim TotalCanjeTmp As Double
 Dim TotalxLetra As Double
@@ -26506,23 +26497,23 @@ Dim NumeroLetra As Integer
     TotalCanje = val(gridl.TextMatrix(1, 5))
     TotalxLetra = Format(TotalCanje / ww, "#0.00")
    grid_canje.Rows = ww + 2
-   I = 0
-   For I = 2 To grid_canje.Rows - 1
-        grid_canje.TextMatrix(I, 1) = I - 1 & ".-"
-        grid_canje.TextMatrix(I, 2) = i_tipdoc.Text
-        If I = grid_canje.Rows - 1 Then
-            grid_canje.TextMatrix(I, 3) = TotalCanje - TotalCanjeTmp
+   i = 0
+   For i = 2 To grid_canje.Rows - 1
+        grid_canje.TextMatrix(i, 1) = i - 1 & ".-"
+        grid_canje.TextMatrix(i, 2) = i_tipdoc.Text
+        If i = grid_canje.Rows - 1 Then
+            grid_canje.TextMatrix(i, 3) = TotalCanje - TotalCanjeTmp
         Else
-            grid_canje.TextMatrix(I, 3) = TotalxLetra
+            grid_canje.TextMatrix(i, 3) = TotalxLetra
             TotalCanjeTmp = TotalCanjeTmp + TotalxLetra
         End If
         NumeroLetra = NumeroLetra + 1
-        grid_canje.TextMatrix(I, 7) = NumeroLetra
-   Next I
+        grid_canje.TextMatrix(i, 7) = NumeroLetra
+   Next i
    
-   Do Until I > ww + 1
-        FORMGEN.grid_canje.TextMatrix(I, 3) = 0 '3
-        I = I + 1
+   Do Until i > ww + 1
+        FORMGEN.grid_canje.TextMatrix(i, 3) = 0 '3
+        i = i + 1
    Loop
    textovar_canje.Visible = False
    If grid_canje.Visible = True Then grid_canje.SetFocus
@@ -26530,18 +26521,18 @@ Dim NumeroLetra As Integer
 End Sub
 
 Private Sub cmdDistImpLet_Click()
-Dim I As Integer
+Dim i As Integer
 Dim TotalCanje As Double
 Dim TotalCanjeTmp As Double
 Dim RowActual As Integer
     
     RowActual = grid_canje.Row
     TotalCanje = val(gridl.TextMatrix(1, 5))
-    For I = 2 To grid_canje.Rows - 1
-        If I <> RowActual Then
-            TotalCanjeTmp = val(grid_canje.TextMatrix(I, 3)) + TotalCanjeTmp
+    For i = 2 To grid_canje.Rows - 1
+        If i <> RowActual Then
+            TotalCanjeTmp = val(grid_canje.TextMatrix(i, 3)) + TotalCanjeTmp
         End If
-    Next I
+    Next i
     grid_canje.TextMatrix(RowActual, 3) = TotalCanje - TotalCanjeTmp
     CALCULA_TOTALES_CANJE
 End Sub

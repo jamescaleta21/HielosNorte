@@ -867,8 +867,12 @@ Begin VB.MDIForm MDIForm1
          Visible         =   0   'False
       End
       Begin VB.Menu submenutit7 
-         Caption         =   "Datos de Transportista"
+         Caption         =   "Registro de Metas"
          Index           =   12
+      End
+      Begin VB.Menu submenutit7 
+         Caption         =   "Reporte de Metas"
+         Index           =   13
       End
    End
    Begin VB.Menu menuAyuda 
@@ -2351,50 +2355,64 @@ End If
 End Sub
 
 Private Sub submenutit7_Click(Index As Integer)
-  Select Case Index
-    Case 0
-       Screen.MousePointer = 11
-'       Load frmPrecios
-'       frmPrecios.Show
-'       Screen.MousePointer = 0
-         frmProductoPromocion.Show
-        'frmPedidoHorario.Show
-        Screen.MousePointer = 0
-     Case 2
-       Screen.MousePointer = 11
-       frmPedidoHorario.Show
-       Screen.MousePointer = 0
-    Case 4
-       Screen.MousePointer = 11
-       frmEmpresa.Show
-       Screen.MousePointer = 0
-   Case 6
-       Screen.MousePointer = 11
-       'Load frmOpcion
-        frmRepartos.Show
-       Screen.MousePointer = 0
-    Case 8
-       Screen.MousePointer = 11
-       'Load frmCampania
-       'Screen.MousePointer = 0
-       frmCampania.Show
-    Case 10
-       Screen.MousePointer = 11
-       PUB_TIPOPRINT = 1
-       Load FrmRepo
-       FrmRepo.Caption = "Impresion por Lotes de Facturas y Boletas"
-       FrmRepo.cheguia.Visible = False
-       FrmRepo.cmdMostrar.Caption = "&Imprimir Documentos"
-       Screen.MousePointer = 0
-       FrmRepo.Show 1
-    Case 12
-       Screen.MousePointer = 11
-       Load frmTransportista
-       Screen.MousePointer = 0
-       frmTransportista.Show
-    Case Else
-        MsgBox "INDICE FUERA DE RANGO ... ", 48, Pub_Titulo
-End Select
+
+    Select Case Index
+
+        Case 0
+            Screen.MousePointer = 11
+            '       Load frmPrecios
+            '       frmPrecios.Show
+            '       Screen.MousePointer = 0
+            frmProductoPromocion.Show
+            'frmPedidoHorario.Show
+            Screen.MousePointer = 0
+
+        Case 2
+            Screen.MousePointer = 11
+            frmPedidoHorario.Show
+            Screen.MousePointer = 0
+
+        Case 4
+            Screen.MousePointer = 11
+            frmEmpresa.Show
+            Screen.MousePointer = 0
+
+        Case 6
+            Screen.MousePointer = 11
+            'Load frmOpcion
+            frmRepartos.Show
+            Screen.MousePointer = 0
+
+        Case 8
+            Screen.MousePointer = 11
+            'Load frmCampania
+            'Screen.MousePointer = 0
+            frmCampania.Show
+
+        Case 10
+            Screen.MousePointer = 11
+            PUB_TIPOPRINT = 1
+            Load FrmRepo
+            FrmRepo.Caption = "Impresion por Lotes de Facturas y Boletas"
+            FrmRepo.cheguia.Visible = False
+            FrmRepo.cmdMostrar.Caption = "&Imprimir Documentos"
+            Screen.MousePointer = 0
+            FrmRepo.Show 1
+
+        Case 12
+            Screen.MousePointer = 11
+            'Load frmTransportista
+            frmMeta.Show
+            Screen.MousePointer = 0
+
+        Case 13
+            frmMetaReporte.Show
+
+        Case Else
+            MsgBox "INDICE FUERA DE RANGO ... ", 48, Pub_Titulo
+
+    End Select
+
 End Sub
 
 Private Sub submenutit8_Click(Index As Integer)

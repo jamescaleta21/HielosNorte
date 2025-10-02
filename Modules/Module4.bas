@@ -142,18 +142,27 @@ MsgBox "Descripcion del Error: " & xError.Description & vbCrLf & _
 "Origen del Error: " & xError.Source & vbCrLf & "Número de Error: " & xError.Number, vbCritical, NombreProyecto
 End Sub
 
-
 Public Sub LimpiarControles(Frm As Form)
-   Dim i
-   For i = 0 To Frm.Controls.count - 1
-      If TypeOf Frm.Controls(i) Is TextBox Then
-         Frm.Controls(i).Text = ""
-      ElseIf TypeOf Frm.Controls(i) Is label And Frm.Controls(i).Tag = "X" Then
-          Frm.Controls(i).Caption = ""
-      ElseIf TypeOf Frm.Controls(i) Is ComboBox Then
-Frm.Controls(i).ListIndex = -1
-      End If
-   Next i
+
+    Dim i
+Dim masked As String
+    For i = 0 To Frm.Controls.count - 1
+
+        If TypeOf Frm.Controls(i) Is TextBox Then
+            Frm.Controls(i).Text = ""
+        ElseIf TypeOf Frm.Controls(i) Is label And Frm.Controls(i).Tag = "X" Then
+            Frm.Controls(i).Caption = ""
+        ElseIf TypeOf Frm.Controls(i) Is ComboBox Then
+            Frm.Controls(i).ListIndex = -1
+        ElseIf TypeOf Frm.Controls(i) Is MaskEdBox Then
+        masked = Frm.Controls(i).Mask
+        Frm.Controls(i).Mask = ""
+            Frm.Controls(i).Text = ""
+  Frm.Controls(i).Mask = masked
+        End If
+
+    Next i
+
 End Sub
 
 Public Sub ActivarControles(Frm As Form)

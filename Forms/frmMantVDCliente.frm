@@ -782,7 +782,7 @@ Private Sub Estado_Botones(val As Valores)
 
 End Sub
 
-Private Sub ConfigurarLV()
+Private Sub configurarLV()
 Me.lvCliente.Icons = Me.ilCliente
 Me.lvCliente.SmallIcons = Me.ilCliente
 
@@ -811,7 +811,7 @@ End Sub
 
 Private Sub Form_Load()
     pIDempresa = devuelveIDempresaXdefecto
-    ConfigurarLV
+    configurarLV
     DesactivarControles Me
     Estado_Botones InicializarFormulario
     clienteSearch Me.txtSearch.Text

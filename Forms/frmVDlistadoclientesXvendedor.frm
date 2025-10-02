@@ -260,13 +260,13 @@ End Sub
 Private Sub Form_Resize()
    If Me.WindowState = vbMinimized Then Exit Sub
     'Me.crvReporte.Top = 0
-    Me.fraReporte.Left = 0
-    Me.fraReporte.Height = Me.ScaleHeight - 1000
-    Me.fraReporte.Width = Me.ScaleWidth
+    Me.FraReporte.Left = 0
+    Me.FraReporte.Height = Me.ScaleHeight - 1000
+    Me.FraReporte.Width = Me.ScaleWidth
 '    Me.frafiltro.Height = Me.ScaleHeight - 1000
-   Me.frafiltro.Width = Me.fraReporte.Width
+   Me.FraFiltro.Width = Me.FraReporte.Width
     'Me.crvReporte.Zoom 100
-     Me.cmdMostrar.Left = (Me.fraReporte.Width - Me.cmdMostrar.Width) - 100
+     Me.cmdMostrar.Left = (Me.FraReporte.Width - Me.cmdMostrar.Width) - 100
     ' Me.crvReporte.Left = 0
     Me.crvReporte.Height = Me.ScaleHeight - 1300
     Me.crvReporte.Width = Me.ScaleWidth - 200
