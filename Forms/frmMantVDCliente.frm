@@ -123,6 +123,7 @@ Begin VB.Form frmMantVDCliente
       _ExtentY        =   12515
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -136,26 +137,28 @@ Begin VB.Form frmMantVDCliente
       EndProperty
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMantVDCliente.frx":2B9A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1"
-      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "txtSearch"
       Tab(0).Control(1)=   "lvCliente"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "txtSearch"
-      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(2)=   "Label1"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Cliente"
       TabPicture(1)   =   "frmMantVDCliente.frx":2BB6
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FraDatospersonales"
-      Tab(1).Control(1)=   "optDni"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "lblIdCliente"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "optRuc"
+      Tab(1).Control(2)=   "FraRuc"
       Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "FraDni"
-      Tab(1).Control(4)=   "FraRuc"
-      Tab(1).Control(5)=   "lblIdCliente"
-      Tab(1).Control(6)=   "Label2"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "optRuc"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "optDni"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "FraDatospersonales"
+      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).ControlCount=   7
       Begin VB.Frame FraDatospersonales 
          BeginProperty Font 
@@ -168,7 +171,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3975
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   19
          Top             =   2400
          Width           =   7695
@@ -395,7 +398,7 @@ Begin VB.Form frmMantVDCliente
       Begin VB.OptionButton optDni 
          Caption         =   "Dni"
          Height          =   255
-         Left            =   -70080
+         Left            =   4920
          TabIndex        =   6
          TabStop         =   0   'False
          Top             =   1320
@@ -404,7 +407,7 @@ Begin VB.Form frmMantVDCliente
       Begin VB.OptionButton optRuc 
          Caption         =   "Ruc"
          Height          =   255
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   5
          TabStop         =   0   'False
          Top             =   1320
@@ -421,7 +424,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   -70320
+         Left            =   4680
          TabIndex        =   18
          Top             =   1320
          Width           =   3735
@@ -455,7 +458,7 @@ Begin VB.Form frmMantVDCliente
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   17
          Top             =   1320
          Width           =   3735
@@ -471,14 +474,14 @@ Begin VB.Form frmMantVDCliente
       End
       Begin VB.TextBox txtSearch 
          Height          =   360
-         Left            =   1440
+         Left            =   -73560
          TabIndex        =   1
          Top             =   480
          Width           =   7695
       End
       Begin MSComctlLib.ListView lvCliente 
          Height          =   6015
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   2
          Top             =   960
          Width           =   9015
@@ -510,7 +513,7 @@ Begin VB.Form frmMantVDCliente
          BorderStyle     =   1  'Fixed Single
          ForeColor       =   &H80000008&
          Height          =   360
-         Left            =   -72720
+         Left            =   2280
          TabIndex        =   16
          Tag             =   "X"
          Top             =   600
@@ -521,7 +524,7 @@ Begin VB.Form frmMantVDCliente
          BackStyle       =   0  'Transparent
          Caption         =   "Id Cliente:"
          Height          =   240
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   15
          Top             =   660
          Width           =   1035
@@ -531,7 +534,7 @@ Begin VB.Form frmMantVDCliente
          BackStyle       =   0  'Transparent
          Caption         =   "Busqueda"
          Height          =   240
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   14
          Top             =   540
          Width           =   945
@@ -613,10 +616,10 @@ Private Sub cargarDatosAdicionales()
             End If
         
             ' Configurar datCategoria
-            Set Me.datCategoria.RowSource = orsTEMP2
-            Me.datCategoria.ListField = orsTEMP2.Fields(1).Name
-            Me.datCategoria.BoundColumn = orsTEMP2.Fields(0).Name
-            Me.datCategoria.BoundText = -1
+            Set Me.DatCategoria.RowSource = orsTEMP2
+            Me.DatCategoria.ListField = orsTEMP2.Fields(1).Name
+            Me.DatCategoria.BoundColumn = orsTEMP2.Fields(0).Name
+            Me.DatCategoria.BoundText = -1
 
         End If
 
@@ -663,7 +666,7 @@ Sub Mandar_Datos()
             Me.txtdni.Text = oRSmain!DNI
             Me.txtDireccion.Text = oRSmain!dir
             Me.DatVendedor.BoundText = oRSmain!IDVEN
-            Me.datCategoria.BoundText = oRSmain!idcat
+            Me.DatCategoria.BoundText = oRSmain!idcat
 
             If Len(Trim(oRSmain!FNAC)) <> 0 Then Me.mebFecNac.Text = oRSmain!FNAC
             Me.txtTelefono.Text = oRSmain!TEL
@@ -798,7 +801,7 @@ End With
 End Sub
 
 Private Sub DatVendedor_KeyPress(KeyAscii As Integer)
-HandleEnterKey KeyAscii, Me.datCategoria
+HandleEnterKey KeyAscii, Me.DatCategoria
 End Sub
 
 Private Sub dtpFechNac_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -900,7 +903,7 @@ Private Sub mtbCliente_ButtonClick(ByVal Button As MSComctlLib.Button)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@RS", adVarChar, adParamInput, 100, Trim(Me.txtRS.Text))
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@DIR", adVarChar, adParamInput, 300, Trim(Me.txtDireccion.Text))
-                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.datCategoria.BoundText)
+                oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDCATEGORIA", adInteger, adParamInput, , Me.DatCategoria.BoundText)
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@IDVENDEDOR", adInteger, adParamInput, , Me.DatVendedor.BoundText)
                 
                 oCmdEjec.Parameters.Append oCmdEjec.CreateParameter("@FECNAC", adVarChar, adParamInput, 8, Trim(strFecha))

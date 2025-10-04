@@ -3999,13 +3999,13 @@ For fila = 2 To 3
     End If
     WSUBFAMI = 1
     wnombre = artloc_llave!art_nombre
-    For I = 0 To art_familia.ListCount - 1
-      art_familia.ListIndex = I
+    For i = 0 To art_familia.ListCount - 1
+      art_familia.ListIndex = i
       If WFAMILIA = val(Right(art_familia.Text, 6)) Then
          wnombre = Trim(Left(art_familia.Text, 6)) & " " & Trim(Left(art_grupo.Text, 15)) & " " & Trim(Left(art_numero.Text, 15)) & "-" & Trim(Left(art_marca.Text, 15))  ' & " " & Left(art_linea.Text, 3) ' Trim(Left(art_linea.Text, 5))
          Exit For
       End If
-    Next I
+    Next i
     WNUMERO = artloc_llave!art_numero
     wgrupo = artloc_llave!art_subgru
     WLINEA = artloc_llave!art_linea
@@ -4969,7 +4969,7 @@ frmARTI.SSTab1.tab = 0
 VAR_ACTIVAR = 0
 End Sub
 Public Sub LIMPIA_ARTI()
-Dim I As Integer
+Dim i As Integer
 txtMin.Text = ""
 txtMax.Text = ""
 frmARTI.txt_alterno.Text = ""
@@ -5116,7 +5116,7 @@ End Sub
 Public Sub GRABAR_ARTI()
 Dim wSTOCK  As Currency
 Dim ws_igv As Currency
-Dim I As Integer
+Dim i As Integer
 Dim WS_IMPORTE As Currency
 Dim WS_FLAG_UNIDAD As Integer
 Dim WORIGINAL As Currency
@@ -5396,7 +5396,7 @@ End Sub
 Public Function GENERA_CODI() As Double
 Dim NUMCAD, FIJO As String
 Dim DIGI As String * 2
-Dim I, VINT1, VINT2, VINT3, VINT4 As Double
+Dim i, VINT1, VINT2, VINT3, VINT4 As Double
 Dim VSTR1, VSTR2, VSTR3, VSTR4 As String
 Dim VFIJO As Double
 Dim VVARI As Integer
@@ -5429,10 +5429,10 @@ If VINT1 > 1 Then
     VSTR4 = val(Mid(NUMCAD, 1, VINT1 - 2)) + 1
 End If
 
-For I = 1 To VINT1 - 2
-   VSTR1 = Mid(VSTR4, I, 1)
+For i = 1 To VINT1 - 2
+   VSTR1 = Mid(VSTR4, i, 1)
    VINT2 = VINT2 + val(VSTR1)
-Next I
+Next i
 VINT3 = VINT2 * 7
 
 VSTR3 = Right(CStr(VINT3), 2)
@@ -5615,7 +5615,7 @@ End Sub
 Private Sub txt_key_KeyPress(KeyAscii As Integer)
 Dim valor As String
 Dim tf As Integer
-Dim I
+Dim i
 Dim itmFound As Object
 
 If KeyAscii = 27 Then
@@ -5749,7 +5749,7 @@ End If
 End Sub
 
 Public Function CONSIS_UNIDAD() As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim QUIEN As String
 QUIEN = 0
 For fila = 1 To grid_unid.Rows - 1
@@ -6873,7 +6873,7 @@ Private Sub txt_alterno_KeyPress(KeyAscii As Integer)
 
     Dim tf    As Integer
 
-    Dim I
+    Dim i
 
     Dim itmFound As Object
 
@@ -8430,7 +8430,7 @@ Private Sub cmd_AddItem_Click()
 
     Dim sCnnSQL        As String
 
-    Dim I              As Long
+    Dim i              As Long
 
     Dim s_Sql          As String
 
@@ -9078,7 +9078,7 @@ End Sub
 
 Private Function FindInCmb(ByVal cbo As ComboBox, ByVal s_Familia As String) As Boolean
 
-    Dim I     As Long
+    Dim i     As Long
 
     Dim aux   As Boolean
 
@@ -9086,12 +9086,12 @@ Private Function FindInCmb(ByVal cbo As ComboBox, ByVal s_Familia As String) As 
 
     aux = False
 
-    For I = 0 To cbo.ListCount - 1
-        aux_f = cbo.List(I)
+    For i = 0 To cbo.ListCount - 1
+        aux_f = cbo.List(i)
         aux_f = Trim$(Left$(aux_f, Len(aux_f) - 10))
 
         If Trim(aux_f) = Trim(s_Familia) Then
-            cbo.ListIndex = I
+            cbo.ListIndex = i
             aux = True
             Exit For
 
