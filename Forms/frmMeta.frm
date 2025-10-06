@@ -151,11 +151,11 @@ Begin VB.Form frmMeta
       TabCaption(1)   =   "Meta"
       TabPicture(1)   =   "frmMeta.frx":3150
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FraDetalle"
+      Tab(1).Control(0)=   "FraProducto"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "FraCabecera"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "FraProducto"
+      Tab(1).Control(2)=   "FraDetalle"
       Tab(1).Control(2).Enabled=   0   'False
       Tab(1).ControlCount=   3
       Begin VB.Frame FraProducto 
@@ -1474,7 +1474,7 @@ grabar:
             Me.txtSearch.Enabled = True
             Me.txtSearch.SetFocus
             Me.lblMensajeProducto.Caption = "**3. Detalle de Productos/Metas para: **"
-            
+            metaSearch Me.txtSearch.Text
         Case 5 'Desactivar
             
             If MsgBox("¿Desea continuar con la Operación?", vbQuestion + vbYesNo, Pub_Titulo) = vbYes Then
