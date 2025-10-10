@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
 Begin VB.Form frmMeta 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Metas"
@@ -79,15 +79,15 @@ Begin VB.Form frmMeta
    End
    Begin MSComctlLib.Toolbar mtbMeta 
       Align           =   1  'Align Top
-      Height          =   660
+      Height          =   630
       Left            =   0
       TabIndex        =   23
       Top             =   0
       Width           =   16665
       _ExtentX        =   29395
-      _ExtentY        =   1164
-      ButtonWidth     =   1879
-      ButtonHeight    =   1005
+      _ExtentY        =   1111
+      ButtonWidth     =   1720
+      ButtonHeight    =   953
       AllowCustomize  =   0   'False
       Appearance      =   1
       _Version        =   393216
@@ -127,6 +127,7 @@ Begin VB.Form frmMeta
       _ExtentY        =   15055
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -140,27 +141,24 @@ Begin VB.Form frmMeta
       EndProperty
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMeta.frx":3134
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1"
-      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "lvDatos"
       Tab(0).Control(1)=   "txtSearch"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "lvDatos"
-      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(2)=   "Label1"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Meta"
       TabPicture(1)   =   "frmMeta.frx":3150
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FraProducto"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "FraDetalle"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "FraCabecera"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "FraDetalle"
+      Tab(1).Control(2)=   "FraProducto"
       Tab(1).Control(2).Enabled=   0   'False
       Tab(1).ControlCount=   3
       Begin VB.Frame FraProducto 
          Height          =   6255
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   25
          Top             =   2160
          Width           =   5415
@@ -278,7 +276,7 @@ Begin VB.Form frmMeta
       End
       Begin VB.Frame FraCabecera 
          Height          =   1815
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   13
          Top             =   360
          Width           =   16215
@@ -414,7 +412,7 @@ Begin VB.Form frmMeta
       End
       Begin MSComctlLib.ListView lvDatos 
          Height          =   7335
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   2
          Top             =   1080
          Width           =   16215
@@ -443,14 +441,14 @@ Begin VB.Form frmMeta
       End
       Begin VB.TextBox txtSearch 
          Height          =   375
-         Left            =   1080
+         Left            =   -73920
          TabIndex        =   1
          Top             =   600
          Width           =   15255
       End
       Begin VB.Frame FraDetalle 
          Height          =   6255
-         Left            =   -69360
+         Left            =   5640
          TabIndex        =   19
          Top             =   2160
          Width           =   10695
@@ -612,7 +610,7 @@ Begin VB.Form frmMeta
          BackStyle       =   0  'Transparent
          Caption         =   "Buscar:"
          Height          =   240
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   12
          Top             =   667
          Width           =   750
@@ -1353,6 +1351,7 @@ Private Sub mtbMeta_ButtonClick(ByVal Button As MSComctlLib.Button)
             Me.FraDetalle.Enabled = True
             VNuevo = True
             LimpiarRecordsets
+            Me.lblIdVendedor.Caption = ""
             Me.lvVendedor.ListItems.Clear
             Me.txtDescripcion.SetFocus
 
@@ -1631,6 +1630,11 @@ If KeyAscii = vbKeyReturn Then metaSearch Me.txtSearch
 End Sub
 
 Private Sub LimpiarRecordsets()
+    oRSVendedor.Filter = ""
+    oRSProducto.Filter = ""
+    
+If Not oRSVendedor.EOF Then oRSVendedor.MoveFirst
+    If Not oRSProducto.EOF Then oRSProducto.MoveFirst
     If Not oRSVendedor Is Nothing Then
         If oRSVendedor.RecordCount > 0 Then
             oRSVendedor.MoveFirst
@@ -1652,5 +1656,6 @@ Private Sub LimpiarRecordsets()
             'oRSProducto.MoveFirst
         End If
     End If
+
 End Sub
 
