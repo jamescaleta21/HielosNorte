@@ -1,15 +1,15 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
 Begin VB.Form frmMeta 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Metas"
    ClientHeight    =   9345
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   16665
+   ClientWidth     =   15495
    BeginProperty Font 
       Name            =   "Verdana"
       Size            =   9.75
@@ -26,7 +26,7 @@ Begin VB.Form frmMeta
    MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   9345
-   ScaleWidth      =   16665
+   ScaleWidth      =   15495
    Begin MSComctlLib.ImageList ilMeta 
       Left            =   17160
       Top             =   7920
@@ -79,15 +79,15 @@ Begin VB.Form frmMeta
    End
    Begin MSComctlLib.Toolbar mtbMeta 
       Align           =   1  'Align Top
-      Height          =   630
+      Height          =   660
       Left            =   0
-      TabIndex        =   23
+      TabIndex        =   27
       Top             =   0
-      Width           =   16665
-      _ExtentX        =   29395
-      _ExtentY        =   1111
-      ButtonWidth     =   1720
-      ButtonHeight    =   953
+      Width           =   15495
+      _ExtentX        =   27331
+      _ExtentY        =   1164
+      ButtonWidth     =   1879
+      ButtonHeight    =   1005
       AllowCustomize  =   0   'False
       Appearance      =   1
       _Version        =   393216
@@ -122,12 +122,11 @@ Begin VB.Form frmMeta
       TabIndex        =   0
       TabStop         =   0   'False
       Top             =   720
-      Width           =   16455
-      _ExtentX        =   29025
+      Width           =   15255
+      _ExtentX        =   26908
       _ExtentY        =   15055
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -141,25 +140,100 @@ Begin VB.Form frmMeta
       EndProperty
       TabCaption(0)   =   "Listado"
       TabPicture(0)   =   "frmMeta.frx":3134
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "lvDatos"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "txtSearch"
-      Tab(0).Control(2)=   "Label1"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "lvDatos"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Meta"
       TabPicture(1)   =   "frmMeta.frx":3150
-      Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "FraDetalle"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "FraCabecera"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "FraProducto"
-      Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).ControlCount=   3
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "FraVendedor"
+      Tab(1).Control(1)=   "FraProducto"
+      Tab(1).Control(2)=   "FraCabecera"
+      Tab(1).Control(3)=   "FraDetalle"
+      Tab(1).ControlCount=   4
+      Begin VB.Frame FraVendedor 
+         Height          =   975
+         Left            =   -69360
+         TabIndex        =   39
+         Top             =   2280
+         Width           =   9495
+         Begin VB.CommandButton cmdChkImportePedido 
+            Height          =   360
+            Left            =   8280
+            Picture         =   "frmMeta.frx":316C
+            Style           =   1  'Graphical
+            TabIndex        =   43
+            Top             =   487
+            Width           =   375
+         End
+         Begin VB.TextBox txtCantPedido 
+            Height          =   375
+            Left            =   6240
+            TabIndex        =   9
+            Tag             =   "X"
+            Top             =   480
+            Width           =   2055
+         End
+         Begin VB.TextBox txtImporte 
+            Height          =   375
+            Left            =   1920
+            TabIndex        =   8
+            Tag             =   "X"
+            Top             =   480
+            Width           =   2055
+         End
+         Begin VB.Label Label13 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Cant. Pedidos:"
+            Height          =   240
+            Left            =   4680
+            TabIndex        =   42
+            Top             =   540
+            Width           =   1455
+         End
+         Begin VB.Label Label9 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Importe:"
+            Height          =   240
+            Left            =   960
+            TabIndex        =   41
+            Top             =   540
+            Width           =   855
+         End
+         Begin VB.Label lblMensajeImportePedido 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            BackColor       =   &H8000000D&
+            BorderStyle     =   1  'Fixed Single
+            Caption         =   "**3. Importe y Cantidad de Pedidos para: **"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00FFFFFF&
+            Height          =   360
+            Left            =   0
+            TabIndex        =   40
+            Top             =   0
+            Width           =   9480
+         End
+      End
       Begin VB.Frame FraProducto 
          Height          =   6255
-         Left            =   120
-         TabIndex        =   25
+         Left            =   -74880
+         TabIndex        =   29
          Top             =   2160
          Width           =   5415
          Begin VB.Frame fraMensajeVendedor 
@@ -185,25 +259,27 @@ Begin VB.Form frmMeta
          Begin VB.CommandButton cmdVendedorDel 
             Height          =   360
             Left            =   4800
-            Picture         =   "frmMeta.frx":316C
+            Picture         =   "frmMeta.frx":36F6
             Style           =   1  'Graphical
-            TabIndex        =   31
+            TabIndex        =   16
+            TabStop         =   0   'False
             Top             =   2040
             Width           =   510
          End
          Begin VB.CommandButton cmdVendedorAdd 
             Height          =   360
             Left            =   4800
-            Picture         =   "frmMeta.frx":34F6
+            Picture         =   "frmMeta.frx":3A80
             Style           =   1  'Graphical
-            TabIndex        =   29
+            TabIndex        =   15
+            TabStop         =   0   'False
             Top             =   1200
             Width           =   510
          End
          Begin MSDataListLib.DataCombo DatVendedor 
             Height          =   360
             Left            =   120
-            TabIndex        =   26
+            TabIndex        =   6
             Top             =   1200
             Width           =   4575
             _ExtentX        =   8070
@@ -215,7 +291,7 @@ Begin VB.Form frmMeta
          Begin MSComctlLib.ListView lvVendedor 
             Height          =   4335
             Left            =   120
-            TabIndex        =   30
+            TabIndex        =   7
             Top             =   1800
             Width           =   4575
             _ExtentX        =   8070
@@ -259,7 +335,7 @@ Begin VB.Form frmMeta
             ForeColor       =   &H00FFFFFF&
             Height          =   360
             Left            =   0
-            TabIndex        =   28
+            TabIndex        =   31
             Top             =   120
             Width           =   5400
          End
@@ -269,17 +345,17 @@ Begin VB.Form frmMeta
             Caption         =   "Asignar Vendedor:"
             Height          =   240
             Left            =   120
-            TabIndex        =   27
+            TabIndex        =   30
             Top             =   840
             Width           =   1815
          End
       End
       Begin VB.Frame FraCabecera 
          Height          =   1815
-         Left            =   120
-         TabIndex        =   13
+         Left            =   -74880
+         TabIndex        =   18
          Top             =   360
-         Width           =   16215
+         Width           =   15015
          Begin VB.TextBox txtDescripcion 
             Height          =   375
             Left            =   1560
@@ -341,7 +417,7 @@ Begin VB.Form frmMeta
             Left            =   0
             TabIndex        =   34
             Top             =   120
-            Width           =   16200
+            Width           =   15000
          End
          Begin VB.Label lblActivo 
             Appearance      =   0  'Flat
@@ -351,7 +427,7 @@ Begin VB.Form frmMeta
             ForeColor       =   &H80000008&
             Height          =   315
             Left            =   6840
-            TabIndex        =   24
+            TabIndex        =   28
             Tag             =   "X"
             Top             =   720
             Width           =   1995
@@ -362,7 +438,7 @@ Begin VB.Form frmMeta
             Caption         =   "Fecha Inicio"
             Height          =   240
             Left            =   9000
-            TabIndex        =   18
+            TabIndex        =   23
             Top             =   720
             Width           =   1200
          End
@@ -372,7 +448,7 @@ Begin VB.Form frmMeta
             Caption         =   "Fecha Fin"
             Height          =   240
             Left            =   10800
-            TabIndex        =   17
+            TabIndex        =   22
             Top             =   720
             Width           =   960
          End
@@ -382,8 +458,8 @@ Begin VB.Form frmMeta
             Caption         =   "Descripcion:"
             Height          =   240
             Left            =   240
-            TabIndex        =   16
-            Top             =   1200
+            TabIndex        =   21
+            Top             =   1267
             Width           =   1215
          End
          Begin VB.Label lblIdMeta 
@@ -394,7 +470,7 @@ Begin VB.Form frmMeta
             ForeColor       =   &H80000008&
             Height          =   315
             Left            =   1560
-            TabIndex        =   15
+            TabIndex        =   20
             Tag             =   "X"
             Top             =   720
             Width           =   1995
@@ -405,18 +481,18 @@ Begin VB.Form frmMeta
             Caption         =   "Id Meta:"
             Height          =   240
             Left            =   600
-            TabIndex        =   14
-            Top             =   750
+            TabIndex        =   19
+            Top             =   757
             Width           =   855
          End
       End
       Begin MSComctlLib.ListView lvDatos 
          Height          =   7335
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   2
          Top             =   1080
-         Width           =   16215
-         _ExtentX        =   28601
+         Width           =   15015
+         _ExtentX        =   26485
          _ExtentY        =   12938
          View            =   3
          LabelEdit       =   1
@@ -441,17 +517,17 @@ Begin VB.Form frmMeta
       End
       Begin VB.TextBox txtSearch 
          Height          =   375
-         Left            =   -73920
+         Left            =   1080
          TabIndex        =   1
          Top             =   600
-         Width           =   15255
+         Width           =   14055
       End
       Begin VB.Frame FraDetalle 
-         Height          =   6255
-         Left            =   5640
-         TabIndex        =   19
-         Top             =   2160
-         Width           =   10695
+         Height          =   5175
+         Left            =   -69360
+         TabIndex        =   24
+         Top             =   3240
+         Width           =   9495
          Begin VB.Frame fraMensajeDetalle 
             BackColor       =   &H00FFFFFF&
             BorderStyle     =   0  'None
@@ -459,7 +535,7 @@ Begin VB.Form frmMeta
             Left            =   360
             TabIndex        =   37
             Top             =   2040
-            Width           =   8895
+            Width           =   7935
             Begin VB.Label Label12 
                Alignment       =   2  'Center
                AutoSize        =   -1  'True
@@ -469,35 +545,35 @@ Begin VB.Form frmMeta
                Left            =   0
                TabIndex        =   38
                Top             =   120
-               Width           =   8880
+               Width           =   7800
             End
          End
          Begin VB.CommandButton cmdDel 
             Height          =   360
-            Left            =   9480
-            Picture         =   "frmMeta.frx":3880
+            Left            =   8400
+            Picture         =   "frmMeta.frx":3E0A
             Style           =   1  'Graphical
-            TabIndex        =   11
+            TabIndex        =   13
             Top             =   2280
             Width           =   990
          End
          Begin VB.CommandButton cmdAdd 
             Height          =   360
-            Left            =   9480
-            Picture         =   "frmMeta.frx":3C0A
+            Left            =   8400
+            Picture         =   "frmMeta.frx":4194
             Style           =   1  'Graphical
-            TabIndex        =   10
+            TabIndex        =   12
             Top             =   1920
             Width           =   990
          End
          Begin MSComctlLib.ListView lvDetalle 
-            Height          =   4575
+            Height          =   3495
             Left            =   240
-            TabIndex        =   9
+            TabIndex        =   14
             Top             =   1560
-            Width           =   9135
-            _ExtentX        =   16113
-            _ExtentY        =   8070
+            Width           =   8175
+            _ExtentX        =   14420
+            _ExtentY        =   6165
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -511,18 +587,10 @@ Begin VB.Form frmMeta
             Appearance      =   1
             NumItems        =   0
          End
-         Begin VB.TextBox txtImporte 
-            Height          =   375
-            Left            =   6600
-            TabIndex        =   8
-            Tag             =   "X"
-            Top             =   1080
-            Width           =   2055
-         End
          Begin VB.TextBox txtCantidad 
             Height          =   375
             Left            =   1560
-            TabIndex        =   7
+            TabIndex        =   11
             Tag             =   "X"
             Top             =   1080
             Width           =   2055
@@ -530,10 +598,10 @@ Begin VB.Form frmMeta
          Begin MSDataListLib.DataCombo DatProducto 
             Height          =   360
             Left            =   1560
-            TabIndex        =   6
+            TabIndex        =   10
             Top             =   720
-            Width           =   7095
-            _ExtentX        =   12515
+            Width           =   6855
+            _ExtentX        =   12091
             _ExtentY        =   635
             _Version        =   393216
             Style           =   2
@@ -546,9 +614,9 @@ Begin VB.Form frmMeta
             BorderStyle     =   1  'Fixed Single
             ForeColor       =   &H80000008&
             Height          =   240
-            Left            =   9480
+            Left            =   8400
             TabIndex        =   33
-            Top             =   3600
+            Top             =   3000
             Visible         =   0   'False
             Width           =   1095
          End
@@ -557,7 +625,7 @@ Begin VB.Form frmMeta
             Appearance      =   0  'Flat
             BackColor       =   &H8000000D&
             BorderStyle     =   1  'Fixed Single
-            Caption         =   "**3. Detalle de Productos/Metas para: **"
+            Caption         =   "**4. Detalle de Productos/Metas para: **"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   12
@@ -572,17 +640,7 @@ Begin VB.Form frmMeta
             Left            =   0
             TabIndex        =   32
             Top             =   120
-            Width           =   10680
-         End
-         Begin VB.Label Label9 
-            AutoSize        =   -1  'True
-            BackStyle       =   0  'Transparent
-            Caption         =   "Importe:"
-            Height          =   240
-            Left            =   5640
-            TabIndex        =   22
-            Top             =   1140
-            Width           =   855
+            Width           =   9480
          End
          Begin VB.Label Label8 
             AutoSize        =   -1  'True
@@ -590,7 +648,7 @@ Begin VB.Form frmMeta
             Caption         =   "Cantidad:"
             Height          =   240
             Left            =   495
-            TabIndex        =   21
+            TabIndex        =   26
             Top             =   1140
             Width           =   960
          End
@@ -600,7 +658,7 @@ Begin VB.Form frmMeta
             Caption         =   "Producto:"
             Height          =   240
             Left            =   480
-            TabIndex        =   20
+            TabIndex        =   25
             Top             =   780
             Width           =   975
          End
@@ -610,8 +668,8 @@ Begin VB.Form frmMeta
          BackStyle       =   0  'Transparent
          Caption         =   "Buscar:"
          Height          =   240
-         Left            =   -74640
-         TabIndex        =   12
+         Left            =   360
+         TabIndex        =   17
          Top             =   667
          Width           =   750
       End
@@ -633,6 +691,8 @@ Private Function GenerarXML(ByVal oRSVendedor As ADODB.Recordset, _
     Dim sXML   As String
 
     Dim idVend As Long
+    Dim cantpedido As Integer
+    Dim importe As Double
     
     sXML = "<root>" & vbCrLf
     
@@ -644,8 +704,10 @@ Private Function GenerarXML(ByVal oRSVendedor As ADODB.Recordset, _
 
     Do Until oRSVendedor.EOF
         idVend = oRSVendedor("idVendedor").Value
+        importe = oRSVendedor("importe").Value
+        cantpedido = oRSVendedor("cantpedido").Value
         
-        sXML = sXML & "  <vendedor id=""" & idVend & """>" & vbCrLf
+        sXML = sXML & "  <vendedor id=""" & idVend & """" & " importe = """ & importe & """ cantpedido = """ & cantpedido & """>" & vbCrLf
         
         ' Filtrar productos de ese vendedor
         If Not oRSProducto.EOF Then
@@ -654,7 +716,7 @@ Private Function GenerarXML(ByVal oRSVendedor As ADODB.Recordset, _
             Do Until oRSProducto.EOF
 
                 If oRSProducto("idVendedor").Value = idVend Then
-                    sXML = sXML & "    <detalle idProducto=""" & oRSProducto("idProducto").Value & """ cantidad=""" & oRSProducto("cantidad").Value & """ importe=""" & oRSProducto("importe").Value & """ />" & vbCrLf
+                    sXML = sXML & "    <detalle idProducto=""" & oRSProducto("idProducto").Value & """ cantidad=""" & oRSProducto("cantidad").Value & """ />" & vbCrLf
 
                 End If
 
@@ -717,7 +779,7 @@ Private Sub metaInfo(xIDempresa As Integer, xIDmeta As Integer)
     If oRSmain.RecordCount <> 0 Then Me.fraMensajeVendedor.Visible = False
     
     Do While Not oRSmain.EOF
-        agregarVendedorRS oRSmain!idv, oRSmain!vend
+        agregarVendedorRS oRSmain!idv, oRSmain!vend, oRSmain!importe, oRSmain!cantpedido
         agregarVendedorLV oRSmain!idv, oRSmain!vend
         oRSmain.MoveNext
     Loop
@@ -725,7 +787,7 @@ Private Sub metaInfo(xIDempresa As Integer, xIDmeta As Integer)
     Set orsTmp = oRSmain.NextRecordset
     
     Do While Not orsTmp.EOF
-        agregarProductoRS orsTmp!idv, orsTmp!idp, orsTmp!prod, orsTmp!cant, orsTmp!imp
+        agregarProductoRS orsTmp!idv, orsTmp!idp, orsTmp!prod, orsTmp!cant ', orsTmp!imp
         orsTmp.MoveNext
     Loop
 
@@ -968,11 +1030,11 @@ Private Sub cmdAdd_Click()
         Me.fraMensajeDetalle.Visible = False
 
         If oRSProducto.EOF Then
-            agregarProductoRS Me.lblIdVendedor.Caption, Me.DatProducto.BoundText, Me.DatProducto.Text, Me.txtCantidad.Text, Me.txtImporte.Text
-            agregarProductoLV Me.lblIdVendedor.Caption, Me.DatProducto.BoundText, Me.DatProducto.Text, Me.txtCantidad.Text, Me.txtImporte.Text
+            agregarProductoRS Me.lblIdVendedor.Caption, Me.DatProducto.BoundText, Me.DatProducto.Text, Me.txtCantidad.Text ', Me.txtImporte.Text
+            agregarProductoLV Me.lblIdVendedor.Caption, Me.DatProducto.BoundText, Me.DatProducto.Text, Me.txtCantidad.Text ', Me.txtImporte.Text
             Me.DatProducto.BoundText = -1
             Me.txtCantidad.Text = ""
-            Me.txtImporte.Text = ""
+            'Me.txtImporte.Text = ""
         
             Me.DatProducto.SetFocus
         Else
@@ -983,6 +1045,14 @@ Private Sub cmdAdd_Click()
 
     End If
 
+End Sub
+
+Private Sub cmdChkImportePedido_Click()
+oRSVendedor("importe").Value = Me.txtImporte.Text
+oRSVendedor("cantpedido").Value = Me.txtCantPedido.Text
+oRSVendedor.Update
+MsgBox "Importes actualizados.", vbInformation, Pub_Titulo
+Me.DatProducto.SetFocus
 End Sub
 
 Private Sub cmdDel_Click()
@@ -1016,7 +1086,7 @@ Private Sub cmdVendedorAdd_Click()
         oRSVendedor.Filter = "idVendedor=" & Me.DatVendedor.BoundText
         
         If oRSVendedor.EOF Then
-            agregarVendedorRS Me.DatVendedor.BoundText, Me.DatVendedor.Text
+            agregarVendedorRS Me.DatVendedor.BoundText, Me.DatVendedor.Text, 0, 0
             agregarVendedorLV Me.DatVendedor.BoundText, Me.DatVendedor.Text
         Else
             MsgBox "Vendedor ya se encuentra en lista.", vbInformation, Pub_Titulo
@@ -1045,31 +1115,33 @@ End Sub
 Private Sub agregarProductoLV(cidVenvedor As Integer, _
                               cIDProducto As Integer, _
                               cProducto As String, _
-                              cCantidad As Double, _
-                              cImporte As Double)
+                              cCantidad As Double) ', _
+                              'cImporte As Double)
 
     Dim itemx As Object
 
     Set itemx = Me.lvDetalle.ListItems.Add(, , cProducto, Me.ilMeta.ListImages(8).Key, Me.ilMeta.ListImages(8).Key)
     itemx.Tag = cIDProducto
     itemx.SubItems(1) = cCantidad
-    itemx.SubItems(2) = cImporte
+    'itemx.SubItems(2) = cImporte
 
 End Sub
 
-Private Sub agregarVendedorRS(cIDvendedor As Integer, cvendedor As String)
+Private Sub agregarVendedorRS(cIDvendedor As Integer, cvendedor As String, cImporte As Double, cCantPedido As Integer)
 oRSVendedor.AddNew
 oRSVendedor("idVendedor").Value = cIDvendedor
 oRSVendedor("vendedor").Value = cvendedor
+oRSVendedor("importe").Value = cImporte
+oRSVendedor("cantpedido").Value = cCantPedido
 oRSVendedor.Update
 End Sub
-Private Sub agregarProductoRS(cidVenvedor As Integer, cIDProducto As Integer, cProducto As String, cCantidad As Double, cImporte As Double)
+Private Sub agregarProductoRS(cidVenvedor As Integer, cIDProducto As Integer, cProducto As String, cCantidad As Double) ', cImporte As Double)
 oRSProducto.AddNew
 oRSProducto("idVendedor").Value = cidVenvedor
 oRSProducto("idProducto").Value = cIDProducto
 oRSProducto("producto").Value = cProducto
 oRSProducto("cantidad").Value = cCantidad
-oRSProducto("importe").Value = cImporte
+'oRSProducto("importe").Value = cImporte
 oRSProducto.Update
 End Sub
 
@@ -1176,6 +1248,8 @@ Set oRSVendedor = New ADODB.Recordset
 'definir campos
 oRSVendedor.Fields.Append "idVendedor", adInteger
 oRSVendedor.Fields.Append "vendedor", adVarChar, 100
+oRSVendedor.Fields.Append "importe", adDouble
+oRSVendedor.Fields.Append "cantpedido", adInteger
 
 'abrir recordset en memoria
 oRSVendedor.CursorLocation = adUseClient
@@ -1189,7 +1263,7 @@ oRSProducto.Fields.Append "idVendedor", adInteger
 oRSProducto.Fields.Append "idProducto", adInteger
 oRSProducto.Fields.Append "producto", adVarChar, 100
 oRSProducto.Fields.Append "cantidad", adInteger
-oRSProducto.Fields.Append "importe", adDouble
+'oRSProducto.Fields.Append "importe", adDouble
 
 'abrir recordset en memoria
 oRSProducto.CursorLocation = adUseClient
@@ -1207,9 +1281,9 @@ Private Sub ConfigurarLV()
     Me.lvVendedor.SmallIcons = Me.ilMeta
 
     With Me.lvDetalle
-        .ColumnHeaders.Add , , "Producto", 4500
+        .ColumnHeaders.Add , , "Producto", 5500
         .ColumnHeaders.Add , , "Cantidad"
-        .ColumnHeaders.Add , , "Importe"
+        '.ColumnHeaders.Add , , "Importe"
         .HideColumnHeaders = False
         .View = lvwReport
         .FullRowSelect = True
@@ -1254,6 +1328,15 @@ End Sub
 
 Private Sub muestraProductos(cIDvendedor As Integer)
     oRSProducto.Filter = ""
+    oRSVendedor.Filter = ""
+    
+    If Not oRSVendedor.EOF Then oRSVendedor.MoveFirst
+    oRSVendedor.Filter = "idVendedor = " & cIDvendedor
+    
+    If oRSVendedor.RecordCount <> 0 Then
+        Me.txtImporte.Text = oRSVendedor!importe
+        Me.txtCantPedido.Text = oRSVendedor!cantpedido
+    End If
 
     If Not oRSProducto.EOF Then oRSProducto.MoveFirst
     oRSProducto.Filter = "idVendedor = " & cIDvendedor
@@ -1269,14 +1352,15 @@ Private Sub muestraProductos(cIDvendedor As Integer)
         Set itemx = Me.lvDetalle.ListItems.Add(, , oRSProducto("Producto").Value, Me.ilMeta.ListImages(8).Key, Me.ilMeta.ListImages(8).Key)
         itemx.Tag = oRSProducto("idProducto").Value
         itemx.SubItems(1) = oRSProducto("cantidad").Value
-        itemx.SubItems(2) = oRSProducto("importe").Value
+        'itemx.SubItems(2) = oRSProducto("importe").Value
         oRSProducto.MoveNext
     Loop
 End If
 End Sub
 
 Private Sub lvVendedor_ItemClick(ByVal Item As MSComctlLib.ListItem)
-Me.lblMensajeProducto.Caption = "**3. Detalle de Productos/Metas para: " & Me.lvVendedor.SelectedItem.Text & "**"
+Me.lblMensajeImportePedido.Caption = "**3. Importe y Cantidad de Pedidos para: " & Me.lvVendedor.SelectedItem.Text & "**"
+Me.lblMensajeProducto.Caption = "**4. Detalle de Productos/Metas para: " & Me.lvVendedor.SelectedItem.Text & "**"
 Me.lblIdVendedor.Caption = Me.lvVendedor.SelectedItem.Tag
 muestraProductos Me.lvVendedor.SelectedItem.Tag
 End Sub
@@ -1472,7 +1556,8 @@ grabar:
             Me.lvDatos.Enabled = True
             Me.txtSearch.Enabled = True
             Me.txtSearch.SetFocus
-            Me.lblMensajeProducto.Caption = "**3. Detalle de Productos/Metas para: **"
+            Me.lblMensajeProducto.Caption = "**4. Detalle de Productos/Metas para: **"
+            Me.lblMensajeImportePedido.Caption = "**3. Importe y Cantidad de Pedidos para: **"
             metaSearch Me.txtSearch.Text
         Case 5 'Desactivar
             
@@ -1607,7 +1692,12 @@ End Sub
 
 Private Sub txtCantidad_KeyPress(KeyAscii As Integer)
 KeyAscii = SoloNumeros(KeyAscii)
-HandleEnterKey KeyAscii, Me.txtImporte
+HandleEnterKey KeyAscii, Me.cmdAdd
+End Sub
+
+Private Sub txtCantPedido_KeyPress(KeyAscii As Integer)
+KeyAscii = SoloNumeros(KeyAscii)
+HandleEnterKey KeyAscii, Me.cmdChkImportePedido
 End Sub
 
 Private Sub txtDescripcion_KeyPress(KeyAscii As Integer)
@@ -1622,7 +1712,7 @@ End Sub
 
 Private Sub txtImporte_KeyPress(KeyAscii As Integer)
 KeyAscii = SoloNumerosPunto(Me.txtImporte, KeyAscii)
- HandleEnterKey KeyAscii, Me.cmdAdd
+ HandleEnterKey KeyAscii, Me.txtCantPedido
 End Sub
 
 Private Sub txtSearch_KeyPress(KeyAscii As Integer)
